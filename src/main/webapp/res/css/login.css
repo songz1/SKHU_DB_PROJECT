@@ -27,17 +27,19 @@ html, body {
   position: relative;
   display: inline-block;
   width: 50%;
-  padding: 1em;
-  background: white;
+  padding: 10px;
   box-shadow: 1px 1px 3px 3px #aaaaaa;
 }
 
 .title {
-	font-size: 30px;
 	color: #B70000;
 }
 
 .forgot {
 	margin-top: 15px;
 	font-size: 12px;
+}
+
+.test {
+	font-size: 40px;
 }

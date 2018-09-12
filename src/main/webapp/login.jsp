@@ -12,6 +12,7 @@
 <title>성공회대 학사 시스템</title>
 </head>
 <body>
+<div class="test">???</div>
 	<div class="wrap text-center">
 		<div class="outer">
 			<div class="inner">
@@ -19,7 +20,7 @@
 					<form class="form-horizontal">
 						<div class="form-group title">성공회대학교 학사 시스템</div>
 						<div class="form-group">
-							<img src="./res/image/login_logo.jpg" />
+							<img src="./res/image/login_logo.jpg" class="img-responsive center-block" alt="Responsive image"/>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label" > 아이디</label>
@@ -37,6 +38,7 @@
 							<button type="submit" class="btn btn-primary btn-block">로그인</button>
 						</div>
 					</form>
+
 					<div class="forgot">
 						<a href="">아이디</a>·<a href="">비밀번호 찾기</a>
 					</div>
