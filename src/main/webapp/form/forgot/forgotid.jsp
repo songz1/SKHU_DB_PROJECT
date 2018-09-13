@@ -10,14 +10,14 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../res/css/form.css?ver=1">
 <script type="text/javascript" src="../../res/script/form.js?ver=1"></script>
-<title>아이디 찾기</title>
+<title>성공회대 학사 시스템</title>
 </head>
 <body>
 	<div class="wrap text-center">
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form class="form-horizontal">
+					<form class="form-horizontal" action="./confirm.jsp">
 						<div class="form-group title">아이디 찾기</div>
 						<div>
 							<img src="../../res/image/login_logo.jpg" class="img-responsive center-block" alt="Responsive image"/>

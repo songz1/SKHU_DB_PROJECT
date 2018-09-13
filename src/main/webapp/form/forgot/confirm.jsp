@@ -17,7 +17,7 @@
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form class="form-inline">
+					<form class="form-inline" action="./success.jsp">
 						<div class="form-group title">이메일 인증</div>
 						<div>
 							<img src="../../res/image/login_logo.jpg" class="img-responsive center-block" alt="Responsive image"/>

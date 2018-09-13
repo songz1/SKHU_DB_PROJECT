@@ -17,7 +17,7 @@
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form class="form-horizontal">
+					<form class="form-horizontal" action="./regist.jsp">
 						<div class="form-group title">성공회대학교 학사 시스템</div>
 						<div>
 							<img src="../../res/image/login_logo.jpg" class="img-responsive center-block" alt="Responsive image"/>
@@ -39,7 +39,7 @@
 						</div>
 					</form>
 					<div class="forgot">
-						<a href="">아이디</a>·<a href="">비밀번호 찾기</a>
+						<a href="../forgot/forgotid.jsp">아이디</a>·<a href="../forgot/forgotpwd.jsp">비밀번호 찾기</a>
 					</div>
 				</div>
 			</div>
