@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+html, body { 
+	width: 100%; 
+	height: 100%; 
+	background: #F6F6F6;
+	font-size: 15px;
+	padding: 0;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    height: 65px;
+    background-color: #FAFAFA;
+}
+
+.navbar-brand {
+	color: #000000;
+	font-weight: bold;
+}
+
+.dropdown-toggle {
+	color: #424242;
+}
+
+main {
+    flex: auto;
+    background-color: #FFFFFF;
+    pading-top: 20px;
+}
+
+footer {
+    height: 25px;
+}
+
