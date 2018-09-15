@@ -70,30 +70,21 @@
 		</div>
 	</header>
 	<main>
-	<div class="container">
-		<div id="header" class="panel panel-default">
-			<div class="panel-body">
-				<div class="table-responsive">
-					<table class="table text-center">
-						<h3>18학번 이전</h3>
-						<tr class="warning summary">
-							<td class="col-md-4">필수교양 13/16</td>
-							<td class="col-md-4"></td>
-							<td class="col-md-4"></td>
-						</tr>
-					</table>
-					<table class="table text-center">
-						<h3>18학번 이전</h3>
-						<tr class="warning summary">
-							<td class="col-md-4">필수교양 13/16</td>
-							<td class="col-md-4"></td>
-							<td class="col-md-4"></td>
-						</tr>
-					</table>
+		<div class="container">
+			<div id="header" class="panel panel-default">
+				<div class="panel-body">
+					<h3 class="text-center">이메일 변경</h3>
+					<form class="form-inline mt-25 mb-25">
+						<div class="input-group col-md-4">
+							<div class="input-group-addon">이메일</div>
+							<input type="email" class="form-control" id="confirmCode">
+						</div>
+						<a href=""><button type="submit" class="btn btn-primary">확인</button></a>
+					</form>
+					<div class="mb-25">확인 버튼을 누르면 입력한 이메일 주소로 인증 메일이 전송됩니다.</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</main>
 	<footer> </footer>
 </body>
