@@ -33,6 +33,11 @@ main {
 
 }
 
+.title {
+	background: #F6F6F6;
+	font-weight: bold;
+}
+
 footer {
     height: 25px;
 }
