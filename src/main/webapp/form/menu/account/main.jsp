@@ -76,7 +76,7 @@
 					<table class="table text-center">
 						<h3 class="text-center">졸업 학점 현황</h3>
 						<tr class="warning summary">
-							<td class="col-md-4">필수교양 11/16</td>
+							<td class="col-md-4">필수교양 13/16</td>
 							<td class="col-md-4"></td>
 							<td class="col-md-4"></td>
 						</tr>
@@ -85,15 +85,15 @@
 							<td class="col-md-4 danger">사회봉사 0/2</td>
 							<td class="col-md-4 success">대학생활세미나I 2/2</td>
 						</tr>
-						<tr class="detail">
+						<tr class="etail">
 							<td class="col-md-4 success">대학생활세미나II 2/2</td>
-							<td class="col-md-4 danger">인권과평화 0/2</td>
+							<td class="col-md-4 success">인권과평화 0/2</td>
 							<td class="col-md-4 success">말과글 2/2</td>
 						</tr>
 						<tr class="detail">
 							<td class="col-md-4 success">과학기술과에콜로지 2/2</td>
 							<td class="col-md-4 success">데이터활용및분석 2/2</td>
-							<td class="col-md-4"></td>
+							<td class="col-md-4 success"></td>
 						</tr>
 						<tr class="detail">
 							<td class="col-md-4"></td>

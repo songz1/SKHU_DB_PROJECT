@@ -11,8 +11,9 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../res/css/main.css?ver=1">
-<script type="text/javascript" src="../../res/script/main.js?ver=1"></script>
+	href="../../../res/css/main.css?ver=1">
+<script type="text/javascript" src="../../../res/script/main.js?ver=1"></script>
+<script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -74,94 +75,19 @@
 			<div class="panel-body">
 				<div class="table-responsive">
 					<table class="table text-center">
-						<h3 class="text-center">졸업 학점 현황</h3>
+						<h3>18학번 이전</h3>
 						<tr class="warning summary">
-							<td class="col-md-4">필수교양 11/16</td>
+							<td class="col-md-4">필수교양 13/16</td>
 							<td class="col-md-4"></td>
 							<td class="col-md-4"></td>
-						</tr>
-						<tr class="detail">
-							<td class="col-md-4 warning">채플 1/2</td>
-							<td class="col-md-4 danger">사회봉사 0/2</td>
-							<td class="col-md-4 success">대학생활세미나I 2/2</td>
-						</tr>
-						<tr class="detail">
-							<td class="col-md-4 success">대학생활세미나II 2/2</td>
-							<td class="col-md-4 danger">인권과평화 0/2</td>
-							<td class="col-md-4 success">말과글 2/2</td>
-						</tr>
-						<tr class="detail">
-							<td class="col-md-4 success">과학기술과에콜로지 2/2</td>
-							<td class="col-md-4 success">데이터활용및분석 2/2</td>
-							<td class="col-md-4"></td>
-						</tr>
-						<tr class="detail">
-							<td class="col-md-4"></td>
-							<td class="col-md-4"></td>
-							<td class="col-md-4"></td>
-						</tr>
-						<tr>
-							<td class="col-md-4 warning">전공탐색 16/19</td>
-							<td class="col-md-4 success">전공탐색세미나 <i
-								class="glyphicon glyphicon-ok"></i></td>
-							<td class="col-md-4 danger">융학자율학부개설과목<i
-								class="glyphicon glyphicon-remove"></i></td>
-						<tr>
-							<td class="col-md-4 success">가치역량 6/6</td>
-							<td class="col-md-4 warning">대안역량 3/6</td>
-							<td class="col-md-4 danger">실천역량 0/6</td>
 						</tr>
 					</table>
-				</div>
-				<div class="table-responsive">
 					<table class="table text-center">
-						<thead>
-							<tr class="info">
-								<td class="col-md-3">분류</td>
-								<td class="col-md-3">필수</td>
-								<td class="col-md-3">선택</td>
-								<td class="col-md-3">계</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="active">
-								<td class="col-md-3">전공</td>
-								<td class="col-md-3">19</td>
-								<td class="col-md-3">6</td>
-								<td class="col-md-3">25</td>
-							</tr>
-							<tr class="active">
-								<td class="col-md-3">부전공</td>
-								<td class="col-md-3">6</td>
-								<td class="col-md-3">3</td>
-								<td class="col-md-3">9</td>
-							</tr>
-							<tr class="active">
-								<td class="col-md-3">복수전공</td>
-								<td class="col-md-3">6</td>
-								<td class="col-md-3">3</td>
-								<td class="col-md-3">9</td>
-							</tr>
-							<tr class="active">
-								<td class="col-md-3">편입</td>
-								<td class="col-md-3">3</td>
-								<td class="col-md-3">3</td>
-								<td class="col-md-3">6</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="table-responsive">
-					<table class="table text-center">
-						<tr class="info">
-							<td class="col-md-4">기타</td>
-							<td class="col-md-4">교직</td>
-							<td class="col-md-4">평교</td>
-						</tr>
-						<tr class="active">
-							<td class="col-md-4">3</td>
-							<td class="col-md-4">3</td>
-							<td class="col-md-4">3</td>
+						<h3>18학번 이전</h3>
+						<tr class="warning summary">
+							<td class="col-md-4">필수교양 13/16</td>
+							<td class="col-md-4"></td>
+							<td class="col-md-4"></td>
 						</tr>
 					</table>
 				</div>
