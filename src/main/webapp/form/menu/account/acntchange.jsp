@@ -73,23 +73,21 @@
 		<div class="container">
 			<div id="header" class="panel panel-default">
 				<div class="panel-body">
-					<h3 class="text-center">비밀번호 변경</h3>
-					<form class="form-inline mt-25 mb-25">
-						<div>
-							<div class="input-group mb-25 col-md-4 col-md-offset-1">
-								<div class="input-group-addon">변경 패스워드</div>
-								<input type="password" class="form-control" id="password">
+					<h3 class="text-center">기본정보 변경</h3>
+					<form class="form-horizontal mb-25 mt-25">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">이름</label>
+							<div class="mb-25 col-md-4 col-md-offset-2">
+								<input type="text" name="name" class="form-control">
 							</div>
 						</div>
-						<div>
-							<div class="input-group mb-25 col-md-4 col-md-offset-1">
-								<div class="input-group-addon">패스워드 확인</div>
-								<input type="password" class="form-control" id="password">
+						<div class="form-group mb-50">
+							<label class="col-sm-2 control-label">핸드폰번호</label>
+							<div class="mb-25 col-md-4 col-md-offset-2">
+								<input type="text" name="name" class="form-control">
 							</div>
 						</div>
-						<div>
-						<a href=""><button type="submit" class="btn btn-primary mb-25 col-md-1 col-md-offset-4">확인</button></a>
-						</div>
+						<button type="submit" class="btn btn-primary mb-25 col-md-2 col-md-offset-5">확인</button>
 					</form>
 				</div>
 			</div>
