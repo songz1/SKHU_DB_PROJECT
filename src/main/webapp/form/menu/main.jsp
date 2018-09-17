@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<jsp:include page="header.jsp" flush="true"></jsp:include>
+	<jsp:include page="header.jsp" flush="false"></jsp:include>
 	<main>
 	<div class="container">
 		<div id="header" class="panel panel-default">
