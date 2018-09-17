@@ -49,12 +49,12 @@
 						</td>
 						<td class="col-md-1">
 							<span style="float:left">
-							<input type="checkbox">전체학기</button>
+							<input type="checkbox"> 전체학기</button>
 							</span>
 						</td>
 						<td class="col-md-1">
 							<span style="float:right">
-							<button type="submit" class="btn btn-info btn-block"
+							<button type="submit" class="btn btn-default btn-block"
 								style="WIDTH: 100pt;" onclick="/">조회</button>
 							</span>
 						</td>
