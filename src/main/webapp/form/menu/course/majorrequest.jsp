@@ -33,7 +33,7 @@
 						<button type="button" class="btn btn-danger col-md-2 col-md-offset-3">취소</button>
 					</div>
 					<div>
-						<button type="submit" class="btn btn-info col-md-2 col-md-offset-2 mb-25">대체 과목 신청</button>
+						<button type="submit" class="btn btn-info col-md-2 col-md-offset-2 mb-25">신청</button>
 					</div>
 				</form>
 			</div>

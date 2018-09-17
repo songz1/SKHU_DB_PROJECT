@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <header>
 	<div id="divNav">
 		<nav class="navbar navbar-custom navbar-fixed-top" id="topnavbar">
@@ -23,8 +24,8 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a href="/SKHU_DB_PROJECT/form/menu/course/substitution.jsp">대체과목 목록 조회</a></li>
-								<li><a href="/SKHU_DB_PROJECT/form/menu/course/majorrequest.jsp">전공인정 신청</a></li>
 								<li><a href="/SKHU_DB_PROJECT/form/menu/course/changerequest.jsp">대체과목 인정 신청</a></li>
+								<li><a href="/SKHU_DB_PROJECT/form/menu/course/majorrequest.jsp">전공인정 신청</a></li>
 								<li><a href="/SKHU_DB_PROJECT/form/menu/course/grades.jsp">성적 조회</a></li>
 							</ul></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
