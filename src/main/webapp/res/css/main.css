@@ -56,6 +56,11 @@ footer {
 	margin-bottom: 25px;
 }
 
-.mb-40 {
-	margin-bottom: 40px;
+select {
+	width: 180px;
+	height: 23px;
+}
+
+.line {
+    border-right: 1px solid #cecece;
 }

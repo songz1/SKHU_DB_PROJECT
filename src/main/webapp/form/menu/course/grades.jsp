@@ -71,7 +71,7 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-			
+
 				<table class="table text-center">
 					<h3 class="text-center">성적 조회</h3>
 					<tr>
@@ -83,16 +83,34 @@
 						<td class="col-md-2">소프트웨어공학과</td>
 					</tr>
 				</table>
-				
+
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">년도</td>
-						<td class="col-md-1">2018</td>
+						<td class="col-md-1"><input type="text" name="year" value="2018"></input></td>
 						<td class="title col-md-1">학기</td>
-						<td class="col-md-1">1학기</td>
+						<td class="col-md-1">
+							<select name="semester">
+								<option value="1">1학기</option>
+								<option value="2">2학기</option>
+								<option value="summer">여름학기</option>
+								<option value="autumn">가을학기</option>
+							</select>
+						</td>
+						<td class="col-md-1">
+							<span style="float:left">
+							<input type="checkbox">전체학기</button>
+							</span>
+						</td>
+						<td class="col-md-1">
+							<span style="float:right">
+							<button type="submit" class="btn btn-default btn-block"
+								style="WIDTH: 100pt;" onclick="/">조회</button>
+							</span>
+						</td>
 					</tr>
 				</table>
-				
+
 				<table class="table text-center">
 					<tr class="title">
 						<td class="col-md-1">년도</td>
@@ -124,7 +142,7 @@
 						<td class="col-md-1">전선</td>
 						<td class="col-md-1">3.0</td>
 						<td class="col-md-1">A0</td>
-						</tr>
+					</tr>
 					<tr>
 						<td class="col-md-1">2018</td>
 						<td class="col-md-1">1학기</td>
@@ -186,7 +204,7 @@
 						<td class="col-md-1">B0</td>
 					</tr>
 				</table>
-				
+
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">신청학점</td>
@@ -204,4 +222,3 @@
 	<footer> </footer>
 </body>
 </html>
-
