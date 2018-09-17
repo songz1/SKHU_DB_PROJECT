@@ -32,7 +32,7 @@
 							<input type="password" class="form-control" id="passwordConfirm" placeholder="비밀번호 확인">
 						</div>
 						<div>
-							<a href="confirm.jsp"><button type="submit" class="btn btn-primary btn-block">확인</button></a>
+							<a href="confirm.jsp"><button type="submit" class="btn btn-info btn-block">확인</button></a>
 						</div>
 					</form>
 					<div class="forgot">확인 버튼을 누르면 입력한 이메일 주소로 인증 메일이 전송됩니다.</div>
