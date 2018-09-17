@@ -26,7 +26,7 @@
 							<div class="input-group-addon">인증번호</div>
 								<input type="text" class="form-control" id="confirmCode">
 						</div>
-						<a href="./login.jsp"><button type="submit" class="btn btn-info">인증</button></a>
+						<a href="login.jsp"><button type="submit" class="btn btn-info">인증</button></a>
 					</form>
 				</div>
 			</div>

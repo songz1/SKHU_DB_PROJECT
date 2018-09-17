@@ -17,7 +17,7 @@
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form class="form-horizontal" action="./regist.jsp">
+					<form class="form-horizontal" action="regist.jsp">
 						<div class="form-group title">성공회대학교 학사 시스템</div>
 						<div>
 							<img src="../../res/image/login_logo.jpg" class="img-responsive center-block" alt="Responsive image"/>
