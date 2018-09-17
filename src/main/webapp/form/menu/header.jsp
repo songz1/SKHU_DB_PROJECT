@@ -23,7 +23,8 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a href="/SKHU_DB_PROJECT/form/menu/course/substitution.jsp">대체과목 목록 조회</a></li>
-								<li><a href="/SKHU_DB_PROJECT/form/menu/course/changerequest.jsp">전공인정 신청</a></li>
+								<li><a href="/SKHU_DB_PROJECT/form/menu/course/majorrequest.jsp">전공인정 신청</a></li>
+								<li><a href="/SKHU_DB_PROJECT/form/menu/course/changerequest.jsp">대체과목 인정 신청</a></li>
 								<li><a href="/SKHU_DB_PROJECT/form/menu/course/grades.jsp">성적 조회</a></li>
 							</ul></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -32,7 +33,7 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a href="/SKHU_DB_PROJECT/form/menu/account/acntchange.jsp">기본 정보 변경</a></li>
-								<li><a href="/SKHU_DB_PROJECT/form/menu/account/pwdchange.jsp">비밀번호 변경</a></li>
+								<li><a href="/SKHU_DB_PROJECT/form/menu/account/pwdconfirm.jsp">비밀번호 변경</a></li>
 								<li><a href="/SKHU_DB_PROJECT/form/menu/account/emailchange.jsp">이메일 변경</a></li>
 							</ul></li>
 					</ul>

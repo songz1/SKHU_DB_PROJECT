@@ -24,7 +24,7 @@
 			<div id="header" class="panel panel-default">
 				<div class="panel-body">
 					<h3 class="text-center">비밀번호 변경</h3>
-					<form class="form-inline mt-25 mb-25">
+					<form class="form-inline mt-25 mb-25" action="pwdchange.jsp">
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon">기존 패스워드</div>
