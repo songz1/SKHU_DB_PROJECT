@@ -60,7 +60,7 @@
 								<div>
 									<i class="glyphicon glyphicon-user"></i> 201532020 송지은 (6학기)<br />
 								</div>
-								<button type="submit" class="btn btn-default btn-block"
+								<button type="submit" class="btn btn-info btn-block"
 									onclick="/">로그아웃</button>
 							</div>
 						</div>
@@ -80,7 +80,7 @@
 								<div class="input-group-addon">기존 패스워드</div>
 								<input type="password" class="form-control" id="password">
 							</div>
-							<a href=""><button type="submit" class="btn btn-primary">확인</button></a>
+							<a href=""><button type="submit" class="btn btn-info">확인</button></a>
 						</div>
 					</form>
 				</div>

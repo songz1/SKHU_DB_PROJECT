@@ -35,7 +35,7 @@
 							</div>
 						</div>
 						<div>
-							<button type="submit" class="btn btn-primary btn-block" onclick="confirm">이메일 인증</button>
+							<button type="submit" class="btn btn-info btn-block" onclick="confirm">이메일 인증</button>
 						</div>
 					</form>
 						<div class="forgot">이메일은 계정에서 인증한 이메일 주소로 전송됩니다.</div>

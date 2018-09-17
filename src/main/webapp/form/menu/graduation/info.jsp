@@ -8,7 +8,7 @@
 	rel="stylesheet" media="screen">
 <link rel="stylesheet" type="text/css" href="../../../res/css/test.css?ver=1">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>졸업요건표</title>
 </head>
 <body>
 <table class="table">

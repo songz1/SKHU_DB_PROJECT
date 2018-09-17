@@ -60,7 +60,7 @@
 								<div>
 									<i class="glyphicon glyphicon-user"></i> 201532020 송지은 (6학기)<br />
 								</div>
-								<button type="submit" class="btn btn-default btn-block"
+								<button type="submit" class="btn btn-info btn-block"
 									onclick="/">로그아웃</button>
 							</div>
 						</div>
@@ -79,7 +79,7 @@
 							<div class="input-group-addon">이메일</div>
 							<input type="email" class="form-control" id="confirmCode">
 						</div>
-						<a href=""><button type="submit" class="btn btn-primary">확인</button></a>
+						<a href=""><button type="submit" class="btn btn-info">확인</button></a>
 					</form>
 					<div class="mb-25">확인 버튼을 누르면 입력한 이메일 주소로 인증 메일이 전송됩니다.</div>
 				</div>

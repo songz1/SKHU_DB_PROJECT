@@ -58,7 +58,7 @@
 								<div>
 									<i class="glyphicon glyphicon-user"></i> 201532020 송지은 (6학기)<br />
 								</div>
-								<button type="submit" class="btn btn-default btn-block"
+								<button type="submit" class="btn btn-info btn-block"
 									onclick="/">로그아웃</button>
 							</div>
 						</div>
