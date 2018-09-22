@@ -16,7 +16,23 @@
 	<div class="wrap text-center">
 		<div class="outer">
 			<div class="inner">
-				<div class="centered title">비밀번호 초기화 되었습니다 또는 당신의 계정은 201432019 입니다.</div>
+				<div class="centered">
+					<form action="../login/login.jsp">
+						<div class="form-group">
+							<img src="../../res/image/login_logo.png" class="img-responsive center-block" alt="Responsive image"/>
+						</div>
+						<div class="form-group title">패스워드 변경</div>
+						<div class="form-group">
+							<input type="password" class="form-control" id="password" placeholder="비밀번호">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" id="passwordConfirm" placeholder="비밀번호 확인">
+						</div>
+						<div>
+							<button type="submit" class="btn btn-info btn-block">다음</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

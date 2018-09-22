@@ -23,6 +23,9 @@
 						</div>
 						<div class="form-group title">회원가입</div>
 						<div class="form-group">
+							<input type="text" class="form-control" id="studentNumber" placeholder="학번">
+						</div>
+						<div class="form-group">
 							<input type="email" class="form-control" id="email" placeholder="이메일">
 						</div>
 						<div class="form-group">
