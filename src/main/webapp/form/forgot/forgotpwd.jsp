@@ -18,10 +18,10 @@
 			<div class="inner">
 				<div class="centered">
 					<form class="form-horizontal" action="./confirm.jsp">
-						<div class="form-group title">패스워드 초기화</div>
 						<div>
-							<img src="../../res/image/login_logo.jpg" class="img-responsive center-block" alt="Responsive image"/>
+							<img src="../../res/image/login_logo.png" class="img-responsive center-block" alt="Responsive image"/>
 						</div>
+						<div class="form-group title">패스워드 초기화</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label" > 아이디</label>
 							<div class="col-sm-10">
@@ -35,11 +35,10 @@
 							</div>
 						</div>
 						<div>
-							<button type="submit" class="btn btn-info btn-block" onclick="confirm">이메일 인증</button>
+							<button type="submit" class="btn btn-info btn-block" onclick="confirm">다음</button>
 						</div>
+						<div class="forgot mt-10">초기화된 비밀번호는 s+주민등록번호  뒷자리(s1234567)입니다.</div>
 					</form>
-						<div class="forgot">이메일은 계정에서 인증한 이메일 주소로 전송됩니다.</div>
-						<div class="forgot">초기화된 비밀번호는 s+주민등록번호  뒷자리(s1234567)입니다.</div>
 				</div>
 			</div>
 		</div>

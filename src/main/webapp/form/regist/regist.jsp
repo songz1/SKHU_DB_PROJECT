@@ -18,10 +18,10 @@
 			<div class="inner">
 				<div class="centered">
 					<form action="confirm.jsp">
-						<div class="form-group title">계정 정보 입력</div>
 						<div class="form-group">
-							<img src="../../res/image/regist_logo.jpg" class="img-responsive center-block" alt="Responsive image"/>
+							<img src="../../res/image/login_logo.png" class="img-responsive center-block" alt="Responsive image"/>
 						</div>
+						<div class="form-group title">회원가입</div>
 						<div class="form-group">
 							<input type="email" class="form-control" id="email" placeholder="이메일">
 						</div>
@@ -32,10 +32,9 @@
 							<input type="password" class="form-control" id="passwordConfirm" placeholder="비밀번호 확인">
 						</div>
 						<div>
-							<button type="submit" class="btn btn-info btn-block">확인</button>
+							<button type="submit" class="btn btn-info btn-block">다음</button>
 						</div>
 					</form>
-					<div class="forgot">확인 버튼을 누르면 입력한 이메일 주소로 인증 메일이 전송됩니다.</div>
 				</div>
 			</div>
 		</div>
