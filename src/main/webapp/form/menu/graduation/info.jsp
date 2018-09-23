@@ -6,19 +6,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet" media="screen">
-<link rel="stylesheet" type="text/css" href="../../../res/css/test.css?ver=1">
+<link rel="stylesheet" type="text/css" href="../../../res/css/info.css?ver=1">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <title>졸업요건표</title>
 </head>
 <body>
-<table class="table">
+<table class="table table-bordered text-center align-middle">
 	<thead>
-		<tr>
-			<th class="col-md-1">대상</th>
-			<th class="col-md-1">부/복수전공</th>
-			<th class="col-md-1">졸업조건</th>
-			<th class="col-md-1">기타졸업조건</th>
-			<th class="col-md-1">비고</th>
+		<tr class="test">
+			<td class="col-md-1">대상</td>
+			<td class="col-md-1">부/복수전공</td>
+			<td class="col-md-1">졸업조건</td>
+			<td class="col-md-1">기타졸업조건</td>
+			<td class="col-md-1">비고</td>
 		</tr>
 	</thead>
 	<tbody>
