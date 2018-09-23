@@ -11,7 +11,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/main.css?ver=1">
+	href="../../../../res/css/main.css?ver=1">
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -21,7 +21,7 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-			
+
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">학번</td>
@@ -30,15 +30,13 @@
 						<td class="col-md-1">송지은</td>
 						<td class="title col-md-1">학과</td>
 						<td class="col-md-2">소프트웨어공학과</td>
-						<td class="col-md-1">
-							<span style="float:right">
-							<button type="submit" class="btn btn-info btn-block"
-								style="WIDTH: 100pt;" onclick="/">대체과목 신청</button>
-							</span>
-						</td>
+						<td class="col-md-1"><span style="float: right">
+								<button type="submit" class="btn btn-info btn-block"
+									style="WIDTH: 100pt;" onclick="/">대체과목 신청</button>
+						</span></td>
 					</tr>
 				</table>
-				
+
 				<table class="table text-center">
 					<tr>
 						<td class="title line" colspan="5">폐지과목 수강신청내역</td>
@@ -70,7 +68,7 @@
 						<td class="col-md-1">O</td>
 					</tr>
 				</table>
-				
+
 				<table class="table text-center">
 					<h3 class="text-center">대체과목 목록</h3>
 					<tr>

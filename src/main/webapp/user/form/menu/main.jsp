@@ -11,8 +11,8 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../res/css/main.css?ver=1">
-<script type="text/javascript" src="../../res/script/main.js?ver=1"></script>
+	href="../../../res/css/main.css?ver=1">
+<script type="text/javascript" src="../../../res/script/main.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -26,59 +26,55 @@
 					<h3 class="text-center">졸업 학점 현황</h3>
 
 					<table class="table text-center">
-						<tr class="warning summary">
+						<tr class="warning essential">
+							<td class="col-md-4"></td>
 							<td class="col-md-4">교양 필수 11/16</td>
 							<td class="col-md-4"></td>
-							<td class="col-md-4"></td>
 						</tr>
-						<tr class="detail">
+						<tr class="essential-detail">
 							<td class="col-md-4 warning">채플 1/2</td>
 							<td class="col-md-4 danger">사회봉사 0/2</td>
 							<td class="col-md-4 success">대학생활세미나I 2/2</td>
 						</tr>
-						<tr class="detail">
+						<tr class="essential-detail">
 							<td class="col-md-4 success">대학생활세미나II 2/2</td>
 							<td class="col-md-4 danger">인권과평화 0/2</td>
 							<td class="col-md-4 success">말과글 2/2</td>
 						</tr>
-						<tr class="detail">
+						<tr class="essential-detail">
 							<td class="col-md-4 success">과학기술과에콜로지 2/2</td>
 							<td class="col-md-4 success">데이터활용및분석 2/2</td>
 							<td class="col-md-4"></td>
 						</tr>
-						<tr class="detail">
-							<td class="col-md-4"></td>
-							<td class="col-md-4"></td>
-							<td class="col-md-4"></td>
-						</tr>
 					</table>
-
+				</div>
+				<div class="table-responsive">
 					<table class="table text-center">
-						<tr class="warning summary">
+						<tr class="warning area-essential">
+							<td class="col-md-4"></td>
 							<td class="col-md-4">영역 필수 9/18</td>
 							<td class="col-md-4"></td>
-							<td class="col-md-4"></td>
 						</tr>
-						<tr class="detail">
+						<tr class="area-detail">
 							<td class="col-md-4 success">가치역량 6/6</td>
 							<td class="col-md-4 warning">대안역량 3/6</td>
 							<td class="col-md-4 danger">실천역량 0/6</td>
 						</tr>
 					</table>
-					
+				</div>
+				<div class="table-responsive">
 					<table class="table text-center">
-						<tr class="warning summary">
-							<td class="col-md-4 warning">전공 탐색 7/19</td>
-							<td class="col-md-4"></td>
+						<tr class="warning major-searching">
+							<td class="col-md-4 warning"></td>
+							<td class="col-md-4">전공 탐색 7/19</td>
 							<td class="col-md-4"></td>
 						</tr>
-						<tr class="detail">
+						<tr class="major-detail">
 							<td class="col-md-4 success">전공탐색세미나 1/1</td>
 							<td class="col-md-4 success">IT융합자율학부 개설과목 6/3</td>
 							<td class="col-md-4 danger">타 학부 개설과목 0/3</td>
 						</tr>
 					</table>
-					
 				</div>
 				<div class="table-responsive">
 					<table class="table text-center">

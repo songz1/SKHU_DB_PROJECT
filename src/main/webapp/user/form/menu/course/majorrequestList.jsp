@@ -11,7 +11,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/main.css?ver=1">
+	href="../../../../res/css/main.css?ver=1">
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -31,7 +31,7 @@
 						<td class="col-md-2">소프트웨어공학과</td>
 					</tr>
 				</table>
-				
+
 				<table class="table text-center">
 					<tr>
 						<td class="title" colspan="5">전공인정 신청내역</td>
