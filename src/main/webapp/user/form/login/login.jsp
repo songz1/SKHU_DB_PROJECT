@@ -21,7 +21,7 @@
 			<div class="inner">
 				<div class="centered">
 					<form class="form-horizontal" action="../menu/main.jsp">
-						<img src="../../res/image/login_logo.png"
+						<img src="../../../res/image/login_logo.png"
 							class="img-responsive center-block" alt="Responsive image" />
 						<div class="form-group mt-10">
 							<div class="col-sm-12">

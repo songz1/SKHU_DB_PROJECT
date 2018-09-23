@@ -22,7 +22,7 @@
 				<div class="centered">
 					<form action="../login/login.jsp">
 						<div class="form-group">
-							<img src="../../res/image/login_logo.png"
+							<img src="../../../res/image/login_logo.png"
 								class="img-responsive center-block" alt="Responsive image" />
 						</div>
 						<div class="form-group title">패스워드 변경</div>

@@ -22,7 +22,7 @@
 				<div class="centered">
 					<form class="form-inline" action="changepwd.jsp">
 						<div>
-							<img src="../../res/image/regist_logo.png"
+							<img src="../../../res/image/regist_logo.png"
 								class="img-responsive center-block" alt="Responsive image" />
 						</div>
 						<div class="title">OTP 인증</div>
