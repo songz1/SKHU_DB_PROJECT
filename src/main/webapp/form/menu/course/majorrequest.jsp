@@ -24,13 +24,20 @@
 				<h3 class="text-center mb-25">전공 인정 신청</h3>
 				<form>
 					<div class="form-group col-md-4 col-md-offset-4">
-						<input type="text" name="changeSubject" class="form-control" placeholder="신청 과목">
-					</div>
+						과목 코드: <input type="text" name="subjectCode" class="form-control" placeholder="과목 코드"></br>
+						과목명: <input type="text" name="subjectName" class="form-control" placeholder="과목명"></br>
+						개설 학과: <select name="department" class="form-control">
+								<option value="1">소프트웨어공학과</option>
+								<option value="2">컴퓨터공학과</option>
+								<option value="3">글로컬IT학과</option>
+								<option value="4">정보통신공학과</option>
+							</select>
+						</div>
 					<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
 						<textarea name="reportContent" class="form-control" maxlength="1024" style="height: 100px"  placeholder="기타사항"></textarea>
 					</div>
 					<div>
-						<button type="button" class="btn btn-danger col-md-2 col-md-offset-3">취소</button>
+						<button type="button" class="btn btn-warning col-md-2 col-md-offset-3">내 신청 목록</button>
 					</div>
 					<div>
 						<button type="submit" class="btn btn-info col-md-2 col-md-offset-2 mb-25">신청</button>

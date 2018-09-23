@@ -24,11 +24,29 @@
 				<h3 class="text-center mb-25">대체 과목 신청</h3>
 				<form>
 					<div class="form-group col-md-4 col-md-offset-1">
-						<input type="text" name="changeSubject" class="form-control" placeholder="대체할 과목">
+					<div class="text-center"><label>폐지과목</label></div></p>
+						과목 코드: <input type="text" name="subjectCodeB" class="form-control" placeholder="과목 코드"></br>
+						과목명: <input type="text" name="subjectNameB" class="form-control" placeholder="과목명"></br>
+						이수 구분: <select name="partB" class="form-control">
+								<option value="1">전공필수</option>
+								<option value="2">전공선택</option>
+								<option value="3">전공탐색</option>
+								<option value="4">교양필수</option>
+								<option value="5">교양선택</option>
+							</select>
 					</div>
 					<div class="form-group text-center col-md-2"><i class="glyphicon glyphicon-arrow-right"></i></div>
 					<div class="form-group col-md-4">
-						<input type="text" name="changeSubject" class="form-control" placeholder="신청할 과목">
+						<div class="text-center"><label>대체과목</label></div></p>
+						과목 코드: <input type="text" name="subjectCodeA" class="form-control" placeholder="과목 코드"></br>
+						과목명: <input type="text" name="subjectNameA" class="form-control" placeholder="과목명"></br>
+						이수 구분: <select name="partA" class="form-control">
+								<option value="1">전공필수</option>
+								<option value="2">전공선택</option>
+								<option value="3">전공탐색</option>
+								<option value="4">교양필수</option>
+								<option value="5">교양선택</option>
+							</select>
 					</div>
 					<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
 					<textarea name="reportContent" class="form-control" maxlength="1024" style="height: 100px;" placeholder="기타사항"></textarea>
@@ -37,7 +55,7 @@
 						<button type="button" class="btn btn-danger col-md-2 col-md-offset-3">취소</button>
 					</div>
 					<div>
-						<button type="submit" class="btn btn-info col-md-2 col-md-offset-2 mb-25">대체 과목 신청</button>
+						<button type="submit" class="btn btn-info col-md-2 col-md-offset-2 mb-25">신청</button>
 					</div>
 				</form>
 			</div>

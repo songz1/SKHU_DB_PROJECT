@@ -35,7 +35,6 @@
 							<ul class="dropdown-menu">
 								<li><a href="/SKHU_DB_PROJECT/form/menu/account/acntchange.jsp">기본 정보 변경</a></li>
 								<li><a href="/SKHU_DB_PROJECT/form/menu/account/pwdconfirm.jsp">비밀번호 변경</a></li>
-								<li><a href="/SKHU_DB_PROJECT/form/menu/account/emailchange.jsp">이메일 변경</a></li>
 							</ul></li>
 					</ul>
 						<div class="uib-button-bar navbar-right">

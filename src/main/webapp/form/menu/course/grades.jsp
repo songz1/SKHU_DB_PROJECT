@@ -44,7 +44,7 @@
 								<option value="1">1학기</option>
 								<option value="2">2학기</option>
 								<option value="summer">여름학기</option>
-								<option value="autumn">가을학기</option>
+								<option value="winter">겨울학기</option>
 							</select>
 						</td>
 						<td class="col-md-1">
@@ -163,6 +163,12 @@
 						<td class="col-md-1">21.0</td>
 						<td class="title col-md-1">평점</td>
 						<td class="col-md-1">3.85</td>
+						<td class="col-md-1">
+							<span style="float:right">
+							<button type="submit" class="btn btn-warning btn-block"
+								style="WIDTH: 80pt;" onclick="/">성적 업로드</button>
+							</span>
+						</td>
 					</tr>
 				</table>
 			</div>

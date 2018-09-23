@@ -32,9 +32,20 @@
 							</div>
 						</div>
 						<div class="form-group mb-50">
-							<label class="col-sm-2 control-label">핸드폰번호</label>
+							<label class="col-sm-2 control-label">소속 학과</label>
 							<div class="mb-25 col-md-4 col-md-offset-2">
 								<input type="text" name="name" class="form-control">
+							</div>
+						</div>
+						<div class="form-group mb-50">
+							<label class="col-sm-2 control-label">학년</label>
+							<div class="mb-25 col-md-4 col-md-offset-2">
+								<select name="grade" class="form-control">
+								<option value="1">1학년</option>
+								<option value="2">2학년</option>
+								<option value="3">3학년</option>
+								<option value="4">4학년 이상</option>
+							</select>
 							</div>
 						</div>
 						<button type="submit" class="btn btn-info mb-25 col-md-2 col-md-offset-5">확인</button>

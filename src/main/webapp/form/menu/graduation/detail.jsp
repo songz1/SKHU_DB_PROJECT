@@ -22,8 +22,8 @@
 		<div class="container">
 			<div id="header" class="panel panel-default">
 				<div class="panel-body">
-					<h1 class="new">학부/학과 졸업요건</h1>
-					<table class="table new-detail mt-25">
+					<h1>학부/학과 졸업요건</h1>
+					<table class="table mt-25">
 						<thead>
 							<tr data-url="info.jsp">
 								<th class="col-md-12">인문융합 자율학부</th>
@@ -44,7 +44,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<table class="table new-detail">
+					<table class="table">
 						<thead>
 							<tr>
 								<th class="col-md-12">사회융합 자율학부</th>
@@ -62,7 +62,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<table class="table new-detail">
+					<table class="table">
 						<thead>
 							<tr>
 								<th class="col-md-12">미디어컨텐츠융합 자율학부</th>
@@ -77,7 +77,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<table class="table new-detail">
+					<table class="table">
 						<thead>
 							<tr>
 								<th class="col-md-12">IT융합 자율학부</th>
@@ -97,24 +97,6 @@
 								<td class="col-md-12">글로컬IT공학과</td>
 							</tr>
 						</tbody>
-					</table>
-					<h1 id='mtb' class="old mt-200 mb-200">기타졸업요건</h1>
-					<table class="table old-detail mt-25 text-center">
-						<tr>
-							<td class="col-md-2">학과명</td>
-							<td class="col-md-8">졸업학점 외 졸업요건</td>
-							<td class="col-md-2">비고</td>
-						</tr>
-						<tr>
-							<td class="col-md-2">신학과</td>
-							<td class="col-md-8">TOEIC 750점 이상</td>
-							<td class="col-md-2"></td>
-						</tr>
-						<tr>
-							<td class="col-md-2">영어학과</td>
-							<td class="col-md-8">TOEIC 750점 이상</td>
-							<td class="col-md-2">2012학번까지</td>
-						</tr>
 					</table>
 				</div>
 			</div>

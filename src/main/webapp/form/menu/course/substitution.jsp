@@ -30,6 +30,12 @@
 						<td class="col-md-1">송지은</td>
 						<td class="title col-md-1">학과</td>
 						<td class="col-md-2">소프트웨어공학과</td>
+						<td class="col-md-1">
+							<span style="float:right">
+							<button type="submit" class="btn btn-info btn-block"
+								style="WIDTH: 100pt;" onclick="/">대체과목 신청</button>
+							</span>
+						</td>
 					</tr>
 				</table>
 				
