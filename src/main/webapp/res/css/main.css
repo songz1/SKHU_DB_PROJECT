@@ -15,6 +15,11 @@ header {
     background-color: #FAFAFA;
 }
 
+.navbar-color {
+	background: #FAFAFA;
+}
+
+
 .navbar-brand {
 	color: #000000;
 	font-weight: bold;
@@ -55,6 +60,7 @@ footer {
 .mb-25 {
 	margin-bottom: 25px;
 }
+
 
 select {
 	width: 180px;

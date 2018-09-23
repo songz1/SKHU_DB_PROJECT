@@ -3,7 +3,7 @@
 
 <header>
 	<div id="divNav">
-		<nav class="navbar navbar-custom navbar-fixed-top" id="topnavbar">
+		<nav class="navbar navbar-custom navbar-fixed-top navbar-color" id="topnavbar">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="/SKHU_DB_PROJECT/form/menu/main.jsp">성공회대학교 졸업관리</a>
