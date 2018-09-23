@@ -25,6 +25,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="/SKHU_DB_PROJECT/form/menu/course/substitution.jsp">대체과목 목록 조회</a></li>
 								<li><a href="/SKHU_DB_PROJECT/form/menu/course/changerequest.jsp">대체과목 인정 신청</a></li>
+								<li><a href="/SKHU_DB_PROJECT/form/menu/course/majorrequestList.jsp">전공인정 신청 목록 조회</a></li>
 								<li><a href="/SKHU_DB_PROJECT/form/menu/course/majorrequest.jsp">전공인정 신청</a></li>
 								<li><a href="/SKHU_DB_PROJECT/form/menu/course/grades.jsp">성적 조회</a></li>
 							</ul></li>

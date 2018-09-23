@@ -37,10 +37,7 @@
 						<textarea name="reportContent" class="form-control" maxlength="1024" style="height: 100px"  placeholder="기타사항"></textarea>
 					</div>
 					<div>
-						<button type="button" class="btn btn-warning col-md-2 col-md-offset-3">내 신청 목록</button>
-					</div>
-					<div>
-						<button type="submit" class="btn btn-info col-md-2 col-md-offset-2 mb-25">신청</button>
+						<button type="submit" class="btn btn-info col-md-2 col-md-offset-5 mb-25">신청</button>
 					</div>
 				</form>
 			</div>
