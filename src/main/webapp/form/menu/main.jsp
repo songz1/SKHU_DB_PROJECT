@@ -23,10 +23,11 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<div class="table-responsive">
+					<h3 class="text-center">졸업 학점 현황</h3>
+
 					<table class="table text-center">
-						<h3 class="text-center">졸업 학점 현황</h3>
 						<tr class="warning summary">
-							<td class="col-md-4">필수교양 11/16</td>
+							<td class="col-md-4">교양 필수 11/16</td>
 							<td class="col-md-4"></td>
 							<td class="col-md-4"></td>
 						</tr>
@@ -50,18 +51,34 @@
 							<td class="col-md-4"></td>
 							<td class="col-md-4"></td>
 						</tr>
-						<tr>
-							<td class="col-md-4 warning">전공탐색 16/19</td>
-							<td class="col-md-4 success">전공탐색세미나 <i
-								class="glyphicon glyphicon-ok"></i></td>
-							<td class="col-md-4 danger">융학자율학부개설과목<i
-								class="glyphicon glyphicon-remove"></i></td>
-						<tr>
+					</table>
+
+					<table class="table text-center">
+						<tr class="warning summary">
+							<td class="col-md-4">영역 필수 9/18</td>
+							<td class="col-md-4"></td>
+							<td class="col-md-4"></td>
+						</tr>
+						<tr class="detail">
 							<td class="col-md-4 success">가치역량 6/6</td>
 							<td class="col-md-4 warning">대안역량 3/6</td>
 							<td class="col-md-4 danger">실천역량 0/6</td>
 						</tr>
 					</table>
+					
+					<table class="table text-center">
+						<tr class="warning summary">
+							<td class="col-md-4 warning">전공 탐색 7/19</td>
+							<td class="col-md-4"></td>
+							<td class="col-md-4"></td>
+						</tr>
+						<tr class="detail">
+							<td class="col-md-4 success">전공탐색세미나 1/1</td>
+							<td class="col-md-4 success">IT융합자율학부 개설과목 6/3</td>
+							<td class="col-md-4 danger">타 학부 개설과목 0/3</td>
+						</tr>
+					</table>
+					
 				</div>
 				<div class="table-responsive">
 					<table class="table text-center">
