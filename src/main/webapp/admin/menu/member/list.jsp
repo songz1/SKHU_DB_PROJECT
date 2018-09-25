@@ -25,23 +25,50 @@
 			<div class="panel-body">
 			<h3 class="text-center">학생 목록</h3>
 			
+			<table class="table text-center">
+					<tr>
+						<td class="title col-md-1">학과(부)</td>
+						<td class="col-md-1">
+							<select name="department">
+								<option value="0">전체</option>
+								<option value="1">소프트웨어공학과</option>
+								<option value="2">컴퓨터공학과</option>
+								<option value="3">글로컬IT학과</option>
+								<option value="4">정보통신공학과</option>
+							</select>
+						</td>
+						<td class="title col-md-1">학번</td>
+						<td class="col-md-1">
+							<input type="text" name="studentNumber"></input>
+						</td>
+						<td class="title col-md-1">이름</td>
+						<td class="col-md-1">
+							<input type="text" name="studentName"></input>
+						</td>
+						<td class="col-md-1"><span style="float: right">
+								<button type="submit" class="btn btn-default btn-block"
+									style="WIDTH: 100pt;" onclick="/">조회</button>
+						</span></td>
+					</tr>
+				</table>
+			
 				<table class="table table-bordered mt5">
 					<thead>
-						<tr>
-							<th>학번</th>
-							<th>이름</th>
-							<th>학과</th>
-							<th>학년</th>
+						<tr class="title">
+							<th class="text-center">학번</th>
+							<th class="text-center">이름</th>
+							<th class="text-center">학과</th>
+							<th class="text-center">학년</th>
 						</tr>
 					</thead>
 					<tbody>
-							<tr data-url="detail?id=201532020">
+							<tr class="text-center">
 								<td>201532020</td>
 								<td>송지은</td>
 								<td>소프트웨어공학과</td>
 								<td>3학년</td>
 							</tr>
-							<tr data-url="detail?id=201432019">
+							<tr class="text-center">
 								<td>201432019</td>
 								<td>신정호</td>
 								<td>소프트웨어공학과</td>
