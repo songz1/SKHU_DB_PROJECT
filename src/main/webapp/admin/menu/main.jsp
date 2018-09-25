@@ -11,8 +11,10 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/admin/main.css?ver=1">
-<script type="text/javascript" src="../../../res/script/admin/main.js?ver=1"></script>
+	href="../../res/css/admin/main.css?ver=1">
+<link rel="stylesheet" type="text/css" href="test?ver=1">
+<script type="text/javascript"
+	src="../../../res/script/admin/main.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -23,108 +25,27 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<div class="table-responsive">
-					<h3 class="text-center">졸업 학점 현황</h3>
-
+					<h3 class="text-center">학생 신청 현황</h3>
 					<table class="table text-center">
-						<tr class="warning essential">
-							<td class="col-md-4"></td>
-							<td class="col-md-4">교양 필수 11/16</td>
-							<td class="col-md-4"></td>
+						<tr>
+							<td class="title line" colspan="3">전공인청 신청내역</td>
+							<td class="title" colspan="3">대체과목 신청내역</td>
 						</tr>
-						<tr class="essential-detail">
-							<td class="col-md-4 warning">채플 1/2</td>
-							<td class="col-md-4 danger">사회봉사 0/2</td>
-							<td class="col-md-4 success">대학생활세미나I 2/2</td>
+						<tr>
+							<td class="title col-md-1">신청자</td>
+							<td class="title col-md-4">신청내역</td>
+							<td class="title line"></td>
+							<td class="title col-md-1">신청자</td>
+							<td class="title col-md-4">신청내역</td>
+							<td class="title col-md-1"></td>
 						</tr>
-						<tr class="essential-detail">
-							<td class="col-md-4 success">대학생활세미나II 2/2</td>
-							<td class="col-md-4 danger">인권과평화 0/2</td>
-							<td class="col-md-4 success">말과글 2/2</td>
-						</tr>
-						<tr class="essential-detail">
-							<td class="col-md-4 success">과학기술과에콜로지 2/2</td>
-							<td class="col-md-4 success">데이터활용및분석 2/2</td>
-							<td class="col-md-4"></td>
-						</tr>
-					</table>
-				</div>
-				<div class="table-responsive">
-					<table class="table text-center">
-						<tr class="warning area-essential">
-							<td class="col-md-4"></td>
-							<td class="col-md-4">영역 필수 9/18</td>
-							<td class="col-md-4"></td>
-						</tr>
-						<tr class="area-detail">
-							<td class="col-md-4 success">가치역량 6/6</td>
-							<td class="col-md-4 warning">대안역량 3/6</td>
-							<td class="col-md-4 danger">실천역량 0/6</td>
-						</tr>
-					</table>
-				</div>
-				<div class="table-responsive">
-					<table class="table text-center">
-						<tr class="warning major-searching">
-							<td class="col-md-4 warning"></td>
-							<td class="col-md-4">전공 탐색 7/19</td>
-							<td class="col-md-4"></td>
-						</tr>
-						<tr class="major-detail">
-							<td class="col-md-4 success">전공탐색세미나 1/1</td>
-							<td class="col-md-4 success">IT융합자율학부 개설과목 6/3</td>
-							<td class="col-md-4 danger">타 학부 개설과목 0/3</td>
-						</tr>
-					</table>
-				</div>
-				<div class="table-responsive">
-					<table class="table text-center">
-						<thead>
-							<tr class="info">
-								<td class="col-md-3">분류</td>
-								<td class="col-md-3">필수</td>
-								<td class="col-md-3">선택</td>
-								<td class="col-md-3">계</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="active">
-								<td class="col-md-3">전공</td>
-								<td class="col-md-3">19</td>
-								<td class="col-md-3">6</td>
-								<td class="col-md-3">25</td>
-							</tr>
-							<tr class="active">
-								<td class="col-md-3">부전공</td>
-								<td class="col-md-3">6</td>
-								<td class="col-md-3">3</td>
-								<td class="col-md-3">9</td>
-							</tr>
-							<tr class="active">
-								<td class="col-md-3">복수전공</td>
-								<td class="col-md-3">6</td>
-								<td class="col-md-3">3</td>
-								<td class="col-md-3">9</td>
-							</tr>
-							<tr class="active">
-								<td class="col-md-3">편입</td>
-								<td class="col-md-3">3</td>
-								<td class="col-md-3">3</td>
-								<td class="col-md-3">6</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="table-responsive">
-					<table class="table text-center">
-						<tr class="info">
-							<td class="col-md-4">기타</td>
-							<td class="col-md-4">교직</td>
-							<td class="col-md-4">평교</td>
-						</tr>
-						<tr class="active">
-							<td class="col-md-4">3</td>
-							<td class="col-md-4">3</td>
-							<td class="col-md-4">3</td>
+						<tr>
+							<td class="col-md-1">신정호</td>
+							<td class="col-md-4">보안시스템</td>
+							<td class="line">new</td>
+							<td class="col-md-1">송지은</td>
+							<td class="col-md-4">모바일 프로그래밍</td>
+							<td class="col-md-1">new</td>
 						</tr>
 					</table>
 				</div>

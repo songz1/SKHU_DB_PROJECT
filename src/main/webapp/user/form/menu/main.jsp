@@ -12,7 +12,8 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/user/main.css?ver=1">
-<script type="text/javascript" src="../../../res/script/user/main.js?ver=1"></script>
+<script type="text/javascript"
+	src="../../../res/script/user/main.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -24,7 +25,6 @@
 			<div class="panel-body">
 				<div class="table-responsive">
 					<h3 class="text-center">졸업 학점 현황</h3>
-
 					<table class="table text-center">
 						<tr class="warning essential">
 							<td class="col-md-4"></td>
