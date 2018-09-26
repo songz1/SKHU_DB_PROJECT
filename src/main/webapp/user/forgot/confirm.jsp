@@ -28,7 +28,7 @@
 						<div class="mt-10 mb-10">
 							<div class="input-group">
 								<div class="input-group-addon">인증코드</div>
-								<input type="text" class="form-control" id="confirmCode">
+								<input type="text" class="form-control" name="confirmCode">
 							</div>
 							<a href="login.jsp"><button type="submit"
 									class="btn btn-info">인증</button></a>

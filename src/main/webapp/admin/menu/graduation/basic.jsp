@@ -12,6 +12,8 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/admin/main.css?ver=1">
+	<link rel="stylesheet" type="text/css"
+	href="../../../res/css/admin/form.css?ver=1">
 <script type="text/javascript"
 	src="../../../res/script/admin/main.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
@@ -23,15 +25,14 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
+				<h4 class="text-center">졸업 이수 학점</h4>
 				<table class="table text-center">
-					<h4 class="text-center">졸업 이수 학점</h4>
 					<tr>
 						<td class="title col-md-1"></td>
 						<td class="title col-md-1">졸업 학점</td>
 						<td class="title col-md-1">전공 학점</td>
 						<td class="title col-md-1">교양 학점</td>
 						<td class="title col-md-1">특별과정 학점</td>
-						<td class="title col-md-1">전공탐색 학점</td>
 					</tr>
 					<tr>
 						<td class="title col-md-1">2017학번까지</td>
@@ -39,7 +40,19 @@
 						<td class="col-md-1">32 이상</td>
 						<td class="col-md-1">60 이상</td>
 						<td class="col-md-1">15 이상</td>
-						<td class="col-md-1">해당 없음</td>
+					</tr>
+				</table>
+				<div class="text-right btn-lg">
+					<a href="#"><i class="glyphicon glyphicon-floppy-remove"></i></a>
+				</div>
+				<table class="table text-center">
+					<tr>
+						<td class="title col-md-1"></td>
+						<td class="title col-md-1">졸업 학점</td>
+						<td class="title col-md-1">전공 학점</td>
+						<td class="title col-md-1">교양 학점</td>
+						<td class="title col-md-1">특별과정 학점</td>
+						<td class="title col-md-1">전공탐색 학점</td>
 					</tr>
 					<tr>
 						<td class="title col-md-1">2018학번부터</td>
@@ -50,6 +63,18 @@
 						<td class="col-md-1">18 이상</td>
 					</tr>
 				</table>
+				<div class="text-right btn-lg">
+					<a href="#"><i class="glyphicon glyphicon-floppy-remove"></i></a>
+				</div>
+				<form method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label>파일</label> 
+						<input type="file" class="form-control form-width" name="scoreFile" />
+					</div>
+					<button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-ok"></i>저장
+					</button>
+				</form>
 
 				<table class="table text-center">
 					<h4 class="text-center">학년별 수료 학점</h4>
@@ -74,6 +99,18 @@
 						<td class="col-md-1">130 이상</td>
 					</tr>
 				</table>
+				<div class="text-right btn-lg">
+					<a href="#"><i class="glyphicon glyphicon-floppy-remove"></i></a>
+				</div>
+				<form method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label>파일</label> 
+						<input type="file" class="form-control form-width" name="completeFile" />
+					</div>
+					<button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-ok"></i>저장
+					</button>
+				</form>
 
 				<table class="table text-center">
 					<h4 class="text-center">학번별 교양 필수 학점</h4>
@@ -106,12 +143,45 @@
 						</td>
 					</tr>
 				</table>
-
-				<h4 class="text-center">2018학번 교양학점 이수 조건표</h4>
-				<div>
-					<img src="../../../res/image/gradu.jpg"
-						class="img-responsive center-block" alt="Responsive image" />
+				<div class="text-right btn-lg">
+					<a href="#"><i class="glyphicon glyphicon-floppy-remove"></i></a>
 				</div>
+				<form method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label>파일</label> <input type="file" class="form-control form-width" name="essentialFile" />
+					</div>
+					<button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-ok"></i>저장
+					</button>
+				</form>
+
+				<h4 class="text-center">상세 졸업요건</h4>
+				<table class="table text-center">
+					<tr>
+						<td class="title col-md-1">학번</td>
+						<td class="title col-md-2">첨부파일</td>
+					</tr>
+					<tr>
+						<td class="col-md-1">2018학번</td>
+						<td class="col-md-2">
+							<a href="#"><i class="glyphicon glyphicon-download-alt"></i></a>
+							<a href="#"><i class="glyphicon glyphicon-floppy-remove"></i></a>
+						</td>
+					</tr>
+				</table>
+				<form method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label>학번</label>
+						<input type="text" class="form-control form-width" name="detailYear" />
+					</div>
+					<div class="form-group">
+						<label>파일</label>
+						<input type="file" class="form-control form-width" name="detailFile"/>
+					</div>
+					<button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-ok"></i>저장
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>

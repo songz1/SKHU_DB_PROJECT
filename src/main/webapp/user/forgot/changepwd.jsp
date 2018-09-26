@@ -27,11 +27,11 @@
 						</div>
 						<div class="form-group title">패스워드 변경</div>
 						<div class="form-group">
-							<input type="password" class="form-control" id="password"
+							<input type="password" class="form-control" name="password"
 								placeholder="비밀번호">
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" id="passwordConfirm"
+							<input type="password" class="form-control" name="passwordConfirm"
 								placeholder="비밀번호 확인">
 						</div>
 						<div>

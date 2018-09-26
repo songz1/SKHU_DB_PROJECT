@@ -26,7 +26,7 @@
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon">기존 패스워드</div>
-							<input type="password" class="form-control" id="password">
+							<input type="password" class="form-control" name="password">
 						</div>
 						<a href=""><button type="submit" class="btn btn-info">확인</button></a>
 					</div>

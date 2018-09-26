@@ -28,10 +28,10 @@
 							<label>폐지과목</label>
 						</div>
 						</p>
-						과목 코드: <input type="text" name="subjectCodeB" class="form-control"
+						과목 코드: <input type="text" name="lostSubjectCode" class="form-control"
 							placeholder="과목 코드"></br> 과목명: <input type="text"
-							name="subjectNameB" class="form-control" placeholder="과목명"></br>
-						이수 구분: <select name="partB" class="form-control">
+							name="lostSubjectName" class="form-control" placeholder="과목명"></br>
+						이수 구분: <select name="lostSubjectPart" class="form-control">
 							<option value="1">전공필수</option>
 							<option value="2">전공선택</option>
 							<option value="3">전공탐색</option>
@@ -47,10 +47,10 @@
 							<label>대체과목</label>
 						</div>
 						</p>
-						과목 코드: <input type="text" name="subjectCodeA" class="form-control"
+						과목 코드: <input type="text" name="changeSubjectCode" class="form-control"
 							placeholder="과목 코드"></br> 과목명: <input type="text"
-							name="subjectNameA" class="form-control" placeholder="과목명"></br>
-						이수 구분: <select name="partA" class="form-control">
+							name="changeSubjectName" class="form-control" placeholder="과목명"></br>
+						이수 구분: <select name="changeSubjectPart" class="form-control">
 							<option value="1">전공필수</option>
 							<option value="2">전공선택</option>
 							<option value="3">전공탐색</option>

@@ -12,7 +12,6 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../res/css/admin/main.css?ver=1">
-<link rel="stylesheet" type="text/css" href="test?ver=1">
 <script type="text/javascript"
 	src="../../res/script/admin/main.js?ver=1"></script>
 <title>SKHU 졸업관리</title>

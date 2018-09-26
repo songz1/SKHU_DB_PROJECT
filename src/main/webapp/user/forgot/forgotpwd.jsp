@@ -28,13 +28,13 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label"> 아이디</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="studentNumber">
+								<input type="text" class="form-control" name="studentNumber">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label"> 이름</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="name">
+								<input type="text" class="form-control" name="name">
 							</div>
 						</div>
 						<div>

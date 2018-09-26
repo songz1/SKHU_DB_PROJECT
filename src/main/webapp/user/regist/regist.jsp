@@ -26,19 +26,19 @@
 						</div>
 						<div class="form-group title">회원가입</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="studentNumber"
+							<input type="text" class="form-control" name="studentNumber"
 								placeholder="학번">
 						</div>
 						<div class="form-group">
-							<input type="email" class="form-control" id="email"
+							<input type="email" class="form-control" name="email"
 								placeholder="이메일">
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" id="password"
+							<input type="password" class="form-control" name="password"
 								placeholder="비밀번호">
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" id="passwordConfirm"
+							<input type="password" class="form-control" name="passwordConfirm"
 								placeholder="비밀번호 확인">
 						</div>
 						<div>

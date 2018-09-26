@@ -32,13 +32,13 @@
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">소속 학과</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="text" name="name" class="form-control">
+							<input type="text" name="department" class="form-control">
 						</div>
 					</div>
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">이메일</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="email" name="name" class="form-control">
+							<input type="email" name="email" class="form-control">
 						</div>
 					</div>
 					<div class="form-group mb-50">

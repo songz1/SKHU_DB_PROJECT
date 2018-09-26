@@ -26,13 +26,13 @@
 					<div>
 						<div class="input-group mb-25 col-md-4 col-md-offset-1">
 							<div class="input-group-addon">변경 패스워드</div>
-							<input type="password" class="form-control" id="password">
+							<input type="password" class="form-control" name="password">
 						</div>
 					</div>
 					<div>
 						<div class="input-group mb-25 col-md-4 col-md-offset-1">
 							<div class="input-group-addon">패스워드 확인</div>
-							<input type="password" class="form-control" id="password">
+							<input type="password" class="form-control" name="passwordConfirm">
 						</div>
 					</div>
 					<div>

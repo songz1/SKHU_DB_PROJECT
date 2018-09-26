@@ -24,13 +24,13 @@
 							class="img-responsive center-block" alt="Responsive image" />
 						<div class="form-group mt-10">
 							<div class="col-sm-12">
-								<input type="text" class="form-control" id="studentNumber"
+								<input type="text" class="form-control" name="studentNumber"
 									placeholder="아이디">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-12">
-								<input type="password" class="form-control" id="password"
+								<input type="password" class="form-control" name="password"
 									placeholder="패스워드">
 							</div>
 						</div>
@@ -39,8 +39,8 @@
 						</div>
 					</form>
 					<div class="account">
-						<a href="../regist/regist.jsp">회원가입</a> <a
-							href="../forgot/forgotpwd.jsp">비밀번호 찾기</a>
+						<a href="../regist/regist.jsp">회원가입</a>
+						<a href="../forgot/forgotpwd.jsp">비밀번호 찾기</a>
 					</div>
 				</div>
 			</div>
