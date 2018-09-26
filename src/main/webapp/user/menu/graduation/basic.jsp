@@ -11,9 +11,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../../res/css/main.css?ver=1">
-<script type="text/javascript"
-	src="../../../../res/script/main.js?ver=1"></script>
+	href="../../../res/css/user/main.css?ver=1">
 <title>SKHU 졸업관리</title>
 </head>
 

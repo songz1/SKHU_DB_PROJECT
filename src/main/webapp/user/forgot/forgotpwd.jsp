@@ -11,8 +11,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/user/form.css?ver=1">
-<script type="text/javascript" src="../../../res/script/user/form.js?ver=1"></script>
+	href="../../res/css/user/login.css?ver=1">
 <title>성공회대 학사 시스템</title>
 </head>
 <body>
@@ -22,7 +21,7 @@
 				<div class="centered">
 					<form class="form-horizontal" action="confirm.jsp">
 						<div>
-							<img src="../../../res/image/login_logo.png"
+							<img src="../../res/image/login_logo.png"
 								class="img-responsive center-block" alt="Responsive image" />
 						</div>
 						<div class="form-group title">패스워드 찾기</div>

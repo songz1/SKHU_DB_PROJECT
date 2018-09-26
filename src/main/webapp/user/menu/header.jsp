@@ -7,7 +7,7 @@
 			id="topnavbar">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="/SKHU_DB_PROJECT/user/form/menu/main.jsp">성공회대학교
+					<a class="navbar-brand" href="/SKHU_DB_PROJECT/user/menu/main.jsp">성공회대학교
 						졸업관리</a>
 				</div>
 				<div id="bs-navbar-collapse" class="collapse navbar-collapse">
@@ -18,10 +18,10 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="/SKHU_DB_PROJECT/user/form/menu/graduation/basic.jsp">기본
+									href="/SKHU_DB_PROJECT/user/menu/graduation/basic.jsp">기본
 										졸업 요건</a></li>
 								<li><a
-									href="/SKHU_DB_PROJECT/user/form/menu/graduation/detail.jsp">학과/학부별
+									href="/SKHU_DB_PROJECT/user/menu/graduation/detail.jsp">학과/학부별
 										졸업 요건</a></li>
 							</ul></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -30,18 +30,18 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="/SKHU_DB_PROJECT/user/form/menu/course/substitution.jsp">대체과목
+									href="/SKHU_DB_PROJECT/user/menu/course/substitution.jsp">대체과목
 										목록 조회</a></li>
 								<li><a
-									href="/SKHU_DB_PROJECT/user/form/menu/course/changerequest.jsp">대체과목
+									href="/SKHU_DB_PROJECT/user/menu/course/changerequest.jsp">대체과목
 										인정 신청</a></li>
 								<li><a
-									href="/SKHU_DB_PROJECT/user/form/menu/course/majorrequestList.jsp">전공인정
+									href="/SKHU_DB_PROJECT/user/menu/course/majorrequestList.jsp">전공인정
 										신청 목록 조회</a></li>
 								<li><a
-									href="/SKHU_DB_PROJECT/user/form/menu/course/majorrequest.jsp">전공인정
+									href="/SKHU_DB_PROJECT/user/menu/course/majorrequest.jsp">전공인정
 										신청</a></li>
-								<li><a href="/SKHU_DB_PROJECT/user/form/menu/course/grades.jsp">성적
+								<li><a href="/SKHU_DB_PROJECT/user/menu/course/grades.jsp">성적
 										조회</a></li>
 							</ul></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -50,10 +50,10 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="/SKHU_DB_PROJECT/user/form/menu/account/acntchange.jsp">기본
+									href="/SKHU_DB_PROJECT/user/menu/account/acntchange.jsp">기본
 										정보 변경</a></li>
 								<li><a
-									href="/SKHU_DB_PROJECT/user/form/menu/account/pwdconfirm.jsp">비밀번호
+									href="/SKHU_DB_PROJECT/user/menu/account/pwdconfirm.jsp">비밀번호
 										변경</a></li>
 							</ul></li>
 					</ul>

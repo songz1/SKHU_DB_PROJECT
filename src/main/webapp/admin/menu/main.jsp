@@ -14,7 +14,7 @@
 	href="../../res/css/admin/main.css?ver=1">
 <link rel="stylesheet" type="text/css" href="test?ver=1">
 <script type="text/javascript"
-	src="../../../res/script/admin/main.js?ver=1"></script>
+	src="../../res/script/admin/main.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -28,26 +28,42 @@
 					<h3 class="text-center">학생 신청 현황</h3>
 					<table class="table text-center">
 						<tr>
-							<td class="title line" colspan="3">전공인청 신청내역</td>
-							<td class="title" colspan="3">대체과목 신청내역</td>
-						</tr>
-						<tr>
 							<td class="title col-md-1">신청자</td>
 							<td class="title col-md-4">신청내역</td>
-							<td class="title line"></td>
-							<td class="title col-md-1">신청자</td>
-							<td class="title col-md-4">신청내역</td>
-							<td class="title col-md-1"></td>
+							<td class="title col-md-1">상태</td>
 						</tr>
 						<tr>
 							<td class="col-md-1">신정호</td>
-							<td class="col-md-4">보안시스템</td>
-							<td class="line">new</td>
+							<td class="col-md-4">전공인정 신청</td>
+							<td class="col-md-1"><i class="glyphicon glyphicon-question-sign"></i></td>
+						</tr>
+						<tr>
 							<td class="col-md-1">송지은</td>
-							<td class="col-md-4">모바일 프로그래밍</td>
-							<td class="col-md-1">new</td>
+							<td class="col-md-4">대체과목 신청</td>
+							<td class="col-md-1"><i class="glyphicon glyphicon-question-sign"></i></td>
+						</tr>
+						<tr>
+							<td class="col-md-1">홍길동</td>
+							<td class="col-md-4">전공인정 신청</td>
+							<td class="col-md-1"><i class="glyphicon glyphicon-ok-sign"></i></td>
+						</tr>
+						<tr>
+							<td class="col-md-1">이순신</td>
+							<td class="col-md-4">전공인정 신청</td>
+							<td class="col-md-1"><i class="glyphicon glyphicon-remove-sign"></i></td>
+						</tr>
+						<tr>
+							<td class="col-md-1">이세종</td>
+							<td class="col-md-4">대체과목 신청</td>
+							<td class="col-md-1"><i class="glyphicon glyphicon-ok-sign"></i></td>
 						</tr>
 					</table>
+					<nav>
+					  <ul class="pager">
+					    <li><a href="#" class="glyphicon glyphicon-menu-left"></a></li>
+					    <li><a href="#" class="glyphicon glyphicon-menu-right"></a></li>
+					  </ul>
+					</nav>
 				</div>
 			</div>
 		</div>

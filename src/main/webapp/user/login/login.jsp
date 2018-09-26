@@ -11,8 +11,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/user/form.css?ver=2">
-<script type="text/javascript" src="../../../res/script/user/form.js?ver=1"></script>
+	href="../../res/css/user/login.css?ver=1">
 <title>성공회대 학사 시스템</title>
 </head>
 <body>
@@ -21,7 +20,7 @@
 			<div class="inner">
 				<div class="centered">
 					<form class="form-horizontal" action="../menu/main.jsp">
-						<img src="../../../res/image/login_logo.png"
+						<img src="../../res/image/login_logo.png"
 							class="img-responsive center-block" alt="Responsive image" />
 						<div class="form-group mt-10">
 							<div class="col-sm-12">
