@@ -36,8 +36,7 @@
 						</div>
 					</div>
 					<div>
-						<a href=""><button type="submit"
-								class="btn btn-info mb-25 col-md-1 col-md-offset-4">확인</button></a>
+						<a href=""><button type="submit" class="btn btn-info mb-25 col-md-1 col-md-offset-4">확인</button></a>
 					</div>
 				</form>
 			</div>

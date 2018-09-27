@@ -70,3 +70,15 @@ select {
 .line {
     border-right: 1px solid #cecece;
 }
+
+.essential {
+	cursor:pointer;
+}
+
+.area-essential {
+	cursor:pointer;
+}
+
+.major-searching {
+	cursor:pointer;
+}
