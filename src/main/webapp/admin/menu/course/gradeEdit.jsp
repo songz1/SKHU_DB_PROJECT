@@ -11,19 +11,20 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../../res/css/user/main.css?ver=1">
+	href="../../../res/css/admin/main.css?ver=1">
+<script type="text/javascript"
+	src="../../../res/script/admin/toDetail.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
 <body>
-	<jsp:include page="../header.jsp" flush="true"></jsp:include>
+	<jsp:include page="../header.jsp" flush="false"></jsp:include>
 	<main>
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-
+				<h3 class="text-center">성적 조회</h3>
 				<table class="table text-center">
-					<h3 class="text-center">성적 조회</h3>
 					<tr>
 						<td class="title col-md-1">학번</td>
 						<td class="col-md-1">201532020</td>
@@ -33,27 +34,11 @@
 						<td class="col-md-2">소프트웨어공학과</td>
 					</tr>
 				</table>
-
 				<table class="table text-center">
 					<tr>
-						<td class="title col-md-1">년도</td>
-						<td class="col-md-1"><input type="text" name="year"
-							value="2018"></input></td>
-						<td class="title col-md-1">학기</td>
-						<td class="col-md-1"><select name="semester">
-								<option value="1">1학기</option>
-								<option value="2">2학기</option>
-								<option value="summer">여름학기</option>
-								<option value="winter">겨울학기</option>
-						</select></td>
-						<td class="col-md-1"><span style="float: left"> <input
-								type="checkbox"> 전체학기
-								</button>
-						</span></td>
-						<td class="col-md-1"><span style="float: right">
-								<button type="submit" class="btn btn-default btn-block"
-									style="WIDTH: 100pt;" onclick="/">조회</button>
-						</span></td>
+						<td class="title col-md-3">성적 업로드</td>
+						<td class="title col-md-3"><input type="file" class="form-control form-width"
+							name="grade" /></td>
 					</tr>
 				</table>
 
@@ -159,16 +144,13 @@
 						<td class="col-md-1">21.0</td>
 						<td class="title col-md-1">평점</td>
 						<td class="col-md-1">3.85</td>
-						<td class="col-md-1"><span style="float: right">
-								<button type="submit" class="btn btn-warning btn-block"
-									style="WIDTH: 80pt;" onclick="/">성적 업로드</button>
-						</span></td>
 					</tr>
 				</table>
+
 			</div>
 		</div>
-	</div>
 	</main>
 	<footer> </footer>
 </body>
 </html>
+
