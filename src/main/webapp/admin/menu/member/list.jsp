@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/admin/main.css?ver=1">
 <script type="text/javascript"
-	src="../../../res/script/admin/main.js?ver=1"></script>
+	src="../../../res/script/admin/member.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -55,23 +55,20 @@
 							<th class="text-center">이름</th>
 							<th class="text-center">학과</th>
 							<th class="text-center">학년</th>
-							<th class="text-center"></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center">
+						<tr class="text-center" data-url="detail.jsp">
 							<td>201532020</td>
 							<td>송지은</td>
 							<td>소프트웨어공학과</td>
 							<td>3학년</td>
-							<td><a href="detail.jsp">조회</a></td>
 						</tr>
-						<tr class="text-center">
+						<tr class="text-center" data-url="detail.jsp">
 							<td>201432019</td>
 							<td>신정호</td>
 							<td>소프트웨어공학과</td>
 							<td>3학년</td>
-							<td><a href="detail.jsp">조회</a></td>
 						</tr>
 					</tbody>
 				</table>
