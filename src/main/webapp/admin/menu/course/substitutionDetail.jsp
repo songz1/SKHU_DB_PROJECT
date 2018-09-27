@@ -11,17 +11,20 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../../res/css/user/main.css?ver=1">
+	href="../../../res/css/admin/main.css?ver=1">
+<script type="text/javascript"
+	src="../../../res/script/admin/main.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
 <body>
-	<jsp:include page="../header.jsp" flush="true"></jsp:include>
+	<jsp:include page="../header.jsp" flush="false"></jsp:include>
 	<main>
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-
+				<h3 class="text-center">대체과목 신청 정보</h3>
+				<hr />
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">학번</td>
@@ -30,18 +33,13 @@
 						<td class="col-md-1">송지은</td>
 						<td class="title col-md-1">학과</td>
 						<td class="col-md-2">소프트웨어공학과</td>
-						<td class="col-md-1"><span style="float: right">
-								<button type="submit" class="btn btn-info btn-block"
-									style="WIDTH: 100pt;" onclick="/">대체과목 신청</button>
-						</span></td>
 					</tr>
 				</table>
 
 				<table class="table text-center">
 					<tr>
-						<td class="title line" colspan="5">폐지과목 수강신청내역</td>
-						<td class="title line" colspan="4">대체희망 수강신청내역</td>
-						<td class="title col-md-1"></td>
+						<td class="title line" colspan="5">폐지 과목</td>
+						<td class="title" colspan="4">대체희망 과목</td>
 					</tr>
 					<tr>
 						<td class="title col-md-1">과목코드</td>
@@ -52,8 +50,7 @@
 						<td class="title col-md-1">과목코드</td>
 						<td class="title col-md-2">과목명</td>
 						<td class="title col-md-1">이수구분</td>
-						<td class="title col-md-1 line">학점</td>
-						<td class="title col-md-1">대체여부</td>
+						<td class="title col-md-1">학점</td>
 					</tr>
 					<tr>
 						<td class="col-md-1">IC00048</td>
@@ -64,24 +61,20 @@
 						<td class="col-md-1">IC00045</td>
 						<td class="col-md-2">모바일 프로그래밍I</td>
 						<td class="col-md-1">전선</td>
-						<td class="col-md-1 line">3.0</td>
-						<td class="col-md-1">O</td>
+						<td class="col-md-1">3.0</td>
 					</tr>
 				</table>
-
-				<table class="table text-center">
-					<h3 class="text-center">대체과목 목록</h3>
-					<tr>
-						<td class="title col-md-1">과목코드</td>
-						<td class="title col-md-2">과목명</td>
-						<td class="title col-md-1">이수구분</td>
-						<td class="title col-md-1">학점</td>
-					</tr>
-				</table>
+				
+				
+					<button type="submit"
+						class="btn btn-danger mb-20 col-md-2 col-md-offset-3">거절</button>
+					<button type="submit"
+						class="btn btn-info mb-20 col-md-2 col-md-offset-2">승인</button>
+			
 			</div>
 		</div>
-	</div>
 	</main>
 	<footer> </footer>
 </body>
 </html>
+

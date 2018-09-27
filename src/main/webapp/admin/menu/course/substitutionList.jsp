@@ -23,7 +23,7 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-				<h3 class="text-center">학생 목록</h3>
+				<h3 class="text-center">대체과목 신청 목록</h3>
 
 				<table class="table text-center">
 					<tr>
@@ -54,21 +54,21 @@
 							<th class="text-center">학번</th>
 							<th class="text-center">이름</th>
 							<th class="text-center">학과</th>
-							<th class="text-center">학년</th>
+							<th class="text-center">처리 여부</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center" data-url="detail.jsp">
+						<tr class="text-center" data-url="substitutionDetail.jsp">
 							<td>201532020</td>
 							<td>송지은</td>
 							<td>소프트웨어공학과</td>
-							<td>3학년</td>
+							<td>X</td>
 						</tr>
-						<tr class="text-center" data-url="detail.jsp">
-							<td>201432019</td>
-							<td>신정호</td>
+						<tr class="text-center" data-url="substitutionDetail.jsp">
+							<td>201732099</td>
+							<td>이세종</td>
 							<td>소프트웨어공학과</td>
-							<td>3학년</td>
+							<td>O</td>
 						</tr>
 					</tbody>
 				</table>
