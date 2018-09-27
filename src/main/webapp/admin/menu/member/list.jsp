@@ -24,7 +24,6 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<h3 class="text-center">학생 목록</h3>
-
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">학과(부)</td>

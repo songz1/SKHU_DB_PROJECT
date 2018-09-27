@@ -29,7 +29,8 @@
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label col-md-offset-1">학번</label>
 						<div class="mb-25 col-md-4 col-md-offset-1">
-							<input type="text" name="number" class="form-control" value="201532020">
+							<input type="text" name="number" class="form-control"
+								value="201532020">
 						</div>
 					</div>
 					<div class="form-group">
@@ -62,7 +63,7 @@
 					</div>
 					<button type="submit"
 						class="btn btn-danger mb-20 col-md-2 col-md-offset-3">탈퇴</button>
-						<button type="submit"
+					<button type="submit"
 						class="btn btn-info mb-20 col-md-2 col-md-offset-2">수정</button>
 				</form>
 			</div>

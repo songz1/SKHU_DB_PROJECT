@@ -64,13 +64,13 @@
 						<td class="col-md-1">3.0</td>
 					</tr>
 				</table>
-				
-				
-					<button type="submit"
-						class="btn btn-danger mb-20 col-md-2 col-md-offset-3">거절</button>
-					<button type="submit"
-						class="btn btn-info mb-20 col-md-2 col-md-offset-2">승인</button>
-			
+
+
+				<button type="submit"
+					class="btn btn-danger mb-20 col-md-2 col-md-offset-3">거절</button>
+				<button type="submit"
+					class="btn btn-info mb-20 col-md-2 col-md-offset-2">승인</button>
+
 			</div>
 		</div>
 	</main>
