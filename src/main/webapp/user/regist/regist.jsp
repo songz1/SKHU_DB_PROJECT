@@ -26,12 +26,32 @@
 						</div>
 						<div class="form-group title">회원가입</div>
 						<div class="form-group">
+							<input type="text" class="form-control" name="name"
+								placeholder="이름">
+						</div>
+						<div class="form-group">
 							<input type="text" class="form-control" name="studentNumber"
 								placeholder="학번">
 						</div>
 						<div class="form-group">
 							<input type="email" class="form-control" name="email"
 								placeholder="이메일">
+						</div>
+						<div class="form-group">
+							<select name="department" class="form-control">
+								<option value="1">소프트웨어공학과</option>
+								<option value="2">컴퓨터공학과</option>
+								<option value="3">영어학과</option>
+								<option value="4">중국어학과</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<select name="grade" class="form-control">
+								<option value="1">1학년</option>
+								<option value="2">2학년</option>
+								<option value="3">3학년</option>
+								<option value="4">4학년 이상</option>
+							</select>
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="password"

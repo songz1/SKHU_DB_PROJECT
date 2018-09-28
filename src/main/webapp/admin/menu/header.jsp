@@ -7,23 +7,26 @@
 			id="topnavbar">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="/SKHU_DB_PROJECT/admin/menu/main.jsp">성공회대학교 졸업관리</a>
+					<a class="navbar-brand" href="/SKHU_DB_PROJECT/admin/menu/main.jsp">성공회대학교
+						졸업관리</a>
 				</div>
 				<div id="bs-navbar-collapse" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav navbar">
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false">졸업 요건  수정<span class="caret"></span>
+							aria-expanded="false">졸업 요건 관리<span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="/SKHU_DB_PROJECT/admin/menu/graduation/basic.jsp">기본 졸업 요건</a></li>
+									href="/SKHU_DB_PROJECT/admin/menu/graduation/basic.jsp">기본
+										졸업 요건</a></li>
 								<li><a
-									href="/SKHU_DB_PROJECT/admin/menu/graduation/detail.jsp">학과/학부별 졸업 요건</a></li>
-							</ul></li>
+									href="/SKHU_DB_PROJECT/admin/menu/graduation/detail.jsp">학과/학부별
+										졸업 요건</a></li>
+							</ul>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false">수강 수정<span class="caret"></span>
+							aria-expanded="false">학생 성적/과목 관리<span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu">
 								<li><a
@@ -31,17 +34,22 @@
 								<li><a
 									href="/SKHU_DB_PROJECT/admin/menu/course/majorrequestList.jsp">전공인정</a></li>
 								<li><a href="/SKHU_DB_PROJECT/admin/menu/course/grades.jsp">성적</a></li>
-							</ul></li>
+							</ul>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false">계정 정보 변경<span class="caret"></span>
+							aria-expanded="false">계정 관리<span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="/SKHU_DB_PROJECT/admin/menu/account/acntchange.jsp">학생 계정</a></li>
+									href="/SKHU_DB_PROJECT/admin/menu/account/acntchange.jsp">학생
+										계정</a></li>
 								<li><a
-									href="/SKHU_DB_PROJECT/admin/menu/account/pwdconfirm.jsp">관리자 계정</a></li>
-							</ul></li>
+									href="/SKHU_DB_PROJECT/admin/menu/account/pwdconfirm.jsp">관리자
+										계정</a></li>
+								<li><a
+									href="/SKHU_DB_PROJECT/admin/menu/account/pwdconfirm.jsp">관리자
+										추가</a></li>
+							</ul>
 					</ul>
 					<div class="uib-button-bar navbar-right">
 						<div class="divItem">
