@@ -40,6 +40,10 @@
 						<td class="title col-md-1">이름</td>
 						<td class="col-md-1"><input type="text" name="studentName"></input>
 						</td>
+						<td class="col-md-1"><span style="float: left"> <input
+								type="checkbox"> 졸업요건 미충족
+								</button>
+						</span></td>
 						<td class="col-md-1"><span style="float: right">
 								<button type="submit" class="btn btn-default btn-block"
 									style="WIDTH: 100pt;" onclick="/">조회</button>
@@ -54,6 +58,7 @@
 							<th class="text-center">이름</th>
 							<th class="text-center">학과</th>
 							<th class="text-center">학년</th>
+							<th class="text-center col-md-2">졸업요건 충족</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -62,12 +67,14 @@
 							<td>송지은</td>
 							<td>소프트웨어공학과</td>
 							<td>3학년</td>
+							<td>X</td>
 						</tr>
 						<tr class="text-center" data-url="detail.jsp">
 							<td>201432019</td>
 							<td>신정호</td>
 							<td>소프트웨어공학과</td>
 							<td>3학년</td>
+							<td>O</td>
 						</tr>
 					</tbody>
 				</table>

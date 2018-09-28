@@ -30,10 +30,10 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="/SKHU_DB_PROJECT/admin/menu/course/substitution.jsp">대체과목</a></li>
+									href="/SKHU_DB_PROJECT/admin/menu/course/substitutionList.jsp">대체과목</a></li>
 								<li><a
 									href="/SKHU_DB_PROJECT/admin/menu/course/majorrequestList.jsp">전공인정</a></li>
-								<li><a href="/SKHU_DB_PROJECT/admin/menu/course/grades.jsp">성적</a></li>
+								<li><a href="/SKHU_DB_PROJECT/admin/menu/course/gradeList.jsp">성적</a></li>
 							</ul>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -41,7 +41,7 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="/SKHU_DB_PROJECT/admin/menu/account/acntchange.jsp">학생
+									href="/SKHU_DB_PROJECT/admin/menu/member/list.jsp">학생
 										계정</a></li>
 								<li><a
 									href="/SKHU_DB_PROJECT/admin/menu/account/pwdconfirm.jsp">관리자
