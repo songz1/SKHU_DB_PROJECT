@@ -6,4 +6,14 @@ $(function(){
             $("input[name=deleteId]").prop("checked",false);
         }
     })
+    
+    $("[edit-subject]").click(function() {
+    	var url = $(this).attr("edit-subject");
+		location.href = url;
+	});
+	
+	$("[edit-grade]").click(function() {
+		var url = $(this).attr("edit-grade");
+		location.href = url;
+	}); 
 });

@@ -70,3 +70,7 @@ select {
 .line {
     border-right: 1px solid #cecece;
 }
+
+.graduationlist {
+	cursor:pointer;
+}

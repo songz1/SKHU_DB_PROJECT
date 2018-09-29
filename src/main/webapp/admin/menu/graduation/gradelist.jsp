@@ -40,14 +40,14 @@
 									<option value="4">정보통신공학과</option>
 							</select></td>
 							<td class="title col-md-1">졸업요건</td>
-							<td class="col-md-1"><select name="department">
+							<td class="col-md-1"><select name="graduation">
 									<option value="1">주전공</option>
 									<option value="2">부전공</option>
 									<option value="3">전공기초</option>
 									<option value="4">전공심화</option>
 							</select></td>
 							<td class="title col-md-1">학점/과목</td>
-							<td class="col-md-1"><select name="department">
+							<td class="col-md-1"><select name="category">
 									<option value="1">학점</option>
 									<option value="2">과목</option>
 							</select></td>
@@ -63,58 +63,44 @@
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr class="title">
-								<th class="text-center">적용학번</th>
+								<th class="text-center">id</th>
+								<th class="text-center">적용년도</th>
 								<th class="text-center">학과</th>
 								<th class="text-center">졸업요건명</th>
-								<th class="text-center">과목명</th>
-								<th class="text-center">필수여부</th>
+								<th class="text-center">학점명</th>
+								<th class="text-center">학점</th>
 								<th class="text-center">비고</th>
-								<th class="text-center"><input type="checkbox" name="allCheck" /></th>
+								<th class="text-center"><input type="checkbox" id="allCheck" /></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="text-center" data-url="substitutionDetail.jsp">
+							<tr class="text-center graduationlist" edit-grade="editgrade.jsp">
+								<td>3</td>
 								<td>2018</td>
 								<td>소프트웨어공학과</td>
 								<td>주전공</td>
-								<td>과정지도I</td>
-								<td>O</td>
+								<td>전공학점</td>
+								<td>60</td>
 								<td></td>
-								<td><input type="checkbox" name="deleteId" value="5" /></td>
-							</tr>
-							<tr class="text-center" data-url="substitutionDetail.jsp">
-								<td>2018</td>
-								<td>소프트웨어공학과</td>
-								<td>전공기초</td>
-								<td>이산수학</td>
-								<td>X</td>
-								<td>2개 이상</td>
-								<td><input type="checkbox" name="deleteId" value="4" /></td>
-							</tr>
-							<tr class="text-center" data-url="substitutionDetail.jsp">
-								<td>2018</td>
-								<td>소프트웨어공학과</td>
-								<td>전공기초</td>
-								<td>컴퓨터 활용</td>
-								<td>X</td>
-								<td>2개 이상</td>
 								<td><input type="checkbox" name="deleteId" value="3" /></td>
 							</tr>
-							<tr class="text-center" data-url="substitutionDetail.jsp">
+							<tr class="text-center graduationlist" edit-grade="editgrade.jsp">
+								<td>2</td>
 								<td>2018</td>
 								<td>소프트웨어공학과</td>
-								<td>전공기초</td>
-								<td>대학 수학</td>
-								<td>X</td>
-								<td>2개 이상</td>
+								<td>부전공</td>
+								<td>전공학점</td>
+								<td>40</td>
+								<td></td>
 								<td><input type="checkbox" name="deleteId" value="2" /></td>
 							</tr>
-							<tr class="text-center" data-url="substitutionDetail.jsp">
-								<td>2017</td>
+							<tr class="text-center graduationlist" edit-grade="editgrade.jsp">
+								<td>1</td>
+								<td>2016</td>
 								<td>소프트웨어공학과</td>
-								<td>주전공</td>
-								<td>자바 프로그래밍</td>
-								<td>O</td>
+								<td>전공기초</td>
+								<td>교양학점</td>
+								<td>47</td>
 								<td></td>
 								<td><input type="checkbox" name="deleteId" value="1" /></td>
 							</tr>
