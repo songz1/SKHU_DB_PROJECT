@@ -42,7 +42,7 @@
 						<tr>
 							<td class="title col-md-1">졸업요건</td>
 							<td class="col-md-1">
-								<select name="way" id="tse" onChange="test()">
+								<select name="way" id="option-show">
 										<option value="1">주전공</option>
 										<option value="2">부전공</option>
 										<option value="3">복수</option>

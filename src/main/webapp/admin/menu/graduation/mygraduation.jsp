@@ -11,7 +11,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/user/main.css?ver=1">
+	href="../../../res/css/admin/main.css?ver=1">
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/admin/form.css?ver=1">
 <script type="text/javascript"
@@ -33,7 +33,7 @@
 						<tr>
 							<td class="title col-md-1">졸업요건</td>
 							<td class="col-md-1">
-								<select name="way" id="tse" onChange="test()">
+								<select name="way" id="option-show">
 										<option value="1">주전공</option>
 										<option value="2">부전공</option>
 										<option value="3">복수</option>

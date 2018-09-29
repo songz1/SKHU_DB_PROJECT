@@ -69,7 +69,7 @@
 					</div>
 					<div class="form-group">
 						<label>파일</label> <input type="file"
-							class="form-control form-width" name="scoreFile" />
+							class="form-control form-width form-height" name="scoreFile" />
 					</div>
 					<table class="table text-center">
 						<h4 class="text-center">학년별 수료 학점</h4>
@@ -99,7 +99,7 @@
 					</div>
 					<div class="form-group">
 						<label>파일</label> <input type="file"
-							class="form-control form-width" name="completeFile" />
+							class="form-control form-width form-height" name="completeFile" />
 					</div>
 
 					<table class="table text-center">
@@ -138,7 +138,7 @@
 					</div>
 					<div class="form-group">
 						<label>파일</label> <input type="file"
-							class="form-control form-width" name="essentialFile" />
+							class="form-control form-width form-height" name="essentialFile" />
 					</div>
 
 					<h4 class="text-center">상세 졸업요건</h4>
@@ -156,11 +156,11 @@
 					</table>
 					<div class="form-group">
 						<label>학번</label> <input type="text"
-							class="form-control form-width" name="detailYear" />
+							class="form-control form-width form-height" name="detailYear" />
 					</div>
 					<div class="form-group">
 						<label>파일</label> <input type="file"
-							class="form-control form-width" name="detailFile" />
+							class="form-control form-width form-height" name="detailFile" />
 					</div>
 					<div class="form-group text-center">
 						<button type="submit" class="btn btn-primary">

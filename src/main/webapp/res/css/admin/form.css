@@ -1,7 +1,11 @@
 @charset "UTF-8";
 
 .form-width {
-	width: 30%;
+	width: 400px;
+}
+
+.form-height {
+	height: 40px;
 }
 
 .btn-width {

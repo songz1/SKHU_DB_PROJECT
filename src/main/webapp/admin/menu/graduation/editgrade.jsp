@@ -11,7 +11,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/user/main.css?ver=1">
+	href="../../../res/css/admin/main.css?ver=1">
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -36,6 +36,17 @@
 								<option value="2">컴퓨터공학과</option>
 								<option value="3">영어학과</option>
 								<option value="4">중국어학과</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-50">
+						<label class="col-sm-2 control-label">졸업요건명</label>
+						<div class="mb-25 col-md-4 col-md-offset-2">
+							<select name="department" class="form-control">
+								<option value="1">주전공</option>
+								<option value="2">부전공</option>
+								<option value="3">전공기초</option>
+								<option value="4">전공심화</option>
 							</select>
 						</div>
 					</div>

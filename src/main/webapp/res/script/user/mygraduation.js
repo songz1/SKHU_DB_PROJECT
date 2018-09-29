@@ -20,16 +20,16 @@ $(function(){
 	    } 
 	})
 	
-	$("#tse").change(function() {
-		var ss = document.getElementById("tse");
-		var ssValue = ss.options[ss.selectedIndex].value;
+	$("#option-show").change(function() {
+		var optionShow = document.getElementById("option-show");
+		var optionShowValue = optionShow.options[optionShow.selectedIndex].value;
 		
-		if(ssValue == 2) {
+		if(optionShowValue == 2) {
 			$(".td-minor").show();
 			$(".td-double").hide();
 		}
 		
-		else if(ssValue == 3) {
+		else if(optionShowValue == 3) {
 			$(".td-double").show();
 			$(".td-minor").hide();
 		}
