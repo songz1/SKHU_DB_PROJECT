@@ -33,22 +33,25 @@
 									href="/SKHU_DB_PROJECT/admin/menu/course/substitutionList.jsp">대체과목</a></li>
 								<li><a
 									href="/SKHU_DB_PROJECT/admin/menu/course/majorrequestList.jsp">전공인정</a></li>
-								<li><a href="/SKHU_DB_PROJECT/admin/menu/course/gradeList.jsp">성적</a></li>
+								<li><a
+									href="/SKHU_DB_PROJECT/admin/menu/course/gradeList.jsp">성적</a></li>
 							</ul>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">계정 관리<span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu">
+								<li><a href="/SKHU_DB_PROJECT/admin/menu/member/list.jsp">학생
+										관리</a></li>
 								<li><a
-									href="/SKHU_DB_PROJECT/admin/menu/member/list.jsp">학생
-										계정</a></li>
+									href="/SKHU_DB_PROJECT/admin/menu/account/adminList.jsp">관리자
+										목록</a></li>
 								<li><a
-									href="/SKHU_DB_PROJECT/admin/menu/account/pwdconfirm.jsp">관리자
-										계정</a></li>
-								<li><a
-									href="/SKHU_DB_PROJECT/admin/menu/account/pwdconfirm.jsp">관리자
+									href="/SKHU_DB_PROJECT/admin/menu/account/addadmin.jsp">관리자
 										추가</a></li>
+								<li><a
+									href="/SKHU_DB_PROJECT/admin/menu/account/pwdconfirm.jsp">내
+										정보 관리</a></li>
 							</ul>
 					</ul>
 					<div class="uib-button-bar navbar-right">
