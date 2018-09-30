@@ -46,6 +46,13 @@
 						</span></td>
 					</tr>
 				</table>
+				<table class="table text-center">
+					<tr>
+						<td class="title col-md-3">규칙 업로드</td>
+						<td class="title col-md-3"><input type="file" class="form-control form-width"
+							name="rule" /></td>
+					</tr>
+				</table>
 
 				<table class="table table-bordered mt5">
 					<thead>

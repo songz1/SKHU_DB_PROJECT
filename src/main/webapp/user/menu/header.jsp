@@ -24,7 +24,8 @@
 									href="/SKHU_DB_PROJECT/user/menu/graduation/detail.jsp">학과/학부별
 										졸업 요건</a></li>
 								<li><a
-									href="/SKHU_DB_PROJECT/user/menu/graduation/mygraduation.jsp">내 졸업요건 확인</a></li>
+									href="/SKHU_DB_PROJECT/user/menu/graduation/mygraduation.jsp">내
+										졸업요건 확인</a></li>
 							</ul></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -32,16 +33,19 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a
+									href="/SKHU_DB_PROJECT/user/menu/course/changerequest.jsp">대체과목인정
+										신청</a></li>
+								<li><a
 									href="/SKHU_DB_PROJECT/user/menu/course/substitution.jsp">대체과목
 										목록 조회</a></li>
+
 								<li><a
-									href="/SKHU_DB_PROJECT/user/menu/course/changerequest.jsp">대체과목
-										인정 신청</a></li>
-										<li><a
-									href="/SKHU_DB_PROJECT/user/menu/course/majorrequestNotice.jsp">전공인정신청 공지</a></li>
+									href="/SKHU_DB_PROJECT/user/menu/course/majorrequestNotice.jsp">전공인정
+										신청</a></li>
 								<li><a
-									href="/SKHU_DB_PROJECT/user/menu/course/majorrequestList.jsp">전공인정신청 목록 조회</a></li>
-								
+									href="/SKHU_DB_PROJECT/user/menu/course/majorrequestList.jsp">전공인정신청
+										목록 조회</a></li>
+
 								<li><a href="/SKHU_DB_PROJECT/user/menu/course/grades.jsp">성적
 										조회</a></li>
 							</ul></li>
