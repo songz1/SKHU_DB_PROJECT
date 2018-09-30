@@ -7,7 +7,7 @@
 			id="topnavbar">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="//admin/menu/main.jsp">성공회대학교
+					<a class="navbar-brand" href="/admin/menu/main.jsp">성공회대학교
 						졸업관리</a>
 				</div>
 				<div id="bs-navbar-collapse" class="collapse navbar-collapse">
