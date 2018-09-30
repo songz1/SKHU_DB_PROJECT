@@ -7,7 +7,7 @@
 			id="topnavbar">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="/admin/menu/main.jsp">성공회대학교
+					<a class="navbar-brand" href="//admin/menu/main.jsp">성공회대학교
 						졸업관리</a>
 				</div>
 				<div id="bs-navbar-collapse" class="collapse navbar-collapse">
@@ -18,22 +18,22 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="admin/menu/graduation/basic.jsp">기본
+									href="/admin/menu/graduation/basic.jsp">기본
 										졸업 요건</a></li>
 								<li><a
-									href="admin/menu/graduation/detail.jsp">학과/학부별
+									href="/admin/menu/graduation/detail.jsp">학과/학부별
 										졸업 요건</a></li>
 								<li><a
-									href="admin/menu/graduation/gradelist.jsp">졸업
+									href="/admin/menu/graduation/gradelist.jsp">졸업
 										요건 목록 - 학점</a></li>
 								<li><a
-									href="admin/menu/graduation/subjectlist.jsp">졸업
+									href="/admin/menu/graduation/subjectlist.jsp">졸업
 										요건 목록 - 과목</a></li>
 								<li><a
-									href="admin/menu/graduation/creategraduation.jsp">졸업
+									href="/admin/menu/graduation/creategraduation.jsp">졸업
 										요건 생성</a></li>
 								<li><a
-									href="admin/menu/graduation/mygraduation.jsp">졸업
+									href="/admin/menu/graduation/mygraduation.jsp">졸업
 										요건 확인</a></li>
 							</ul>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -42,7 +42,7 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="admin/menu/course/substitutionList.jsp">대체과목</a></li>
+									href="/admin/menu/course/substitutionList.jsp">대체과목</a></li>
 								<li><a
 									href="/admin/menu/course/majorrequestList.jsp">전공인정</a></li>
 								<li><a
