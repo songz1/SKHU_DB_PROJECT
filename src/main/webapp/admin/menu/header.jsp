@@ -23,6 +23,18 @@
 								<li><a
 									href="/SKHU_DB_PROJECT/admin/menu/graduation/detail.jsp">학과/학부별
 										졸업 요건</a></li>
+								<li><a
+									href="/SKHU_DB_PROJECT/admin/menu/graduation/gradelist.jsp">졸업
+										요건 목록 - 학점</a></li>
+								<li><a
+									href="/SKHU_DB_PROJECT/admin/menu/graduation/subjectlist.jsp">졸업
+										요건 목록 - 과목</a></li>
+								<li><a
+									href="/SKHU_DB_PROJECT/admin/menu/graduation/creategraduation.jsp">졸업
+										요건 생성</a></li>
+								<li><a
+									href="/SKHU_DB_PROJECT/admin/menu/graduation/mygraduation.jsp">졸업
+										요건 확인</a></li>
 							</ul>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
