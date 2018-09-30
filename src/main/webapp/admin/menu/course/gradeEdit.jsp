@@ -34,13 +34,6 @@
 						<td class="col-md-2">소프트웨어공학과</td>
 					</tr>
 				</table>
-				<table class="table text-center">
-					<tr>
-						<td class="title col-md-3">성적 업로드</td>
-						<td class="title col-md-3"><input type="file" class="form-control form-width"
-							name="grade" /></td>
-					</tr>
-				</table>
 
 				<table class="table text-center">
 					<tr class="title">

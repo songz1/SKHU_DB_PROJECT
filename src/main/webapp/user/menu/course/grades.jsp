@@ -56,6 +56,13 @@
 						</span></td>
 					</tr>
 				</table>
+				<table class="table text-center">
+					<tr>
+						<td class="title col-md-3">수강과목 및 성적 업로드</td>
+						<td class="title col-md-3"><input type="file" class="form-control form-width"
+							name="grades" /></td>
+					</tr>
+				</table>
 
 				<table class="table text-center">
 					<tr class="title">
@@ -159,10 +166,6 @@
 						<td class="col-md-1">21.0</td>
 						<td class="title col-md-1">평점</td>
 						<td class="col-md-1">3.85</td>
-						<td class="col-md-1"><span style="float: right">
-								<button type="submit" class="btn btn-warning btn-block"
-									style="WIDTH: 80pt;" onclick="/">성적 업로드</button>
-						</span></td>
 					</tr>
 				</table>
 			</div>
