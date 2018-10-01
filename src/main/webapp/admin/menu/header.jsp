@@ -42,9 +42,13 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a
-									href="/admin/menu/course/substitutionList.jsp">대체과목</a></li>
+									href="/admin/menu/course/changerequestList.jsp">대체과목</a></li>
+									<li><a
+									href="/admin/menu/course/changerequestConfirm.jsp">대체과목 확인</a></li>
 								<li><a
 									href="/admin/menu/course/majorrequestList.jsp">전공인정</a></li>
+									<li><a
+									href="/admin/menu/course/majorrequestConfirm.jsp">전공인정 확인</a></li>
 								<li><a
 									href="/admin/menu/course/gradeList.jsp">성적</a></li>
 							</ul>

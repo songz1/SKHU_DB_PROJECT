@@ -35,12 +35,12 @@
 								<option value="4">정보통신공학과</option>
 						</select></td>
 						<td class="title col-md-1">학번</td>
-						<td class="col-md-1"><input type="text" name="studentNumber"></input>
+						<td><input type="text" name="studentNumber"></input>
 						</td>
 						<td class="title col-md-1">이름</td>
-						<td class="col-md-1"><input type="text" name="studentName"></input>
+						<td><input type="text" name="studentName"></input>
 						</td>
-						<td class="col-md-1"><span style="float: left"> <input
+						<td class="col-md-3"><span style="float: left"> <input
 								type="checkbox"> 졸업요건 미충족
 								</button>
 						</span></td>
@@ -49,6 +49,7 @@
 									style="WIDTH: 100pt;" onclick="/">조회</button>
 						</span></td>
 					</tr>
+					
 				</table>
 
 				<table class="table table-bordered mt5">
@@ -59,6 +60,7 @@
 							<th class="text-center">학과</th>
 							<th class="text-center">학년</th>
 							<th class="text-center col-md-2">졸업요건 충족</th>
+							<th class="text-center col-md-2">조치사항 수정</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -68,6 +70,7 @@
 							<td>소프트웨어공학과</td>
 							<td>3학년</td>
 							<td>X</td>
+							<td>2018.09.09</td>
 						</tr>
 						<tr class="text-center" data-url="detail.jsp">
 							<td>201432019</td>
@@ -75,6 +78,7 @@
 							<td>소프트웨어공학과</td>
 							<td>3학년</td>
 							<td>O</td>
+							<td>-</td>
 						</tr>
 					</tbody>
 				</table>
