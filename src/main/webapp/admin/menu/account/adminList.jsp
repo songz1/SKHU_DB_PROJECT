@@ -57,13 +57,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center" data-url="adminEdit.jsp">
+						<tr class="text-center cursor" data-url="adminEdit.jsp">
 							<td>201099999</td>
 							<td>관리자1</td>
 							<td>IT학부</td>
 							<td>5</td>
 						</tr>
-						<tr class="text-center" data-url="adminEdit.jsp">
+						<tr class="text-center cursor" data-url="adminEdit.jsp">
 							<td>201199999</td>
 							<td>관리자2</td>
 							<td>IT학부</td>

@@ -58,7 +58,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center" data-url="gradeDetail.jsp">
+						<tr class="text-center cursor" data-url="gradeDetail.jsp">
 							<td>201532020</td>
 							<td>송지은</td>
 							<td>소프트웨어공학과</td>
@@ -66,7 +66,7 @@
 							<td class="col-md-4"><input type="file"
 							class="form-control form-width" name="grade" /></td>
 						</tr>
-						<tr class="text-center" data-url="gradeDetail.jsp">
+						<tr class="text-center cursor" data-url="gradeDetail.jsp">
 							<td>201432019</td>
 							<td>신정호</td>
 							<td>소프트웨어공학과</td>

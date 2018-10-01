@@ -74,13 +74,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center" data-url="changerequestDetail.jsp">
+						<tr class="text-center cursor" data-url="changerequestDetail.jsp">
 							<td>201532020</td>
 							<td>송지은</td>
 							<td>소프트웨어공학과</td>
 							<td>X</td>
 						</tr>
-						<tr class="text-center" data-url="changerequestDetail.jsp">
+						<tr class="text-center cursor" data-url="changerequestDetail.jsp">
 							<td>201732099</td>
 							<td>이세종</td>
 							<td>소프트웨어공학과</td>

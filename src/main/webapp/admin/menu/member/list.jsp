@@ -64,7 +64,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center" data-url="detail.jsp">
+						<tr class="text-center cursor" data-url="detail.jsp">
 							<td>201532020</td>
 							<td>송지은</td>
 							<td>소프트웨어공학과</td>
@@ -72,7 +72,7 @@
 							<td>X</td>
 							<td>2018.09.09</td>
 						</tr>
-						<tr class="text-center" data-url="detail.jsp">
+						<tr class="text-center cursor" data-url="detail.jsp">
 							<td>201432019</td>
 							<td>신정호</td>
 							<td>소프트웨어공학과</td>

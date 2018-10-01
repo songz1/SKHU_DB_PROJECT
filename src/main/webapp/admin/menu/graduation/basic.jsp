@@ -155,10 +155,6 @@
 						</tr>
 					</table>
 					<div class="form-group">
-						<label>학번</label> <input type="text"
-							class="form-control form-width form-height" name="detailYear" />
-					</div>
-					<div class="form-group">
 						<label>파일</label> <input type="file"
 							class="form-control form-width form-height" name="detailFile" />
 					</div>

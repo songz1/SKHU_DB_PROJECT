@@ -25,9 +25,6 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-				<div class="text-right btn-lg">
-					<a href="#"><button class="btn btn-default">졸업요건목록</button></a>
-				</div>
 				<form class="form-horizontal">
 					<table class="table text-center">
 						<tr>

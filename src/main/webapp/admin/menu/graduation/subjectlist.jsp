@@ -69,11 +69,11 @@
 								<th class="text-center">과목명</th>
 								<th class="text-center">필수여부</th>
 								<th class="text-center">비고</th>
-								<th class="text-center"><input type="checkbox" name="allCheck" /></th>
+								<th class="text-center"><input type="checkbox" id="allCheck" /></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="text-center graduationlist" edit-subject="editsubject.jsp">
+							<tr class="text-center cursor" edit-subject="editsubject.jsp">
 								<td>2018</td>
 								<td>소프트웨어공학과</td>
 								<td>주전공</td>
@@ -82,7 +82,7 @@
 								<td></td>
 								<td><input type="checkbox" name="deleteId" value="5" /></td>
 							</tr>
-							<tr class="text-center graduationlist" edit-subject="editsubject.jsp">
+							<tr class="text-center cursor" edit-subject="editsubject.jsp">
 								<td>2018</td>
 								<td>소프트웨어공학과</td>
 								<td>전공기초</td>
@@ -91,7 +91,7 @@
 								<td>2개 이상</td>
 								<td><input type="checkbox" name="deleteId" value="4" /></td>
 							</tr>
-							<tr class="text-center graduationlist" edit-subject="editsubject.jsp">
+							<tr class="text-center cursor" edit-subject="editsubject.jsp">
 								<td>2018</td>
 								<td>소프트웨어공학과</td>
 								<td>전공기초</td>
@@ -100,7 +100,7 @@
 								<td>2개 이상</td>
 								<td><input type="checkbox" name="deleteId" value="3" /></td>
 							</tr>
-							<tr class="text-center graduationlist" edit-subject="editsubject.jsp">
+							<tr class="text-center cursor" edit-subject="editsubject.jsp">
 								<td>2018</td>
 								<td>소프트웨어공학과</td>
 								<td>전공기초</td>
@@ -109,7 +109,7 @@
 								<td>2개 이상</td>
 								<td><input type="checkbox" name="deleteId" value="2" /></td>
 							</tr>
-							<tr class="text-center graduationlist" edit-subject="editsubject.jsp">
+							<tr class="text-center cursor" edit-subject="editsubject.jsp">
 								<td>2017</td>
 								<td>소프트웨어공학과</td>
 								<td>주전공</td>
