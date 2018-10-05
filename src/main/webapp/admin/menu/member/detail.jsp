@@ -62,16 +62,8 @@
 						</div>
 					</div>
 					
-					<div class="form-group mb-50">
-						<label class="col-sm-2 control-label col-md-offset-1"></label>
-					<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
-						<textarea name="reportContent" class="form-control"
-							maxlength="1024" style="height: 100px" placeholder="조치사항"></textarea>
-					</div>
-					</div>
-					
 					<button type="submit"
-						class="btn btn-danger mb-20 col-md-2 col-md-offset-3">탈퇴</button>
+						class="btn btn-danger mb-20 col-md-2 col-md-offset-3">취소</button>
 					<button type="submit"
 						class="btn btn-info mb-20 col-md-2 col-md-offset-2">수정</button>
 				</form>
