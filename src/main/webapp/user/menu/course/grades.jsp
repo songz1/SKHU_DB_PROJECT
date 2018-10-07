@@ -74,6 +74,7 @@
 						<td class="col-md-1">이수구분</td>
 						<td class="col-md-1">학점</td>
 						<td class="col-md-1">성적등급</td>
+						<td class="col-md-1">비고</td>
 					</tr>
 
 					<tr>
@@ -85,6 +86,7 @@
 						<td class="col-md-1">전필</td>
 						<td class="col-md-1">1.0</td>
 						<td class="col-md-1">P</td>
+						<td class="col-md-1">-</td>
 					</tr>
 					<tr>
 						<td class="col-md-1">2018</td>
@@ -95,6 +97,7 @@
 						<td class="col-md-1">전선</td>
 						<td class="col-md-1">3.0</td>
 						<td class="col-md-1">A0</td>
+						<td class="col-md-1">-</td>
 					</tr>
 					<tr>
 						<td class="col-md-1">2018</td>
@@ -105,6 +108,7 @@
 						<td class="col-md-1">전선</td>
 						<td class="col-md-1">3.0</td>
 						<td class="col-md-1">B+</td>
+						<td class="col-md-1">-</td>
 					</tr>
 					<tr>
 						<td class="col-md-1">2018</td>
@@ -115,6 +119,7 @@
 						<td class="col-md-1">전필</td>
 						<td class="col-md-1">3.0</td>
 						<td class="col-md-1">C+</td>
+						<td class="col-md-1">-</td>
 					</tr>
 					<tr>
 						<td class="col-md-1">2018</td>
@@ -125,6 +130,7 @@
 						<td class="col-md-1">전선</td>
 						<td class="col-md-1">3.0</td>
 						<td class="col-md-1">C0</td>
+						<td class="col-md-1">전공인정</td>
 					</tr>
 					<tr>
 						<td class="col-md-1">2018</td>
@@ -135,6 +141,7 @@
 						<td class="col-md-1">전필</td>
 						<td class="col-md-1">3.0</td>
 						<td class="col-md-1">A+</td>
+						<td class="col-md-1">-</td>
 					</tr>
 					<tr>
 						<td class="col-md-1">2018</td>
@@ -145,6 +152,7 @@
 						<td class="col-md-1">교선</td>
 						<td class="col-md-1">3.0</td>
 						<td class="col-md-1">A+</td>
+						<td class="col-md-1">-</td>
 					</tr>
 					<tr>
 						<td class="col-md-1">2018</td>
@@ -155,6 +163,7 @@
 						<td class="col-md-1">교선</td>
 						<td class="col-md-1">2.0</td>
 						<td class="col-md-1">B0</td>
+						<td class="col-md-1">대체</td>
 					</tr>
 				</table>
 
