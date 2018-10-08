@@ -56,24 +56,6 @@
 					<div class="text-right btn-lg">
 						<a href="#"><i class="glyphicon glyphicon-floppy-remove"></i></a>
 					</div>
-					<table class="table text-center">
-						<tr>
-							<td class="title col-md-1"></td>
-							<td class="title col-md-1">졸업 학점</td>
-							<td class="title col-md-1">전공 학점</td>
-							<td class="title col-md-1">교양 학점</td>
-							<td class="title col-md-1">특별과정 학점</td>
-							<td class="title col-md-1">전공탐색 학점</td>
-						</tr>
-						<tr>
-							<td class="title col-md-1">2018학번부터</td>
-							<td class="col-md-1">130 이상</td>
-							<td class="col-md-1">34 이상</td>
-							<td class="col-md-1">60~63 이상</td>
-							<td class="col-md-1">해당 없음</td>
-							<td class="col-md-1">18 이상</td>
-						</tr>
-					</table>
 					<div class="text-right btn-lg">
 						<a href="#"><i class="glyphicon glyphicon-floppy-remove"></i></a>
 					</div>
