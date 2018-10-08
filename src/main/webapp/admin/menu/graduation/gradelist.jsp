@@ -74,17 +74,17 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="text-center cursor" edit-grade="editgrade.jsp">
-								<td>3</td>
-								<td>2018</td>
-								<td>소프트웨어공학과</td>
-								<td>주전공</td>
-								<td>전공학점</td>
-								<td>60</td>
-								<td></td>
+							<tr class="text-center">
+								<td class="cursor" edit-grade="editgrade.jsp">3</td>
+								<td class="cursor" edit-grade="editgrade.jsp">2018</td>
+								<td class="cursor" edit-grade="editgrade.jsp">소프트웨어공학과</td>
+								<td class="cursor" edit-grade="editgrade.jsp">주전공</td>
+								<td class="cursor" edit-grade="editgrade.jsp">전공학점</td>
+								<td class="cursor" edit-grade="editgrade.jsp">60</td>
+								<td class="cursor" edit-grade="editgrade.jsp"></td>
 								<td><input type="checkbox" name="deleteId" value="3" /></td>
 							</tr>
-							<tr class="text-center cursor" edit-grade="editgrade.jsp">
+							<tr class="text-center">
 								<td>2</td>
 								<td>2018</td>
 								<td>소프트웨어공학과</td>
@@ -94,7 +94,7 @@
 								<td></td>
 								<td><input type="checkbox" name="deleteId" value="2" /></td>
 							</tr>
-							<tr class="text-center cursor" edit-grade="editgrade.jsp">
+							<tr class="text-center">
 								<td>1</td>
 								<td>2016</td>
 								<td>소프트웨어공학과</td>

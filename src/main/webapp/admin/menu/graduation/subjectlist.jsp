@@ -73,16 +73,16 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="text-center cursor" edit-subject="editsubject.jsp">
-								<td>2018</td>
-								<td>소프트웨어공학과</td>
-								<td>주전공</td>
-								<td>과정지도I</td>
-								<td>O</td>
-								<td></td>
+							<tr class="text-center">
+								<td class="cursor" edit-subject="editsubject.jsp">2018</td>
+								<td class="cursor" edit-subject="editsubject.jsp">소프트웨어공학과</td>
+								<td class="cursor" edit-subject="editsubject.jsp">주전공</td>
+								<td class="cursor" edit-subject="editsubject.jsp">과정지도I</td>
+								<td class="cursor" edit-subject="editsubject.jsp">O</td>
+								<td class="cursor" edit-subject="editsubject.jsp"></td>
 								<td><input type="checkbox" name="deleteId" value="5" /></td>
 							</tr>
-							<tr class="text-center cursor" edit-subject="editsubject.jsp">
+							<tr class="text-center">
 								<td>2018</td>
 								<td>소프트웨어공학과</td>
 								<td>전공기초</td>
@@ -91,7 +91,7 @@
 								<td>2개 이상</td>
 								<td><input type="checkbox" name="deleteId" value="4" /></td>
 							</tr>
-							<tr class="text-center cursor" edit-subject="editsubject.jsp">
+							<tr class="text-center">
 								<td>2018</td>
 								<td>소프트웨어공학과</td>
 								<td>전공기초</td>
@@ -100,7 +100,7 @@
 								<td>2개 이상</td>
 								<td><input type="checkbox" name="deleteId" value="3" /></td>
 							</tr>
-							<tr class="text-center cursor" edit-subject="editsubject.jsp">
+							<tr class="text-center">
 								<td>2018</td>
 								<td>소프트웨어공학과</td>
 								<td>전공기초</td>
@@ -109,7 +109,7 @@
 								<td>2개 이상</td>
 								<td><input type="checkbox" name="deleteId" value="2" /></td>
 							</tr>
-							<tr class="text-center cursor" edit-subject="editsubject.jsp">
+							<tr class="text-center">
 								<td>2017</td>
 								<td>소프트웨어공학과</td>
 								<td>주전공</td>

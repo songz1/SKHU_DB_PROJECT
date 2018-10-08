@@ -26,14 +26,15 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<form method="post" enctype="multipart/form-data">
-					<h4 class="text-center">졸업 이수 학점</h4>
 					<table class="table text-center">
+						<h4 class="text-center">졸업 이수 학점</h4>
 						<tr>
 							<td class="title col-md-1"></td>
 							<td class="title col-md-1">졸업 학점</td>
 							<td class="title col-md-1">전공 학점</td>
 							<td class="title col-md-1">교양 학점</td>
 							<td class="title col-md-1">특별과정 학점</td>
+							<td class="title col-md-1">전공탐색 학점</td>
 						</tr>
 						<tr>
 							<td class="title col-md-1">2017학번까지</td>
@@ -41,6 +42,15 @@
 							<td class="col-md-1">32 이상</td>
 							<td class="col-md-1">60 이상</td>
 							<td class="col-md-1">15 이상</td>
+							<td class="col-md-1">해당 없음</td>
+						</tr>
+						<tr>
+							<td class="title col-md-1">2018학번부터</td>
+							<td class="col-md-1">130 이상</td>
+							<td class="col-md-1">34 이상</td>
+							<td class="col-md-1">60~63 이상</td>
+							<td class="col-md-1">해당 없음</td>
+							<td class="col-md-1">18 이상</td>
 						</tr>
 					</table>
 					<div class="text-right btn-lg">

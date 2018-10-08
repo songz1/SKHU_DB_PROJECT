@@ -24,5 +24,11 @@ $(function(){
 			$(".create-grade").hide();
 			$(".create-subject").hide();
 		}
+		
+		else if(showFormValue == 0) {
+			$(".create-upload").hide();
+			$(".create-grade").hide();
+			$(".create-subject").hide();
+		}
     })
 });

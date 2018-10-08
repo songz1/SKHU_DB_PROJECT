@@ -30,21 +30,26 @@
 					<table class="table mt-25">
 						<thead>
 							<tr data-url="info.jsp">
-								<th class="col-md-12">인문융합 자율학부</th>
+								<th class="col-md-8">인문융합 자율학부</th>
+								<th class="col-md-4"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td class="col-md-12">영어학과</td>
+								<td class="col-md-8 cursor">영어학과</td>
+								<td class="col-md-4"><input type="file" name="grade" /></td>
 							</tr>
 							<tr>
-								<td class="col-md-12">일어일본학과</td>
+								<td class="col-md-8">일어일본학과</td>
+								<td class="col-md-4"><input type="file" name="grade" /></td>
 							</tr>
 							<tr>
-								<td class="col-md-12">중어중국학과</td>
+								<td class="col-md-8">중어중국학과</td>
+								<td class="col-md-4"><input type="file" name="grade" /></td>
 							</tr>
 							<tr>
-								<td class="col-md-12">신학과(기독교문화전공)</td>
+								<td class="col-md-8">신학과(기독교문화전공)</td>
+								<td class="col-md-4"><input type="file" name="grade" /></td>
 							</tr>
 						</tbody>
 					</table>
@@ -102,6 +107,9 @@
 							</tr>
 						</tbody>
 					</table>
+					<div class="text-right">
+						<button type="submit" class="btn btn-info">확인</button>
+					</div>
 				</form>
 			</div>
 		</div>

@@ -25,72 +25,16 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-				<form class="form-horizontal">
-					<table class="table text-center">
-						<tr>
-							<td class="title col-md-1">졸업요건</td>
-							<td class="col-md-1">
-								<select name="way" id="option-show">
-										<option value="1">주전공</option>
-										<option value="2">부전공</option>
-										<option value="3">복수</option>
-										<option value="4">편입</option>
-								</select>
-							</td>
-							<td class="title col-md-1 td-minor">타학과부전공</td>
-							<td class="col-md-1 td-minor">
-								<select name="minor">
-										<option value="1">소프트웨어공학과</option>
-										<option value="2">컴퓨터공학과</option>
-										<option value="3">영어학과</option>
-										<option value="4">중국어학과</option>
-								</select>
-							</td>
-							<td class="title col-md-1 td-double">타학과복수전공1</td>
-							<td class="col-md-1 td-double">
-								<select name="doubleMajor1">
-										<option value="1">소프트웨어공학과</option>
-										<option value="2">컴퓨터공학과</option>
-										<option value="3">영어학과</option>
-										<option value="4">중국어학과</option>
-								</select>
-							</td>
-							<td class="title col-md-1 td-double">타학과복수전공2</td>
-							<td class="col-md-1 td-double">
-								<select name="doubleMajor2">
-										<option value="1">소프트웨어공학과</option>
-										<option value="2">컴퓨터공학과</option>
-										<option value="3">영어학과</option>
-										<option value="4">중국어학과</option>
-								</select>
-							</td>
-						</tr>
-					</table>
-					<table class="table text-center">
-						<tr>
-							<td class="title col-md-1">특수졸업요건</td>
-							<td class="col-md-1">
-								<select name="special">
-									<option value="1">없음</option>
-									<option value="2">전공기초</option>
-									<option value="3">전공심화</option>
-									<option value="4">인도창</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-					</table>
-					<div class="form-group">
-						<div class="col-md-4 col-md-offset-4">
-							<input type="text" name="studentNumber" class="form-control" placeholder="학번">
-						</div>
-					</div>
-					<div class="form-group mb-25">
-						<div class="col-md-4 col-md-offset-4 text-center">
-							<button type="submit" class="btn btn-info btn-width">조회</button>
-						</div>
-					</div>
-				</form>
+				<table class="table text-center">
+					<tr>
+						<td class="title col-md-1">학번</td>
+						<td class="col-md-1">201532020</td>
+						<td class="title col-md-1">이름</td>
+						<td class="col-md-1">송지은</td>
+						<td class="title col-md-1">학과</td>
+						<td class="col-md-2">소프트웨어공학과</td>
+					</tr>
+				</table>
 				<div class="text-center">
 					<h3>주전공</h3>
 				</div>

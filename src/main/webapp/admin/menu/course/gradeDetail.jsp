@@ -148,7 +148,14 @@
 						<td class="col-md-1">3.85</td>
 					</tr>
 				</table>
-
+				<form class="form-inline text-right">
+					<div class="form-group">
+						<div class="input-group">
+							<input type="file" class="form-height" name="grade" />
+						</div>
+						<a href=""><button type="submit" class="btn btn-info">확인</button></a>
+					</div>
+				</form>
 			</div>
 		</div>
 	</main>

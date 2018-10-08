@@ -12,6 +12,8 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/admin/main.css?ver=1">
+	<link rel="stylesheet" type="text/css"
+	href="../../../res/css/admin/from.css?ver=1">
 <script type="text/javascript"
 	src="../../../res/script/admin/toDetail.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
@@ -54,7 +56,6 @@
 							<th class="text-center">이름</th>
 							<th class="text-center">학과</th>
 							<th class="text-center">수정 날짜</th>
-							<th class="text-center">성적 업로드</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -63,19 +64,23 @@
 							<td>송지은</td>
 							<td>소프트웨어공학과</td>
 							<td>2018.09.09</td>
-							<td class="col-md-4"><input type="file"
-							class="form-control form-width" name="grade" /></td>
 						</tr>
 						<tr class="text-center cursor" data-url="gradeDetail.jsp">
 							<td>201432019</td>
 							<td>신정호</td>
 							<td>소프트웨어공학과</td>
 							<td>2018.07.21</td>
-							<td class="col-md-4"><input type="file"
-							class="form-control form-width" name="grade" /></td>
 						</tr>
 					</tbody>
 				</table>
+				<form class="form-inline text-right">
+					<div class="form-group">
+						<div class="input-group">
+							<input type="file" class="form-height" name="grade" />
+						</div>
+						<a href=""><button type="submit" class="btn btn-info">확인</button></a>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
