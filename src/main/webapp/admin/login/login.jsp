@@ -12,6 +12,8 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../res/css/admin/login.css?ver=1">
+<link rel="stylesheet" type="text/css"
+	href="../../res/css/common/login.css?ver=1">
 <title>성공회대 학사 시스템</title>
 </head>
 <body>

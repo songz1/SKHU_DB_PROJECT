@@ -11,9 +11,9 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/admin/main.css?ver=1">
+	href="../../res/css/common/main.css?ver=1">
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/admin/form.css?ver=1">
+	href="../../../res/css/common/form.css?ver=1">
 <script type="text/javascript"
 	src="../../../res/script/admin/graduationlist.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
@@ -73,7 +73,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="text-center">
+							<tr class="text-center tr-hover">
 								<td class="cursor" edit-subject="editsubject.jsp">2018</td>
 								<td class="cursor" edit-subject="editsubject.jsp">소프트웨어공학과</td>
 								<td class="cursor" edit-subject="editsubject.jsp">주전공</td>

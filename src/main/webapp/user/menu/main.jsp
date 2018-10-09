@@ -11,7 +11,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../res/css/user/main.css?ver=1">
+	href="../../res/css/common/main.css?ver=1">
 <script type="text/javascript"
 	src="../../res/script/user/main.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
@@ -26,7 +26,7 @@
 				<div class="table-responsive">
 					<h3 class="text-center">졸업 학점 현황</h3>
 					<table class="table text-center">
-						<tr class="warning essential">
+						<tr class="warning essential cursor">
 							<td class="col-md-4"></td>
 							<td class="col-md-4">교양 필수 11/16</td>
 							<td class="col-md-4"></td>
@@ -50,7 +50,7 @@
 				</div>
 				<div class="table-responsive">
 					<table class="table text-center">
-						<tr class="warning area-essential">
+						<tr class="warning area-essential cursor">
 							<td class="col-md-4"></td>
 							<td class="col-md-4">영역 필수 9/18</td>
 							<td class="col-md-4"></td>
@@ -64,7 +64,7 @@
 				</div>
 				<div class="table-responsive">
 					<table class="table text-center">
-						<tr class="warning major-searching">
+						<tr class="warning major-searching cursor">
 							<td class="col-md-4 warning"></td>
 							<td class="col-md-4">전공 탐색 7/19</td>
 							<td class="col-md-4"></td>

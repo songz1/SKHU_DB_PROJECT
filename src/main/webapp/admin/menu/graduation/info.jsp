@@ -8,7 +8,7 @@
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet" media="screen">
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/admin/info.css?ver=1">
+	href="../../../res/css/common/info.css?ver=1">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <title>졸업요건표</title>

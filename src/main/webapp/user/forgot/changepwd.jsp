@@ -11,8 +11,11 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../res/css/user/form.css?ver=1">
-<script type="text/javascript" src="../../res/script/user/form.js?ver=1"></script>
+	href="../../res/css/common/form.css?ver=1">
+<link rel="stylesheet" type="text/css"
+	href="../../res/css/common/login.css?ver=1">
+<link rel="stylesheet" type="text/css"
+	href="../../res/css/user/login.css?ver=1">
 <title>성공회대 학사 시스템</title>
 </head>
 <body>

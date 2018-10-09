@@ -11,11 +11,11 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/admin/main.css?ver=1">
+	href="../../res/css/common/main.css?ver=1">
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/admin/form.css?ver=1">
+	href="../../../res/css/common/form.css?ver=1">
 <script type="text/javascript"
-	src="../../../res/script/admin/mygraduation.js?ver=1"></script>
+	src="../../../res/script/common/mygraduation.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -49,7 +49,7 @@
 				</div>
 				<div class="table-responsive">
 					<table class="table text-center">
-						<tr class="warning way-essential">
+						<tr class="warning way-essential cursor">
 							<td class="col-md-4"></td>
 							<td class="col-md-4">전공 필수 </td>
 							<td class="col-md-4"></td>
@@ -81,7 +81,7 @@
 				</div>
 				<div class="table-responsive">
 					<table class="table text-center">
-						<tr class="success essential-subject">
+						<tr class="success essential-subject cursor">
 							<td class="col-md-4"></td>
 							<td class="col-md-4">필수과목</td>
 							<td class="col-md-4"></td>

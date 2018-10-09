@@ -11,7 +11,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/admin/main.css?ver=1">
+	href="../../../res/css/common/main.css?ver=1">
 <script type="text/javascript"
 	src="../../../res/script/admin/toDetail.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
@@ -74,13 +74,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center cursor" data-url="changerequestDetail.jsp">
+						<tr class="text-center cursor tr-hover" data-url="changerequestDetail.jsp">
 							<td>201532020</td>
 							<td>송지은</td>
 							<td>소프트웨어공학과</td>
 							<td>X</td>
 						</tr>
-						<tr class="text-center cursor" data-url="changerequestDetail.jsp">
+						<tr class="text-center cursor tr-hover" data-url="changerequestDetail.jsp">
 							<td>201732099</td>
 							<td>이세종</td>
 							<td>소프트웨어공학과</td>

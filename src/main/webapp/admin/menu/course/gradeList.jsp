@@ -11,9 +11,9 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../../../res/css/admin/main.css?ver=1">
+	href="../../../res/css/common/main.css?ver=1">
 	<link rel="stylesheet" type="text/css"
-	href="../../../res/css/admin/from.css?ver=1">
+	href="../../../res/css/common/from.css?ver=1">
 <script type="text/javascript"
 	src="../../../res/script/admin/toDetail.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
@@ -59,13 +59,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center cursor" data-url="gradeDetail.jsp">
+						<tr class="text-center cursor tr-hover" data-url="gradeDetail.jsp">
 							<td>201532020</td>
 							<td>송지은</td>
 							<td>소프트웨어공학과</td>
 							<td>2018.09.09</td>
 						</tr>
-						<tr class="text-center cursor" data-url="gradeDetail.jsp">
+						<tr class="text-center cursor tr-hover" data-url="gradeDetail.jsp">
 							<td>201432019</td>
 							<td>신정호</td>
 							<td>소프트웨어공학과</td>
