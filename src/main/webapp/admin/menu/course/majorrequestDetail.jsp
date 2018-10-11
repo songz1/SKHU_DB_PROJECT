@@ -34,7 +34,7 @@
 						<td class="title col-md-1">학과</td>
 						<td class="col-md-2">소프트웨어공학과</td>
 						<td class="col-md-1"><button type="submit"
-					class="btn btn-info" data-url="majorrequestConfirm.jsp">전공인정 확인</button></td>
+					class="btn btn-info" data-url="majorrequestConfirm.jsp">전공인정 추가</button></td>
 					</tr>
 				</table>
 

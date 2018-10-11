@@ -43,9 +43,18 @@
 						</td>
 					</tr>
 				</table>
-
 				<hr />
-
+				<table class="table text-center">
+					<tr>
+					<td class="title col-md-1">학과</td>
+						<td class="col-md-1">소프트웨어공학과</td>
+						<td class="title col-md-1">학번</td>
+						<td class="col-md-1">201532020</td>
+						<td class="title col-md-1">이름</td>
+						<td class="col-md-1">송지은</td>
+					</tr>
+				</table>
+				<hr />
 				<h3 class="text-center mb-25">대체 과목 신청</h3>
 				<form>
 					<div class="form-group col-md-4 col-md-offset-1">
@@ -84,10 +93,6 @@
 							<option value="4">교양필수</option>
 							<option value="5">교양선택</option>
 						</select>
-					</div>
-					<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
-						<textarea name="reportContent" class="form-control"
-							maxlength="1024" style="height: 100px;" placeholder="기타사항"></textarea>
 					</div>
 					<div>
 						<button type="button"

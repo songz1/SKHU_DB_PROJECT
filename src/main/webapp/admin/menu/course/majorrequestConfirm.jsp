@@ -37,9 +37,18 @@
 						</td>
 					</tr>
 				</table>
-
 				<hr />
-
+				<table class="table text-center">
+					<tr>
+						<td class="title col-md-1">학과</td>
+						<td class="col-md-1">소프트웨어공학과</td>
+						<td class="title col-md-1">학번</td>
+						<td class="col-md-1">201432019</td>
+						<td class="title col-md-1">이름</td>
+						<td class="col-md-1">신정호</td>
+					</tr>
+				</table>
+				<hr />
 				<h3 class="text-center mb-25">전공 인정 신청</h3>
 				<form>
 					<div class="form-group col-md-4 col-md-offset-4">
@@ -52,10 +61,6 @@
 							<option value="3">글로컬IT학과</option>
 							<option value="4">정보통신공학과</option>
 						</select>
-					</div>
-					<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
-						<textarea name="reportContent" class="form-control"
-							maxlength="1024" style="height: 100px" placeholder="기타사항"></textarea>
 					</div>
 					<div>
 						<button type="submit"
