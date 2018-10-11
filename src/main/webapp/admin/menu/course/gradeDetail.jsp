@@ -32,6 +32,16 @@
 						<td class="col-md-2">소프트웨어공학과</td>
 					</tr>
 				</table>
+				
+				<table class="table text-center">
+					<tr>
+						<td class="title col-md-3">성적 업로드</td>
+						<td class="title col-md-2"><input type="file"
+							class="form-control form-width" name="grade" /></td>
+						<td class="title col-md-1"><a href=""><button
+									type="submit" class="btn btn-default">확인</button></a></td>
+					</tr>
+				</table>
 
 				<table class="table text-center">
 					<tr class="title">
@@ -146,14 +156,6 @@
 						<td class="col-md-1">3.85</td>
 					</tr>
 				</table>
-				<form class="form-inline text-right">
-					<div class="form-group">
-						<div class="input-group">
-							<input type="file" class="form-height" name="grade" />
-						</div>
-						<a href=""><button type="submit" class="btn btn-info">확인</button></a>
-					</div>
-				</form>
 			</div>
 		</div>
 	</main>

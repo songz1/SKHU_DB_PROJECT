@@ -25,8 +25,8 @@
 										요건 목록 - 과목</a></li>
 								<li><a href="/admin/menu/graduation/creategraduation.jsp">졸업
 										요건 생성</a></li>
-								<li><a href="/admin/menu/graduation/mygraduation.jsp">졸업
-										요건 확인</a></li>
+								<li><a href="/admin/menu/graduation/graduationList.jsp">졸업
+										요건 충족도 확인</a></li>
 								<li><a href="/admin/menu/graduation/counseling.jsp">학생
 										조치사항 내역</a></li>
 							</ul>
@@ -36,11 +36,7 @@
 						</a>
 							<ul class="dropdown-menu">
 								<li><a href="/admin/menu/course/changerequestList.jsp">대체과목</a></li>
-								<li><a href="/admin/menu/course/changerequestConfirm.jsp">대체과목
-										확인</a></li>
 								<li><a href="/admin/menu/course/majorrequestList.jsp">전공인정</a></li>
-								<li><a href="/admin/menu/course/majorrequestConfirm.jsp">전공인정
-										확인</a></li>
 								<li><a href="/admin/menu/course/gradeList.jsp">성적</a></li>
 							</ul>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"

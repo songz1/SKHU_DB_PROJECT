@@ -12,6 +12,10 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/common/main.css?ver=1">
+<link rel="stylesheet" type="text/css"
+	href="../../../res/css/common/form.css?ver=1">
+<script type="text/javascript"
+	src="../../../res/script/admin/counseling.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -22,7 +26,6 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<h3 class="text-center">조치사항</h3>
-				<hr />
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">학번</td>
@@ -34,7 +37,7 @@
 						
 						<td class="col-md-1"><span style="float: right">
 								<button type="submit" class="btn btn-info btn-block"
-									style="WIDTH: 100pt;" onclick="/">추가</button>
+									style="WIDTH: 100pt;" onclick="/" data-url="counselingAdd.jsp">추가</button>
 						</span></td>
 					</tr>
 				</table>

@@ -150,10 +150,16 @@
 					<button type="submit"
 						class="btn btn-info mb-25 col-md-2 col-md-offset-5">확인</button>
 				</form>
-				<form method="post" enctype="multipart/form-data" class="create-upload">
+				<form method="post" enctype="multipart/form-data"
+					class="create-upload">
 					<div class="form-group">
-						<label>파일</label> <input type="file"
-							class="form-control form-width form-height" name="scoreFile" />
+					<hr/>
+						<label>양식</label><br/>
+						<a href="/" download="양식">다운로드</a>
+						<hr/>
+						<label>파일</label>
+						<input type="file" class="form-control form-width form-height"
+							name="scoreFile" />
 					</div>
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary">

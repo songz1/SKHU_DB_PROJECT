@@ -44,16 +44,6 @@
 					</tr>
 				</table>
 
-				<table>
-					<hr />
-					<h4 class="title text-center">양식 다운로드</h4>
-					<hr />
-					<tr>
-						<td class="col-md-5 col-md-offset-5 text-center">1. <a
-							href="/" download="재수강성적대체청원서">재수강 성적 대체 청원서</a></td>
-					</tr>
-				</table>
-
 				<hr />
 
 				<h3 class="text-center mb-25">대체 과목 신청</h3>
@@ -98,10 +88,6 @@
 					<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
 						<textarea name="reportContent" class="form-control"
 							maxlength="1024" style="height: 100px;" placeholder="기타사항"></textarea>
-					</div>
-					<div>
-						<input type="file"
-							class="form-group col-md-5 col-md-offset-5 mb-25" name="file" />
 					</div>
 					<div>
 						<button type="button"

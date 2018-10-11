@@ -53,12 +53,6 @@
 							<td class="col-md-1">18 이상</td>
 						</tr>
 					</table>
-					<div class="text-right btn-lg">
-						<a href="#"><i class="glyphicon glyphicon-floppy-remove"></i></a>
-					</div>
-					<div class="text-right btn-lg">
-						<a href="#"><i class="glyphicon glyphicon-floppy-remove"></i></a>
-					</div>
 					<div class="form-group">
 						<label>파일</label> <input type="file"
 							class="form-control form-width form-height" name="scoreFile" />
@@ -86,9 +80,6 @@
 							<td class="col-md-1">130 이상</td>
 						</tr>
 					</table>
-					<div class="text-right btn-lg">
-						<a href="#"><i class="glyphicon glyphicon-floppy-remove"></i></a>
-					</div>
 					<div class="form-group">
 						<label>파일</label> <input type="file"
 							class="form-control form-width form-height" name="completeFile" />
@@ -125,9 +116,6 @@
 							</td>
 						</tr>
 					</table>
-					<div class="text-right btn-lg">
-						<a href="#"><i class="glyphicon glyphicon-floppy-remove"></i></a>
-					</div>
 					<div class="form-group">
 						<label>파일</label> <input type="file"
 							class="form-control form-width form-height" name="essentialFile" />

@@ -53,10 +53,6 @@
 							<option value="4">정보통신공학과</option>
 						</select>
 					</div>
-					<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
-						<textarea name="reportContent" class="form-control"
-							maxlength="1024" style="height: 100px" placeholder="기타사항"></textarea>
-					</div>
 					<div>
 						<button type="submit"
 							class="btn btn-info col-md-2 col-md-offset-5 mb-25">신청</button>

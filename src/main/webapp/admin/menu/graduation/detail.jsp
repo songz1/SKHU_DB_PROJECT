@@ -12,7 +12,7 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/common/main.css?ver=1">
-	<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css"
 	href="../../../res/css/common/form.css?ver=1">
 <script type="text/javascript"
 	src="../../../res/script/common/graduation.js?ver=1"></script>
@@ -108,6 +108,7 @@
 						</tbody>
 					</table>
 					<div class="text-right">
+					학번: <input type="text" name="number"></input>
 						<button type="submit" class="btn btn-info">확인</button>
 					</div>
 				</form>

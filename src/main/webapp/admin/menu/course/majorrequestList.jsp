@@ -12,6 +12,8 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/common/main.css?ver=1">
+<script type="text/javascript"
+	src="../../../res/script/admin/toDetail.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -21,7 +23,29 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
+				<hr />
+				<table>
+					<tr>
+						<td class="title col-md-5 col-md-offset-5 text-center">양식
+							다운로드</td>
+						<td class="col-md-5 col-md-offset-5 text-center">1. <a
+							href="/" download="규칙">규칙</a></td>
+					</tr>
+				</table>
+				<hr />
+				<table class="table text-center">
+					<tr>
+						<td class="title col-md-3">규칙 업로드</td>
+						<td class="title col-md-2"><input type="file"
+							class="form-control form-width" name="rule" /></td>
+						<td class="title col-md-1"><a href=""><button
+									type="submit" class="btn btn-default">확인</button></a></td>
+					</tr>
+				</table>
+
+				<hr />
 				<h3 class="text-center">전공인정 신청 목록</h3>
+				<hr />
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">학과(부)</td>
@@ -44,46 +68,32 @@
 						</span></td>
 					</tr>
 				</table>
-				<table class="table text-center">
-					<tr>
-						<td class="title col-md-3">규칙 업로드</td>
-						<td class="title col-md-3"><input type="file" class="form-control form-width"
-							name="rule" /></td>
-					</tr>
-					<tr>
-						<td class="title col-md-3">신청 양식 업로드</td>
-						<td class="title col-md-3"><input type="file" class="form-control form-width"
-							name="file" /></td>
-					</tr>
-				</table>
-
 				<table class="table table-bordered mt5">
 					<thead>
 						<tr class="title">
 							<th class="text-center">학번</th>
 							<th class="text-center">이름</th>
 							<th class="text-center">학과</th>
-							<th class="text-center">처리 여부</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center cursor tr-hover" data-url="majorrequestDetail.jsp">
+						<tr class="text-center cursor tr-hover"
+							data-url="majorrequestDetail.jsp">
 							<td>201432019</td>
 							<td>신정호</td>
 							<td>소프트웨어공학과</td>
-							<td>X</td>
 						</tr>
-						<tr class="text-center cursor tr-hover" data-url="majorrequestDetail.jsp">
+						<tr class="text-center cursor tr-hover"
+							data-url="majorrequestDetail.jsp">
 							<td>201333099</td>
 							<td>홍길동</td>
 							<td>정보통신공학과</td>
-							<td>O</td>
 						</tr>
-						<tr class="text-center cursor tr-hover" data-url="majorrequestDetail.jsp">
+						<tr class="text-center cursor tr-hover"
+							data-url="majorrequestDetail.jsp">
 							<td>201631099</td>
 							<td>이순신</td>
 							<td>컴퓨터공학과</td>
-							<td>O</td>
 						</tr>
 					</tbody>
 				</table>
