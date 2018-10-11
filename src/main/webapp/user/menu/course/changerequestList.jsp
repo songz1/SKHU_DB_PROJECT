@@ -33,11 +33,16 @@
 					</tr>
 				</table>
 
+				<hr />
+				<h5 class="text-center">
+					<a href="/" download="대체과목목록">대체과목 목록 다운로드</a>
+				</h5>
+				<hr />
+
 				<table class="table text-center">
 					<tr>
 						<td class="title line" colspan="5">폐지과목 수강신청내역</td>
-						<td class="title line" colspan="4">대체희망 수강신청내역</td>
-						<td class="title col-md-1"></td>
+						<td class="title" colspan="4">대체희망 수강신청내역</td>
 					</tr>
 					<tr>
 						<td class="title col-md-1">과목코드</td>
@@ -48,8 +53,7 @@
 						<td class="title col-md-1">과목코드</td>
 						<td class="title col-md-2">과목명</td>
 						<td class="title col-md-1">이수구분</td>
-						<td class="title col-md-1 line">학점</td>
-						<td class="title col-md-1">대체여부</td>
+						<td class="title col-md-1">학점</td>
 					</tr>
 					<tr>
 						<td class="col-md-1">IC00048</td>
@@ -60,18 +64,7 @@
 						<td class="col-md-1">IC00045</td>
 						<td class="col-md-2">모바일 프로그래밍I</td>
 						<td class="col-md-1">전선</td>
-						<td class="col-md-1 line">3.0</td>
-						<td class="col-md-1">O</td>
-					</tr>
-				</table>
-
-				<table class="table text-center">
-					<h3 class="text-center">대체과목 목록</h3>
-					<tr>
-						<td class="title col-md-1">과목코드</td>
-						<td class="title col-md-2">과목명</td>
-						<td class="title col-md-1">이수구분</td>
-						<td class="title col-md-1">학점</td>
+						<td class="col-md-1">3.0</td>
 					</tr>
 				</table>
 			</div>

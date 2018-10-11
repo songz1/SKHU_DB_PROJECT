@@ -40,15 +40,16 @@
 						<td class="title col-md-1">과목코드</td>
 						<td class="title col-md-2">과목명</td>
 						<td class="title col-md-1">이수구분</td>
-						<td class="title col-md-1 line">학점</td>
-						<td class="title col-md-1">인정여부</td>
+						<td class="title col-md-1">학점</td>
+						<td class="title col-md-1">신청 취소</td>
 					</tr>
 					<tr>
 						<td class="col-md-1">IC00048</td>
 						<td class="col-md-2">보안시스템</td>
 						<td class="col-md-1">전선</td>
-						<td class="col-md-1 line">3.0</td>
-						<td class="col-md-1">O</td>
+						<td class="col-md-1">3.0</td>
+						<td class="col-md-1"><button type="submit"
+							class="btn btn-danger">취소</button></td>
 					</tr>
 				</table>
 			</div>
