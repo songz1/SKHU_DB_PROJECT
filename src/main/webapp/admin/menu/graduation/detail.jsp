@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/common/form.css?ver=1">
 <script type="text/javascript"
-	src="../../../res/script/common/graduation.js?ver=1"></script>
+	src="../../../res/script/common/mygraduation.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -29,27 +29,22 @@
 				<form method="post" enctype="multipart/form-data">
 					<table class="table mt-25">
 						<thead>
-							<tr data-url="info.jsp">
-								<th class="col-md-8">인문융합 자율학부</th>
-								<th class="col-md-4"></th>
+							<tr>
+								<th class="col-md-12">인문융합 자율학부</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="tr-hover">
-								<td class="col-md-8 cursor">영어학과</td>
-								<td class="col-md-4"><input type="file" name="grade" /></td>
+							<tr class="tr-hover way-essential">
+								<td class="col-md-12 cursor">영어학과</td>
 							</tr>
 							<tr>
-								<td class="col-md-8">일어일본학과</td>
-								<td class="col-md-4"><input type="file" name="grade" /></td>
+								<td class="col-md-12">일어일본학과</td>
 							</tr>
 							<tr>
-								<td class="col-md-8">중어중국학과</td>
-								<td class="col-md-4"><input type="file" name="grade" /></td>
+								<td class="col-md-12">중어중국학과</td>
 							</tr>
 							<tr>
-								<td class="col-md-8">신학과(기독교문화전공)</td>
-								<td class="col-md-4"><input type="file" name="grade" /></td>
+								<td class="col-md-12">신학과(기독교문화전공)</td>
 							</tr>
 						</tbody>
 					</table>
@@ -108,7 +103,7 @@
 						</tbody>
 					</table>
 					<div class="text-right">
-					학번: <input type="text" name="number"></input>
+						학번: <input type="text" name="number"></input>
 						<button type="submit" class="btn btn-info">확인</button>
 					</div>
 				</form>

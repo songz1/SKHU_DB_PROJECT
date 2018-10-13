@@ -40,8 +40,7 @@
 						<td class="title col-md-3">대체과목 목록 업로드</td>
 						<td class="title col-md-2"><input type="file"
 							class="form-control form-width" name="list" /></td>
-						<td class="title col-md-1"><a href=""><button
-									type="submit" class="btn btn-default">확인</button></a></td>
+						<td class="title col-md-1"></td>
 					</tr>
 					<tr>
 						<td class="title col-md-3">규칙 업로드</td>

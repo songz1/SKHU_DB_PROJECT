@@ -42,7 +42,8 @@
 				<table class="table text-center">
 					<tr>
 						<td class="title line" colspan="5">폐지과목 수강신청내역</td>
-						<td class="title" colspan="4">대체희망 수강신청내역</td>
+						<td class="title line" colspan="4">대체희망 수강신청내역</td>
+						<td class="title"></td>
 					</tr>
 					<tr>
 						<td class="title col-md-1">과목코드</td>
@@ -53,7 +54,8 @@
 						<td class="title col-md-1">과목코드</td>
 						<td class="title col-md-2">과목명</td>
 						<td class="title col-md-1">이수구분</td>
-						<td class="title col-md-1">학점</td>
+						<td class="title col-md-1 line">학점</td>
+						<td class="title col-md-1">신청취소</td>
 					</tr>
 					<tr>
 						<td class="col-md-1">IC00048</td>
@@ -64,7 +66,9 @@
 						<td class="col-md-1">IC00045</td>
 						<td class="col-md-2">모바일 프로그래밍I</td>
 						<td class="col-md-1">전선</td>
-						<td class="col-md-1">3.0</td>
+						<td class="col-md-1 line">3.0</td>
+						<td class="col-md-1"><button type="submit"
+							class="btn btn-danger">취소</button></td>
 					</tr>
 				</table>
 			</div>

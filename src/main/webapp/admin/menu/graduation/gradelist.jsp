@@ -46,11 +46,6 @@
 									<option value="3">전공기초</option>
 									<option value="4">전공심화</option>
 							</select></td>
-							<td class="title col-md-1">학점/과목</td>
-							<td class="col-md-1"><select name="category">
-									<option value="1">학점</option>
-									<option value="2">과목</option>
-							</select></td>
 						</tr>
 					</table>
 					<div class="form-group">

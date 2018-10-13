@@ -53,10 +53,7 @@
 							<td class="col-md-1">18 이상</td>
 						</tr>
 					</table>
-					<div class="form-group">
-						<label>파일</label> <input type="file"
-							class="form-control form-width form-height" name="scoreFile" />
-					</div>
+
 					<table class="table text-center">
 						<h4 class="text-center">학년별 수료 학점</h4>
 						<tr>
@@ -116,10 +113,6 @@
 							</td>
 						</tr>
 					</table>
-					<div class="form-group">
-						<label>파일</label> <input type="file"
-							class="form-control form-width form-height" name="essentialFile" />
-					</div>
 
 					<h4 class="text-center">상세 졸업요건</h4>
 					<table class="table text-center">
