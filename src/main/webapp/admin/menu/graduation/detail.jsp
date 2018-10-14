@@ -15,9 +15,7 @@
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/common/form.css?ver=1">
 <script type="text/javascript"
-	src="../../../res/script/common/mygraduation.js?ver=1"></script>
-	<script type="text/javascript"
-	src="../../../res/script/common/graduation.js?ver=1"></script>
+	src="../../../res/script/admin/toDetail.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -32,92 +30,75 @@
 					<table class="table mt-25">
 						<thead>
 							<tr>
-								<th colspan="3">인문융합 자율학부</th>
+								<th class="col-md-12">인문융합 자율학부</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">영어학과</td>
+							<tr class="tr-hover cursor" data-url="yearChoice.jsp">
+								<td>영어학과</td>
 							</tr>
-							<tr class="way-detail">
-								<td class="col-md-4 text-center cursor tr-hover" data-url="info.jsp">2018학번 이후</td>
-								<td class="col-md-4 text-center cursor tr-hover">2017학번</td>
-								<td class="col-md-4 text-center cursor tr-hover">2016학번</td>
+							<tr class="tr-hover cursor" data-url="yearChoice.jsp">
+								<td>일어일본학과</td>
 							</tr>
-							<tr class="way-detail">
-								<td class="col-md-4 text-center cursor tr-hover">2015학번</td>
-								<td class="col-md-4 text-center cursor tr-hover">2014학번</td>
-								<td class="col-md-4 text-center cursor tr-hover">2013학번</td>
+							<tr class="tr-hover cursor" data-url="yearChoice.jsp">
+								<td>중어중국학과</td>
 							</tr>
-							<tr class="way-detail">
-								<td class="col-md-4 text-center cursor tr-hover">2012학번</td>
-								<td class="col-md-4 text-center cursor tr-hover">2011학번</td>
-								<td class="col-md-4 text-center cursor tr-hover">2010학번 이전</td>
-							</tr>
-
-
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">일어일본학과</td>
-							</tr>
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">중어중국학과</td>
-							</tr>
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">신학과(기독교문화전공)</td>
+							<tr class="tr-hover cursor" data-url="yearChoice.jsp">
+								<td>신학과(기독교문화전공)</td>
 							</tr>
 						</tbody>
 					</table>
 					<table class="table">
 						<thead>
 							<tr>
-								<th colspan="3">사회융합 자율학부</th>
+								<th class="col-md-12">사회융합 자율학부</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">사회과학과</td>
+							<tr class="tr-hover cursor">
+								<td>사회과학과</td>
 							</tr>
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">사회복지학과</td>
+							<tr class="tr-hover cursor">
+								<td>사회복지학과</td>
 							</tr>
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">경영학과</td>
+							<tr class="tr-hover cursor">
+								<td>경영학과</td>
 							</tr>
 						</tbody>
 					</table>
 					<table class="table">
 						<thead>
 							<tr>
-								<th colspan="3">미디어컨텐츠융합 자율학부</th>
+								<th class="col-md-12">미디어컨텐츠융합 자율학부</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">신문방송학과</td>
+							<tr class="tr-hover cursor">
+								<td>신문방송학과</td>
 							</tr>
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">디지털컨텐츠학과</td>
+							<tr class="tr-hover cursor">
+								<td>디지털컨텐츠학과</td>
 							</tr>
 						</tbody>
 					</table>
 					<table class="table">
 						<thead>
 							<tr>
-								<th colspan="3">IT융합 자율학부</th>
+								<th class="col-md-12">IT융합 자율학부</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">컴퓨터공학과</td>
+							<tr class="tr-hover cursor">
+								<td>컴퓨터공학과</td>
 							</tr>
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">소프트웨어공학과</td>
+							<tr class="tr-hover cursor">
+								<td>소프트웨어공학과</td>
 							</tr>
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">정보통신공학과</td>
+							<tr class="tr-hover cursor">
+								<td>정보통신공학과</td>
 							</tr>
-							<tr class="tr-hover cursor way-essential">
-								<td colspan="3">글로컬IT공학과</td>
+							<tr class="tr-hover cursor">
+								<td>글로컬IT공학과</td>
 							</tr>
 						</tbody>
 					</table>
