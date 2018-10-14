@@ -54,24 +54,21 @@
 							<th class="text-center">학번</th>
 							<th class="text-center">이름</th>
 							<th class="text-center">학과</th>
-							<th class="text-center">조치 일시</th>
-							<th class="text-center">조치 관리자</th>
+							<th class="text-center">최근 조치일</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center cursor tr-hover" data-url="counselingDetail.jsp">
+						<tr class="text-center cursor tr-hover" data-url="counselingList.jsp">
 							<td>201532020</td>
 							<td>송지은</td>
 							<td>소프트웨어공학과</td>
 							<td>2018.09.09</td>
-							<td>행정직원</td>
 						</tr>
-						<tr class="text-center cursor tr-hover" data-url="counselingDetail.jsp">
+						<tr class="text-center cursor tr-hover" data-url="counselingList.jsp">
 							<td>201432019</td>
 							<td>신정호</td>
 							<td>소프트웨어공학과</td>
 							<td>2018.07.21</td>
-							<td>행정직원</td>
 						</tr>
 					</tbody>
 				</table>

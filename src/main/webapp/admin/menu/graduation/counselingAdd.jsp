@@ -12,10 +12,12 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/common/main.css?ver=1">
+<script type="text/javascript"
+	src="../../../res/script/admin/toDetail.js?ver=1"></script>
 <title>조치사항</title>
 </head>
 <body>
-<main>
+	<main>
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
@@ -27,13 +29,17 @@
 						maxlength="1024" style="height: 100px"></textarea>
 				</div>
 				<div>
-					<button type="submit" class="btn btn-info col-md-2 col-md-offset-5">확인</button>
+					<button type="submit"
+						class="btn btn-danger col-md-2 col-md-offset-3" data-url="counselingList.jsp">취소</button>
+				</div>
+				<div>
+					<button type="submit" class="btn btn-info col-md-2 col-md-offset-2">확인</button>
 				</div>
 			</div>
 		</div>
 	</div>
-</main>
-<footer> </footer>
+	</main>
+	<footer> </footer>
 </body>
 </html>
 
