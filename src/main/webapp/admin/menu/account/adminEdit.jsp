@@ -47,6 +47,12 @@
 							</select>
 						</div>
 					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label col-md-offset-1">이메일</label>
+						<div class="mb-25 col-md-4 col-md-offset-1">
+							<input type="text" name="email" class="form-control" value="">
+						</div>
+					</div>
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label col-md-offset-1">권한</label>
 						<div class="mb-25 col-md-4 col-md-offset-1">

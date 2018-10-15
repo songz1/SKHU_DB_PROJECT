@@ -59,7 +59,7 @@
 						<thead>
 							<tr class="title">
 								<th class="text-center">id</th>
-								<th class="text-center">적용년도</th>
+								<th class="text-center">적용학번</th>
 								<th class="text-center">학과</th>
 								<th class="text-center">졸업요건명</th>
 								<th class="text-center">학점명</th>

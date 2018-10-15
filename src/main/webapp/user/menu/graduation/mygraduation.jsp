@@ -12,10 +12,8 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/common/main.css?ver=1">
-<link rel="stylesheet" type="text/css"
-	href="../../../res/css/common/mygraduation.css?ver=1">
 <script type="text/javascript"
-	src="../../../res/script/user/mygraduation.js?ver=1"></script>
+	src="../../../res/script/common/mygraduation.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -40,7 +38,7 @@
 	
 					<table class="table text-center">
 						<tr>
-							<td class="title col-md-1">졸업요건</td>
+							<td class="title col-md-1">졸업과정</td>
 							<td class="col-md-1">
 								<select name="way" id="option-show">
 										<option value="1">주전공</option>
@@ -80,7 +78,7 @@
 					</table>
 					<table class="table text-center">
 						<tr>
-							<td class="title col-md-1">특수졸업요건</td>
+							<td class="title col-md-1">상세졸업과정</td>
 							<td class="col-md-1">
 								<select name="special">
 									<option value="1">없음</option>

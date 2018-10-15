@@ -36,7 +36,7 @@
 				</select>
 				<form class="form-horizontal mb-25 mt-25 create-grade">
 					<div class="form-group">
-						<label class="col-sm-2 control-label">적용년도</label>
+						<label class="col-sm-2 control-label">적용학번</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
 							<input type="number" name="year" class="form-control">
 						</div>
@@ -86,7 +86,7 @@
 				</form>
 				<form class="form-horizontal mb-25 mt-25 create-subject">
 					<div class="form-group">
-						<label class="col-sm-2 control-label">적용년도</label>
+						<label class="col-sm-2 control-label">적용학번</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
 							<input type="number" name="year" class="form-control">
 						</div>

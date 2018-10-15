@@ -43,18 +43,9 @@
 						</td>
 					</tr>
 				</table>
+
 				<hr />
-				<table class="table text-center">
-					<tr>
-					<td class="title col-md-1">학과</td>
-						<td class="col-md-1">소프트웨어공학과</td>
-						<td class="title col-md-1">학번</td>
-						<td class="col-md-1">201532020</td>
-						<td class="title col-md-1">이름</td>
-						<td class="col-md-1">송지은</td>
-					</tr>
-				</table>
-				<hr />
+
 				<h3 class="text-center mb-25">대체 과목 신청</h3>
 				<form>
 					<div class="form-group col-md-4 col-md-offset-1">
@@ -62,16 +53,11 @@
 							<label>폐지과목</label>
 						</div>
 						</p>
-						과목 코드: <input type="text" name="lostSubjectCode"
-							class="form-control" placeholder="과목 코드"></br> 과목명: <input
-							type="text" name="lostSubjectName" class="form-control"
-							placeholder="과목명"></br> 이수 구분: <select name="lostSubjectPart"
+						과목명: <select name="lastSubjectName"
 							class="form-control">
-							<option value="1">전공필수</option>
-							<option value="2">전공선택</option>
-							<option value="3">전공탐색</option>
-							<option value="4">교양필수</option>
-							<option value="5">교양선택</option>
+							<option value="1">폐지과목1</option>
+							<option value="2">폐지과목2</option>
+							<option value="3">폐지과목3</option>
 						</select>
 					</div>
 					<div class="form-group text-center col-md-2">
@@ -82,25 +68,16 @@
 							<label>대체과목</label>
 						</div>
 						</p>
-						과목 코드: <input type="text" name="changeSubjectCode"
-							class="form-control" placeholder="과목 코드"></br> 과목명: <input
-							type="text" name="changeSubjectName" class="form-control"
-							placeholder="과목명"></br> 이수 구분: <select
-							name="changeSubjectPart" class="form-control">
-							<option value="1">전공필수</option>
-							<option value="2">전공선택</option>
-							<option value="3">전공탐색</option>
-							<option value="4">교양필수</option>
-							<option value="5">교양선택</option>
+						과목명: <select name="changeSubjectName"
+							class="form-control">
+							<option value="1">대체과목1</option>
+							<option value="2">대체과목2</option>
+							<option value="3">대체과목3</option>
 						</select>
 					</div>
 					<div>
-						<button type="button"
-							class="btn btn-danger col-md-2 col-md-offset-3">취소</button>
-					</div>
-					<div>
 						<button type="submit"
-							class="btn btn-info col-md-2 col-md-offset-2 mb-25">신청</button>
+							class="btn btn-info col-md-2 col-md-offset-5 mb-25">신청</button>
 					</div>
 				</form>
 			</div>
@@ -110,4 +87,3 @@
 	<footer> </footer>
 </body>
 </html>
-

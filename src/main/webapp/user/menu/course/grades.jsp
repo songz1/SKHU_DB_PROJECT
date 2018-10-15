@@ -59,8 +59,10 @@
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-3">수강과목 및 성적 업로드</td>
-						<td class="title col-md-3"><input type="file" class="form-control form-width"
-							name="grades" /></td>
+						<td class="title col-md-2"><input type="file"
+							class="form-control form-width" name="grades" /></td>
+						<td class="title col-md-1"><a href=""><button
+									type="submit" class="btn btn-default">확인</button></a></td>
 					</tr>
 				</table>
 

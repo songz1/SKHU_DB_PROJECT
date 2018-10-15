@@ -32,7 +32,11 @@
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">담당 부서</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="text" name="part" class="form-control">
+							<select name="part" class="form-control">
+								<option value="1">IT학부</option>
+								<option value="2">행정</option>
+								<option value="3">교수</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group mb-50">
@@ -45,6 +49,12 @@
 						<label class="col-sm-2 control-label">비밀번호 변경</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
 							<input type="password" name="password" class="form-control">
+						</div>
+					</div>
+					<div class="form-group mb-50">
+						<label class="col-sm-2 control-label">비밀번호 변경 확인</label>
+						<div class="mb-25 col-md-4 col-md-offset-2">
+							<input type="password" name="passwordConfirm" class="form-control">
 						</div>
 					</div>
 

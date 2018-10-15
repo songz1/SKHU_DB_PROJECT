@@ -24,9 +24,21 @@
 				<h3 class="text-center">관리자 추가</h3>
 				<form class="form-horizontal mb-25 mt-25">
 					<div class="form-group">
-						<label class="col-sm-2 control-label">아이디</label>
+						<label class="col-sm-2 control-label">교번</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
 							<input type="text" name="id" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">비밀번호</label>
+						<div class="mb-25 col-md-4 col-md-offset-2">
+							<input type="password" name="password" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">비밀번호 확인</label>
+						<div class="mb-25 col-md-4 col-md-offset-2">
+							<input type="password" name="passwordConfirm" class="form-control">
 						</div>
 					</div>
 					<div class="form-group">
@@ -52,6 +64,19 @@
 							</select>
 						</div>
 					</div>
+					<div class="form-group mb-50">
+						<label class="col-sm-2 control-label">권한</label>
+						<div class="mb-25 col-md-4 col-md-offset-2">
+							<select name="right" class="form-control">
+								<option value="5">5 - 총괄</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="2">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
+					</div>
+					
 					<button type="submit"
 						class="btn btn-info mb-25 col-md-2 col-md-offset-5">확인</button>
 				</form>
