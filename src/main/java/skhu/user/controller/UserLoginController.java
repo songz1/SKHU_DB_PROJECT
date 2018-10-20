@@ -1,15 +1,15 @@
-package skhu.controller.admin;
+package skhu.user.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("admin/login")
-public class LoginController {
+@RequestMapping("user/login")
+public class UserLoginController {
 
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String login() {
-		return "admin/login/login";
+		return "user/login/login";
 	}
 }
