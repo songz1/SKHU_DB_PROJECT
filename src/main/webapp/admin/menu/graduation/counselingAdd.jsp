@@ -23,14 +23,16 @@
 			<div class="panel-body">
 				<h3 class="text-center">조치사항 추가</h3>
 				<hr />
-
 				<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
-					<textarea name="reportContent" class="form-control"
+					제목 <textarea name="reportContent" class="form-control"
+						maxlength="1024" style="height: 30px; overflow:hidden;"></textarea>
+					</p>내용 <textarea name="reportContent" class="form-control"
 						maxlength="1024" style="height: 100px"></textarea>
 				</div>
 				<div>
 					<button type="submit"
-						class="btn btn-danger col-md-2 col-md-offset-3" data-url="counselingList.jsp">취소</button>
+						class="btn btn-danger col-md-2 col-md-offset-3"
+						data-url="counselingList.jsp">취소</button>
 				</div>
 				<div>
 					<button type="submit" class="btn btn-info col-md-2 col-md-offset-2">확인</button>

@@ -34,13 +34,11 @@
 								<option value="3">글로컬IT학과</option>
 								<option value="4">정보통신공학과</option>
 						</select></td>
-						<td class="title col-md-1">학번</td>
-						<td class="col-md-1"><input type="text" name="studentNumber"></input>
-						</td>
-						<td class="title col-md-1">이름</td>
-						<td class="col-md-1"><input type="text" name="studentName"></input>
-						</td>
-					
+						<td class="title col-md-1"><select name="student">
+								<option value="1">학번</option>
+								<option value="2">이름</option>
+						</select></td>
+						<td class="col-md-1"><input type="text" name="student"></input>
 						<td class="col-md-1"><span style="float: right">
 								<button type="submit" class="btn btn-default btn-block"
 									style="WIDTH: 100pt;" onclick="/">조회</button>
@@ -58,13 +56,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center cursor tr-hover" data-url="counselingList.jsp">
+						<tr class="text-center cursor tr-hover"
+							data-url="counselingList.jsp">
 							<td>201532020</td>
 							<td>송지은</td>
 							<td>소프트웨어공학과</td>
 							<td>2018.09.09</td>
 						</tr>
-						<tr class="text-center cursor tr-hover" data-url="counselingList.jsp">
+						<tr class="text-center cursor tr-hover"
+							data-url="counselingList.jsp">
 							<td>201432019</td>
 							<td>신정호</td>
 							<td>소프트웨어공학과</td>

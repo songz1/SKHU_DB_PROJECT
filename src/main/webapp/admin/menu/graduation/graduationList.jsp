@@ -34,13 +34,13 @@
 								<option value="3">글로컬IT학과</option>
 								<option value="4">정보통신공학과</option>
 						</select></td>
-						<td class="title col-md-2">학번</td>
-						<td><input type="text" name="studentNumber"></input>
+						<td class="title col-md-2"><select name="student">
+								<option value="1">학번</option>
+								<option value="2">이름</option>
+						</select></td>
+						<td><input type="text" name="student"></input>
 						</td>
-						<td class="title col-md-2">이름</td>
-						<td><input type="text" name="studentName"></input>
-						</td>
-						<td class="col-md-1"></td>
+						<td class="col-md-2"><input class="col-md-2" type="checkbox" id="major" />전공필수 미충족</td>
 					</tr>
 					<tr>
 						<td class="title col-md-2">학년</td>
@@ -57,15 +57,11 @@
 								<option value="1">1학기</option>
 								<option value="2">2학기</option>
 						</select></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class="col-md-2"><input class="col-md-2" type="checkbox" id="refinement" />교양필수 미충족</td>
 						</tr>
 						<tr>
 						<td></td>
-						<td class="col-md-1"><input class="col-md-2" type="checkbox" id="major" />전공필수 미충족</td>
 						<td></td>
-						<td class="col-md-1"><input class="col-md-2" type="checkbox" id="refinement" />교양필수 미충족</td>
 						<td></td>
 						<td></td>
 						<td class="col-md-1"><span style="float: right">
@@ -82,6 +78,7 @@
 							<th class="text-center">이름</th>
 							<th class="text-center">학과</th>
 							<th class="text-center">학년</th>
+							<th class="text-center">학기</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -90,12 +87,14 @@
 							<td>송지은</td>
 							<td>소프트웨어공학과</td>
 							<td>3학년</td>
+							<td>6학기</td>
 						</tr>
 						<tr class="text-center cursor" data-url="graduationDetail.jsp">
 							<td>201432019</td>
 							<td>신정호</td>
 							<td>소프트웨어공학과</td>
 							<td>3학년</td>
+							<td>6학기</td>
 						</tr>
 					</tbody>
 				</table>
