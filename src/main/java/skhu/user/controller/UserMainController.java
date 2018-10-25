@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("user/login")
-public class UserLoginController {
+@RequestMapping("user/menu")
+public class UserMainController {
 
-	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String login() {
-		return "user/login/login";
+	@RequestMapping(value = "main", method = RequestMethod.GET)
+	public String main() {
+		return "user/menu/main";
 	}
 
 }
