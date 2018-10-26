@@ -6,6 +6,32 @@
 		select * from admin
 	</select>
 	<select id="login" resultType="Admin">
-		select id, loginId, name, departmentId from admin where loginId = #{loginId} and password = #{password};
+		select id, loginId, name, departmentId, authority, email from admin where loginId = #{loginId} and password = #{password};
 	</select>
+	<select id="findById" resultType="Admin">
+		select * from admin where id = #{id}
+	</select>
+	<update id="update">
+		update admin
+		<set>
+			<if test="password != null">
+				password = #{password}
+			</if>
+			<if test="name != null">
+				name = #{name}
+			</if>
+			<if test="departmentId != 0 and departmentId != null">
+				, departmentId = #{departmentId}
+			</if>
+			<if test="email != null">
+				, email = #{email}
+			</if>
+		</set>
+		where
+			id = #{id}
+	</update>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert into admin(loginId, password, name, departmentId, email, authority)
+		values(#{loginId}, #{password}, #{name}, #{departmentId}, #{email}, #{authority});
+	</insert>
 </mapper>

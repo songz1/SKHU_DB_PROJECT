@@ -46,14 +46,14 @@
 								<li><a href="/admin/menu/member/list">학생 관리</a></li>
 								<li><a href="/admin/menu/account/adminList">관리자 목록</a></li>
 								<li><a href="/admin/menu/account/addadmin">관리자 추가</a></li>
-								<li><a href="/admin/menu/account/pwdconfirm">내 정보
-										관리</a></li>
+								<li><a href="/admin/menu/account/acntchange">내 정보 변경</a></li>
+								<li><a href="/admin/menu/account/pwdconfirm">내 비밀번호 변경</a></li>
 							</ul>
 					</ul>
 					<div class="uib-button-bar navbar-right">
 						<div class="divItem">
 							<div>
-								<i class="glyphicon glyphicon-user"></i>${ authInfo.loginId }<br />
+								<i class="glyphicon glyphicon-user"></i>${ adminInfo.loginId }<br />
 							</div>
 							<form action="/admin/login/logout" method="post">
 								<button type="submit" class="btn btn-default btn-block">로그아웃</button>

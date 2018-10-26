@@ -1,5 +1,12 @@
 package skhu.mapper;
 
-public interface DepartmentMapper {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import skhu.dto.Department;
+
+@Mapper
+public interface DepartmentMapper {
+	List<Department> findAll();
 }

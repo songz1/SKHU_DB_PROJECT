@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,9 @@ import skhu.mapper.ActionMapper;
 @RequestMapping("admin/menu")
 public class AdminMainController {
 	@Autowired ActionMapper actionMapper;
-
+	
 	@RequestMapping(value="main", method=RequestMethod.GET)
-	public String main(Model model, HttpSession session) {
+	public String main(Model model, HttpSession session, Pageable pageable) {
 		List<Action> actions = actionMapper.findActionRecently();
 
 		model.addAttribute("actions", actions);

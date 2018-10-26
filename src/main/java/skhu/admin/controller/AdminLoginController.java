@@ -4,7 +4,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -17,7 +16,7 @@ public class AdminLoginController {
 	@Autowired AdminMapper adminMapper;
 
 	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String login(Model model, Admin admin, HttpSession session) {
+	public String login(Admin admin, HttpSession session) {
 		Admin login = adminMapper.login(admin.getLoginId(), admin.getPassword());
 
 		if(login != null) {
@@ -33,7 +32,10 @@ public class AdminLoginController {
 	}
 
 	@RequestMapping(value="login", method=RequestMethod.GET)
-	public String login() {
+	public String login(HttpSession session) {
+		if(session.getAttribute("adminInfo") != null)
+			return "redirect:../menu/main";
+
 		return "admin/login/login";
 	}
 

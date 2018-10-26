@@ -22,7 +22,7 @@
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form:form method="post" action="login" modelAttribute="Admin">
+					<form:form method="post" action="login">
 						<img src="../../res/image/login_logo.png"
 							class="img-responsive center-block" alt="Responsive image" />
 						<div class="form-group mt-10">

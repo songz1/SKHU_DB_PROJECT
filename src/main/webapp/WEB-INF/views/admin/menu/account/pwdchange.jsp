@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
@@ -23,29 +22,24 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-				<h3 class="text-center">기본정보 변경</h3>
-				<form:form method="post" action="acntupdate" modelAttribute="admin" class="form-horizontal mb-25 mt-25">
+				<h3 class="text-center">비밀번호 변경</h3>
+				<form:form method="post" action="pwdupdate" modelAttribute="account" class="form-inline mt-25 mb-25">
 					<form:hidden path="id" />
-					<div class="form-group">
-						<label class="col-sm-2 control-label">이름</label>
-						<div class="mb-25 col-md-4 col-md-offset-2">
-							<form:input path="name" class="form-control" />
+					<div>
+						<div class="input-group mb-25 col-md-4 col-md-offset-1">
+							<div class="input-group-addon">변경 패스워드</div>
+							<input type="password" class="form-control" name="password">
 						</div>
 					</div>
-					<div class="form-group mb-50">
-						<label class="col-sm-2 control-label">담당 부서</label>
-						<div class="mb-25 col-md-4 col-md-offset-2">
-							<form:select path="departmentId" class="form-control" itemValue="id" itemLabel="name" items="${ departments }" />
+					<div>
+						<div class="input-group mb-25 col-md-4 col-md-offset-1">
+							<div class="input-group-addon">패스워드 확인</div>
+							<input type="password" class="form-control" name="passwordConfirm">
 						</div>
 					</div>
-					<div class="form-group mb-50">
-						<label class="col-sm-2 control-label">이메일</label>
-						<div class="mb-25 col-md-4 col-md-offset-2">
-							<form:input path="email" class="form-control" />
-						</div>
+					<div>
+						<a href=""><button type="submit" class="btn btn-info mb-25 col-md-1 col-md-offset-4">확인</button></a>
 					</div>
-					<button type="submit"
-						class="btn btn-info mb-25 col-md-2 col-md-offset-5">확인</button>
 				</form:form>
 			</div>
 		</div>

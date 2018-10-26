@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,15 +24,15 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<h3 class="text-center">내 정보 관리</h3>
-				<form class="form-inline mt-25 mb-25" action="acntchange.jsp">
+				<form:form method="post" action="pwdchange" modelAttribute="Admin" class="form-inline mt-25 mb-25">
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon">패스워드</div>
 							<input type="password" class="form-control" name="password">
 						</div>
-						<a href=""><button type="submit" class="btn btn-info">확인</button></a>
+						<button type="submit" class="btn btn-info">확인</button>
 					</div>
-				</form>
+				</form:form>
 			</div>
 		</div>
 	</div>
