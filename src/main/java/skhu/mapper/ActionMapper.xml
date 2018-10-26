@@ -11,7 +11,11 @@
 		left join student s on a.studentId = s.id
 		left join department d on s.departmentId = d.id
 		left join admin p on a.adminId = p.id
-		order by date desc;
+		order by date desc
+		limit #{start}, #{end}
+	</select>
+	<select id="count" resultType="int">
+		select count(*) from action
 	</select>
 	<resultMap id="mainResultMap" type="Action">
 		<id property="id" column="id" />

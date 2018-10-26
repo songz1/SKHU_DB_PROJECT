@@ -8,5 +8,6 @@ import skhu.dto.Action;
 
 @Mapper
 public interface ActionMapper {
-	List<Action> findActionRecently();
+	List<Action> findActionRecently(int start, int end);
+	int count();
 }

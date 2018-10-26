@@ -49,8 +49,11 @@
 					</table>
 					<nav>
 					  <ul class="pager">
-					    <li><a href="#" class="glyphicon glyphicon-menu-left"></a></li>
-					    <li><a href="#" class="glyphicon glyphicon-menu-right"></a></li>
+					    <c:forEach var="page" items="${ pages }">
+							<li>
+								<a href="main?${ page.queryString }"> ${ page.label }</a>
+							</li>
+						</c:forEach>
 					  </ul>
 					</nav>
 				</div>
