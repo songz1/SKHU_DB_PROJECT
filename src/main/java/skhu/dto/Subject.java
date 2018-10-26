@@ -5,7 +5,7 @@ public class Subject {
 	int year;
 	int semester;
 	String code;
-	String class0;
+	String subjectClass;
 	String name;
 	Admin admin;
 	int professorId;
@@ -14,10 +14,10 @@ public class Subject {
 	String establish;
 	Department department;
 	int departmentId;
-	Subject_detail subject_detail;
+	SubjectDetail subjectDetail;
 	int detailId;
 	String abolish;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -43,10 +43,10 @@ public class Subject {
 		this.code = code;
 	}
 	public String getClass0() {
-		return class0;
+		return subjectClass;
 	}
-	public void setClass0(String class0) {
-		this.class0 = class0;
+	public void setClass0(String subjectClass) {
+		this.subjectClass = subjectClass;
 	}
 	public String getName() {
 		return name;
@@ -96,11 +96,11 @@ public class Subject {
 	public void setDepartmentId(int departmentId) {
 		this.departmentId = departmentId;
 	}
-	public Subject_detail getSubject_detail() {
-		return subject_detail;
+	public SubjectDetail getSubject_detail() {
+		return subjectDetail;
 	}
-	public void setSubject_detail(Subject_detail subject_detail) {
-		this.subject_detail = subject_detail;
+	public void setSubject_detail(SubjectDetail subject_detail) {
+		this.subjectDetail = subject_detail;
 	}
 	public int getDetailId() {
 		return detailId;
@@ -113,6 +113,6 @@ public class Subject {
 	}
 	public void setAbolish(String abolish) {
 		this.abolish = abolish;
-	} 
-	
+	}
+
 }

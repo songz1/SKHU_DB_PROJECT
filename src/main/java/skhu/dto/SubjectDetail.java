@@ -1,6 +1,6 @@
 package skhu.dto;
 
-public class Subject_detail {
+public class SubjectDetail {
 	int id;
 	String title;
 	String subtitle;
