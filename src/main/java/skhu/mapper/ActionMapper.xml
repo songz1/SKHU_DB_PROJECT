@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.skhu.mapper.ActionMapper">
-
+<mapper namespace="skhu.mapper.ActionMapper">
+	<select id="findActionRecently" resultMap="mainResultMap">
+		select a.id, a.date, a.name,
+			s.id studentId, s.studentNumber, s.name studentName, 
+			d.id departmentId, d.name departmentName,
+			p.id adminId, p.name adminName
+		from action a
+		left join student s on a.studentId = s.id
+		left join department d on s.departmentId = d.id
+		left join admin p on a.adminId = p.id
+		order by date desc;
+	</select>
+	<resultMap id="mainResultMap" type="Action">
+		<id property="id" column="id" />
+		<result property="date" column="date" />
+		<result property="name" column="name" />
+		<result property="studentId" column="studentId" />
+		<result property="adminId" column="adminId" />
+		<association property="student" javaType="Student">
+			<id property="id" column="studentId" />
+			<result property="studentNumber" column="studentNumber" />
+			<result property="name" column="studentName" />
+			<result property="departmentId" column="departmentId" />
+			<association property="department" javaType="Department">
+				<id property="id" column="departmentId" />
+				<result property="name" column="departmentName" />
+			</association>
+		</association>
+		<association property="admin" javaType="Admin">
+			<id property="id" column="adminId" />
+			<result property="name" column="adminName" />
+		</association>
+	</resultMap>
 </mapper>

@@ -1,5 +1,12 @@
 package skhu.mapper;
 
-public interface ActionMapper {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import skhu.dto.Action;
+
+@Mapper
+public interface ActionMapper {
+	List<Action> findActionRecently();
 }

@@ -5,4 +5,7 @@
 	<select id="findAll" resultType="Admin">
 		select * from admin
 	</select>
+	<select id="login" resultType="Admin">
+		select id, loginId, name, departmentId from admin where loginId = #{loginId} and password = #{password};
+	</select>
 </mapper>

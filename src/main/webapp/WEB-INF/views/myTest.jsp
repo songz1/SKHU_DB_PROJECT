@@ -13,6 +13,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h1>${authInfo.id}</h1>
 	<table class="table table-bordered mt5">
 		<thead>
 			<tr>

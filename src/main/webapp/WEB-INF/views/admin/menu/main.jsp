@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,41 +29,23 @@
 					<h3 class="text-center">조치사항 내역</h3>
 					<table class="table text-center">
 						<tr>
-							<td class="title col-md-1">학번</td>
+							<td class="title col-md-2">학번</td>
 							<td class="title col-md-1">이름</td>
-							<td class="title col-md-4">제목</td>
-							<td class="title col-md-1">최근 조치일</td>
+							<td class="title col md-1">학과명</td>
+							<td class="title col-md-3">제목</td>
+							<td class="title col-md-1">조치자명</td>
+							<td class="title col-md-2">조치일</td>
 						</tr>
-						<tr>
-							<td class="col-md-1">201432019</td>
-							<td class="col-md-1">신정호</td>
-							<td class="col-md-4">교양필수 학점 관련</td>
-							<td class="col-md-1">2018.10.13</td>
-						</tr>
-						<tr>
-							<td class="col-md-1">201532020</td>
-							<td class="col-md-1">송지은</td>
-							<td class="col-md-4">전공필수 수업 관련</td>
-							<td class="col-md-1">2018.09.09</td>
-						</tr>
-						<tr>
-							<td class="col-md-1">201231099</td>
-							<td class="col-md-1">홍길동</td>
-							<td class="col-md-4">진로 상담</td>
-							<td class="col-md-1">2018.09.02</td>
-						</tr>
-						<tr>
-							<td class="col-md-1">201133099</td>
-							<td class="col-md-1">이순신</td>
-							<td class="col-md-4">학점 관련</td>
-							<td class="col-md-1">2018.08.29</td>
-						</tr>
-						<tr>
-							<td class="col-md-1">201335099</td>
-							<td class="col-md-1">이세종</td>
-							<td class="col-md-4">취업 관련</td>
-							<td class="col-md-1">2018.08.03</td>
-						</tr>
+						<c:forEach var="action" items="${ actions }">
+							<tr>
+								<td class="title col-md-2">${ action.student.studentNumber }</td>
+								<td class="title col-md-1">${ action.student.name }</td>
+								<td class="title col md-1">${ action.student.department.name }</td>
+								<td class="title col-md-3">${ action.name }</td>
+								<td class="title col-md-1">${ action.admin.name }</td>
+								<td class="title col-md-2"><fmt:formatDate pattern="yy-MM-dd hh:ss" value="${ action.date }" /></td>
+							</tr>
+						</c:forEach>
 					</table>
 					<nav>
 					  <ul class="pager">

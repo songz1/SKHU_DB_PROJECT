@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <header>
 	<div id="divNav">
 		<nav class="navbar navbar-custom navbar-fixed-top navbar-color"
@@ -54,10 +53,11 @@
 					<div class="uib-button-bar navbar-right">
 						<div class="divItem">
 							<div>
-								<i class="glyphicon glyphicon-user"></i>root<br />
+								<i class="glyphicon glyphicon-user"></i>${ authInfo.loginId }<br />
 							</div>
-							<button type="submit" class="btn btn-default btn-block"
-								onclick="/">로그아웃</button>
+							<form action="/admin/login/logout" method="post">
+								<button type="submit" class="btn btn-default btn-block">로그아웃</button>
+							</form>
 						</div>
 					</div>
 				</div>

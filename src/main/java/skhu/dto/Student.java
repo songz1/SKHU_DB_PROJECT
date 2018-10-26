@@ -1,6 +1,7 @@
 package skhu.dto;
 
 public class Student {
+	int id;
 	String studentNumber;
 	String password;
 	String name;
@@ -14,6 +15,12 @@ public class Student {
 	String doubleMajor;
 	int majorEssential;
 	int liberalEssential;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getStudentNumber() {
 		return studentNumber;
 	}
