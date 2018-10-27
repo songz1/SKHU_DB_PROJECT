@@ -3,5 +3,61 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="skhu.mapper.StudentMapper">
 
-	
+	<select id="findAll" resultType="Student">
+		select * from student
+	</select>
+	<select id="login" resultType="Student">
+		select id, studentNumber, name, year, semester, departmentId, email, graduation, minor, doubleMajor, majorEssential, liberalEssential
+		from student 
+		where studentNumber = #{studentNumber} and password = #{password};
+	</select>
+	<select id="findById" resultType="Student">
+		select * from student 
+		where id = #{id}
+	</select>
+	<update id="update">
+		update student
+		<set>
+			<if test="password != null">
+				password = #{password}
+			</if>
+			<if test="name != null">
+				name = #{name}
+			</if>
+			<if test="year != null">
+				year = #{year}
+			</if>
+			<if test="departmentId != 0 and departmentId != null">
+				departmentId = #{departmentId}
+			</if>
+			<if test="email != null">
+				email = #{email}
+			</if>
+			<if test="semester != null">
+				semester = #{semester}
+			</if>
+			<if test="graduation != null">
+				graduation = #{graduation}
+			</if>
+			<if test="minor != null">
+				minor = #{minor}
+			</if>
+			<if test="douleMajor != null">
+				douleMajor = #{douleMajor}
+			</if>
+			<if test="majorEssential != null">
+				majorEssential = #{majorEssential}
+			</if>
+			<if test="liberalEssential != null">
+				liberalEssential = #{liberalEssential}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert
+		into student(studentNumber, password, name, year, departmentId, email)
+		values(#{studentNumber}, #{password}, #{name}, #{year}, #{departmentId}, #{email});
+	</insert>
+
 </mapper>
