@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form class="form-horizontal" action="../menu/main">
+					<form:form method="post" action="login">
 						<img src="../../res/image/login_logo.png"
 							class="img-responsive center-block" alt="Responsive image" />
 						<div class="form-group mt-10">
@@ -39,7 +40,7 @@
 						<div>
 							<button type="submit" class="btn btn-info btn-block">로그인</button>
 						</div>
-					</form>
+					</form:form>
 					<div class="account">
 						<a href="../regist/regist.jsp">회원가입</a>
 						*

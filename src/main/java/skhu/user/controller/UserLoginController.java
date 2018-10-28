@@ -20,7 +20,7 @@ public class UserLoginController {
 		Student login = studentMapper.login(student.getStudentNumber(), student.getPassword());
 
 		if(login != null) {
-			session.removeAttribute("userInfo");
+			session.removeAttribute("adminInfo");
 			session.setAttribute("userInfo", login);
 			session.setMaxInactiveInterval(5400);
 			return "redirect:../menu/main";
