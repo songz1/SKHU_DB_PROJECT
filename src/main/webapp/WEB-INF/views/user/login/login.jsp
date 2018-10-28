@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,14 +42,12 @@
 						</div>
 					</form:form>
 					<div class="account">
-						<a href="../regist/regist.jsp">회원가입</a>
-						*
-						<a href="../forgot/forgotpwd.jsp">비밀번호 찾기</a>
+						<a href="/user/regist/regist">회원가입</a> * <a
+							href="/user/forgot/forgotpwd">비밀번호 찾기</a>
 					</div>
 					<div class="account">
-						<a href="guest/basic.jsp">기본 졸업 요건</a>
-						*
-						<a href="guest/detail.jsp">학과/학부별 졸업 요건</a>
+						<a href="guest/basic.jsp">기본 졸업 요건</a> * <a
+							href="guest/detail.jsp">학과/학부별 졸업 요건</a>
 					</div>
 				</div>
 			</div>

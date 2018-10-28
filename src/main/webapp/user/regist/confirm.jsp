@@ -21,7 +21,7 @@
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form class="form-inline" action="../login/login.jsp">
+					<form class="form-inline" action="confirm">
 						<div>
 							<img src="../../res/image/regist_logo.png"
 								class="img-responsive center-block" alt="Responsive image" />

@@ -23,7 +23,7 @@
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form action="../login/login.jsp">
+					<form:form action="changepwd" method="post">
 						<div class="form-group">
 							<img src="../../res/image/login_logo.png"
 								class="img-responsive center-block" alt="Responsive image" />
@@ -40,7 +40,7 @@
 						<div>
 							<button type="submit" class="btn btn-info btn-block">다음</button>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form action="confirm.jsp">
+					<form:form action="regist" method="post">
 						<div class="form-group">
 							<img src="../../res/image/login_logo.png"
 								class="img-responsive center-block" alt="Responsive image" />
@@ -60,13 +61,13 @@
 								placeholder="비밀번호">
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" name="passwordConfirm"
-								placeholder="비밀번호 확인">
+							<input type="password" class="form-control"
+								name="passwordConfirm" placeholder="비밀번호 확인">
 						</div>
 						<div>
 							<button type="submit" class="btn btn-info btn-block">다음</button>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>

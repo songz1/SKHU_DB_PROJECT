@@ -11,7 +11,7 @@ import skhu.dto.Student;
 public interface StudentMapper {
 	List<Student> findAll();
 	Student login(@Param("studentNumber")String studentNumber, @Param("password")String password);
-	Student findById(int id);
+	Student findById(@Param("id")int id);
 	void update(Student student);
 	void insert(Student student);
 }

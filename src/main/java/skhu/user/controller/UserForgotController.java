@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import skhu.dto.Admin;
 import skhu.dto.Student;
 import skhu.mapper.StudentMapper;
 
@@ -25,16 +27,12 @@ public class UserForgotController {
 	public String confirm() {
 		return "user/forgot/confirm";
 	}
+	
+	@RequestMapping(value="changepwd", method=RequestMethod.POST)
+	public String changepwd(HttpSession session, Model model, Student account, @RequestParam("passwordConfirm") String passwordConfirm) {
+		if(account.getPassword().equals(passwordConfirm))
+			studentMapper.update(account);
 
-	@RequestMapping(value="pwdchange", method=RequestMethod.POST)
-	public String pwdchange(HttpSession session, Model model, Student confirm) {
-		int id = ((Student)session.getAttribute("userInfo")).getId();
-		Student account = studentMapper.findById(id);
-		if(confirm != null && account != null && confirm.getPassword().equals(account.getPassword())) {
-			model.addAttribute("account", account);
-
-			return "user/menu/account/pwdchange";
-		}
-		return "redirect:pwdconfirm";
+		return "user/login/login";
 	}
 }

@@ -56,8 +56,8 @@
 	</update>
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		insert
-		into student(studentNumber, password, name, year, departmentId, email)
-		values(#{studentNumber}, #{password}, #{name}, #{year}, #{departmentId}, #{email});
+		into student(studentNumber, password, name, year, departmentId, email, semester, graduation, minor, doubleMajor, majorEssential, liberalEssential)
+		values(#{studentNumber}, #{password}, #{name}, #{year}, #{departmentId}, #{email}, 0, '0', '0', '0', 0, 0);
 	</insert>
 
 </mapper>
