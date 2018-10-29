@@ -12,6 +12,7 @@ public interface StudentMapper {
 	List<Student> findAll();
 	Student login(@Param("studentNumber")String studentNumber, @Param("password")String password);
 	Student findById(@Param("id")int id);
+	Student findByAccount(@Param("name")String name, @Param("studentNumber")String studentNumber);
 	void update(Student student);
 	void insert(Student student);
 }

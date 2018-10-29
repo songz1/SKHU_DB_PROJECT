@@ -17,16 +17,20 @@ public class AdminLoginController {
 
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	public String login(Admin admin, HttpSession session) {
+		System.out.println("test");
 		Admin login = adminMapper.login(admin.getLoginId(), admin.getPassword());
-
+		System.out.println("test");
 		if(login != null) {
+			System.out.println("test");
 			session.removeAttribute("userInfo");
 			session.setAttribute("adminInfo", login);
 			session.setMaxInactiveInterval(5400);
+			System.out.println("test");
 			return "redirect:../menu/main";
 		}
 
 		else {
+			System.out.println("test");
 			return "admin/login/login";
 		}
 	}

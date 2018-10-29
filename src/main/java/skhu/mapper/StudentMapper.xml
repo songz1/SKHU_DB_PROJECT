@@ -15,6 +15,10 @@
 		select * from student 
 		where id = #{id}
 	</select>
+	<select id="findByAccount" resultType="Student">
+		select id from student 
+		where name = #{name} and studentNumber = #{studentNumber}
+	</select>
 	<update id="update">
 		update student
 		<set>

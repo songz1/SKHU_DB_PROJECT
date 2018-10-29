@@ -1,5 +1,12 @@
 package skhu.mapper;
 
-public interface GraduationMapper {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import skhu.dto.Graduation;
+
+@Mapper
+public interface GraduationMapper {
+	List<Graduation> findAll();
 }

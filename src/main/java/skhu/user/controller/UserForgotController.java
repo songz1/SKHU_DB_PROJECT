@@ -19,7 +19,9 @@ public class UserForgotController {
 	@Autowired StudentMapper studentMapper;
 
 	@RequestMapping(value = "forgotpwd", method = RequestMethod.GET)
-	public String forgotpwd() {
+	public String forgotpwd(Model model) {
+		Student student = new Student();
+		model.addAttribute("student", student);
 		return "user/forgot/forgotpwd";
 	}
 
@@ -29,15 +31,14 @@ public class UserForgotController {
 	}
 	
 	@RequestMapping(value="changepwd", method=RequestMethod.POST)
-	public String changepwd(HttpSession session, Model model, Student confirm) {
-		int id = ((Student)session.getAttribute("userInfo")).getId();
-		Student account = studentMapper.findById(id);
-		if(confirm != null && account != null && confirm.getPassword().equals(account.getPassword())) {
+	public String changepwd(HttpSession session, Model model, Student student) {
+		Student account = studentMapper.findByAccount(student.getName(), student.getStudentNumber());
+		
+		if(account != null) {
 			model.addAttribute("account", account);
-
 			return "user/forgot/changepwd";
 		}
-		return "redirect:updatepwd";
+		return "redirect:forgotpwd";
 	}
 	
 	@RequestMapping(value="updatepwd", method=RequestMethod.POST)

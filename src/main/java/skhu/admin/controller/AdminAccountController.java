@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import skhu.dto.Admin;
 import skhu.dto.Department;
+import skhu.dto.Graduation;
 import skhu.mapper.AdminMapper;
 import skhu.mapper.DepartmentMapper;
+import skhu.mapper.GraduationMapper;
 
 @Controller
 @RequestMapping("admin/menu/account")
@@ -35,7 +37,7 @@ public class AdminAccountController {
 	@RequestMapping(value="acntchange", method=RequestMethod.GET)
 	public String acntchange(HttpSession session, Model model) {
 		List<Department> departments = departmentMapper.findAll();
-
+		
 		model.addAttribute("admin", session.getAttribute("adminInfo"));
 		model.addAttribute("departments", departments);
 

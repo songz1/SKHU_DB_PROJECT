@@ -23,7 +23,7 @@
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form:form class="form-horizontal" action="changepwd" method="post" modelAttribute="Student">
+					<form:form class="form-horizontal" action="changepwd" method="post" modelAttribute="student">
 					<form:hidden path="id" />
 						<div>
 							<img src="../../res/image/login_logo.png"

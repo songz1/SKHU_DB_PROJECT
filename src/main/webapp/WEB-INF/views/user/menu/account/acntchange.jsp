@@ -58,7 +58,7 @@
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">졸업과정</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<select name="graduation" class="form-control">
+							<select name="gradu" class="form-control">
 								<option value="1">주전공</option>
 								<option value="2">부전공</option>
 								<option value="3">복수전공</option>
@@ -70,7 +70,7 @@
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">상세졸업과정</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<select name="graduation2" class="form-control">
+							<select name="ation" class="form-control">
 								<option value="1">없음</option>
 								<option value="2">전공기초</option>
 								<option value="3">전공심화</option>
