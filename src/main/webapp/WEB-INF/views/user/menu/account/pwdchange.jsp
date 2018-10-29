@@ -24,6 +24,7 @@
 			<div class="panel-body">
 				<h3 class="text-center">비밀번호 변경</h3>
 				<form:form method="post" action="pwdupdate" modelAttribute="account" class="form-inline mt-25 mb-25">
+					<form:hidden path="id" />
 					<div>
 						<div class="input-group mb-25 col-md-4 col-md-offset-1">
 							<div class="input-group-addon">변경 패스워드</div>

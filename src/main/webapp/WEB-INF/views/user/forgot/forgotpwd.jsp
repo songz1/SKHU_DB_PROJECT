@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +23,8 @@
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form class="form-horizontal" action="confirm.jsp">
+					<form:form class="form-horizontal" action="changepwd" method="post" modelAttribute="Student">
+					<form:hidden path="id" />
 						<div>
 							<img src="../../res/image/login_logo.png"
 								class="img-responsive center-block" alt="Responsive image" />
@@ -30,20 +33,19 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label"> 아이디</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="studentNumber">
+								<form:input path="studentNumber" class="form-control" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label"> 이름</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="name">
+								<form:input path="name" class="form-control" />
 							</div>
 						</div>
 						<div>
-							<button type="submit" class="btn btn-info btn-block"
-								onclick="confirm">다음</button>
+							<button type="submit" class="btn btn-info btn-block">다음</button>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>

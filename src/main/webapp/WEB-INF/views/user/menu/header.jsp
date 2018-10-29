@@ -54,7 +54,7 @@
 							<div>
 								<i class="glyphicon glyphicon-user"></i>${ userInfo.studentNumber } ${ userInfo.name }<br />
 							</div>
-							<form action="user/login/logout" method="post">
+							<form action="/user/login/logout" method="post">
 								<button type="submit" class="btn btn-default btn-block">로그아웃</button>
 							</form>
 						</div>

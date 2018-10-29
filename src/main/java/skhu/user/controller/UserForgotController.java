@@ -29,10 +29,22 @@ public class UserForgotController {
 	}
 	
 	@RequestMapping(value="changepwd", method=RequestMethod.POST)
-	public String changepwd(HttpSession session, Model model, Student account, @RequestParam("passwordConfirm") String passwordConfirm) {
+	public String changepwd(HttpSession session, Model model, Student confirm) {
+		int id = ((Student)session.getAttribute("userInfo")).getId();
+		Student account = studentMapper.findById(id);
+		if(confirm != null && account != null && confirm.getPassword().equals(account.getPassword())) {
+			model.addAttribute("account", account);
+
+			return "user/forgot/changepwd";
+		}
+		return "redirect:updatepwd";
+	}
+	
+	@RequestMapping(value="updatepwd", method=RequestMethod.POST)
+	public String updatepwd(HttpSession session, Model model, Student account, @RequestParam("passwordConfirm") String passwordConfirm) {
 		if(account.getPassword().equals(passwordConfirm))
 			studentMapper.update(account);
 
-		return "user/login/login";
+		return "redirect:../main";
 	}
 }

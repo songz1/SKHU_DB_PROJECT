@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +25,8 @@
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form:form action="changepwd" method="post">
+				<form:form method="post" action="updatepwd" modelAttribute="account">
+					<form:hidden path="id" />
 						<div class="form-group">
 							<img src="../../res/image/login_logo.png"
 								class="img-responsive center-block" alt="Responsive image" />
