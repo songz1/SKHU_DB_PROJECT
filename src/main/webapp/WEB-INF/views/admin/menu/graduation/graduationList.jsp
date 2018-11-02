@@ -27,58 +27,60 @@
 			<div class="panel-body">
 				<h3 class="text-center">학생 목록</h3>
 				<table class="table text-center">
-					<form:form method="post" modelAttribute="admin" action="insert">
-					<tr>
-						<td class="title col-md-2">학과(부)</td>
-						<td class="col-md-1">
-							<select name="department">
-								<option value="0">전체</option>
-								<option value="1">소프트웨어공학과</option>
-								<option value="2">컴퓨터공학과</option>
-								<option value="3">글로컬IT학과</option>
-								<option value="4">정보통신공학과</option>
-							</select>
-						</td>
-						<td class="title col-md-2">학번</td>
-						<td><input type="text" name="studentNumber"></input>
-						</td>
-						<td class="title col-md-2">이름</td>
-						<td><input type="text" name="studentName"></input>
-						</td>
-						<td class="col-md-1"></td>
-					</tr>
-					<tr>
-						<td class="title col-md-2">학년</td>
-						<td class="col-md-1"><select name="year">
-								<option value="0">전체</option>
-								<option value="1">1학년</option>
-								<option value="2">2학년</option>
-								<option value="3">3학년</option>
-								<option value="4">4학년 이상</option>
-						</select></td>
-						<td class="title col-md-2">이수학기</td>
-						<td class="col-md-1"><select name="grade">
-								<option value="0">전체</option>
-								<option value="1">1학기</option>
-								<option value="2">2학기</option>
-						</select></td>
-						<td></td>
-						<td></td>
-						<td></td>
+					<form:form method="get" modelAttribute="student" action="graduationlist">
+						<tr>
+							<td class="title col-md-2">학과(부)</td>
+							<td class="col-md-1">
+								<form:select path="departmentId" itemValue="id" itemLabel="name" items="${ departments }" />
+							</td>
+							<td class="title col-md-1">학년</td>
+							<td>
+								<form:select path="year">
+									<form:option value="0" label="전체" />
+									<form:option value="1" label="1학년" />
+									<form:option value="2" label="2학년" />
+									<form:option value="3" label="3학년" />
+									<form:option value="4" label="4학년" />
+								</form:select>
+							</td>
+							<td class="title col-md-1">이수학기</td>
+							<td>
+								<form:select path="semester">
+									<form:option value="0" label="전체" />
+									<form:option value="1" label="1학기" />
+									<form:option value="2" label="2학기" />
+									<form:option value="3" label="3학기" />
+									<form:option value="4" label="4학기" />
+									<form:option value="5" label="5학기" />
+									<form:option value="6" label="6학기" />
+									<form:option value="7" label="7학기" />
+									<form:option value="8" label="8학기" />
+								</form:select>
+							</td>
 						</tr>
 						<tr>
-						<td></td>
-						<td class="col-md-1"><input class="col-md-2" type="checkbox" id="major" />전공필수 미충족</td>
-						<td></td>
-						<td class="col-md-1"><input class="col-md-2" type="checkbox" id="refinement" />교양필수 미충족</td>
-						<td></td>
-						<td></td>
-						<td class="col-md-1"><span style="float: right">
-								<button type="submit" class="btn btn-default btn-block"
-									style="WIDTH: 100pt;" onclick="/">조회</button>
-						</span></td>
-					</tr>
-				</form:form>
+							<td class="col-md-1">
+								<input type="checkbox" name="majorCheck" <c:if test='${ majorCheck }'>checked</c:if>>전공필수 미충족
+							</td>
+							<td class="col-md-1">
+								<input type="checkbox" name="minorCheck" <c:if test='${ minorCheck }'>checked</c:if> />교양필수 미충족
+							</td>
+							<td class="col-md-1">
+								<select name="searchType">
+									<option value="0" <c:if test="${searchType eq '0'}">selected</c:if> label="학번" />
+									<option value="1" label="이름" <c:if test="${searchType eq '1'}">selected</c:if>/>
+								</select>
+							</td>
+							<td class="col-md-1">
+								<input type="text" name="searchText" value="${ searchText }" />
+							</td>
+							<td class="col-md-1">
+								<span style="float: right">
+									<button type="submit" class="btn btn-default btn-block" style="WIDTH: 100pt;">조회</button>
+								</span>
+							</td>
+						</tr>
+					</form:form>
 				</table>
 
 				<table class="table table-bordered mt5">
@@ -91,18 +93,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center cursor tr-hover" data-url="graduationDetail.jsp">
-							<td>201532020</td>
-							<td>송지은</td>
-							<td>소프트웨어공학과</td>
-							<td>3학년</td>
-						</tr>
-						<tr class="text-center cursor" data-url="graduationDetail.jsp">
-							<td>201432019</td>
-							<td>신정호</td>
-							<td>소프트웨어공학과</td>
-							<td>3학년</td>
-						</tr>
+						<c:forEach var="test" items="${ students }">
+							<tr class="text-center cursor tr-hover" data-url="graduationDetail.jsp">
+								<td>${ student.studentNumber }</td>
+								<td>${ student.name }</td>
+								<td>${ student.department.departmentName }</td>
+								<td>${ student.year }</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

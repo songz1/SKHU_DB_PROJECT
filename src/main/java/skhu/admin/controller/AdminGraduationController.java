@@ -72,10 +72,16 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="graduationlist", method=RequestMethod.GET)
-	public String graduationList(Model model, HttpServletRequest request,
-		@RequestParam("student") Student student, @RequestParam("searchText") String searchText,
-		@RequestParam(value="pg", required=false) String pg,@RequestParam("searchType") String searchType,
-		@RequestParam(value="majorCheck") boolean majorCheck, @RequestParam(value="minorCheck") boolean minorCheck) {
+	public String graduationList(Model model, HttpServletRequest request, Student student,
+		@RequestParam(value="searchText", required=false) String searchText, @RequestParam(value="pg", required=false) String pg,
+		@RequestParam(value="searchType", required=false) String searchType,@RequestParam(value="majorCheck", required=false) boolean majorCheck,
+		@RequestParam(value="minorCheck", required=false) boolean minorCheck) {
+
+		if(searchText == null)
+    		searchText = "";
+
+		if(searchType == null)
+    		searchType = "0";
 
 		Page page = new Page();
 		int total = studentMapper.countByGraduation(student, searchText, searchType, majorCheck, minorCheck);
@@ -88,6 +94,15 @@ public class AdminGraduationController {
 		List<Department> departments = departmentMapper.findAll();
 		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
 
+		for(Student ttest : students) {
+			ttest.getDepartmentId();
+		}
+
+		model.addAttribute("student", student);
+		model.addAttribute("searchText", searchText);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("majorCheck", majorCheck);
+		model.addAttribute("minorCheck", minorCheck);
 		model.addAttribute("students", students);
 		model.addAttribute("departments", departments);
 		model.addAttribute("pages", pages);

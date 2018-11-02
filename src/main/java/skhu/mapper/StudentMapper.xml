@@ -39,7 +39,7 @@
 		left join graduation_grade g on s.departmentId = g.departmentId
 		<where>
 			<if test="student.departmentId != 0 and student.departmentId != null">
-				and d.id = #{departmentId}
+				and d.id = #{student.departmentId}
 			</if>
 			<if test='searchType == "0" and searchText != null and searchText != ""'>
 				and s.studentNumber = #{searchText}
@@ -48,20 +48,20 @@
 				and s.name = #{searchText}
 			</if>
 			<if test='student.year != null and student.year != "0"'>
-				and s.year = #{year}
+				and s.year = #{student.year}
 			</if>
 			<if test="student.semester != 0 and student.semester != null">
-				and s.semester = #{semester}
+				and s.semester = #{student.semester}
 			</if>
 			<if test="majorCheck or minorCheck">
 				and (d.id in (1, d.id) and
-		   		left(s.studentNumber, 4) = graduationYear)
+		   		left(s.studentNumber, 4) = g.year)
 		    	<if test="majorCheck">
 		    		and g.name like '전공필수'
 		    		and s.majorEssential >= g.score
 		    	</if>
 		    	<if test="minorCheck">
-		    		and g.ame like '교양필수'
+		    		and g.name like '교양필수'
 		    		and s.liberalEssential >= g.score
 		    	</if>
 			</if>
@@ -95,7 +95,7 @@
 		left join graduation_grade g on s.departmentId = g.departmentId
 		<where>
 			<if test="student.departmentId != 0 and student.departmentId != null">
-				and d.id = #{departmentId}
+				and d.id = #{student.departmentId}
 			</if>
 			<if test='searchType == "0" and searchText != null and searchText != ""'>
 				and s.studentNumber = #{searchText}
@@ -104,20 +104,20 @@
 				and s.name = #{searchText}
 			</if>
 			<if test='student.year != null and student.year != "0"'>
-				and s.year = #{year}
+				and s.year = #{student.year}
 			</if>
 			<if test="student.semester != 0 and student.semester != null">
-				and s.semester = #{semester}
+				and s.semester = #{student.semester}
 			</if>
 			<if test="majorCheck or minorCheck">
 				and (d.id in (1, d.id) and
-		   		left(s.studentNumber, 4) = graduationYear)
+		   		left(s.studentNumber, 4) = g.year)
 		    	<if test="majorCheck">
 		    		and g.name like '전공필수'
 		    		and s.majorEssential >= g.score
 		    	</if>
 		    	<if test="minorCheck">
-		    		and g.ame like '교양필수'
+		    		and g.name like '교양필수'
 		    		and s.liberalEssential >= g.score
 		    	</if>
 			</if>
