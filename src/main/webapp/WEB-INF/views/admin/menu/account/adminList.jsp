@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,22 +26,20 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<h3 class="text-center">관리자 목록</h3>
+				<form:form>
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">담당 부서</td>
-						<td class="col-md-1"><select name="part">
-								<option value="0">전체</option>
-								<option value="1">소프트웨어공학과</option>
-								<option value="2">컴퓨터공학과</option>
-								<option value="3">글로컬IT학과</option>
-								<option value="4">정보통신공학과</option>
+						<td class="col-md-1">
+						<form:select path="departmentId" class="col-md-1" itemValue="id" itemLabel="name" items="${ departments }" />
+						</td>
+						<td class="title col-md-1"><select name="admin">
+								<option value="1">교번</option>
+								<option value="2">이름</option>
 						</select></td>
-						<td class="title col-md-1">교번</td>
-						<td class="col-md-1"><input type="text" name="adminNumber"></input>
+						<td class="col-md-1"><input type="text" name="admin"></input>
 						</td>
-						<td class="title col-md-1">이름</td>
-						<td class="col-md-1"><input type="text" name="adminName"></input>
-						</td>
+
 						<td class="col-md-1"><span style="float: right">
 								<button type="submit" class="btn btn-default btn-block"
 									style="WIDTH: 100pt;" onclick="/">조회</button>
@@ -57,20 +57,17 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center cursor tr-hover" data-url="adminEdit.jsp">
-							<td>201099999</td>
-							<td>관리자1</td>
-							<td>IT학부</td>
-							<td>5</td>
-						</tr>
-						<tr class="text-center cursor tr-hover" data-url="adminEdit.jsp">
-							<td>201199999</td>
-							<td>관리자2</td>
-							<td>IT학부</td>
-							<td>4</td>
-						</tr>
+						<c:forEach var="admin" items="${ admins }">
+							<tr data-url="adminEdit?id=${ admin.id }">
+								<td>${ admin.loginId }</td>
+								<td>${ admin.name }</td>
+								<td>${ admin.departmentId }</td>
+								<td>${ admin.authority }</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
+				</form:form>
 			</div>
 		</div>
 	</div>

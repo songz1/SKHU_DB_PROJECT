@@ -25,13 +25,40 @@ public class AdminAccountController {
 	@Autowired DepartmentMapper departmentMapper;
 
 	@RequestMapping(value="adminList", method=RequestMethod.GET)
-	public String adminList() {
+	public String adminList(Model model) {
+		List<Department> departments = departmentMapper.findAll();
+		List<Admin> admins = adminMapper.findAll();
+		Admin admin = new Admin();
+		
+		model.addAttribute("admins", admins);
+		model.addAttribute("admin", admin);
+		model.addAttribute("departments", departments);
+		
 		return "admin/menu/account/adminList";
 	}
 
 	@RequestMapping(value="adminEdit", method=RequestMethod.GET)
-	public String adminEdit() {
-		return "admin/menu/account/adminEdit";
+	public String adminEdit(Model model, @RequestParam("id") int id) {
+		Admin admin = adminMapper.findById(id);
+		List<Department> departments = departmentMapper.findAll();
+		
+		model.addAttribute("admin", admin);
+		model.addAttribute("departments", departments);
+
+		return "admin/menu/account/edit";
+	}
+
+	@RequestMapping(value = "edit", method = RequestMethod.POST)
+	public String edit(Model model, Admin admin) {
+		adminMapper.update(admin);
+		
+		return "redirect:adminList";
+	}
+	
+	@RequestMapping("delete")
+	public String delete(Model model, @RequestParam("id") int id) {
+		adminMapper.delete(id);
+		return "redirect:adminList";
 	}
 
 	@RequestMapping(value="acntchange", method=RequestMethod.GET)

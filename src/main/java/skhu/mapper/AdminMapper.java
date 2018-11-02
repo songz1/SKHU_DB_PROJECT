@@ -14,4 +14,5 @@ public interface AdminMapper {
 	Admin findById(@Param("id")int id);
 	void update(Admin admin);
 	void insert(Admin admin);
+	void delete(@Param("id")int id);
 }

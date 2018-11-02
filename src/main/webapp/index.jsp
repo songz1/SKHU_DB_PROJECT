@@ -8,7 +8,8 @@
 </head>
 <body>
 	<h1>mybatis</h1>
-	<a href="user/login/login">login</a>
+	<a href="user/login/login">User Login</a><p />
+	<a href="admin/login/login">Admin Login</a>
 	<br />
 </body>
 </html>

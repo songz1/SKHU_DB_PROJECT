@@ -34,4 +34,9 @@
 		insert into admin(loginId, password, name, departmentId, email, authority)
 		values(#{loginId}, #{password}, #{name}, #{departmentId}, #{email}, #{authority});
 	</insert>
+	
+	<delete id="delete">
+		DELETE FROM book WHERE id = #{id}
+	</delete>
+	
 </mapper>
