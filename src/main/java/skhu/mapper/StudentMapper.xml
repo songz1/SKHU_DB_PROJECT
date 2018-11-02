@@ -39,19 +39,19 @@
 			<if test="departmentId != 0 and departmentId != null">
 				and d.id = #{departmentId}
 			</if>
-			<if test="studentNumber != null">
-				and s.studentNumber = #{studentNumber}
+			<if test='searchType == "0" and searchText != null and searchText != ""'>
+				and s.studentNumber = #{searchText}
 			</if>
-			<if test="name != null">
-				and s.name = #{name}
+			<if test='searchType == "1" and searchText != null and searchText != ""'>
+				and s.name = #{searchText}
 			</if>
-			<if test="year != null">
+			<if test='year != null and year != "0"'>
 				and s.year = #{year}
 			</if>
 			<if test="semester != 0 and semester != null">
 				and s.semester = #{semester}
 			</if>
-			<if test="${majorCheck} or ${minorCheck}">
+			<if test="majorCheck or minorCheck">
 				and (d.id in (1, d.id) and
 		   		left(s.studentNumber, 4) = graduationYear)
 		    	<if test="majorCheck">
@@ -87,6 +87,40 @@
 			</collection>
 		</association>
 	</resultMap>
+	<select id="countByGraduation" resultType="int">
+		select count(*) from student
+		left join department d on s.departmentId = d.id
+		left join graduation_grade g on s.departmentId = g.departmentId
+		<where>
+			<if test="departmentId != 0 and departmentId != null">
+				and d.id = #{departmentId}
+			</if>
+			<if test='searchType == "0" and searchText != null and searchText != ""'>
+				and s.studentNumber = #{searchText}
+			</if>
+			<if test='searchType == "1" and searchText != null and searchText != ""'>
+				and s.name = #{searchText}
+			</if>
+			<if test='year != null and year != "0"'>
+				and s.year = #{year}
+			</if>
+			<if test="semester != 0 and semester != null">
+				and s.semester = #{semester}
+			</if>
+			<if test="majorCheck or minorCheck">
+				and (d.id in (1, d.id) and
+		   		left(s.studentNumber, 4) = graduationYear)
+		    	<if test="majorCheck">
+		    		and g.name like '전공필수'
+		    		and s.majorEssential >= g.score
+		    	</if>
+		    	<if test="minorCheck">
+		    		and g.ame like '교양필수'
+		    		and s.liberalEssential >= g.score
+		    	</if>
+			</if>
+		</where>
+	</select>
 	<update id="update">
 		update student
 		<set>

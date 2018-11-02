@@ -64,11 +64,11 @@
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">권한</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<select name="authority" class="form-control">
-								<option value="2">2 - 관리자</option>
-								<option value="3">3 - 행정/전산</option>
-								<option value="4">4 - 교수</option>
-							</select>
+							<form:select path="authority" class="form-control">
+								<form:option value="2" label="관리자" />
+								<form:option value="3" label="행정/전산" />
+								<form:option value="4" label="교수" />
+							</form:select>
 						</div>
 					</div>
 					<button type="submit"

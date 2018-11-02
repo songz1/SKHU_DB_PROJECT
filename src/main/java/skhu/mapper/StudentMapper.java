@@ -14,10 +14,14 @@ public interface StudentMapper {
 	Student findById(@Param("id")int id);
 	Student findByAccount(@Param("name")String name, @Param("studentNumber")String studentNumber);
 	List<Student> findByGraduation(
-			@Param("start")int start, @Param("end")int end,
-			@Param("departmentId") int departmentId, @Param("studentNumber") String studentNumber,
-			@Param("name") String name, @Param("year") int year, @Param("semester") int semester,
-			@Param("majorCheck") boolean majorCheck, @Param("minorCheck") boolean minorCheck
+		@Param("start")int start, @Param("end")int end, @Param("student") Student student,
+		@Param("searchText") String searchText, @Param("searchType") String searchType,
+		@Param("majorCheck") boolean majorCheck, @Param("minorCheck") boolean minorCheck
+	);
+	int countByGraduation(
+		@Param("student") Student student, @Param("searchText") String searchText,
+		@Param("searchType") String searchType, @Param("majorCheck") boolean majorCheck,
+		@Param("minorCheck") boolean minorCheck
 	);
 	void update(Student student);
 	void insert(Student student);
