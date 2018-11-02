@@ -65,6 +65,7 @@
 			</if>
 		</where>
 		group by s.id
+		limit #{start}, #{end}
 	</select>
 	<resultMap id="graduationListResultMap" type="Student">
 		<id property="id" column="id" />
