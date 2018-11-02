@@ -38,20 +38,20 @@
 		left join department d on s.departmentId = d.id
 		left join graduation_grade g on s.departmentId = g.departmentId
 		<where>
-			<if test="student.departmentId != 0 and student.departmentId != null">
-				and d.id = #{student.departmentId}
+			<if test="condition.departmentId != 0 and condition.departmentId != null">
+				and d.id = #{condition.departmentId}
 			</if>
 			<if test='searchType == "0" and searchText != null and searchText != ""'>
-				and s.studentNumber = #{searchText}
+				and s.studentNumber like #{searchText}
 			</if>
 			<if test='searchType == "1" and searchText != null and searchText != ""'>
-				and s.name = #{searchText}
+				and s.name like #{searchText}
 			</if>
-			<if test='student.year != null and student.year != "0"'>
-				and s.year = #{student.year}
+			<if test='condition.year != null and condition.year != "0"'>
+				and s.year = #{condition.year}
 			</if>
-			<if test="student.semester != 0 and student.semester != null">
-				and s.semester = #{student.semester}
+			<if test="condition.semester != 0 and condition.semester != null">
+				and s.semester = #{condition.semester}
 			</if>
 			<if test="majorCheck or minorCheck">
 				and (d.id in (1, d.id) and
@@ -94,20 +94,20 @@
 		left join department d on s.departmentId = d.id
 		left join graduation_grade g on s.departmentId = g.departmentId
 		<where>
-			<if test="student.departmentId != 0 and student.departmentId != null">
-				and d.id = #{student.departmentId}
+			<if test="condition.departmentId != 0 and condition.departmentId != null">
+				and d.id = #{condition.departmentId}
 			</if>
 			<if test='searchType == "0" and searchText != null and searchText != ""'>
-				and s.studentNumber = #{searchText}
+				and s.studentNumber like #{searchText}
 			</if>
 			<if test='searchType == "1" and searchText != null and searchText != ""'>
-				and s.name = #{searchText}
+				and s.name like #{searchText}
 			</if>
-			<if test='student.year != null and student.year != "0"'>
-				and s.year = #{student.year}
+			<if test='condition.year != null and condition.year != "0"'>
+				and s.year = #{condition.year}
 			</if>
-			<if test="student.semester != 0 and student.semester != null">
-				and s.semester = #{student.semester}
+			<if test="condition.semester != 0 and condition.semester != null">
+				and s.semester = #{condition.semester}
 			</if>
 			<if test="majorCheck or minorCheck">
 				and (d.id in (1, d.id) and

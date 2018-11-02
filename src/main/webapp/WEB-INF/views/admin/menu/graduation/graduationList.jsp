@@ -27,7 +27,7 @@
 			<div class="panel-body">
 				<h3 class="text-center">학생 목록</h3>
 				<table class="table text-center">
-					<form:form method="get" modelAttribute="student" action="graduationlist">
+					<form:form method="get" modelAttribute="condition" action="graduationlist">
 						<tr>
 							<td class="title col-md-2">학과(부)</td>
 							<td class="col-md-1">
@@ -93,11 +93,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="test" items="${ students }">
-							<tr class="text-center cursor tr-hover" data-url="graduationDetail.jsp">
+						<c:forEach var="student" items="${ students }">
+							<tr class="text-center cursor tr-hover" data-url="graduationDetail?id=${ student.id }">
 								<td>${ student.studentNumber }</td>
 								<td>${ student.name }</td>
-								<td>${ student.department.departmentName }</td>
+								<td>${ student.department.name }</td>
 								<td>${ student.year }</td>
 							</tr>
 						</c:forEach>

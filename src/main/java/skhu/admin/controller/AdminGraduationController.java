@@ -72,7 +72,7 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="graduationlist", method=RequestMethod.GET)
-	public String graduationList(Model model, HttpServletRequest request, Student student,
+	public String graduationList(Model model, HttpServletRequest request, Student condition,
 		@RequestParam(value="searchText", required=false) String searchText, @RequestParam(value="pg", required=false) String pg,
 		@RequestParam(value="searchType", required=false) String searchType,@RequestParam(value="majorCheck", required=false) boolean majorCheck,
 		@RequestParam(value="minorCheck", required=false) boolean minorCheck) {
@@ -84,21 +84,22 @@ public class AdminGraduationController {
     		searchType = "0";
 
 		Page page = new Page();
-		int total = studentMapper.countByGraduation(student, searchText, searchType, majorCheck, minorCheck);
+		int total = studentMapper.countByGraduation(condition, "%" + searchText + "%", searchType, majorCheck, minorCheck);
 		int currentPage = 1;
 
     	if(pg != null)
     		currentPage = Integer.parseInt(pg);
 
-		List<Student> students = studentMapper.findByGraduation((currentPage - 1) * 10, 10, student, searchText, searchType, majorCheck, minorCheck);
+		List<Student> students = studentMapper.findByGraduation((currentPage - 1) * 10, 10, condition, "%" + searchText + "%", searchType, majorCheck, minorCheck);
 		List<Department> departments = departmentMapper.findAll();
 		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
 
 		for(Student ttest : students) {
-			ttest.getDepartmentId();
+			System.out.println(ttest.getDepartmentId());
+			System.out.println(ttest.getDepartment().getName());
 		}
 
-		model.addAttribute("student", student);
+		model.addAttribute("condition", condition);
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("majorCheck", majorCheck);
