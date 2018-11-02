@@ -9,7 +9,7 @@ import skhu.dto.Student;
 
 @Mapper
 public interface StudentMapper {
-	List<Student> findAll(@Param("start")int start, @Param("end")int end);
+	List<Student> findAll();
 	Student login(@Param("studentNumber")String studentNumber, @Param("password")String password);
 	Student findById(@Param("id")int id);
 	Student findByAccount(@Param("name")String name, @Param("studentNumber")String studentNumber);

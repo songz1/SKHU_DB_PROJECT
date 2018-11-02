@@ -5,7 +5,6 @@
 
 	<select id="findAll" resultType="Student">
 		select * from student
-		limit #{start}, #{end}
 	</select>
 	<select id="login" resultType="Student">
 		select id, studentNumber, name, year, semester, departmentId, email, graduation, minor, doubleMajor, majorEssential, liberalEssential
