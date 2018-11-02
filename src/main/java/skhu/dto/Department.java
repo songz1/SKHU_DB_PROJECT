@@ -1,10 +1,13 @@
 package skhu.dto;
 
+import java.util.List;
+
 public class Department {
 	int id;
 	String name;
 	int collegeId;
 	College college;
+	List<Graduation> graduations;
 	public int getId() {
 		return id;
 	}
@@ -28,5 +31,11 @@ public class Department {
 	}
 	public void setCollege(College college) {
 		this.college = college;
+	}
+	public List<Graduation> getGraduations() {
+		return graduations;
+	}
+	public void setGraduations(List<Graduation> graduations) {
+		this.graduations = graduations;
 	}
 }

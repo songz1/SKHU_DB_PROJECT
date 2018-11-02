@@ -26,6 +26,8 @@
 				<h3 class="text-center">기본정보 변경</h3>
 				<form:form method="post" action="acntupdate" modelAttribute="admin" class="form-horizontal mb-25 mt-25">
 					<form:hidden path="id" />
+					<form:hidden path="loginId" />
+					<form:hidden path="authority" />
 					<div class="form-group">
 						<label class="col-sm-2 control-label">이름</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">

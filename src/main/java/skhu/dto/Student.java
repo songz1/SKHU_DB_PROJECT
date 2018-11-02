@@ -1,5 +1,7 @@
 package skhu.dto;
 
+import java.util.List;
+
 public class Student {
 	int id;
 	String studentNumber;
@@ -15,6 +17,7 @@ public class Student {
 	String doubleMajor;
 	int majorEssential;
 	int liberalEssential;
+	List<Action> actions;
 	public int getId() {
 		return id;
 	}
@@ -99,5 +102,13 @@ public class Student {
 	public void setLiberalEssential(int liberalEssential) {
 		this.liberalEssential = liberalEssential;
 	}
+	public List<Action> getActions() {
+		return actions;
+	}
+	public void setActions(List<Action> actions) {
+		this.actions = actions;
+	}
+
+
 
 }

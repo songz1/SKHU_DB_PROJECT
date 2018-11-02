@@ -1,12 +1,19 @@
 package skhu.admin.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import skhu.dto.Student;
+import skhu.mapper.StudentMapper;
+
 @Controller
 @RequestMapping("admin/menu/graduation")
 public class AdminGraduationController {
+	@Autowired StudentMapper studentMapper;
 
 	@RequestMapping(value="basic", method=RequestMethod.GET)
 	public String basic() {
@@ -53,8 +60,10 @@ public class AdminGraduationController {
 		return "admin/menu/graduation/creategraduation";
 	}
 
-	@RequestMapping(value="graduationList", method=RequestMethod.GET)
+	@RequestMapping(value="graduationlist", method=RequestMethod.GET)
 	public String graduationList() {
+		List<Student> students = studentMapper.findAll();
+
 		return "admin/menu/graduation/graduationList";
 	}
 

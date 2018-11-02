@@ -13,6 +13,11 @@ public interface StudentMapper {
 	Student login(@Param("studentNumber")String studentNumber, @Param("password")String password);
 	Student findById(@Param("id")int id);
 	Student findByAccount(@Param("name")String name, @Param("studentNumber")String studentNumber);
+	List<Student> findByGraduation(
+			@Param("departmentId") int departmentId, @Param("studentNumber") String studentNumber,
+			@Param("name") String name, @Param("year") int year, @Param("semester") int semester,
+			@Param("majorCheck") boolean majorCheck, @Param("minorCheck") boolean minorCheck
+	);
 	void update(Student student);
 	void insert(Student student);
 }

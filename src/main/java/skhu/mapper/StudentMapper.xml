@@ -19,6 +19,73 @@
 		select id from student 
 		where name = #{name} and studentNumber = #{studentNumber}
 	</select>
+	<select id="findByAction" resultMap="counselingResultMap"> <!-- where절이랑 resultmap 잘 추가해서 하면 됨 + mapper.java 추가  -->
+		select s.id, s.studentNumber, s.name studentName, 
+			d.id departmentId, d.name departmentName, 
+			a.id actionId, max(a.date) date 
+		from student s 
+		left join action a on s.id = a.studentId
+		left join department d on s.departmentId = d.id
+		group by s.id;
+	</select>
+	<select id="findByGraduation" resultMap="graduationListResultMap">
+		select s.id, s.studentNumber, s.name, s.year, s.semester, s.majorEssential, s.liberalEssential
+			d.id departmentId, d.name departmentName,
+			g.id graduationId, g.name graduationName, max(g.score) score, g.year graduationYear
+		from student s
+		left join department d on s.departmentId = d.id
+		left join graduation_grade g on s.departmentId = g.departmentId
+		<where>
+			<if test="departmentId != 0 and departmentId != null">
+				and d.id = #{departmentId}
+			</if>
+			<if test="studentNumber != null">
+				and s.studentNumber = #{studentNumber}
+			</if>
+			<if test="name != null">
+				and s.name = #{name}
+			</if>
+			<if test="year != null">
+				and s.year = #{year}
+			</if>
+			<if test="semester != 0 and semester != null">
+				and s.semester = #{semester}
+			</if>
+			<if test="${majorCheck} or ${minorCheck}">
+				and (d.id in (1, d.id) and
+		   		left(s.studentNumber, 4) = graduationYear)
+		    	<if test="majorCheck">
+		    		and g.name like '전공필수'
+		    		and s.majorEssential >= g.score
+		    	</if>
+		    	<if test="minorCheck">
+		    		and g.ame like '교양필수'
+		    		and s.liberalEssential >= g.score
+		    	</if>
+			</if>
+		</where>
+		group by s.id
+	</select>
+	<resultMap id="graduationListResultMap" type="Student">
+		<id property="id" column="id" />
+		<result property="studentNumber" column="studentNumber" />
+		<result property="name" column="name" />
+		<result property="year" column="year" />
+		<result property="semester" column="semester" />
+		<result property="majorEssential" column="majorEssential" />
+		<result property="liberalEssential" column="liberalEssential" />
+		<result property="departmentId" column="departmentId" />
+		<association property="department" javaType="Department">
+			<id property="id" column="departmentId" />
+			<result property="name" column="departmentName" />
+			<collection property="graduations" ofType="Graduation">
+				<id property="id" column="graduationId" />
+				<result property="name" column="graduationName" />
+				<result property="score" column="score" />
+				<result property="year" column="graduationYear" />
+			</collection>
+		</association>
+	</resultMap>
 	<update id="update">
 		update student
 		<set>
