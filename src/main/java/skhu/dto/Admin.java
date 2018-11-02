@@ -9,6 +9,7 @@ public class Admin {
 	Department department;
 	String email;
 	int authority;
+	
 	public int getId() {
 		return id;
 	}
