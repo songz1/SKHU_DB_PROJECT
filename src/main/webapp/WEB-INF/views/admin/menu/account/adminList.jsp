@@ -26,26 +26,27 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<h3 class="text-center">관리자 목록</h3>
-				<form:form>
-				<table class="table text-center">
-					<tr>
-						<td class="title col-md-1">담당 부서</td>
-						<td class="col-md-1">
-						<form:select path="departmentId" class="col-md-1" itemValue="id" itemLabel="name" items="${ departments }" />
-						</td>
-						<td class="title col-md-1"><select name="admin">
-								<option value="1">교번</option>
-								<option value="2">이름</option>
-						</select></td>
-						<td class="col-md-1"><input type="text" name="admin"></input>
-						</td>
+				<form:form action="searchAdminList" method="get" modelAttribute="admin">
+					<table class="table text-center">
+						<tr>
+							<td class="title col-md-1">담당 부서</td>
+							<td class="col-md-1"><form:select path="departmentId"
+									class="form-control" itemValue="id" itemLabel="name"
+									items="${ departments }" /></td>
+							<td class="title col-md-1"><select name="searchType">
+									<option value="0" searchText="loginId">교번</option>
+									<option value="1" searchText="name">이름</option>
+							</select></td>
+							<td class="col-md-1">
+									<input type="text" name="searchText"></input>
+							</td>
 
-						<td class="col-md-1"><span style="float: right">
-								<button type="submit" class="btn btn-default btn-block"
-									style="WIDTH: 100pt;" onclick="/">조회</button>
-						</span></td>
-					</tr>
-				</table>
+							<td class="col-md-1"><span style="float: right">
+									<button type="submit" class="btn btn-default btn-block"
+										style="WIDTH: 100pt;" onclick="/">조회</button>
+							</span></td>
+						</tr>
+					</table>
 
 				<table class="table table-bordered mt5">
 					<thead>
@@ -61,7 +62,7 @@
 							<tr data-url="adminEdit?id=${ admin.id }">
 								<td>${ admin.loginId }</td>
 								<td>${ admin.name }</td>
-								<td>${ admin.departmentId }</td>
+								<td>${ admin.department.name }</td>
 								<td>${ admin.authority }</td>
 							</tr>
 						</c:forEach>

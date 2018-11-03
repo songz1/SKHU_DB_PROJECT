@@ -36,6 +36,19 @@ public class AdminAccountController {
 		
 		return "admin/menu/account/adminList";
 	}
+	
+	@RequestMapping(value="searchAdminList", method=RequestMethod.GET)
+	public String SearchAdminList(Model model) {
+		List<Department> departments = departmentMapper.findAll();
+		List<Admin> admins = adminMapper.findAllWithDepartment();
+		Admin admin = new Admin();
+		
+		model.addAttribute("admins", admins);
+		model.addAttribute("admin", admin);
+		model.addAttribute("departments", departments);
+		
+		return "admin/menu/account/adminList";
+	}
 
 	@RequestMapping(value="adminEdit", method=RequestMethod.GET)
 	public String adminEdit(Model model, @RequestParam("id") int id) {
