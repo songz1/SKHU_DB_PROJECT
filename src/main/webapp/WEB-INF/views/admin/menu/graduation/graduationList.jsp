@@ -94,7 +94,7 @@
 					</thead>
 					<tbody>
 						<c:forEach var="student" items="${ students }">
-							<tr class="text-center cursor tr-hover" data-url="graduationDetail?id=${ student.id }">
+							<tr class="text-center cursor tr-hover" data-url="graduationdetail?id=${ student.id }">
 								<td>${ student.studentNumber }</td>
 								<td>${ student.name }</td>
 								<td>${ student.department.name }</td>

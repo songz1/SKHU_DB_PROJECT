@@ -17,7 +17,6 @@ public class Subject {
 	SubjectDetail subjectDetail;
 	int detailId;
 	String abolish;
-
 	public int getId() {
 		return id;
 	}
@@ -42,10 +41,10 @@ public class Subject {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public String getClass0() {
+	public String getSubjectClass() {
 		return subjectClass;
 	}
-	public void setClass0(String subjectClass) {
+	public void setSubjectClass(String subjectClass) {
 		this.subjectClass = subjectClass;
 	}
 	public String getName() {
@@ -96,11 +95,11 @@ public class Subject {
 	public void setDepartmentId(int departmentId) {
 		this.departmentId = departmentId;
 	}
-	public SubjectDetail getSubject_detail() {
+	public SubjectDetail getSubjectDetail() {
 		return subjectDetail;
 	}
-	public void setSubject_detail(SubjectDetail subject_detail) {
-		this.subjectDetail = subject_detail;
+	public void setSubjectDetail(SubjectDetail subjectDetail) {
+		this.subjectDetail = subjectDetail;
 	}
 	public int getDetailId() {
 		return detailId;

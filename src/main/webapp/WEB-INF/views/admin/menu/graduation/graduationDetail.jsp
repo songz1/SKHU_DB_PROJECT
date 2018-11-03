@@ -37,83 +37,44 @@
 						<td class="col-md-2">${ student.department.name }</td>
 					</tr>
 				</table>
-				<div class="text-center">
-					<h3>주전공</h3>
-				</div>
-				<div class="table-responsive">
-					<table class="table text-center">
-						<tr>
-							<td class="col-md-4 danger">졸업 학점 109/130</td>
-							<td class="col-md-4 success">전공 학점 41/32</td>
-							<td class="col-md-4 danger">중국어영역 8/15</td>
-						</tr>
-					</table>
-				</div>
-				<div class="table-responsive">
-					<table class="table text-center">
-						<tr class="warning way-essential cursor">
-							<td class="col-md-4"></td>
-							<td class="col-md-4">전공 필수 </td>
-							<td class="col-md-4"></td>
-						</tr>
-						<tr class="way-detail">
-							<td class="col-md-4 success">c프로그래밍I</td>
-							<td class="col-md-4 success">과정지도1</td>
-							<td class="col-md-4 danger">C프로그래밍II</td>
-						</tr>
-						<tr class="way-detail">
-							<td class="col-md-4 success">c프로그래밍I</td>
-							<td class="col-md-4 success">과정지도1</td>
-							<td class="col-md-4 danger">C프로그래밍II</td>
-						</tr>
-						<tr class="way-detail">
-							<td class="col-md-4 success">c프로그래밍I</td>
-							<td class="col-md-4 success">과정지도1</td>
-							<td class="col-md-4 danger">C프로그래밍II</td>
-						</tr>
-					</table>
-				</div>
-				<h3 class="text-center">전공 기초</h3>
-				<div class="table-responsive">
-					<table class="table text-center">
-						<tr>
-							<td class="col-md-4 success">교양 57/47</td>
-						</tr>
-					</table>
-				</div>
-				<div class="table-responsive">
-					<table class="table text-center">
-						<tr class="success essential-subject cursor">
-							<td class="col-md-4"></td>
-							<td class="col-md-4">필수과목</td>
-							<td class="col-md-4"></td>
-						</tr>
-						<tr class="subject-detail">
-							<td class="col-md-4 success">c프로그래밍I</td>
-							<td class="col-md-4 success">과정지도1</td>
-							<td class="col-md-4 danger">C프로그래밍II</td>
-						</tr>
-					</table>
-				</div>
-				<div class="table-responsive">
-					<table class="table text-center">
-						<tr class="info">
-							<td class="col-md-4"></td>
-							<td class="col-md-4">부분필수과목</td>
-							<td class="col-md-4"></td>
-						</tr>
-						<tr>
-							<td class="col-md-4 success">이산수학</td>
-							<td class="col-md-4 success">대학수학</td>
-							<td class="col-md-4 danger">정보사회론</td>
-						</tr>
-						<tr class="active">
-							<td class="col-md-4">2과목 이상 포함</td>
-							<td class="col-md-4"></td>
-							<td class="col-md-4"></td>
-						</tr>
-					</table>
-				</div>
+				<h1>${ student.graduation }</h1>
+				<c:if test="${!student.graduation eq '미설정'}">
+					<div class="text-center">
+						<h3>필요 학점</h3>
+					</div>
+					<div class="table-responsive">
+						<table class="table text-center">
+							<c:forEach var="map" items="${ graduationGradeMap }">
+								<tr>
+									<td class="<c:choose> 
+											<c:when test="${ map.key.score <= map.value }">success</c:when>
+											<c:otherwise>danger</c:otherwise>
+										</c:choose>">
+										${ map.key.name } ${ map.value }/${ map.key.score }
+									</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+					<div class="text-center">
+						<h3>필요 과목</h3>
+					</div>
+					<div class="table-responsive">
+						<table class="table text-center">
+							<c:forEach var="map" items="${ graduationSubjectMap }">
+								<tr>
+									<td class="<c:choose> 
+											<c:when test="${ map.value == 0 }">danger</c:when>
+											<c:when test="${ map.value == 1 }">success</c:when>
+											<c:when test="${ map.value == 2 }">warning</c:when>
+										</c:choose>">
+										${ map.key.subject.name }
+									</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</div>

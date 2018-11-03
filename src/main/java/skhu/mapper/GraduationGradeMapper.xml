@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.skhu.mapper.GraduationGradeMapper">
-
+<mapper namespace="skhu.mapper.GraduationGradeMapper">
+	<select id="findByStudent" resultMap="graduationGradeDetailResultMap">
+		select gg.*, g.id graduationId, g.name graduationName, g.division,
+		d.id departmentId, d.name departmentName
+		from graduation_grade gg
+		left join department d on gg.departmentId = d.id
+		left join graduation g on gg.graduationId = g.id
+		where
+			year = #{ year } and 
+			((gg.graduationId = 1 and gg.departmentId = 1) or
+			(gg.departmentId = #{ student.departmentId } and
+			(g.name = #{ mainGraduation } or g.name = #{ sbuGraduation })))
+			<if test='student.minor != "0"'>
+				and (d.name = #{ student.minor } and g.name = #{ subGraduation })
+			</if>
+			<if test='student.doubleMajor != "0"'>
+				and (d.name = #{ student.doubleMajor } and g.name = #{ subGraduation })
+			</if>
+		order by g.id
+	</select>
+	<resultMap id="graduationGradeDetailResultMap" type="GraduationGrade">
+		<id property="id" column="id" />
+		<result property="year" column="year" />
+		<result property="name" column="name" />
+		<result property="score" column="score" />
+		<result property="note" column="note" />
+		<result property="departmentId" column="departmentId" />
+		<result property="graduationId" column="graduationId" />
+		<association property="graduation" javaType="Graduation">
+			<id property="id" column="graduationId" />
+			<result property="name" column="graduationName" />
+			<result property="division" column="division" />
+		</association>
+		<association property="department" javaType="Department">
+			<id property="id" column="departmentId" />
+			<result property="name" column="departmentName" />
+		</association>
+	</resultMap>
 </mapper>

@@ -2,5 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="skhu.mapper.GraduationSubjectMapper">
-
+	<select id="findByStudent" resultMap="graduationSubjectDetailResultMap">
+		select gs.*, g.id graduationId, g.name graduationName, g.division graduationDivision, 
+		s.id subjectId, s.year subjectYear, s.code, s.class, s.name subjectName, s.score, s.division subjectDivision,
+		d.id departmentId, d.name departmentName
+		from graduation_subject gs
+		left join graduation g on gs.graduationId = g.id
+		left join subject s on gs.subjectId = s.id
+		left join department d on gg.departmentId = d.id
+		where
+			year = #{ year } and 
+			((gg.graduationId = 1 and gg.departmentId = 1) or
+			(gg.departmentId = #{ student.departmentId } and
+			(g.name = #{ mainGraduation } or g.name = #{ sbuGraduation })));
+			<if test='student.minor != "0"'>
+				and (d.name = #{ student.minor } and g.name = #{ subGraduation })
+			</if>
+			<if test='student.doubleMajor != "0"'>
+				and (d.name = #{ student.doubleMajor } and g.name = #{ subGraduation })
+			</if>
+		order by g.id
+	</select>
+	<resultMap id="graduationSubjectDetailResultMap" type="GraduationSubject">
+		<id property="id" column="id" />
+		<result property="year" column="year" />
+		<result property="semester" column="semester" />
+		<result property="note" column="note" />
+		<result property="essential" column="essential" />
+		<result property="departmentId" column="departmentId" />
+		<result property="graduationId" column="graduationId" />
+		<result property="subjectId" column="subjectId" />
+		<association property="graduation" javaType="Graduation">
+			<id property="id" column="graduationId" />
+			<result property="name" column="graduationName" />
+			<result property="division" column="graduationDivision" />
+		</association>
+		<association property="subject" javaType="Subject">
+			<id property="id" column="subjectId" />
+			<result property="year" column="subjectYear" />
+			<result property="code" column="code" />
+			<result property="class" column="class" />
+			<result property="name" column="subjectName" />
+			<result property="score" column="score" />
+			<result property="division" column="subjectDivision" />
+		</association>
+		<association property="department" javaType="Department">
+			<id property="id" column="departmentId" />
+			<result property="name" column="departmentName" />
+		</association>
+	</resultMap>
 </mapper>

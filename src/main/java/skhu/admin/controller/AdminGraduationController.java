@@ -1,7 +1,9 @@
 package skhu.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,9 +15,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import skhu.dto.Department;
+import skhu.dto.GraduationGrade;
+import skhu.dto.GraduationSubject;
+import skhu.dto.Score;
 import skhu.dto.Student;
 import skhu.mapper.DepartmentMapper;
+import skhu.mapper.GraduationGradeMapper;
 import skhu.mapper.GraduationMapper;
+import skhu.mapper.GraduationSubjectMapper;
+import skhu.mapper.ScoreMapper;
 import skhu.mapper.StudentMapper;
 import skhu.vo.Page;
 
@@ -25,6 +33,9 @@ public class AdminGraduationController {
 	@Autowired StudentMapper studentMapper;
 	@Autowired DepartmentMapper departmentMapper;
 	@Autowired GraduationMapper graduationMapper;
+	@Autowired GraduationGradeMapper graduationGradeMapper;
+	@Autowired GraduationSubjectMapper graduationSubjectMapper;
+	@Autowired ScoreMapper scoreMapper;
 
 	@RequestMapping(value="basic", method=RequestMethod.GET)
 	public String basic() {
@@ -110,8 +121,70 @@ public class AdminGraduationController {
 		return "admin/menu/graduation/graduationList";
 	}
 
-	@RequestMapping(value="graduationDetail", method=RequestMethod.GET)
-	public String graduationDetail() {
+	@RequestMapping(value="graduationdetail", method=RequestMethod.GET)
+	public String graduationDetail(Model model, @RequestParam("id") int id) {
+		Student student = studentMapper.findById(id);
+		List<Score> scores = scoreMapper.findByStudentId(student.getId());
+		String year = student.getStudentNumber().substring(0, 3);
+		List<GraduationGrade> graduationGrades = null;
+		List<GraduationSubject> graduationSubjects = null;
+		Map<GraduationGrade, Integer> graduationGradeMap = new HashMap<GraduationGrade, Integer>();
+		Map<GraduationSubject, Integer> graduationSubjectMap = new HashMap<GraduationSubject, Integer>();
+
+		if(!student.getGraduation().equals("0")) {
+			String[] graduations = student.getGraduation().split(" ", 2);
+			graduationGrades = graduationGradeMapper.findByStudent(year, student, graduations[0], graduations[1]);
+			graduationSubjects = graduationSubjectMapper.findByStudent(year, student, graduations[0], graduations[1]);
+
+			for(GraduationGrade graduationGrade : graduationGrades) {
+				int total = 0;
+				for(Score score : scores) {
+					if(score.getSubstitutionCode().equals("0")) {
+						if(graduationGrade.getName().equals(score.getSubject().getDivision()) ||graduationGrade.getName().equals(score.getSubject().getSubjectDetail().getSubtitle())) {
+							total += score.getSubject().getScore();
+							graduationGradeMap.put(graduationGrade, total);
+						}
+
+						else if(graduationGrade.getGraduationId() == 1 && graduationGrade.getDepartmentId() == 1) {
+							total += score.getSubject().getScore();
+							if(graduationGrade.getName().equals("전공") && (score.getSubject().getDivision().equals("전공필수")) || score.getSubject().getDivision().equals("전공선택"))
+								graduationGradeMap.put(graduationGrade, total);
+
+							else if(graduationGrade.getName().equals("교양") && (score.getSubject().getDivision().equals("교양필수")) || score.getSubject().getDivision().equals("교양선택"))
+								graduationGradeMap.put(graduationGrade, total);
+
+							else if(graduationGrade.getName().equals("졸업"))
+								graduationGradeMap.put(graduationGrade, total);
+						}
+					}
+				}
+			}
+
+			for(GraduationSubject graduationSubject : graduationSubjects) {
+				for(Score score : scores) {
+					if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode()))
+						graduationSubjectMap.put(graduationSubject, 1);
+
+					else if(!graduationSubject.getNote().equals("0"))
+						graduationSubjectMap.put(graduationSubject, 2);
+
+					else
+						graduationSubjectMap.put(graduationSubject, 0);
+				}
+			}
+
+
+		}
+
+		else
+			student.setGraduation("미설정");
+
+		model.addAttribute("student", student);
+		model.addAttribute("graduationGrades", graduationGrades);
+		model.addAttribute("graduationSubjects", graduationSubjects);
+		model.addAttribute("graduationGradeMap", graduationGradeMap);
+		model.addAttribute("graduationSubjectMap", graduationSubjectMap);
+
 		return "admin/menu/graduation/graduationDetail";
 	}
 
