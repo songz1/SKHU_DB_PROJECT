@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,6 +46,8 @@
 							<td class="col-md-1">15 이상</td>
 							<td class="col-md-1">해당 없음</td>
 						</tr>
+					</table>
+					<table class="table text-center">
 						<tr>
 							<td class="title col-md-1">2018학번부터</td>
 							<td class="col-md-1">130 이상</td>

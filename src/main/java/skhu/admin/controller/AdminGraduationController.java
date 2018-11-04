@@ -15,16 +15,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import skhu.dto.Department;
+import skhu.dto.Graduation;
 import skhu.dto.GraduationGrade;
 import skhu.dto.GraduationSubject;
 import skhu.dto.Score;
 import skhu.dto.Student;
+import skhu.dto.Subject;
 import skhu.mapper.DepartmentMapper;
 import skhu.mapper.GraduationGradeMapper;
 import skhu.mapper.GraduationMapper;
 import skhu.mapper.GraduationSubjectMapper;
 import skhu.mapper.ScoreMapper;
 import skhu.mapper.StudentMapper;
+import skhu.mapper.SubjectMapper;
 import skhu.vo.Page;
 
 @Controller
@@ -36,6 +39,7 @@ public class AdminGraduationController {
 	@Autowired GraduationGradeMapper graduationGradeMapper;
 	@Autowired GraduationSubjectMapper graduationSubjectMapper;
 	@Autowired ScoreMapper scoreMapper;
+	@Autowired SubjectMapper subjectMapper;
 
 	@RequestMapping(value="basic", method=RequestMethod.GET)
 	public String basic() {
@@ -58,27 +62,128 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="gradelist", method=RequestMethod.GET)
-	public String gradelist() {
+	public String gradelist(Model model, HttpServletRequest request, GraduationGrade condition, @RequestParam(value="pg", required=false) String pg, @RequestParam(value="searchText", required=false) String searchText) {
+		String st = "";
+		if(searchText != null)
+			st = "%" + searchText + "%";
+
+		else
+			searchText = "";
+
+		if(searchText.equals("공통"))
+			st = "0";
+
+		Page page = new Page();
+		int total = graduationGradeMapper.countByOption(condition, searchText);
+		int currentPage = 1;
+
+    	if(pg != null)
+    		currentPage = Integer.parseInt(pg);
+
+		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByOption(condition, st);
+		List<Department> departments = departmentMapper.findAll();
+		List<Graduation> graduations = graduationMapper.findAll();
+		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
+
+		model.addAttribute("condition", condition);
+		model.addAttribute("searchText", searchText);
+		model.addAttribute("departments", departments);
+		model.addAttribute("graduations", graduations);
+		model.addAttribute("graduationGrades", graduationGrades);
+		model.addAttribute("pages", pages);
+
 		return "admin/menu/graduation/gradelist";
 	}
 
 	@RequestMapping(value="editgrade", method=RequestMethod.GET)
-	public String editgrade() {
+	public String editgrade(Model model, @RequestParam("id") int id) {
+		GraduationGrade graduationGrade = graduationGradeMapper.findById(id);
+		List<Department> departments = departmentMapper.findAll();
+		List<Graduation> graduations = graduationMapper.findAll();
+
+		model.addAttribute("graduationSubject", graduationGrade);
+		model.addAttribute("departments", departments);
+		model.addAttribute("graduations", graduations);
+
 		return "admin/menu/graduation/editgrade";
 	}
 
+	@RequestMapping(value="gradeupdate", method=RequestMethod.POST)
+	public String gradeupdate(Model model, GraduationGrade graduationGrade) {
+		graduationGradeMapper.update(graduationGrade);
+
+		return "redirect:gradelist";
+	}
+
 	@RequestMapping(value="subjectlist", method=RequestMethod.GET)
-	public String subjectlist() {
+	public String subjectlist(Model model, HttpServletRequest request, GraduationSubject condition, @RequestParam(value="pg", required=false) String pg, @RequestParam(value="searchText", required=false) String searchText) {
+		String st = "";
+		if(searchText != null)
+			st = "%" + searchText + "%";
+
+		else
+			searchText = "";
+
+		if(searchText.equals("공통"))
+			st = "0";
+
+		Page page = new Page();
+		int total = graduationSubjectMapper.countByOption(condition, searchText);
+		int currentPage = 1;
+
+    	if(pg != null)
+    		currentPage = Integer.parseInt(pg);
+
+		List<GraduationSubject> graduationGrades = graduationSubjectMapper.findByOption(condition, st);
+		List<Department> departments = departmentMapper.findAll();
+		List<Graduation> graduations = graduationMapper.findAll();
+		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
+
+		model.addAttribute("condition", condition);
+		model.addAttribute("searchText", searchText);
+		model.addAttribute("departments", departments);
+		model.addAttribute("graduations", graduations);
+		model.addAttribute("graduationGrades", graduationGrades);
+		model.addAttribute("pages", pages);
+
 		return "admin/menu/graduation/subjectlist";
 	}
 
 	@RequestMapping(value="editsubject", method=RequestMethod.GET)
-	public String editsubject() {
+	public String editsubject(Model model, @RequestParam("id") int id) {
+		GraduationSubject graduationSubject = graduationSubjectMapper.findById(id);
+		List<Department> departments = departmentMapper.findAll();
+		List<Graduation> graduations = graduationMapper.findAll();
+
+		model.addAttribute("graduationSubject", graduationSubject);
+		model.addAttribute("departments", departments);
+		model.addAttribute("graduations", graduations);
+
 		return "admin/menu/graduation/editsubject";
 	}
 
+	@RequestMapping(value="subjectupdate", method=RequestMethod.POST)
+	public String subjectupdate(Model model, GraduationSubject graduationSubject, @RequestParam("code") String code) {
+		Subject subject = subjectMapper.findByCode(code);
+		graduationSubject.setSubjectId(subject.getId());
+
+		graduationSubjectMapper.update(graduationSubject);
+
+		return "redirect:subjectlist";
+	}
+
 	@RequestMapping(value="creategraduation", method=RequestMethod.GET)
-	public String creategraduation() {
+	public String creategraduation(Model model) {
+		GraduationGrade graduationGrade = new GraduationGrade();
+		GraduationSubject graduationSubject = new GraduationSubject();
+		List<Department> departments = departmentMapper.findAll();
+		List<Graduation> graduations = graduationMapper.findAll();
+
+		model.addAttribute("graduationSubject", graduationSubject);
+		model.addAttribute("graduationGrade", graduationGrade);
+		model.addAttribute("departments", departments);
+		model.addAttribute("graduations", graduations);
+
 		return "admin/menu/graduation/creategraduation";
 	}
 
@@ -102,13 +207,8 @@ public class AdminGraduationController {
     		currentPage = Integer.parseInt(pg);
 
 		List<Student> students = studentMapper.findByGraduation((currentPage - 1) * 10, 10, condition, "%" + searchText + "%", searchType, majorCheck, minorCheck);
-		List<Department> departments = departmentMapper.findAll();
+		List<Department> departments = departmentMapper.findWithoutCommon();
 		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
-
-		for(Student ttest : students) {
-			System.out.println(ttest.getDepartmentId());
-			System.out.println(ttest.getDepartment().getName());
-		}
 
 		model.addAttribute("condition", condition);
 		model.addAttribute("searchText", searchText);
@@ -140,21 +240,14 @@ public class AdminGraduationController {
 				int total = 0;
 				for(Score score : scores) {
 					if(score.getSubstitutionCode().equals("0")) {
-						if(graduationGrade.getName().equals(score.getSubject().getDivision()) ||graduationGrade.getName().equals(score.getSubject().getSubjectDetail().getSubtitle())) {
+						if((graduationGrade.getName().equals(score.getSubject().getDivision())) ||
+							graduationGrade.getName().equals(score.getSubject().getSubjectDetail().getSubtitle()) ||
+							graduationGrade.getName().equals("졸업") ||
+							(graduationGrade.getName().equals("전공") && (score.getSubject().getDivision().equals("전공필수")) || score.getSubject().getDivision().equals("전공선택")) ||
+							(graduationGrade.getName().equals("교양") && (score.getSubject().getDivision().equals("교양필수")) || score.getSubject().getDivision().equals("교양선택"))) {
+
 							total += score.getSubject().getScore();
 							graduationGradeMap.put(graduationGrade, total);
-						}
-
-						else if(graduationGrade.getGraduationId() == 1 && graduationGrade.getDepartmentId() == 1) {
-							total += score.getSubject().getScore();
-							if(graduationGrade.getName().equals("전공") && (score.getSubject().getDivision().equals("전공필수")) || score.getSubject().getDivision().equals("전공선택"))
-								graduationGradeMap.put(graduationGrade, total);
-
-							else if(graduationGrade.getName().equals("교양") && (score.getSubject().getDivision().equals("교양필수")) || score.getSubject().getDivision().equals("교양선택"))
-								graduationGradeMap.put(graduationGrade, total);
-
-							else if(graduationGrade.getName().equals("졸업"))
-								graduationGradeMap.put(graduationGrade, total);
 						}
 					}
 				}
@@ -162,10 +255,10 @@ public class AdminGraduationController {
 
 			for(GraduationSubject graduationSubject : graduationSubjects) {
 				for(Score score : scores) {
-					if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode()))
+					if(score.getSubstitutionCode().equals("") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode()))
 						graduationSubjectMap.put(graduationSubject, 1);
 
-					else if(!graduationSubject.getNote().equals("0"))
+					else if(!graduationSubject.getNote().equals(""))
 						graduationSubjectMap.put(graduationSubject, 2);
 
 					else

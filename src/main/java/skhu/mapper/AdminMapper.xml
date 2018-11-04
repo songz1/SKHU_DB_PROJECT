@@ -15,16 +15,16 @@
 		update admin
 		<set>
 			<if test="password != null">
-				password = #{password}
+				password = #{password},
 			</if>
 			<if test="name != null">
-				name = #{name}
+				name = #{name},
 			</if>
 			<if test="departmentId != 0 and departmentId != null">
-				, departmentId = #{departmentId}
+				departmentId = #{departmentId},
 			</if>
 			<if test="email != null">
-				, email = #{email}
+				email = #{email},
 			</if>
 		</set>
 		where

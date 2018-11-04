@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,122 +36,102 @@
 					<option value="2">과목</option>
 					<option value="3">엑셀 파일 업로드</option>
 				</select>
-				<form class="form-horizontal mb-25 mt-25 create-grade">
+				<form:form method="post" action="gradeinsert" modelAttribute="graduationGrade" class="form-horizontal mb-25 mt-25 create-grade">
 					<div class="form-group">
-						<label class="col-sm-2 control-label">적용학번</label>
+						<label class="col-sm-2 control-label">적용년도</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="number" name="year" class="form-control">
+							<form:input path="year" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">적용학과</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<select name="department" class="form-control">
-								<option value="1">소프트웨어공학과</option>
-								<option value="2">컴퓨터공학과</option>
-								<option value="3">영어학과</option>
-								<option value="4">중국어학과</option>
-							</select>
+							<form:select path="departmentId" class="form-control" itemValue="id" itemLabel="name" items="${ departments }" />
 						</div>
 					</div>
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">졸업요건명</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<select name="department" class="form-control">
-								<option value="1">주전공</option>
-								<option value="2">부전공</option>
-								<option value="3">전공기초</option>
-								<option value="4">전공심화</option>
-							</select>
+							<form:select path="graduationId" class="form-control" itemValue="id" itemLabel="name" items="${ graduations }" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">학점명</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="text" name="gradeName" class="form-control">
+							<form:input path="name" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">학점</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="number" name="score" class="form-control">
+							<form:input path="score" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">비고</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="text" name="note" class="form-control">
+							<form:input path="note" class="form-control" />
 						</div>
 					</div>
 					<button type="submit"
 						class="btn btn-info mb-25 col-md-2 col-md-offset-5">확인</button>
-				</form>
-				<form class="form-horizontal mb-25 mt-25 create-subject">
+				</form:form>
+				<form:form method="post" action="subjectinsert" modelAttribute="graduationSubject" class="form-horizontal mb-25 mt-25 create-subject">
 					<div class="form-group">
-						<label class="col-sm-2 control-label">적용학번</label>
+						<label class="col-sm-2 control-label">적용년도</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="number" name="year" class="form-control">
+							<form:input path="year" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">적용학과</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<select name="department" class="form-control">
-								<option value="1">소프트웨어공학과</option>
-								<option value="2">컴퓨터공학과</option>
-								<option value="3">영어학과</option>
-								<option value="4">중국어학과</option>
-							</select>
+							<form:select path="departmentId" class="form-control" itemValue="id" itemLabel="name" items="${ departments }" />
 						</div>
 					</div>
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">졸업요건명</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<select name="department" class="form-control">
-								<option value="1">주전공</option>
-								<option value="2">부전공</option>
-								<option value="3">전공기초</option>
-								<option value="4">전공심화</option>
-							</select>
+							<form:select path="graduationId" class="form-control" itemValue="id" itemLabel="name" items="${ graduations }" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">과목코드</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="text" name="subjectCode" class="form-control">
+							<input type="text" name="code" class="form-control" value="${ graduationSubject.subject.code }"/>
 						</div>
 					</div>
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">학기</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<select name="department" class="form-control">
-								<option value="0">상관없음</option>
-								<option value="1">1학기</option>
-								<option value="2">2학기</option>
-								<option value="2">3학기</option>
-								<option value="2">4학기</option>
-								<option value="2">5학기</option>
-								<option value="2">6학기</option>
-								<option value="2">7학기</option>
-								<option value="2">8학기</option>
-							</select>
+							<form:select path="semester">
+								<form:option value="0" label="상관없음" />
+								<form:option value="1" label="1학기" />
+								<form:option value="2" label="2학기" />
+								<form:option value="3" label="3학기" />
+								<form:option value="4" label="4학기" />
+								<form:option value="5" label="5학기" />
+								<form:option value="6" label="6학기" />
+								<form:option value="7" label="7학기" />
+								<form:option value="8" label="8학기" />
+							</form:select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">비고</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="text" name="note" class="form-control">
+							<form:input path="note" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">필수</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="checkbox" name="essential" />
+							<form:checkbox path="essential" />
 						</div>
 					</div>
 					<button type="submit"
 						class="btn btn-info mb-25 col-md-2 col-md-offset-5">확인</button>
-				</form>
+				</form:form>
 				<form method="post" enctype="multipart/form-data"
 					class="create-upload">
 					<div class="form-group">

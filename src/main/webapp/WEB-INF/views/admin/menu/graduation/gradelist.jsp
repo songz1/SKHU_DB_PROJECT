@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,27 +27,28 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-				<form>
-					<h3 class="text-center">졸업요건 목록</h3>
+				<h3 class="text-center">졸업요건 목록</h3>
+				<form:form method="get" modelAttribute="condition"
+					action="gradelist">
 					<table class="table text-center">
 						<tr>
-							<td class="title col-md-1">학번</td>
-							<td class="col-md-1"><input type="text" name="studentNumber"></input>
+							<td class="title col-md-1">적용년도</td>
+							<td class="col-md-1"><input type="text" name="searchText"
+								value="${ searchText }" /></td>
+							<td class="title col-md-1">학과</td>
+							<td class="col-md-1">
+								<form:select path="departmentId">
+									<form:option value="0" label="전체" />
+									<form:options itemValue="id" itemLabel="name" items="${ departments }"/>
+								</form:select>
 							</td>
-							<td class="title col-md-1">학과(부)</td>
-							<td class="col-md-1"><select name="department">
-									<option value="1">소프트웨어공학과</option>
-									<option value="2">컴퓨터공학과</option>
-									<option value="3">글로컬IT학과</option>
-									<option value="4">정보통신공학과</option>
-							</select></td>
 							<td class="title col-md-1">졸업요건</td>
-							<td class="col-md-1"><select name="graduation">
-									<option value="1">주전공</option>
-									<option value="2">부전공</option>
-									<option value="3">전공기초</option>
-									<option value="4">전공심화</option>
-							</select></td>
+							<td class="col-md-1">
+								<form:select path="graduationId">
+									<form:option value="0" label="전체" />
+									<form:options itemValue="id" itemLabel="name" items="${ graduations }"/>
+								</form:select>
+							</td>
 						</tr>
 					</table>
 					<div class="form-group">
@@ -53,8 +56,8 @@
 							<button type="submit" class="btn btn-info btn-width">조회</button>
 						</div>
 					</div>
-				</form>
-				<form>
+				</form:form>
+				<form method="post" action="deletegrade">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr class="title">
@@ -65,40 +68,25 @@
 								<th class="text-center">학점명</th>
 								<th class="text-center">학점</th>
 								<th class="text-center">비고</th>
-								<th class="text-center"><input type="checkbox" id="allCheck" /></th>
+								<th class="text-center"><input type="checkbox"
+									id="allCheck" /></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="text-center tr-hover">
-								<td class="cursor" edit-grade="editgrade.jsp">3</td>
-								<td class="cursor" edit-grade="editgrade.jsp">2018</td>
-								<td class="cursor" edit-grade="editgrade.jsp">소프트웨어공학과</td>
-								<td class="cursor" edit-grade="editgrade.jsp">주전공</td>
-								<td class="cursor" edit-grade="editgrade.jsp">전공학점</td>
-								<td class="cursor" edit-grade="editgrade.jsp">60</td>
-								<td class="cursor" edit-grade="editgrade.jsp"></td>
-								<td><input type="checkbox" name="deleteId" value="3" /></td>
-							</tr>
-							<tr class="text-center">
-								<td>2</td>
-								<td>2018</td>
-								<td>소프트웨어공학과</td>
-								<td>부전공</td>
-								<td>전공학점</td>
-								<td>40</td>
-								<td></td>
-								<td><input type="checkbox" name="deleteId" value="2" /></td>
-							</tr>
-							<tr class="text-center">
-								<td>1</td>
-								<td>2016</td>
-								<td>소프트웨어공학과</td>
-								<td>전공기초</td>
-								<td>교양학점</td>
-								<td>47</td>
-								<td></td>
-								<td><input type="checkbox" name="deleteId" value="1" /></td>
-							</tr>
+							<c:forEach var="graduationGrade" items="${ graduationGrades }">
+								<tr class="text-center cursor tr-hover"
+									data-url="editgrade?id=${ graduationGrade.id }">
+									<td>${ graduationGrade.id }</td>
+									<td>${ graduationGrade.year }<c:if test="${graduationGrade.year eq '0'}">(공통)</c:if></td>
+									<td>${ graduationGrade.department.name }</td>
+									<td>${ graduationGrade.graduation.name }</td>
+									<td>${ graduationGrade.name }</td>
+									<td>${ graduationGrade.score }</td>
+									<td>${ graduationGrade.note }</td>
+									<td><input type="checkbox" name="deleteId"
+										value="${ graduationGrade.id }" /></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 					<div class="text-right">

@@ -10,5 +10,9 @@ import skhu.dto.Student;
 
 @Mapper
 public interface GraduationSubjectMapper {
+	List<GraduationSubject> findByOption(@Param("condition") GraduationSubject condition, @Param("searchText") String searchText);
+	int countByOption(@Param("condition") GraduationSubject condition, @Param("searchText") String searchText);
 	List<GraduationSubject> findByStudent(@Param("year") String year, @Param("student") Student student, @Param("mainGraduation") String mainGraduation, @Param("subGraduation") String subGraduationString);
+	GraduationSubject findById(@Param("id") int id);
+	void update(GraduationSubject graduationSubject);
 }

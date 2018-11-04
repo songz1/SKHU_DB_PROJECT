@@ -8,5 +8,6 @@ import skhu.dto.Department;
 
 @Mapper
 public interface DepartmentMapper {
+	List<Department> findWithoutCommon();
 	List<Department> findAll();
 }

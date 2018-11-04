@@ -2,7 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="skhu.mapper.GraduationSubjectMapper">
-	<select id="findByStudent" resultMap="graduationSubjectDetailResultMap">
+	<select id="findByOption" resultMap="graduationSubjectResultMap">
+		select gs.*, g.id graduationId, g.name graduationName, g.division graduationDivision, 
+		s.id subjectId, s.year subjectYear, s.code, s.class, s.name subjectName, s.score, s.division subjectDivision,
+		d.id departmentId, d.name departmentName
+		from graduation_subject gs
+		left join subject s on gs.subjectId = s.id
+		left join department d on gs.departmentId = d.id
+		left join graduation g on gs.graduationId = g.id
+		<where>
+			<if test='searchText != null and searchText != ""'>
+				and year like #{ searchText }
+			</if>
+			<if test="condition.departmentId != 0">
+				and departmentId = #{ condition.departmentId }
+			</if>
+			<if test="condition.graduationId != 0">
+				and graduationId = #{ condition.graduationId }
+			</if>
+		</where>
+	</select>
+	<select id="countByOption" resultType="int">
+		select count(*) from graduation_subject gs
+		left join subject s on gs.subjectId = s.id
+		left join department d on gs.departmentId = d.id
+		left join graduation g on gs.graduationId = g.id
+		<where>
+			<if test='searchText != null and searchText != ""'>
+				and year like #{ searchText }
+			</if>
+			<if test="condition.departmentId != 0">
+				and departmentId = #{ condition.departmentId }
+			</if>
+			<if test="condition.graduationId != 0">
+				and graduationId = #{ condition.graduationId }
+			</if>
+		</where>
+	</select>
+	<select id="findById" resultType="graduationSubject">
+		select * from graduation_subject gs
+		left join subject sj on gs.subjectId = sj.id
+		where id = #{ id }
+	</select>
+	<select id="findByStudent" resultMap="graduationSubjectResultMap">
 		select gs.*, g.id graduationId, g.name graduationName, g.division graduationDivision, 
 		s.id subjectId, s.year subjectYear, s.code, s.class, s.name subjectName, s.score, s.division subjectDivision,
 		d.id departmentId, d.name departmentName
@@ -23,7 +65,7 @@
 			</if>
 		order by g.id
 	</select>
-	<resultMap id="graduationSubjectDetailResultMap" type="GraduationSubject">
+	<resultMap id="graduationSubjectResultMap" type="GraduationSubject">
 		<id property="id" column="id" />
 		<result property="year" column="year" />
 		<result property="semester" column="semester" />
@@ -51,4 +93,31 @@
 			<result property="name" column="departmentName" />
 		</association>
 	</resultMap>
+	<update id="update">
+		update graduation_subject
+		<set>
+			<if test="year != null">
+				year = { #year },
+			</if>
+			<if test="departmentId != 0 and departmentId != null">
+				departmentId = #{ departmentId },
+			</if>
+			<if test="graduationId != 0 and graduationId != null">
+				graduationId = #{ graduationId },
+			</if>
+			<if test="subjectId != 0 and subjectId != null">
+				subjectId = #{ subjectId },
+			</if>
+			<if test="semester != null">
+				semester = #{ semester },
+			</if>
+			<if test="note != null">
+				note = #{ note },
+			</if>
+			<if test="essential != null">
+				essential = #{ essential }
+			</if>
+		</set>
+		where id = #{ id };
+	</update>
 </mapper>

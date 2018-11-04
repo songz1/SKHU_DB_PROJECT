@@ -8,5 +8,6 @@ import skhu.dto.Graduation;
 
 @Mapper
 public interface GraduationMapper {
+	List<Graduation> findWithoutCommon();
 	List<Graduation> findAll();
 }

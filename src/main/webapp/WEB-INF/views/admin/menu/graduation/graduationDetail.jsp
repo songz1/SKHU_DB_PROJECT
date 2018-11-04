@@ -68,7 +68,7 @@
 											<c:when test="${ map.value == 1 }">success</c:when>
 											<c:when test="${ map.value == 2 }">warning</c:when>
 										</c:choose>">
-										${ map.key.subject.name }
+										${ map.key.subject.name } (<c:if test="${ map.value == 2 }">${ map.key.note }</c:if>)
 									</td>
 								</tr>
 							</c:forEach>

@@ -29,9 +29,12 @@
 				<table class="table text-center">
 					<form:form method="get" modelAttribute="condition" action="graduationlist">
 						<tr>
-							<td class="title col-md-2">학과(부)</td>
+							<td class="title col-md-2">학과</td>
 							<td class="col-md-1">
-								<form:select path="departmentId" itemValue="id" itemLabel="name" items="${ departments }" />
+								<form:select path="departmentId">
+									<form:option value="0" label="전체" />
+									<form:options itemValue="id" itemLabel="name" items="${ departments }"/>
+								</form:select>
 							</td>
 							<td class="title col-md-1">학년</td>
 							<td>

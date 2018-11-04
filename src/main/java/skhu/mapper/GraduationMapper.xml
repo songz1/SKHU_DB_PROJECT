@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="skhu.mapper.GraduationMapper">
+	<select id="findWithoutCommon" resultType="Graduation">
+		select * from graduation where id != 1;
+	</select>
 	<select id="findAll" resultType="Graduation">
 		select * from graduation;
 	</select>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,27 +26,28 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-				<form>
-					<h3 class="text-center">졸업요건 목록</h3>
+				<h3 class="text-center">졸업요건 목록</h3>
+				<form:form method="get" modelAttribute="condition"
+					action="subjectlist">
 					<table class="table text-center">
 						<tr>
-							<td class="title col-md-1">학번</td>
-							<td class="col-md-1"><input type="text" name="studentNumber"></input>
+							<td class="title col-md-1">적용년도</td>
+							<td class="col-md-1"><input type="text" name="searchText"
+								value="${ searchText }" /></td>
+							<td class="title col-md-1">학과</td>
+							<td class="col-md-1">
+								<form:select path="departmentId">
+									<form:option value="0" label="전체" />
+									<form:options itemValue="id" itemLabel="name" items="${ departments }"/>
+								</form:select>
 							</td>
-							<td class="title col-md-1">학과(부)</td>
-							<td class="col-md-1"><select name="department">
-									<option value="1">소프트웨어공학과</option>
-									<option value="2">컴퓨터공학과</option>
-									<option value="3">글로컬IT학과</option>
-									<option value="4">정보통신공학과</option>
-							</select></td>
 							<td class="title col-md-1">졸업요건</td>
-							<td class="col-md-1"><select name="graduation">
-									<option value="1">주전공</option>
-									<option value="2">부전공</option>
-									<option value="3">전공기초</option>
-									<option value="4">전공심화</option>
-							</select></td>
+							<td class="col-md-1">
+								<form:select path="graduationId">
+									<form:option value="0" label="전체" />
+									<form:options itemValue="id" itemLabel="name" items="${ graduations }"/>
+								</form:select>
+							</td>
 						</tr>
 					</table>
 					<div class="form-group">
@@ -52,66 +55,37 @@
 							<button type="submit" class="btn btn-info btn-width">조회</button>
 						</div>
 					</div>
-				</form>
-				<form>
+				</form:form>
+				<form method="post" action="deletesubject">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr class="title">
+								<th class="text-center">id</th>
 								<th class="text-center">적용학번</th>
 								<th class="text-center">학과</th>
 								<th class="text-center">졸업요건명</th>
 								<th class="text-center">과목명</th>
 								<th class="text-center">필수여부</th>
 								<th class="text-center">비고</th>
-								<th class="text-center"><input type="checkbox" id="allCheck" /></th>
+								<th class="text-center"><input type="checkbox"
+									id="allCheck" /></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="text-center tr-hover">
-								<td class="cursor" edit-subject="editsubject.jsp">2018</td>
-								<td class="cursor" edit-subject="editsubject.jsp">소프트웨어공학과</td>
-								<td class="cursor" edit-subject="editsubject.jsp">주전공</td>
-								<td class="cursor" edit-subject="editsubject.jsp">과정지도I</td>
-								<td class="cursor" edit-subject="editsubject.jsp">O</td>
-								<td class="cursor" edit-subject="editsubject.jsp"></td>
-								<td><input type="checkbox" name="deleteId" value="5" /></td>
-							</tr>
-							<tr class="text-center">
-								<td>2018</td>
-								<td>소프트웨어공학과</td>
-								<td>전공기초</td>
-								<td>이산수학</td>
-								<td>X</td>
-								<td>2개 이상</td>
-								<td><input type="checkbox" name="deleteId" value="4" /></td>
-							</tr>
-							<tr class="text-center">
-								<td>2018</td>
-								<td>소프트웨어공학과</td>
-								<td>전공기초</td>
-								<td>컴퓨터 활용</td>
-								<td>X</td>
-								<td>2개 이상</td>
-								<td><input type="checkbox" name="deleteId" value="3" /></td>
-							</tr>
-							<tr class="text-center">
-								<td>2018</td>
-								<td>소프트웨어공학과</td>
-								<td>전공기초</td>
-								<td>대학 수학</td>
-								<td>X</td>
-								<td>2개 이상</td>
-								<td><input type="checkbox" name="deleteId" value="2" /></td>
-							</tr>
-							<tr class="text-center">
-								<td>2017</td>
-								<td>소프트웨어공학과</td>
-								<td>주전공</td>
-								<td>자바 프로그래밍</td>
-								<td>O</td>
-								<td></td>
-								<td><input type="checkbox" name="deleteId" value="1" /></td>
-							</tr>
+							<c:forEach var="graduationSubject" items="${ graduationSubjects }">
+								<tr class="text-center cursor tr-hover"
+									data-url="editsubject?id=${ graduationSubject.id }">
+									<td>${ graduationSubject.id }</td>
+									<td>${ graduationSubject.year }</td>
+									<td>${ graduationSubject.department.name }</td>
+									<td>${ graduationSubject.graduation.name }</td>
+									<td>${ graduationSubject.subject.name }</td>
+									<td>${ graduationSubject.essential }</td>
+									<td>${ graduationSubject.note }</td>
+									<td><input type="checkbox" name="deleteId"
+										value="${ graduationSubject.id }" /></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 					<div class="text-right">
@@ -128,4 +102,3 @@
 	<footer> </footer>
 </body>
 </html>
-
