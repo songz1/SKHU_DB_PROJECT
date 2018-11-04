@@ -30,21 +30,23 @@
 					<table class="table text-center">
 						<tr>
 							<td class="title col-md-1">담당 부서</td>
-							<td class="col-md-1"><form:select path="departmentId"
+							<td class="col-md-2"><form:select path="departmentId"
 									class="form-control" itemValue="id" itemLabel="name"
 									items="${ departments }" /></td>
 							<td class="title col-md-1"><select name="searchType">
 									<option value="0" searchText="loginId">교번</option>
 									<option value="1" searchText="name">이름</option>
 							</select></td>
-							<td class="col-md-1">
+							<td class="col-md-2">
 									<input type="text" name="searchText"></input>
 							</td>
 
-							<td class="col-md-1"><span style="float: right">
+							<td class="col-md-1">
+								<span style="float: right">
 									<button type="submit" class="btn btn-default btn-block"
-										style="WIDTH: 100pt;" onclick="/">조회</button>
-							</span></td>
+										style="WIDTH: 100pt;">조회</button>
+								</span>
+							</td>
 						</tr>
 					</table>
 
@@ -59,11 +61,16 @@
 					</thead>
 					<tbody>
 						<c:forEach var="admin" items="${ admins }">
-							<tr data-url="adminEdit?id=${ admin.id }">
+							<tr data-url="adminEdit?id=${ admin.id }" class="text-center cursor tr-hover">
 								<td>${ admin.loginId }</td>
 								<td>${ admin.name }</td>
 								<td>${ admin.department.name }</td>
-								<td>${ admin.authority }</td>
+								<td>
+									<c:if test="${ admin.authority == 1 }">super</c:if>
+									<c:if test="${ admin.authority == 2 }">관리자</c:if>
+									<c:if test="${ admin.authority == 3 }">행정/전산</c:if>
+									<c:if test="${ admin.authority == 4 }">교수</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

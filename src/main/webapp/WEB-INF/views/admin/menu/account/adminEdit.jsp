@@ -27,8 +27,7 @@
 			<div class="panel-body">
 				<h3 class="text-center">관리자 정보</h3>
 				<hr />
-				<form:form method="post" action="edit" modelAttribute="admin"
-					class="form-horizontal mb-25 mt-25">
+				<form:form method="post" action="edit" modelAttribute="admin" class="form-horizontal mb-25 mt-25">
 					<form:hidden path="id" />
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label col-md-offset-1">교번</label>
@@ -75,6 +74,7 @@
 						class="btn btn-info mb-20 col-md-2 col-md-offset-2">수정</button>
 				</form:form>
 			</div>
+		</div>
 		</div>
 	</main>
 	<footer> </footer>

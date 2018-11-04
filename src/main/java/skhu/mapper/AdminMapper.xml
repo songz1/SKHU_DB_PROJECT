@@ -42,7 +42,7 @@
 	<select id="findAllWithDepartment" resultMap="resultMap1"> 
 		select a.loginId, a.name, d.name, a.authority
 		from admin a
-		left join department d on d.id = a.departmentId;
+		left join department d on d.id = a.departmentId
 	</select>
 	<resultMap id="resultMap1" type="Admin">
 		<id property="id" column="id" />
@@ -51,7 +51,7 @@
 		<result property="name" column="name" />
 		<result property="email" column="email" />
 		<result property="authority" column="authority" />
-		<association property="departmentId" javaType="Department">
+		<association property="department" javaType="Department">
 			<id property="id" column="departmentId" />
 			<result property="name" column="name" />
 		</association>

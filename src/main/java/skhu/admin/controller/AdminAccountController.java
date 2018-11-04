@@ -27,27 +27,20 @@ public class AdminAccountController {
 	@RequestMapping(value="adminList", method=RequestMethod.GET)
 	public String adminList(Model model) {
 		List<Department> departments = departmentMapper.findAll();
-		List<Admin> admins = adminMapper.findAll();
+		List<Admin> admins = adminMapper.findAllWithDepartment();
 		Admin admin = new Admin();
 		
-		model.addAttribute("admins", admins);
 		model.addAttribute("admin", admin);
 		model.addAttribute("departments", departments);
+		model.addAttribute("admins", admins);
 		
 		return "admin/menu/account/adminList";
 	}
 	
 	@RequestMapping(value="searchAdminList", method=RequestMethod.GET)
 	public String SearchAdminList(Model model) {
-		List<Department> departments = departmentMapper.findAll();
-		List<Admin> admins = adminMapper.findAllWithDepartment();
-		Admin admin = new Admin();
 		
-		model.addAttribute("admins", admins);
-		model.addAttribute("admin", admin);
-		model.addAttribute("departments", departments);
-		
-		return "admin/menu/account/adminList";
+		return "redirect:adminList";
 	}
 
 	@RequestMapping(value="adminEdit", method=RequestMethod.GET)
@@ -58,11 +51,12 @@ public class AdminAccountController {
 		model.addAttribute("admin", admin);
 		model.addAttribute("departments", departments);
 
-		return "admin/menu/account/edit";
+		return "admin/menu/account/adminEdit";
 	}
 
 	@RequestMapping(value = "edit", method = RequestMethod.POST)
 	public String edit(Model model, Admin admin) {
+		
 		adminMapper.update(admin);
 		
 		return "redirect:adminList";
