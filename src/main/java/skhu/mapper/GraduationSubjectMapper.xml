@@ -32,7 +32,7 @@
 	</resultMap>
 	<select id="findByOption" resultMap="graduationSubjectResultMap">
 		select gs.*, g.id graduationId, g.name graduationName, g.division graduationDivision, 
-		s.id subjectId, s.year subjectYear, s.code, s.class, s.name subjectName, s.score, s.division subjectDivision,
+		s.id subjectId, s.year subjectYear, s.code, s.subjectClass, s.name subjectName, s.score, s.division subjectDivision,
 		d.id departmentId, d.name departmentName
 		from graduation_subject gs
 		left join subject s on gs.subjectId = s.id
@@ -40,13 +40,13 @@
 		left join graduation g on gs.graduationId = g.id
 		<where>
 			<if test='searchText != null and searchText != ""'>
-				and year like #{ searchText }
+				and gs.year like #{ searchText }
 			</if>
 			<if test="condition.departmentId != 0">
-				and departmentId = #{ condition.departmentId }
+				and gs.departmentId = #{ condition.departmentId }
 			</if>
 			<if test="condition.graduationId != 0">
-				and graduationId = #{ condition.graduationId }
+				and gs.graduationId = #{ condition.graduationId }
 			</if>
 		</where>
 	</select>
@@ -57,39 +57,39 @@
 		left join graduation g on gs.graduationId = g.id
 		<where>
 			<if test='searchText != null and searchText != ""'>
-				and year like #{ searchText }
+				and gs.year like #{ searchText }
 			</if>
 			<if test="condition.departmentId != 0">
-				and departmentId = #{ condition.departmentId }
+				and gs.departmentId = #{ condition.departmentId }
 			</if>
 			<if test="condition.graduationId != 0">
-				and graduationId = #{ condition.graduationId }
+				and gs.graduationId = #{ condition.graduationId }
 			</if>
 		</where>
 	</select>
 	<select id="findById" resultType="graduationSubject">
 		select * from graduation_subject gs
 		left join subject sj on gs.subjectId = sj.id
-		where id = #{ id }
+		where gs.id = #{ id }
 	</select>
 	<select id="findByStudent" resultMap="graduationSubjectResultMap">
 		select gs.*, g.id graduationId, g.name graduationName, g.division graduationDivision, 
-		s.id subjectId, s.year subjectYear, s.code, s.class, s.name subjectName, s.score, s.division subjectDivision,
+		s.id subjectId, s.year subjectYear, s.code, s.subjectClass, s.name subjectName, s.score, s.division subjectDivision,
 		d.id departmentId, d.name departmentName
 		from graduation_subject gs
 		left join graduation g on gs.graduationId = g.id
 		left join subject s on gs.subjectId = s.id
-		left join department d on gg.departmentId = d.id
+		left join department d on gs.departmentId = d.id
 		where
-			year = #{ year } and 
-			((gg.graduationId = 1 and gg.departmentId = 1) or
-			(gg.departmentId = #{ student.departmentId } and
-			(g.name = #{ mainGraduation } or g.name = #{ sbuGraduation })));
+			gs.year = #{ year } and 
+			((gs.graduationId = 1 and gs.departmentId = 1) or
+			(gs.departmentId = #{ student.departmentId } and
+			(g.name = #{ mainGraduation } or g.name = #{ subGraduation })))
 			<if test='student.minor != "0"'>
-				and (d.name = #{ student.minor } and g.name = #{ subGraduation })
+				or (d.name = #{ student.minor } and g.name = #{ subGraduation })
 			</if>
 			<if test='student.doubleMajor != "0"'>
-				and (d.name = #{ student.doubleMajor } and g.name = #{ subGraduation })
+				or (d.name = #{ student.doubleMajor } and g.name = #{ subGraduation })
 			</if>
 		order by g.id
 	</select>
@@ -111,7 +111,7 @@
 			<id property="id" column="subjectId" />
 			<result property="year" column="subjectYear" />
 			<result property="code" column="code" />
-			<result property="class" column="class" />
+			<result property="subjectClass" column="subjectClass" />
 			<result property="name" column="subjectName" />
 			<result property="score" column="score" />
 			<result property="division" column="subjectDivision" />
@@ -146,6 +146,6 @@
 				essential = #{ essential }
 			</if>
 		</set>
-		where id = #{ id };
+		where id = #{ id }
 	</update>
 </mapper>

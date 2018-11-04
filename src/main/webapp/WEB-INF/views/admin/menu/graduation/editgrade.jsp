@@ -24,7 +24,7 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<form:form method="post" action="gradeupdate" modelAttribute="graduationGrade" class="form-horizontal mb-25 mt-25">
-					<<form:hidden path="id" />
+					<form:hidden path="id" />
 					<div class="form-group">
 						<label class="col-sm-2 control-label">적용년도</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">

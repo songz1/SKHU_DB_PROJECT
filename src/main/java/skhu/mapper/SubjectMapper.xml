@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="skhu.mapper.SubjectMapper">
-	<select id="findByCode" resultType="Subject">
+	<select id="findByCode" resultType="int">
 		select id from subject where code = #{ code } limit 1
 	</select>
 </mapper>

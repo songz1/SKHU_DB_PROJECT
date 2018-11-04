@@ -37,8 +37,8 @@
 						<td class="col-md-2">${ student.department.name }</td>
 					</tr>
 				</table>
-				<h1>${ student.graduation }</h1>
-				<c:if test="${!student.graduation eq '미설정'}">
+				<h3>${ student.graduation }</h3>
+				<c:if test="${student.graduation ne '미설정'}">
 					<div class="text-center">
 						<h3>필요 학점</h3>
 					</div>
@@ -50,7 +50,7 @@
 											<c:when test="${ map.key.score <= map.value }">success</c:when>
 											<c:otherwise>danger</c:otherwise>
 										</c:choose>">
-										${ map.key.name } ${ map.value }/${ map.key.score }
+										${ map.key.name } ${ map.value }/${ map.key.score }<c:if test='${ map.key.note ne ""}'>(${ map.key.note })</c:if>
 									</td>
 								</tr>
 							</c:forEach>
@@ -66,9 +66,9 @@
 									<td class="<c:choose> 
 											<c:when test="${ map.value == 0 }">danger</c:when>
 											<c:when test="${ map.value == 1 }">success</c:when>
-											<c:when test="${ map.value == 2 }">warning</c:when>
+											<c:when test="${ map.value == 2 }">active</c:when>
 										</c:choose>">
-										${ map.key.subject.name } (<c:if test="${ map.value == 2 }">${ map.key.note }</c:if>)
+										${ map.key.subject.name } <c:if test='${ map.key.note ne "" }'>(${ map.key.note })</c:if>
 									</td>
 								</tr>
 							</c:forEach>

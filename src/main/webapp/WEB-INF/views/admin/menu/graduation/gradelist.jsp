@@ -18,6 +18,8 @@
 	href="../../../res/css/common/form.css?ver=1">
 <script type="text/javascript"
 	src="../../../res/script/admin/graduationlist.js?ver=1"></script>
+	<script type="text/javascript"
+	src="../../../res/script/admin/toDetail.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 

@@ -23,7 +23,6 @@ import skhu.dto.GraduationGrade;
 import skhu.dto.GraduationSubject;
 import skhu.dto.Score;
 import skhu.dto.Student;
-import skhu.dto.Subject;
 import skhu.mapper.CollegeMapper;
 import skhu.mapper.CompleteScoreMapper;
 import skhu.mapper.DepartmentMapper;
@@ -156,6 +155,9 @@ public class AdminGraduationController {
 		if(gradeTemp.size() > 0)
 			graduationGradeMap.put(graduations.get(k++).getId(), gradeTemp);
 
+		System.out.println(graduationGrades.get(2).getName());
+		System.out.println(graduationGradeMap.size());
+
 		model.addAttribute("graduations", graduations);
 		model.addAttribute("graduationGradeMap", graduationGradeMap);
 		model.addAttribute("graduationSubjectMap", graduationSubjectMap);
@@ -203,7 +205,7 @@ public class AdminGraduationController {
 		List<Department> departments = departmentMapper.findAll();
 		List<Graduation> graduations = graduationMapper.findAll();
 
-		model.addAttribute("graduationSubject", graduationGrade);
+		model.addAttribute("graduationGrade", graduationGrade);
 		model.addAttribute("departments", departments);
 		model.addAttribute("graduations", graduations);
 
@@ -236,7 +238,7 @@ public class AdminGraduationController {
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
 
-		List<GraduationSubject> graduationGrades = graduationSubjectMapper.findByOption(condition, st);
+		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByOption(condition, st);
 		List<Department> departments = departmentMapper.findAll();
 		List<Graduation> graduations = graduationMapper.findAll();
 		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
@@ -245,7 +247,7 @@ public class AdminGraduationController {
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("departments", departments);
 		model.addAttribute("graduations", graduations);
-		model.addAttribute("graduationGrades", graduationGrades);
+		model.addAttribute("graduationSubjects", graduationSubjects);
 		model.addAttribute("pages", pages);
 
 		return "admin/menu/graduation/subjectlist";
@@ -266,8 +268,8 @@ public class AdminGraduationController {
 
 	@RequestMapping(value="subjectupdate", method=RequestMethod.POST)
 	public String subjectupdate(Model model, GraduationSubject graduationSubject, @RequestParam("code") String code) {
-		Subject subject = subjectMapper.findByCode(code);
-		graduationSubject.setSubjectId(subject.getId());
+		int subjectId = subjectMapper.findByCode(code);
+		graduationSubject.setSubjectId(subjectId);
 
 		graduationSubjectMapper.update(graduationSubject);
 
@@ -327,19 +329,27 @@ public class AdminGraduationController {
 	public String graduationDetail(Model model, @RequestParam("id") int id) {
 		Student student = studentMapper.findById(id);
 		List<Score> scores = scoreMapper.findByStudentId(student.getId());
-		String year = student.getStudentNumber().substring(0, 3);
+		String year = student.getStudentNumber().substring(0, 4);
 		List<GraduationGrade> graduationGrades = null;
 		List<GraduationSubject> graduationSubjects = null;
 		Map<GraduationGrade, Integer> graduationGradeMap = new HashMap<GraduationGrade, Integer>();
 		Map<GraduationSubject, Integer> graduationSubjectMap = new HashMap<GraduationSubject, Integer>();
-
 		if(!student.getGraduation().equals("0")) {
 			String[] graduations = student.getGraduation().split(" ", 2);
+
+			if(graduations.length == 1) {
+				graduations = new String[2];
+				graduations[0] = student.getGraduation();
+				graduations[1] = "";
+			}
 			graduationGrades = graduationGradeMapper.findByStudent(year, student, graduations[0], graduations[1]);
+			System.out.println(graduationGrades.size());
 			graduationSubjects = graduationSubjectMapper.findByStudent(year, student, graduations[0], graduations[1]);
+			System.out.println(graduationSubjects.size());
 
 			for(GraduationGrade graduationGrade : graduationGrades) {
 				int total = 0;
+				graduationGradeMap.put(graduationGrade, total);
 				for(Score score : scores) {
 					if(score.getSubstitutionCode().equals("0")) {
 						if(graduationGrade.getName().contains("채플")) {
@@ -353,7 +363,13 @@ public class AdminGraduationController {
 								graduationGrade.getName().equals(score.getSubject().getSubjectDetail().getSubtitle()) ||
 								graduationGrade.getName().equals("졸업") ||
 								(graduationGrade.getName().contains("전공") && score.getSubject().getDivision().contains("전공") ||
-										(graduationGrade.getName().contains("교양") && score.getSubject().getDivision().contains("교양")))) {
+								(graduationGrade.getName().contains("교양") && score.getSubject().getDivision().contains("교양")))) {
+
+							if(graduationGrade.getName().equals("전공필수") && score.getSubject().getDivision().equals("전공선택"))
+								continue;
+
+							else if(graduationGrade.getName().equals("교양필수") && score.getSubject().getDivision().equals("교양선택"))
+								continue;
 
 							total += score.getSubject().getScore();
 							graduationGradeMap.put(graduationGrade, total);
@@ -363,12 +379,16 @@ public class AdminGraduationController {
 			}
 
 			for(GraduationSubject graduationSubject : graduationSubjects) {
+				if(!graduationSubject.getNote().equals("") || graduationSubject.getNote().length() != 0)
+					graduationSubjectMap.put(graduationSubject, 2);
+				else
+					graduationSubjectMap.put(graduationSubject, 0);
 				for(Score score : scores) {
-					if(score.getSubstitutionCode().equals("") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
+					if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
 						graduationSubjectMap.put(graduationSubject, 1);
 					}
 
-					else if(!graduationSubject.getNote().equals(""))
+					else if(!graduationSubject.getNote().equals("") || graduationSubject.getNote().length() != 0)
 						graduationSubjectMap.put(graduationSubject, 2);
 
 					else

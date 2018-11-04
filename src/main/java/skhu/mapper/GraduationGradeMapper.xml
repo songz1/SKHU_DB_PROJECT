@@ -24,13 +24,13 @@
 		left join graduation g on g.id = gg.graduationId
 		<where>
 			<if test='searchText != null and searchText != ""'>
-				and year like #{ searchText }
+				and gg.year like #{ searchText }
 			</if>
 			<if test="condition.departmentId != 0">
-				and departmentId = #{ condition.departmentId }
+				and gg.departmentId = #{ condition.departmentId }
 			</if>
 			<if test="condition.graduationId != 0">
-				and graduationId = #{ condition.graduationId }
+				and gg.graduationId = #{ condition.graduationId }
 			</if>
 		</where>
 	</select>
@@ -40,13 +40,13 @@
 		left join graduation g on g.id = gg.graduationId
 		<where>
 			<if test='searchText != null and searchText != ""'>
-				and year like #{ searchText }
+				and gg.year like #{ searchText }
 			</if>
 			<if test="condition.departmentId != 0">
-				and departmentId = #{ condition.departmentId }
+				and gg.departmentId = #{ condition.departmentId }
 			</if>
 			<if test="condition.graduationId != 0">
-				and graduationId = #{ condition.graduationId }
+				and gg.graduationId = #{ condition.graduationId }
 			</if>
 		</where>
 	</select>
@@ -60,15 +60,15 @@
 		left join department d on gg.departmentId = d.id
 		left join graduation g on gg.graduationId = g.id
 		where
-			year = #{ year } and 
+			gg.year = #{ year } and 
 			((gg.graduationId = 1 and gg.departmentId = 1) or
 			(gg.departmentId = #{ student.departmentId } and
-			(g.name = #{ mainGraduation } or g.name = #{ sbuGraduation })))
+			(g.name = #{ mainGraduation } or g.name = #{ subGraduation })))
 			<if test='student.minor != "0"'>
-				and (d.name = #{ student.minor } and g.name = #{ subGraduation })
+				or (d.name = #{ student.minor } and g.name = #{ subGraduation })
 			</if>
 			<if test='student.doubleMajor != "0"'>
-				and (d.name = #{ student.doubleMajor } and g.name = #{ subGraduation })
+				or (d.name = #{ student.doubleMajor } and g.name = #{ subGraduation })
 			</if>
 		order by g.id
 	</select>
@@ -94,7 +94,7 @@
 		update graduation_grade
 		<set>
 			<if test="year != null">
-				year = { #year },
+				year = #{ year },
 			</if>
 			<if test="departmentId != 0 and departmentId != null">
 				departmentId = #{ departmentId },
@@ -105,13 +105,13 @@
 			<if test="name != null">
 				name = #{ name },
 			</if>
-			<if test="semester != null">
+			<if test="score != null">
 				score = #{ score },
 			</if>
 			<if test="note != null">
 				note = #{ note }
 			</if>
 		</set>
-		where id = #{ id };
+		where id = #{ id }
 	</update>
 </mapper>

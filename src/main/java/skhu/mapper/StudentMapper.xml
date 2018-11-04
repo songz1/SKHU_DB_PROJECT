@@ -11,10 +11,30 @@
 		from student 
 		where studentNumber = #{studentNumber} and password = #{password};
 	</select>
-	<select id="findById" resultType="Student">
-		select * from student 
-		where id = #{id}
+	<select id="findById" resultMap="studentResultMap">
+		select s.*, d.id departmentId, d.name departmentName, d.collegeId from student s
+		left join department d on s.departmentId = d.id
+		where s.id = #{id}
 	</select>
+	<resultMap id="studentResultMap" type="Student">
+		<id property="id" column="id" />
+		<result property="studentNumber" column="studentNumber" />
+		<result property="name" column="name" />
+		<result property="year" column="year" />
+		<result property="semester" column="semester" />
+		<result property="email" column="email" />
+		<result property="graduation" column="graduation" />
+		<result property="minor" column="minor" />
+		<result property="doubleMajor" column="doubleMajor" />
+		<result property="majorEssential" column="majorEssential" />
+		<result property="liberalEssential" column="liberalEssential" />
+		<result property="departmentId" column="departmentId" />
+		<association property="department" javaType="Department">
+			<id property="id" column="departmentId" />
+			<result property="name" column="departmentName" />
+			<result property="graduationId" column="graduationId" />
+		</association>
+	</resultMap>
 	<select id="findByAccount" resultType="Student">
 		select id from student 
 		where name = #{name} and studentNumber = #{studentNumber}
@@ -58,11 +78,11 @@
 		   		left(s.studentNumber, 4) = g.year)
 		    	<if test="majorCheck">
 		    		and g.name like '전공필수'
-		    		and s.majorEssential >= g.score
+		    		and g.score > s.majorEssential 
 		    	</if>
 		    	<if test="minorCheck">
 		    		and g.name like '교양필수'
-		    		and s.liberalEssential >= g.score
+		    		and g.score > s.liberalEssential 
 		    	</if>
 			</if>
 		</where>
@@ -81,7 +101,7 @@
 		<association property="department" javaType="Department">
 			<id property="id" column="departmentId" />
 			<result property="name" column="departmentName" />
-			<collection property="graduations" ofType="Graduation">
+			<collection property="graduationGrades" ofType="GraduationGrade">
 				<id property="id" column="graduationId" />
 				<result property="name" column="graduationName" />
 				<result property="score" column="score" />
@@ -114,11 +134,11 @@
 		   		left(s.studentNumber, 4) = g.year)
 		    	<if test="majorCheck">
 		    		and g.name like '전공필수'
-		    		and s.majorEssential >= g.score
+		    		and g.score > s.majorEssential 
 		    	</if>
 		    	<if test="minorCheck">
 		    		and g.name like '교양필수'
-		    		and s.liberalEssential >= g.score
+		    		and g.score > s.liberalEssential 
 		    	</if>
 			</if>
 		</where>

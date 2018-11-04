@@ -7,7 +7,7 @@ public class Department {
 	String name;
 	int collegeId;
 	College college;
-	List<Graduation> graduations;
+	List<GraduationGrade> graduationGrades;
 	public int getId() {
 		return id;
 	}
@@ -32,10 +32,10 @@ public class Department {
 	public void setCollege(College college) {
 		this.college = college;
 	}
-	public List<Graduation> getGraduations() {
-		return graduations;
+	public List<GraduationGrade> getGraduationGrades() {
+		return graduationGrades;
 	}
-	public void setGraduations(List<Graduation> graduations) {
-		this.graduations = graduations;
+	public void setGraduations(List<GraduationGrade> graduationGrades) {
+		this.graduationGrades = graduationGrades;
 	}
 }

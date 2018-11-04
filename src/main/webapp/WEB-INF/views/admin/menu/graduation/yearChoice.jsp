@@ -37,7 +37,7 @@
 						</thead>
 						<tbody>
 							<c:forEach var="year" items="${ years }">
-								<tr class="tr-hover cursor" data-url="info?id=${ departmentId }&year=${ year }">
+								<tr class="tr-hover cursor" data-url="info?id=${ department.id }&year=${ year.year }">
 									<td>${ year.year }학번</td>
 								</tr>
 							</c:forEach>
