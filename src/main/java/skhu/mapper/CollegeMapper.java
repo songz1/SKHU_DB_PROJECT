@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import skhu.dto.CompleteScore;
+import skhu.dto.College;
 
 @Mapper
-public interface CompleteScoreMapper {
-	List<CompleteScore> findAll();
+public interface CollegeMapper {
+	List<College> findWithoutCommon();
 }

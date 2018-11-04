@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="skhu.mapper.GraduationGradeMapper">
+	<select id="findByCommon" resultType="GraduationGrade">
+		select * from graduation_grade
+		where departmentId = 1 and graduationId = 1
+		order by year asc
+	</select>
+	<select id="findYear" resultType="GraduationGrade">
+		select distinct year from graduation_grade where departmentId = #{ departmentId } order by year
+	</select>
+	<select id="findByDepartment" resultType="GraduationGrade">
+		select * from graduation_grade
+		where departmentId = #{ departmentId } and year = #{ year }
+		order by graduationId
+	</select>
 	<select id="findByOption" resultMap="graduationGradeResultMap">
 		select gg.*, 
 		d.id departmentId, d.name departmentName,

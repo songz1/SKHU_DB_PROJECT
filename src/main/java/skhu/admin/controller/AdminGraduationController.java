@@ -1,5 +1,6 @@
 package skhu.admin.controller;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import skhu.dto.College;
+import skhu.dto.CompleteScore;
 import skhu.dto.Department;
 import skhu.dto.Graduation;
 import skhu.dto.GraduationGrade;
@@ -21,6 +24,8 @@ import skhu.dto.GraduationSubject;
 import skhu.dto.Score;
 import skhu.dto.Student;
 import skhu.dto.Subject;
+import skhu.mapper.CollegeMapper;
+import skhu.mapper.CompleteScoreMapper;
 import skhu.mapper.DepartmentMapper;
 import skhu.mapper.GraduationGradeMapper;
 import skhu.mapper.GraduationMapper;
@@ -33,6 +38,7 @@ import skhu.vo.Page;
 @Controller
 @RequestMapping("admin/menu/graduation")
 public class AdminGraduationController {
+	@Autowired CollegeMapper collegeMapper;
 	@Autowired StudentMapper studentMapper;
 	@Autowired DepartmentMapper departmentMapper;
 	@Autowired GraduationMapper graduationMapper;
@@ -40,24 +46,120 @@ public class AdminGraduationController {
 	@Autowired GraduationSubjectMapper graduationSubjectMapper;
 	@Autowired ScoreMapper scoreMapper;
 	@Autowired SubjectMapper subjectMapper;
+	@Autowired CompleteScoreMapper completeScoreMapper;
 
 	@RequestMapping(value="basic", method=RequestMethod.GET)
-	public String basic() {
+	public String basic(Model model) {
+		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByCommon();
+		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByCommon();
+		List<CompleteScore> completeScores = completeScoreMapper.findAll();
+		Map<Year, List<GraduationGrade>> graduationGradeMap = new HashMap<Year, List<GraduationGrade>>();
+		Map<Year, List<GraduationSubject>> graduationSubjectMap = new HashMap<Year, List<GraduationSubject>>();
+		List<GraduationGrade> gradeTemp = new ArrayList<GraduationGrade>();
+		List<GraduationSubject> subjectTemp = new ArrayList<GraduationSubject>();
+
+		for(int i = 0; i < graduationGrades.size(); ++i) {
+			if(i != 0) {
+				if(!graduationGrades.get(i).getYear().equals(graduationGrades.get(i-1).getYear())) {
+					graduationGradeMap.put(graduationGrades.get(i).getYear(), gradeTemp);
+					gradeTemp = new ArrayList<GraduationGrade>();
+				}
+
+			}
+			gradeTemp.add(graduationGrades.get(i));
+		}
+
+		if(gradeTemp.size() > 0)
+			graduationGradeMap.put(gradeTemp.get(0).getYear(), gradeTemp);
+
+		for(int i = 0; i < graduationSubjects.size(); ++i) {
+			if(i != 0) {
+				if(!graduationSubjects.get(i).getYear().equals(graduationSubjects.get(i-1).getYear())) {
+					graduationSubjectMap.put(graduationSubjects.get(i).getYear(), subjectTemp);
+					subjectTemp = new ArrayList<GraduationSubject>();
+				}
+
+			}
+			subjectTemp.add(graduationSubjects.get(i));
+		}
+
+		if(subjectTemp.size() > 0)
+			graduationSubjectMap.put(subjectTemp.get(0).getYear(), subjectTemp);
+
+		model.addAttribute("graduationGradeMap", graduationGradeMap);
+		model.addAttribute("graduationSubjectMap", graduationSubjectMap);
+		model.addAttribute("completeScores", completeScores);
+
+
 		return "admin/menu/graduation/basic";
 	}
 
 	@RequestMapping(value="detail", method=RequestMethod.GET)
-	public String detail() {
+	public String detail(Model model) {
+		List<College> colleges = collegeMapper.findWithoutCommon();
+		List<Department> departments = departmentMapper.findWithoutCommon();
+
+		model.addAttribute("colleges", colleges);
+		model.addAttribute("departments", departments);
+
 		return "admin/menu/graduation/detail";
 	}
 
-	@RequestMapping(value="yearChoice", method=RequestMethod.GET)
-	public String yearChoice() {
+	@RequestMapping(value="yearchoice", method=RequestMethod.GET)
+	public String yearChoice(Model model, @RequestParam("id") int id) {
+		List<GraduationGrade> years = graduationGradeMapper.findYear(id);
+		Department department = departmentMapper.findById(id);
+
+		model.addAttribute("years", years);
+		model.addAttribute("department", department);
+
 		return "admin/menu/graduation/yearChoice";
 	}
 
 	@RequestMapping(value="info", method=RequestMethod.GET)
-	public String info() {
+	public String info(Model model, @RequestParam("id") int id, @RequestParam("year") String year) {
+		List<Graduation> graduations = graduationMapper.findWithoutCommon();
+		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByDepartment(id, year);
+		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByDepartment(id, year);
+		Map<Integer, List<GraduationGrade>> graduationGradeMap = new HashMap<Integer, List<GraduationGrade>>();
+		Map<Integer, List<GraduationSubject>> graduationSubjectMap = new HashMap<Integer, List<GraduationSubject>>();
+		List<GraduationGrade> gradeTemp = new ArrayList<GraduationGrade>();
+		List<GraduationSubject> subjectTemp = new ArrayList<GraduationSubject>();
+		int k = 0;
+
+		for(int i = 0; i < graduationGrades.size(); ++i) {
+			if(i != 0) {
+				if(graduationGrades.get(i).getGraduationId() != graduationGrades.get(i-1).getGraduationId()) {
+					graduationGradeMap.put(graduations.get(k++).getId(), gradeTemp);
+					gradeTemp = new ArrayList<GraduationGrade>();
+				}
+			}
+			gradeTemp.add(graduationGrades.get(i));
+		}
+
+		if(gradeTemp.size() > 0)
+			graduationGradeMap.put(graduations.get(k++).getId(), gradeTemp);
+
+		k = 0;
+
+		for(int i = 0; i < graduationSubjects.size(); ++i) {
+			if(i != 0) {
+				if(!graduationSubjects.get(i).getYear().equals(graduationSubjects.get(i-1).getYear())) {
+					graduationSubjectMap.put(graduations.get(k++).getId(), subjectTemp);
+					subjectTemp = new ArrayList<GraduationSubject>();
+				}
+
+			}
+			subjectTemp.add(graduationSubjects.get(i));
+		}
+
+		if(gradeTemp.size() > 0)
+			graduationGradeMap.put(graduations.get(k++).getId(), gradeTemp);
+
+		model.addAttribute("graduations", graduations);
+		model.addAttribute("graduationGradeMap", graduationGradeMap);
+		model.addAttribute("graduationSubjectMap", graduationSubjectMap);
+
 		return "admin/menu/graduation/info";
 	}
 
@@ -77,8 +179,8 @@ public class AdminGraduationController {
 		int total = graduationGradeMapper.countByOption(condition, searchText);
 		int currentPage = 1;
 
-    	if(pg != null)
-    		currentPage = Integer.parseInt(pg);
+		if(pg != null)
+			currentPage = Integer.parseInt(pg);
 
 		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByOption(condition, st);
 		List<Department> departments = departmentMapper.findAll();
@@ -131,8 +233,8 @@ public class AdminGraduationController {
 		int total = graduationSubjectMapper.countByOption(condition, searchText);
 		int currentPage = 1;
 
-    	if(pg != null)
-    		currentPage = Integer.parseInt(pg);
+		if(pg != null)
+			currentPage = Integer.parseInt(pg);
 
 		List<GraduationSubject> graduationGrades = graduationSubjectMapper.findByOption(condition, st);
 		List<Department> departments = departmentMapper.findAll();
@@ -189,22 +291,22 @@ public class AdminGraduationController {
 
 	@RequestMapping(value="graduationlist", method=RequestMethod.GET)
 	public String graduationList(Model model, HttpServletRequest request, Student condition,
-		@RequestParam(value="searchText", required=false) String searchText, @RequestParam(value="pg", required=false) String pg,
-		@RequestParam(value="searchType", required=false) String searchType,@RequestParam(value="majorCheck", required=false) boolean majorCheck,
-		@RequestParam(value="minorCheck", required=false) boolean minorCheck) {
+			@RequestParam(value="searchText", required=false) String searchText, @RequestParam(value="pg", required=false) String pg,
+			@RequestParam(value="searchType", required=false) String searchType,@RequestParam(value="majorCheck", required=false) boolean majorCheck,
+			@RequestParam(value="minorCheck", required=false) boolean minorCheck) {
 
 		if(searchText == null)
-    		searchText = "";
+			searchText = "";
 
 		if(searchType == null)
-    		searchType = "0";
+			searchType = "0";
 
 		Page page = new Page();
 		int total = studentMapper.countByGraduation(condition, "%" + searchText + "%", searchType, majorCheck, minorCheck);
 		int currentPage = 1;
 
-    	if(pg != null)
-    		currentPage = Integer.parseInt(pg);
+		if(pg != null)
+			currentPage = Integer.parseInt(pg);
 
 		List<Student> students = studentMapper.findByGraduation((currentPage - 1) * 10, 10, condition, "%" + searchText + "%", searchType, majorCheck, minorCheck);
 		List<Department> departments = departmentMapper.findWithoutCommon();
@@ -240,11 +342,18 @@ public class AdminGraduationController {
 				int total = 0;
 				for(Score score : scores) {
 					if(score.getSubstitutionCode().equals("0")) {
-						if((graduationGrade.getName().equals(score.getSubject().getDivision())) ||
-							graduationGrade.getName().equals(score.getSubject().getSubjectDetail().getSubtitle()) ||
-							graduationGrade.getName().equals("졸업") ||
-							(graduationGrade.getName().equals("전공") && (score.getSubject().getDivision().equals("전공필수")) || score.getSubject().getDivision().equals("전공선택")) ||
-							(graduationGrade.getName().equals("교양") && (score.getSubject().getDivision().equals("교양필수")) || score.getSubject().getDivision().equals("교양선택"))) {
+						if(graduationGrade.getName().contains("채플")) {
+							if(score.getSubject().getName().contains("채플")) {
+								total += 1;
+								graduationGradeMap.put(graduationGrade, total);
+							}
+						}
+
+						else if((graduationGrade.getName().equals(score.getSubject().getDivision())) ||
+								graduationGrade.getName().equals(score.getSubject().getSubjectDetail().getSubtitle()) ||
+								graduationGrade.getName().equals("졸업") ||
+								(graduationGrade.getName().contains("전공") && score.getSubject().getDivision().contains("전공") ||
+										(graduationGrade.getName().contains("교양") && score.getSubject().getDivision().contains("교양")))) {
 
 							total += score.getSubject().getScore();
 							graduationGradeMap.put(graduationGrade, total);
@@ -255,8 +364,9 @@ public class AdminGraduationController {
 
 			for(GraduationSubject graduationSubject : graduationSubjects) {
 				for(Score score : scores) {
-					if(score.getSubstitutionCode().equals("") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode()))
+					if(score.getSubstitutionCode().equals("") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
 						graduationSubjectMap.put(graduationSubject, 1);
+					}
 
 					else if(!graduationSubject.getNote().equals(""))
 						graduationSubjectMap.put(graduationSubject, 2);
