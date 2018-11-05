@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,95 +23,67 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
+				<c:forEach var="map" items="${ graduationGradeMap }">
+					<table class="table text-center">
+						<tr>
+							<td class="title col-md-1"></td>
+							<c:forEach var="graduation" items="${ map.value }">
+								<td class="title col-md-1">${ graduation.name }</td>
+							</c:forEach>
+						</tr>
+						<tr>
+							<td class="title col-md-1">${ map.key }학번</td>
+							<c:forEach var="graduation" items="${ map.value }">
+								<td class="col-md-1">${ graduation.score }<c:if
+										test="${ graduation.name eq '채플'}">회</c:if> 이상
+								</td>
+							</c:forEach>
+						</tr>
+					</table>
+				</c:forEach>
+				<h4 class="text-center">학년별 수료 학점</h4>
 				<table class="table text-center">
-					<h4 class="text-center">졸업 이수 학점</h4>
-					<tr>
-						<td class="title col-md-1"></td>
-						<td class="title col-md-1">졸업 학점</td>
-						<td class="title col-md-1">전공 학점</td>
-						<td class="title col-md-1">교양 학점</td>
-						<td class="title col-md-1">특별과정 학점</td>
-						<td class="title col-md-1">전공탐색 학점</td>
-					</tr>
-					<tr>
-						<td class="title col-md-1">2017학번까지</td>
-						<td class="col-md-1">130 이상</td>
-						<td class="col-md-1">32 이상</td>
-						<td class="col-md-1">60 이상</td>
-						<td class="col-md-1">15 이상</td>
-						<td class="col-md-1">해당 없음</td>
-					</tr>
-					<tr>
-						<td class="title col-md-1">2018학번부터</td>
-						<td class="col-md-1">130 이상</td>
-						<td class="col-md-1">34 이상</td>
-						<td class="col-md-1">60~63 이상</td>
-						<td class="col-md-1">해당 없음</td>
-						<td class="col-md-1">18 이상</td>
-					</tr>
-				</table>
-
-				<table class="table text-center">
-					<h4 class="text-center">학년별 수료 학점</h4>
 					<tr>
 						<td class="title col-md-1">구분</td>
 						<td class="title col-md-1">총 취득 학점</td>
 					</tr>
-					<tr>
-						<td class="col-md-1">1학년 수료</td>
-						<td class="col-md-1">34 이상</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">2학년 수료</td>
-						<td class="col-md-1">68 이상</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">3학년 수료</td>
-						<td class="col-md-1">102 이상</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">4학년 수료</td>
-						<td class="col-md-1">130 이상</td>
-					</tr>
+					<c:forEach var="completeScore" items="${ completeScores }">
+						<tr>
+							<td class="col-md-1">${ completeScore.grade }</td>
+							<td class="col-md-1">${ completeScore.score }</td>
+						</tr>
+					</c:forEach>
 				</table>
-
+				<h4 class="text-center">학번별 교양 필수 학점</h4>
+				<c:forEach var="map" items="${ graduationSubjectMap }">
+					<table class="table text-center">
+						<tr>
+							<td class="title col-md-1">구분</td>
+							<td class="title col-md-2">내용</td>
+						</tr>
+						<tr>
+							<td class="col-md-1">${ map.key }</td>
+							<td class="col-md-1"><c:forEach var="graduation"
+									items="${ map.value }">
+											${ graduation.subject.name } ${ graduation.subject.score }학점<br />
+								</c:forEach></td>
+						</tr>
+					</table>
+				</c:forEach>
+				<h4 class="text-center">상세 졸업요건</h4>
 				<table class="table text-center">
-					<h4 class="text-center">학번별 교양 필수 학점</h4>
 					<tr>
-						<td class="title col-md-1">구분</td>
-						<td class="title col-md-2">내용</td>
+						<td class="title col-md-1">학번</td>
+						<td class="title col-md-2">첨부파일</td>
 					</tr>
-					<tr>
-						<td class="col-md-1">2015학번까지</td>
-						<td class="col-md-2">채플 1학점 2회<br> 사회봉사 그룹 2학점
-						</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">2016학번</td>
-						<td class="col-md-2">채플 1학점 2회<br> 사회봉사 그룹 2학점<br>
-							대학생활세미나I 2학점, 대학생활세미나II 2학점<br> 말과글 2학점
-						</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">2017학번</td>
-						<td class="col-md-2">채플 1학점 2회<br> 사회봉사 그룹 2학점<br>
-							대학생활세미나I 2학점, 대학생활세미나II 2학점<br> 말과글 2학점
-						</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">2018학번부터</td>
-						<td class="col-md-2">채플 1학점 2회<br> 사회봉사 그룹 2학점<br>
-							대학생활세미나I 2학점, 대학생활세미나II 2학점<br> 말과글 2학점, 인권과 평화 2학점<br>
-							과학기술과 에콜로지 2학점, 데이터 활용 및 분석 2학점
-						</td>
-					</tr>
+					<c:forEach var="map" items="${ graduationGradeMap }">
+						<tr>
+							<td class="col-md-1">${ map.key }</td>
+							<td class="col-md-2"><a href="#"><i
+									class="glyphicon glyphicon-download-alt"></i></a>
+						</tr>
+					</c:forEach>
 				</table>
-
-				<h4 class="text-center">2018학번 교양학점 이수 조건표</h4>
-				<div>
-					<img src="../../../res/image/gradu.jpg"
-						class="img-responsive center-block" alt="Responsive image" />
-				</div>
 			</div>
 		</div>
 	</div>

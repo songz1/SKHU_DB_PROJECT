@@ -36,7 +36,7 @@
 					<option value="2">과목</option>
 					<option value="3">엑셀 파일 업로드</option>
 				</select>
-				<form:form method="post" action="gradeinsert" modelAttribute="graduationGrade" class="form-horizontal mb-25 mt-25 create-grade">
+				<form:form method="post" action="creategrade" modelAttribute="graduationGrade" class="form-horizontal mb-25 mt-25 create-grade">
 					<div class="form-group">
 						<label class="col-sm-2 control-label">적용년도</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
@@ -76,7 +76,7 @@
 					<button type="submit"
 						class="btn btn-info mb-25 col-md-2 col-md-offset-5">확인</button>
 				</form:form>
-				<form:form method="post" action="subjectinsert" modelAttribute="graduationSubject" class="form-horizontal mb-25 mt-25 create-subject">
+				<form:form method="post" action="createsubject" modelAttribute="graduationSubject" class="form-horizontal mb-25 mt-25 create-subject">
 					<div class="form-group">
 						<label class="col-sm-2 control-label">적용년도</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">

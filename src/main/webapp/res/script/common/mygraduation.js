@@ -24,12 +24,12 @@ $(function(){
 		var optionShow = document.getElementById("option-show");
 		var optionShowValue = optionShow.options[optionShow.selectedIndex].value;
 		
-		if(optionShowValue == 2) {
+		if(optionShowValue == 3) {
 			$(".td-minor").show();
 			$(".td-double").hide();
 		}
 		
-		else if(optionShowValue == 3) {
+		else if(optionShowValue == 4) {
 			$(".td-double").show();
 			$(".td-minor").hide();
 		}

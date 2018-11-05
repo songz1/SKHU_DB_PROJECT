@@ -46,7 +46,8 @@
 						<table class="table text-center">
 							<c:forEach var="map" items="${ graduationGradeMap }">
 								<tr>
-									<td class="<c:choose> 
+									<td class="col-md-1 active">${ map.key.graduation.name }</td>
+									<td class="col-md-3 <c:choose> 
 											<c:when test="${ map.key.score <= map.value }">success</c:when>
 											<c:otherwise>danger</c:otherwise>
 										</c:choose>">
@@ -63,7 +64,8 @@
 						<table class="table text-center">
 							<c:forEach var="map" items="${ graduationSubjectMap }">
 								<tr>
-									<td class="<c:choose> 
+									<td class="col-md-1 active">${ map.key.graduation.name }</td>
+									<td class="col-md-3 <c:choose> 
 											<c:when test="${ map.value == 0 }">danger</c:when>
 											<c:when test="${ map.value == 1 }">success</c:when>
 											<c:when test="${ map.value == 2 }">active</c:when>

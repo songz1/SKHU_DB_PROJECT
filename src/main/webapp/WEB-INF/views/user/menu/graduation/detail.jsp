@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,83 +28,23 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<h1>학부/학과 졸업요건</h1>
-				<form method="post" enctype="multipart/form-data">
+				<c:forEach var="college" items="${ colleges }">
 					<table class="table mt-25">
 						<thead>
 							<tr>
-								<th class="col-md-12">인문융합 자율학부</th>
+								<th class="col-md-12">${ college.name }</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="tr-hover cursor" data-url="yearChoice.jsp">
-								<td>영어학과</td>
-							</tr>
-							<tr class="tr-hover cursor" data-url="yearChoice.jsp">
-								<td>일어일본학과</td>
-							</tr>
-							<tr class="tr-hover cursor" data-url="yearChoice.jsp">
-								<td>중어중국학과</td>
-							</tr>
-							<tr class="tr-hover cursor" data-url="yearChoice.jsp">
-								<td>신학과(기독교문화전공)</td>
-							</tr>
+							<c:forEach var="department" items="${ departments }">
+								<tr class="tr-hover cursor"
+									data-url="yearchoice?id=${ department.id }">
+									<c:if test="${ college.id == department.collegeId }"><td>${ department.name }</td></c:if>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
-					<table class="table">
-						<thead>
-							<tr>
-								<th class="col-md-12">사회융합 자율학부</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="tr-hover cursor">
-								<td>사회과학과</td>
-							</tr>
-							<tr class="tr-hover cursor">
-								<td>사회복지학과</td>
-							</tr>
-							<tr class="tr-hover cursor">
-								<td>경영학과</td>
-							</tr>
-						</tbody>
-					</table>
-					<table class="table">
-						<thead>
-							<tr>
-								<th class="col-md-12">미디어컨텐츠융합 자율학부</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="tr-hover cursor">
-								<td>신문방송학과</td>
-							</tr>
-							<tr class="tr-hover cursor">
-								<td>디지털컨텐츠학과</td>
-							</tr>
-						</tbody>
-					</table>
-					<table class="table">
-						<thead>
-							<tr>
-								<th class="col-md-12">IT융합 자율학부</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="tr-hover cursor">
-								<td>컴퓨터공학과</td>
-							</tr>
-							<tr class="tr-hover cursor">
-								<td>소프트웨어공학과</td>
-							</tr>
-							<tr class="tr-hover cursor">
-								<td>정보통신공학과</td>
-							</tr>
-							<tr class="tr-hover cursor">
-								<td>글로컬IT공학과</td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
+				</c:forEach>
 			</div>
 		</div>
 	</div>

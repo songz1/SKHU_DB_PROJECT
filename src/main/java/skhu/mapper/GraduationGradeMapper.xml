@@ -53,6 +53,21 @@
 	<select id="findById" resultType="graduationGrade">
 		select * from graduation_grade where id = #{ id }
 	</select>
+	<select id="findByOptionId" resultMap="graduationGradeResultMap">
+		select gg.*, g.id graduationId, g.name graduationName, g.division,
+		d.id departmentId, d.name departmentName
+		from graduation_grade gg
+		left join department d on gg.departmentId = d.id
+		left join graduation g on gg.graduationId = g.id
+		where
+			gg.year = #{ year } and 
+			((gg.graduationId = 1 and gg.departmentId = 1) or
+			(gg.departmentId = #{ student.departmentId } and
+			(g.id = #{ mainGraduation } or g.id = #{ subGraduation })))
+			or (d.id = #{ minor } and g.id = #{ subGraduation })
+			or (d.name = #{ student.doubleMajor } and g.name = #{ subGraduation })
+		order by g.id
+	</select>
 	<select id="findByStudent" resultMap="graduationGradeResultMap">
 		select gg.*, g.id graduationId, g.name graduationName, g.division,
 		d.id departmentId, d.name departmentName
@@ -63,12 +78,12 @@
 			gg.year = #{ year } and 
 			((gg.graduationId = 1 and gg.departmentId = 1) or
 			(gg.departmentId = #{ student.departmentId } and
-			(g.name = #{ mainGraduation } or g.name = #{ subGraduation })))
+			(g.id = #{ mainGraduationId } or g.id = #{ subGraduationId })))
 			<if test='student.minor != "0"'>
-				or (d.name = #{ student.minor } and g.name = #{ subGraduation })
+				or (d.id = #{ minorId } and g.id = #{ differentDepartmentGraduationId })
 			</if>
 			<if test='student.doubleMajor != "0"'>
-				or (d.name = #{ student.doubleMajor } and g.name = #{ subGraduation })
+				or (d.id = #{ doubleMajorId } and g.id = #{ differentDepartmentGraduationId })
 			</if>
 		order by g.id
 	</select>
@@ -114,4 +129,11 @@
 		</set>
 		where id = #{ id }
 	</update>
+	<delete id="delete">
+		delete from graduation_grade where id = #{id}
+	</delete>
+	<insert id="insert">
+		insert into graduation_grade(year, departmentId, graduationId, name, score, note)
+		values(#{ year }, #{ departmentId }, #{ graduationId }, #{ name }, #{ score }, #{ note });
+	</insert>
 </mapper>

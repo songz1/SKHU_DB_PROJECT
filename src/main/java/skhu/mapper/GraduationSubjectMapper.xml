@@ -14,6 +14,11 @@
 		where g.departmentId = #{ departmentId } and g.year = #{ year }
 		order by g.graduationId
 	</select>
+	<select id="findById" resultMap="graduationSubjectSimpleResultMap">
+		select g.*, s.id subjectId, s.code, s.name subjectName, s.score from graduation_subject g
+		left join subject s on g.subjectId = s.id
+		where g.id = #{ id }
+	</select>
 	<resultMap id="graduationSubjectSimpleResultMap" type="GraduationSubject">
 		<id property="id" column="id" />
 		<result property="year" column="year" />
@@ -67,11 +72,6 @@
 			</if>
 		</where>
 	</select>
-	<select id="findById" resultType="graduationSubject">
-		select * from graduation_subject gs
-		left join subject sj on gs.subjectId = sj.id
-		where gs.id = #{ id }
-	</select>
 	<select id="findByStudent" resultMap="graduationSubjectResultMap">
 		select gs.*, g.id graduationId, g.name graduationName, g.division graduationDivision, 
 		s.id subjectId, s.year subjectYear, s.code, s.subjectClass, s.name subjectName, s.score, s.division subjectDivision,
@@ -84,12 +84,12 @@
 			gs.year = #{ year } and 
 			((gs.graduationId = 1 and gs.departmentId = 1) or
 			(gs.departmentId = #{ student.departmentId } and
-			(g.name = #{ mainGraduation } or g.name = #{ subGraduation })))
+			(g.id = #{ mainGraduationId } or g.id = #{ subGraduationId })))
 			<if test='student.minor != "0"'>
-				or (d.name = #{ student.minor } and g.name = #{ subGraduation })
+				or (d.id = #{ minorId } and g.id = #{ differentDepartmentGraduationId })
 			</if>
 			<if test='student.doubleMajor != "0"'>
-				or (d.name = #{ student.doubleMajor } and g.name = #{ subGraduation })
+				or (d.id = #{ doubleMajorId } and g.name = #{ differentDepartmentGraduationId })
 			</if>
 		order by g.id
 	</select>
@@ -125,7 +125,7 @@
 		update graduation_subject
 		<set>
 			<if test="year != null">
-				year = { #year },
+				year = #{ year },
 			</if>
 			<if test="departmentId != 0 and departmentId != null">
 				departmentId = #{ departmentId },
@@ -148,4 +148,11 @@
 		</set>
 		where id = #{ id }
 	</update>
+	<delete id="delete">
+		delete from graduation_subject where id = #{id}
+	</delete>
+	<insert id="insert">
+		insert into graduation_subject(year, departmentId, graduationId, subjectId, semester, note, essential)
+		values(#{ year }, #{ departmentId }, #{ graduationId }, #{ subjectId }, #{ semester }, #{ note }, #{ essential });
+	</insert>
 </mapper>

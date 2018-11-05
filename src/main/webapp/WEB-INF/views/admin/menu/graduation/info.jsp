@@ -31,7 +31,7 @@
 				<td class="col-md-1">${ graduation.name }</td>
 				<td class="col-md-1">
 					<c:forEach var="graduationGrade" items="${ graduationGradeMap[graduation.id] }">
-						${ graduationGrade.name } ${ graduationGrade.score } ${ graduationGrade.note }<br />
+						${ graduationGrade.name } ${ graduationGrade.score } 이상 ${ graduationGrade.note }<br />
 					</c:forEach>
 				</td>
 				<td class="col-md-1">

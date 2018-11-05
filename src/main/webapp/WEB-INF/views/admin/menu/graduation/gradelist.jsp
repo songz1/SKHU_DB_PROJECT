@@ -59,7 +59,7 @@
 						</div>
 					</div>
 				</form:form>
-				<form method="post" action="deletegrade">
+				<form method="post" action="gradedelete">
 					<table class="table table-bordered table-condensed">
 						<thead>
 							<tr class="title">
@@ -76,15 +76,14 @@
 						</thead>
 						<tbody>
 							<c:forEach var="graduationGrade" items="${ graduationGrades }">
-								<tr class="text-center cursor tr-hover"
-									data-url="editgrade?id=${ graduationGrade.id }">
-									<td>${ graduationGrade.id }</td>
-									<td>${ graduationGrade.year }<c:if test="${graduationGrade.year eq '0'}">(공통)</c:if></td>
-									<td>${ graduationGrade.department.name }</td>
-									<td>${ graduationGrade.graduation.name }</td>
-									<td>${ graduationGrade.name }</td>
-									<td>${ graduationGrade.score }</td>
-									<td>${ graduationGrade.note }</td>
+								<tr class="text-center tr-hover">
+									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.id }</td>
+									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.year }<c:if test="${graduationGrade.year eq '0'}">(공통)</c:if></td>
+									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.department.name }</td>
+									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.graduation.name }</td>
+									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.name }</td>
+									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.score }</td>
+									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.note }</td>
 									<td><input type="checkbox" name="deleteId"
 										value="${ graduationGrade.id }" /></td>
 								</tr>
