@@ -26,7 +26,7 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<h3 class="text-center">관리자 목록</h3>
-				<form:form action="searchAdminList" method="get" modelAttribute="admin">
+				<form:form action="adminList" method="get" modelAttribute="condition">
 					<table class="table text-center">
 						<tr>
 							<td class="title col-md-1">담당 부서</td>
@@ -34,8 +34,8 @@
 									class="form-control" itemValue="id" itemLabel="name"
 									items="${ departments }" /></td>
 							<td class="title col-md-1"><select name="searchType">
-									<option value="0" searchText="loginId">교번</option>
-									<option value="1" searchText="name">이름</option>
+									<option value="0">교번</option>
+									<option value="1">이름</option>
 							</select></td>
 							<td class="col-md-2">
 									<input type="text" name="searchText"></input>
@@ -49,7 +49,7 @@
 							</td>
 						</tr>
 					</table>
-
+					</form:form>
 				<table class="table table-bordered mt5">
 					<thead>
 						<tr class="title">
@@ -75,7 +75,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				</form:form>
+				
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,58 +27,51 @@
 			<div class="panel-body">
 				<h3 class="text-center">학생 정보</h3>
 				<hr />
-				<form class="form-horizontal mb-25 mt-25">
+				<form:form method="post" action="edit" modelAttribute="student" class="form-horizontal mb-25 mt-25">
+					<form:hidden path="id" />
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label col-md-offset-1">학번</label>
 						<div class="mb-25 col-md-4 col-md-offset-1">
-							<input type="text" name="number" class="form-control"
-								value="201532020">
+							<form:input path="studentNumber" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label col-md-offset-1">이름</label>
 						<div class="mb-25 col-md-4 col-md-offset-1">
-							<input type="text" name="name" class="form-control" value="송지은">
+							<form:input path="name" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label col-md-offset-1">학과</label>
 						<div class="mb-25 col-md-4 col-md-offset-1">
-							<select name="department" class="form-control">
-								<option value="1">소프트웨어공학과</option>
-								<option value="2">컴퓨터공학과</option>
-								<option value="3">글로컬IT학과</option>
-								<option value="4">정보통신공학과</option>
-							</select>
+							<form:select path="departmentId" class="form-control"
+								itemValue="id" itemLabel="name" items="${ departments }" />
 						</div>
 					</div>
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label col-md-offset-1">학년</label>
 						<div class="mb-25 col-md-4 col-md-offset-1">
-							<select name="grade" class="form-control">
-								<option value="3">3학년</option>
-								<option value="1">1학년</option>
-								<option value="2">2학년</option>
-								<option value="4">4학년 이상</option>
-							</select>
+							<form:select path="year" class="form-control">
+								<form:option value="1" label="1학년" />
+								<form:option value="2" label="2학년" />
+								<form:option value="3" label="3학년" />
+								<form:option value="4" label="4학년" />
+							</form:select>
 						</div>
 					</div>
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label col-md-offset-1">이메일</label>
 						<div class="mb-25 col-md-4 col-md-offset-1">
-							<input type="email" name="email" class="form-control">
+							<form:input path="email" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label col-md-offset-1">졸업과정</label>
 						<div class="mb-25 col-md-4 col-md-offset-1">
-							<select name="graduation" class="form-control">
-								<option value="1">주전공</option>
-								<option value="2">부전공</option>
-								<option value="3">복수전공</option>
-								<option value="4">편입</option>
-								<option value="5">특별과정</option>
-							</select>
+							<form:select path="graduation" class="form-control">
+								<form:option value="1" label="주전공" />
+								<form:option value="2" label="편입" />
+							</form:select>
 						</div>
 					</div>
 					<div class="form-group mb-50">
@@ -90,12 +85,15 @@
 							</select>
 						</div>
 					</div>
-					
-					<button type="submit"
-						class="btn btn-danger mb-20 col-md-2 col-md-offset-3">탈퇴</button>
+
+					<c:if test="${ student.id > 0 }">
+						<a href="delete?id=${ student.id }"
+							class="btn btn-danger mb-20 col-md-2 col-md-offset-3"
+							data-confirm-delete>탈퇴</a>
+					</c:if>
 					<button type="submit"
 						class="btn btn-info mb-20 col-md-2 col-md-offset-2">수정</button>
-				</form>
+				</form:form>
 			</div>
 		</div>
 	</main>

@@ -25,22 +25,25 @@ public class AdminAccountController {
 	@Autowired DepartmentMapper departmentMapper;
 
 	@RequestMapping(value="adminList", method=RequestMethod.GET)
-	public String adminList(Model model) {
+	public String adminList(Model model, Admin condition,
+			@RequestParam(value="searchText", required=false) String searchText, @RequestParam(value="pg", required=false) String pg,
+			@RequestParam(value="searchType", required=false) String searchType) {
+		
+		if(searchText == null)
+			searchText = "";
+		
+		if(searchType == null)
+			searchType = "0";
+		
 		List<Department> departments = departmentMapper.findAll();
-		List<Admin> admins = adminMapper.findAllWithDepartment();
+		List<Admin> admins = adminMapper.findAllWithDepartment(condition, "%" + searchText + "%", searchType);
 		Admin admin = new Admin();
 		
-		model.addAttribute("admin", admin);
+		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
 		model.addAttribute("admins", admins);
 		
 		return "admin/menu/account/adminList";
-	}
-	
-	@RequestMapping(value="searchAdminList", method=RequestMethod.GET)
-	public String SearchAdminList(Model model) {
-		
-		return "redirect:adminList";
 	}
 
 	@RequestMapping(value="adminEdit", method=RequestMethod.GET)

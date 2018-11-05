@@ -11,6 +11,63 @@
 		from student 
 		where studentNumber = #{studentNumber} and password = #{password};
 	</select>
+	<select id="findAllWithCounseling" resultMap="counselingResultMap">
+		select s.id, s.studentNumber, s.name studentName, d.id departmentId, d.name departmentName, a.id actionId, max(a.date) date from student s 
+		left join action a on s.id = a.studentId
+		left join department d on s.departmentId = d.id
+		<where>
+			<if test="#{student.departmentId}">
+			</if>
+		</where> d.id = #{student.departmentId} and s.studentNumber = #{student.studentNumber} and s.name = #{student.name}
+		group by s.studentNumber
+	</select>
+	<resultMap id="counselingResultMap" type="Student">
+		<id property="id" column="id" />
+		<result property="studentNumber" column="studentNumber" />
+		<result property="name" column="name" />
+		<result property="year" column="year" />
+		<result property="semester" column="semester" />
+		<result property="email" column="email" />
+		<result property="graduation" column="graduation" />
+		<result property="minor" column="minor" />
+		<result property="doubleMajor" column="doubleMajor" />
+		<result property="majorEssential" column="majorEssential" />
+		<result property="liberalEssential" column="liberalEssential" />
+		<result property="departmentId" column="departmentId" />
+		<association property="department" javaType="Department">
+			<id property="id" column="departmentId" />
+			<result property="name" column="departmentName" />		
+		</association>
+		<collection property="action" ofType="Action">
+				<id property="id" column="actionId" />
+				<result property="name" column="actionName" />
+				<result property="content" column="content" />
+				<result property="date" column="date" />
+			</collection>
+	</resultMap>
+	<select id="findAllWithDepartment" resultMap="studentListResultMap">
+		select s.*, d.id departmentId, d.name departmentName, d.collegeId 
+		from student s
+		left join department d on s.departmentId = d.id
+	</select>
+	<resultMap id="studentListResultMap" type="Student">
+		<id property="id" column="id" />
+		<result property="studentNumber" column="studentNumber" />
+		<result property="name" column="name" />
+		<result property="year" column="year" />
+		<result property="semester" column="semester" />
+		<result property="email" column="email" />
+		<result property="graduation" column="graduation" />
+		<result property="minor" column="minor" />
+		<result property="doubleMajor" column="doubleMajor" />
+		<result property="majorEssential" column="majorEssential" />
+		<result property="liberalEssential" column="liberalEssential" />
+		<result property="departmentId" column="departmentId" />
+		<association property="department" javaType="Department">
+			<id property="id" column="departmentId" />
+			<result property="name" column="departmentName" />
+		</association>
+	</resultMap>
 	<select id="findById" resultMap="studentResultMap">
 		select s.*, d.id departmentId, d.name departmentName, d.collegeId from student s
 		left join department d on s.departmentId = d.id
@@ -187,5 +244,8 @@
 		into student(studentNumber, password, name, year, departmentId, email, semester, graduation, minor, doubleMajor, majorEssential, liberalEssential)
 		values(#{studentNumber}, #{password}, #{name}, #{year}, #{departmentId}, #{email}, 0, '0', '0', '0', 0, 0);
 	</insert>
+	<delete id="delete">
+		DELETE FROM student WHERE id = #{id}
+	</delete>
 
 </mapper>

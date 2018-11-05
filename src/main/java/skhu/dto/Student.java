@@ -18,6 +18,7 @@ public class Student {
 	int majorEssential;
 	int liberalEssential;
 	List<Action> actions;
+	
 	public int getId() {
 		return id;
 	}
