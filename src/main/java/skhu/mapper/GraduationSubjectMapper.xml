@@ -85,10 +85,10 @@
 			((gs.graduationId = 1 and gs.departmentId = 1) or
 			(gs.departmentId = #{ student.departmentId } and
 			(g.id = #{ mainGraduationId } or g.id = #{ subGraduationId })))
-			<if test='student.minor != "0"'>
+			<if test='student.minor != "0" and student.minor != null'>
 				or (d.id = #{ minorId } and g.id = #{ differentDepartmentGraduationId })
 			</if>
-			<if test='student.doubleMajor != "0"'>
+			<if test='student.doubleMajor != "0" and student.doubleMajor != null'>
 				or (d.id = #{ doubleMajorId } and g.name = #{ differentDepartmentGraduationId })
 			</if>
 		order by g.id
@@ -139,7 +139,7 @@
 			<if test="semester != null">
 				semester = #{ semester },
 			</if>
-			<if test="note != null">
+			<if test='note != null and note != ""'>
 				note = #{ note },
 			</if>
 			<if test="essential != null">

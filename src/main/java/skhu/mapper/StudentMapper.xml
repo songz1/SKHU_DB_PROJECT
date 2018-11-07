@@ -203,37 +203,37 @@
 	<update id="update">
 		update student
 		<set>
-			<if test="password != null">
+			<if test='password != null and password != ""'>
 				password = #{password}
 			</if>
-			<if test="name != null">
+			<if test='name != null and name != ""'>
 				name = #{name}
 			</if>
-			<if test="year != null">
+			<if test="year != null and year != 0">
 				, year = #{year}
 			</if>
 			<if test="departmentId != 0 and departmentId != null">
 				, departmentId = #{departmentId}
 			</if>
-			<if test="email != null">
+			<if test='email != null and email != ""'>
 				, email = #{email}
 			</if>
-			<if test="semester != null">
+			<if test="semester != null and semester != 0">
 				, semester = #{semester}
 			</if>
-			<if test="graduation != null">
+			<if test='graduation != null and graduation != "0" and graduation != ""'>
 				, graduation = #{graduation}
 			</if>
-			<if test="minor != null">
+			<if test='minor != null and minor != "0" and minor != ""'>
 				, minor = #{minor}
 			</if>
-			<if test="doubleMajor != null">
+			<if test='doubleMajor != null doubleMajor != "0" doubleMajor != ""'>
 				, doubleMajor = #{doubleMajor}
 			</if>
-			<if test="majorEssential != null">
+			<if test="majorEssential != null majorEssential != 0">
 				, majorEssential = #{majorEssential}
 			</if>
-			<if test="liberalEssential != null">
+			<if test="liberalEssential != null and liberalEssential != 0">
 				, liberalEssential = #{liberalEssential}
 			</if>
 		</set>
