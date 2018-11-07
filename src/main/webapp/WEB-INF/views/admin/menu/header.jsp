@@ -24,7 +24,7 @@
 										요건 목록 - 과목</a></li>
 								<li><a href="/admin/menu/graduation/creategraduation">졸업
 										요건 생성</a></li>
-								<li><a href="/admin/menu/graduation/graduationList">졸업
+								<li><a href="/admin/menu/graduation/graduationlist">졸업
 										요건 충족도 확인</a></li>
 								<li><a href="/admin/menu/graduation/counseling">학생
 										조치사항 내역</a></li>
