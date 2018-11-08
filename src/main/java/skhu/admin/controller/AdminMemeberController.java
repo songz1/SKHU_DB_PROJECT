@@ -22,22 +22,28 @@ public class AdminMemeberController {
 	@Autowired StudentMapper studentMapper;
 
 	@RequestMapping(value="list", method=RequestMethod.GET)
-	public String list(Model model) {
-		List<Department> departments = departmentMapper.findAll();
-		List<Student> students = studentMapper.findAllWithDepartment();
+	public String list(Model model, Student condition,
+			@RequestParam(value="searchText", required=false) String searchText,
+			@RequestParam(value="searchType", required=false) String searchType) {
+		
+		if(searchText == null)
+			searchText = "";
+		
+		if(searchType == null)
+			searchType = "0";
+		
+		List<Department> departments = departmentMapper.findWithoutCommon();
+		List<Student> students = studentMapper.findAllWithDepartment(condition, "%" + searchText + "%", searchType);
 		Student student = new Student();
 		
-		model.addAttribute("student", student);
+		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
 		model.addAttribute("students", students);
+		model.addAttribute("student", student);
+		model.addAttribute("searchText", searchText);
+		model.addAttribute("searchType", searchType);
 		
 		return "admin/menu/member/list";
-	}
-	
-	@RequestMapping(value="searchStudentList", method=RequestMethod.GET)
-	public String searchStudentList(Model model) {
-		
-		return "redirect:list";
 	}
 
 	@RequestMapping(value="detail", method=RequestMethod.GET)

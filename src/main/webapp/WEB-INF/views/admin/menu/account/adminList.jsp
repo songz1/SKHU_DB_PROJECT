@@ -30,15 +30,19 @@
 					<table class="table text-center">
 						<tr>
 							<td class="title col-md-1">담당 부서</td>
-							<td class="col-md-2"><form:select path="departmentId"
-									class="form-control" itemValue="id" itemLabel="name"
-									items="${ departments }" /></td>
-							<td class="title col-md-1"><select name="searchType">
+							<td class="col-md-2">
+								<form:select path="departmentId" class="form-control">
+									<form:option value="0" label="전체" />
+									<form:options itemValue="id" itemLabel="name" items="${ departments }"/>
+								</form:select>
+							</td>
+							<td class="title col-md-1">
+								<select name="searchType">
 									<option value="0">교번</option>
 									<option value="1">이름</option>
-							</select></td>
+								</select></td>
 							<td class="col-md-2">
-									<input type="text" name="searchText"></input>
+								<input type="text" name="searchText" value="${ searchText }"></input>
 							</td>
 
 							<td class="col-md-1">

@@ -42,6 +42,9 @@ public class AdminAccountController {
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
 		model.addAttribute("admins", admins);
+		model.addAttribute("admin", admin);
+		model.addAttribute("searchText", searchText);
+		model.addAttribute("searchType", searchType);
 		
 		return "admin/menu/account/adminList";
 	}

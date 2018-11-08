@@ -5,12 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import skhu.dto.Admin;
 import skhu.dto.Student;
 
 @Mapper
 public interface StudentMapper {
 	List<Student> findAll();
-	List<Student> findAllWithDepartment();
+	List<Student> findAllWithDepartment(@Param("condition")Student condition, @Param("searchType")String searchType, @Param("searchText")String searchText);
 	Student login(@Param("studentNumber")String studentNumber, @Param("password")String password);
 	Student findById(@Param("id")int id);
 	Student findByAccount(@Param("name")String name, @Param("studentNumber")String studentNumber);

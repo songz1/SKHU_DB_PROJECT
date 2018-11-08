@@ -26,42 +26,49 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<h3 class="text-center">학생 목록</h3>
-				<form:form action="searchStudentList" method="get"
-					modelAttribute="student">
+				<form:form action="list" method="get" modelAttribute="condition">
 					<table class="table text-center">
 						<tr>
 							<td class="title col-md-2">학과(부)</td>
-							<td class="col-md-1"><form:select path="departmentId"
-									class="form-control" itemValue="id" itemLabel="name"
-									items="${ departments }" /></td>
-							<td class="title col-md-2"><select name="searchType">
-									<option value="0" searchText="loginId">학번</option>
-									<option value="1" searchText="name">이름</option>
-							</select></td>
-							<td><input type="text" name="searchText"></input></td>
-							<td class="col-md-1"></td>
+							<td class="col-md-1">
+								<form:select path="departmentId" class="form-control">
+									<form:option value="0" label="전체" />
+									<form:options itemValue="id" itemLabel="name" items="${ departments }"/>
+								</form:select>
+							</td>
+							<td class="title col-md-2">
+								<select name="searchType">
+									<option value="0">학번</option>
+									<option value="1">이름</option>
+								</select></td>
+							<td><input type="text" name="searchText" value="${ searchText }" class="form-control"/></td>
+							<td class="col-md-1" />
 						</tr>
 						<tr>
 							<td class="title col-md-2">학년</td>
-							<td class="col-md-1"><select name="year">
-									<option value="0">전체</option>
-									<option value="1">1학년</option>
-									<option value="2">2학년</option>
-									<option value="3">3학년</option>
-									<option value="4">4학년 이상</option>
-							</select></td>
+							<td class="col-md-1">
+								<form:select path="year" class="form-control">
+									<form:option value="0" label="전체" />
+									<form:option value="1" label="1학년" />
+									<form:option value="2" label="2학년" />
+									<form:option value="3" label="3학년" />
+									<form:option value="4" label="4학년" />
+								</form:select>
+							</td>
 							<td class="title col-md-2">이수학기</td>
-							<td class="col-md-1"><select name="semester">
-									<option value="0">전체</option>
-									<option value="1">1학기</option>
-									<option value="2">2학기</option>
-									<option value="3">3학기</option>
-									<option value="4">4학기</option>
-									<option value="5">5학기</option>
-									<option value="6">6학기</option>
-									<option value="7">7학기</option>
-									<option value="8">8학기</option>
-							</select></td>
+							<td class="col-md-1">
+								<form:select path="semester" class="form-control">
+									<form:option value="0" label="전체" />
+									<form:option value="1" label="1학기" />
+									<form:option value="2" label="2학기" />
+									<form:option value="3" label="3학기" />
+									<form:option value="4" label="4학기" />
+									<form:option value="5" label="5학기" />
+									<form:option value="6" label="6학기" />
+									<form:option value="7" label="7학기" />
+									<form:option value="8" label="8학기" />
+								</form:select>
+							</td>
 
 							<td class="col-md-1"><span style="float: right">
 									<button type="submit" class="btn btn-default btn-block"

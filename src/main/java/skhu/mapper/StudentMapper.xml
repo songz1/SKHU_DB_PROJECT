@@ -17,9 +17,10 @@
 		left join department d on s.departmentId = d.id
 		<where>
 			<if test="#{student.departmentId}">
-			</if>
-		</where> d.id = #{student.departmentId} and s.studentNumber = #{student.studentNumber} and s.name = #{student.name}
+			d.id = #{student.departmentId} and s.studentNumber = #{student.studentNumber} and s.name = #{student.name}
 		group by s.studentNumber
+			</if>
+		</where> 
 	</select>
 	<resultMap id="counselingResultMap" type="Student">
 		<id property="id" column="id" />
@@ -49,6 +50,23 @@
 		select s.*, d.id departmentId, d.name departmentName, d.collegeId 
 		from student s
 		left join department d on s.departmentId = d.id
+		<where>
+			<if test="condition.departmentId != 0 and condition.departmentId != null">
+				and d.id = #{condition.departmentId}
+			</if>
+			<if test='searchType == "0" and searchText != null and searchText != ""'>
+				and s.studentNumber = #{searchText}
+			</if>
+			<if test='searchType == "1" and searchText != null and searchText != ""'>
+				and s.name = #{searchText}
+			</if>
+			<if test="condition.year != 0 and condition.year != null">
+				and s.year = #{condition.year}
+			</if>
+			<if test="condition.semester != 0 and condition.semester != null">
+				and s.semester = #{condition.semester}
+			</if>
+		</where>
 	</select>
 	<resultMap id="studentListResultMap" type="Student">
 		<id property="id" column="id" />
