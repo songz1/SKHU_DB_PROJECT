@@ -6,4 +6,15 @@
 		select * from complete_score
 		order by year asc;
 	</select>
+	<insert id="insert">
+		insert into complete_score(year, grade, score) values(#{year}, #{grade}, #{score});
+	</insert>
+	<delete id="delete">
+		start transaction;
+		set sql_safe_updates = 0;
+		delete from complete_score;
+		set sql_safe_updates = 1;
+		alter table complete_score auto_increment = 1;
+		commit;
+	</delete>
 </mapper>

@@ -1,5 +1,7 @@
 package skhu.admin.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,13 +9,17 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import skhu.dto.College;
 import skhu.dto.CompleteScore;
@@ -33,6 +39,8 @@ import skhu.mapper.GraduationSubjectMapper;
 import skhu.mapper.ScoreMapper;
 import skhu.mapper.StudentMapper;
 import skhu.mapper.SubjectMapper;
+import skhu.util.ExcelReader;
+import skhu.util.ExcelReaderOption;
 import skhu.vo.Page;
 
 @Controller
@@ -49,7 +57,7 @@ public class AdminGraduationController {
 	@Autowired CompleteScoreMapper completeScoreMapper;
 
 	@RequestMapping(value="basic", method=RequestMethod.GET)
-	public String basic(Model model) {
+	public String basic(Model model) throws Exception{
 		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByCommon();
 		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByCommon();
 		List<CompleteScore> completeScores = completeScoreMapper.findAll();
@@ -92,6 +100,102 @@ public class AdminGraduationController {
 
 
 		return "admin/menu/graduation/basic";
+	}
+
+	@RequestMapping(value="downcompletescore")
+	public void downCompleteScore(HttpServletResponse response) throws Exception {
+		File destCompleteFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\form\\양식_학년별수료학점.xlsx");
+
+		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("양식_학년별수료학점.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
+		response.setHeader("Content-Length", ""+ destCompleteFile.length());
+		response.setHeader("Pragma", "no-cache;");
+		response.setHeader("Expires", "-1;");
+
+		if(!destCompleteFile.exists()){
+			throw new RuntimeException("file not found");
+		}
+
+		FileInputStream fis = null;
+		try{
+			fis = new FileInputStream(destCompleteFile);
+			FileCopyUtils.copy(fis, response.getOutputStream());
+			response.getOutputStream().flush();
+		}catch(Exception ex){
+			throw new RuntimeException(ex);
+		}finally {
+			try {
+				fis.close();
+			}catch(Exception ex){
+			}
+		}
+	}
+
+	@RequestMapping(value="downdetail")
+	public void downDetail(HttpServletResponse response) throws Exception {
+		File destDetailFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\user\\통합_졸업요건.pdf");
+
+		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("통합_졸업요건.pdf".getBytes("UTF-8"), "ISO8859_1") + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
+		response.setHeader("Content-Length", ""+ destDetailFile.length());
+		response.setHeader("Pragma", "no-cache;");
+		response.setHeader("Expires", "-1;");
+
+		if(!destDetailFile.exists()){
+			throw new RuntimeException("file not found");
+		}
+
+		FileInputStream fis = null;
+		try{
+			fis = new FileInputStream(destDetailFile);
+			FileCopyUtils.copy(fis, response.getOutputStream());
+			response.getOutputStream().flush();
+		}catch(Exception ex){
+			throw new RuntimeException(ex);
+		}finally {
+			try {
+				fis.close();
+			}catch(Exception ex){
+			}
+		}
+	}
+
+
+	@RequestMapping(value="basic", method=RequestMethod.POST)
+	public String basic(Model model, MultipartHttpServletRequest request) throws Exception {
+		MultipartFile completeFile = request.getFile("completeFile");
+		MultipartFile detailFile = request.getFile("detailFile");
+
+		if(!completeFile.isEmpty()) {
+			System.out.println("?");
+			File destCompleteFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\admin\\학년별수료학점.xlsx");
+			completeFile.transferTo(destCompleteFile);
+
+			ExcelReaderOption excelReaderOption = new ExcelReaderOption();
+			excelReaderOption.setFilePath(destCompleteFile.getAbsolutePath());
+			excelReaderOption.setOutputColumns("B","C","D");
+			excelReaderOption.setStartRow(3);
+			excelReaderOption.setSheetRow(1);
+
+			List<Map<String, String>> completeExcel = ExcelReader.read(excelReaderOption);
+			completeScoreMapper.delete();
+			for(Map<String, String> map : completeExcel) {
+				CompleteScore completeScore = new CompleteScore();
+				completeScore.setYear(map.get("B").equals("공통") || map.get("B").equals("") ? "0" : map.get("B"));
+				completeScore.setGrade((int)Double.parseDouble(map.get("C")));
+				completeScore.setScore((int)Double.parseDouble(map.get("D")));
+				completeScoreMapper.insert(completeScore);
+			}
+		}
+
+		if(!detailFile.isEmpty()) {
+			File destDetailFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\user\\통합_졸업요건.pdf");
+			detailFile.transferTo(destDetailFile);
+		}
+
+		return "redirect:basic";
 	}
 
 	@RequestMapping(value="detail", method=RequestMethod.GET)
