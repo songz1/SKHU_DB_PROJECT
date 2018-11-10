@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,18 +25,19 @@
 			<div class="panel-body">
 				<h3 class="text-center">조치사항 추가</h3>
 				<hr />
-
+				<form:form action="insert" method="post" modelAttribute="action">
 				<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
 					<textarea name="reportContent" class="form-control"
 						maxlength="1024" style="height: 100px"></textarea>
 				</div>
 				<div>
 					<button type="submit"
-						class="btn btn-danger col-md-2 col-md-offset-3" data-url="counselingList.jsp">취소</button>
+						class="btn btn-danger col-md-2 col-md-offset-3" data-url="counselingList">취소</button>
 				</div>
 				<div>
 					<button type="submit" class="btn btn-info col-md-2 col-md-offset-2">확인</button>
 				</div>
+				</form:form>
 			</div>
 		</div>
 	</div>

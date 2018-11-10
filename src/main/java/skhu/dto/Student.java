@@ -18,6 +18,7 @@ public class Student {
 	int majorEssential;
 	int liberalEssential;
 	List<Action> actions;
+	Action action;
 	
 	public int getId() {
 		return id;
@@ -109,7 +110,11 @@ public class Student {
 	public void setActions(List<Action> actions) {
 		this.actions = actions;
 	}
-
-
+	public Action getAction() {
+		return action;
+	}
+	public void setAction(Action action) {
+		this.action = action;
+	}
 
 }

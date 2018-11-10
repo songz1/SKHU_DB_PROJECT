@@ -35,7 +35,7 @@ public class AdminAccountController {
 		if(searchType == null)
 			searchType = "0";
 		
-		List<Department> departments = departmentMapper.findAll();
+		List<Department> departments = departmentMapper.findWithoutCommon();
 		List<Admin> admins = adminMapper.findAllWithDepartment(condition, "%" + searchText + "%", searchType);
 		Admin admin = new Admin();
 		

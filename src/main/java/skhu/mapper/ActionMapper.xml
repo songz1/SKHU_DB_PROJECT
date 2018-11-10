@@ -38,4 +38,33 @@
 			<result property="name" column="adminName" />
 		</association>
 	</resultMap>
+	
+	<select id="findAll" resultMap="counselingResultMap">
+		select a.*, s.id studentId, s.studentNumber, s.name studentName, s.departmentId, d.id departmentId, d.name departmentName
+		from action a
+		left join student s on s.id = a.studentId
+		left join department d on d.id = s.departmentId
+	</select>
+	<resultMap id="counselingResultMap" type="Action">
+		<id property="id" column="id" />
+		<result property="date" column="date" />
+		<result property="name" column="name" />
+		<result property="studentId" column="studentId" />
+		<result property="adminId" column="adminId" />
+		<association property="student" javaType="Student">
+			<id property="id" column="studentId" />
+			<result property="studentNumber" column="studentNumber" />
+			<result property="name" column="studentName" />
+			<result property="departmentId" column="departmentId" />
+			<association property="department" javaType="Department">
+				<id property="id" column="departmentId" />
+				<result property="name" column="departmentName" />
+			</association>
+		</association>
+	</resultMap>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert into action(studentId, name, content, date, adminId)
+		values(#{studentId}, #{name}, #{content}, #{date}, #{adminId});
+	</insert>
 </mapper>

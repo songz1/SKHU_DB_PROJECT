@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,27 +26,32 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<h3 class="text-center">조치사항 목록</h3>
+				<form:form action="counselingList" method="get" modelAttribute="condition">
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">학과(부)</td>
-						<td class="col-md-1"><select name="department">
-								<option value="0">전체</option>
-								<option value="1">소프트웨어공학과</option>
-								<option value="2">컴퓨터공학과</option>
-								<option value="3">글로컬IT학과</option>
-								<option value="4">정보통신공학과</option>
-						</select></td>
-						<td class="title col-md-1">학번</td>
-						<td class="col-md-1"><input type="text" name="studentNumber"></input>
+						<td class="col-md-1">
+							<form:select path="departmentId" class="form-control">
+								<form:option value="0" label="전체" />
+								<form:options itemValue="id" itemLabel="name" items="${ departments }"/>
+							</form:select>
 						</td>
-						<td class="title col-md-1">이름</td>
-						<td class="col-md-1"><input type="text" name="studentName"></input>
+						<td class="title col-md-1">
+							<select name="searchType">
+									<option value="0">학번</option>
+									<option value="1">이름</option>
+							</select>
+						</td>
+						<td class="col-md-1">
+							<input type="text" name="searchText" value="${ searchText }" />
 						</td>
 					
-						<td class="col-md-1"><span style="float: right">
+						<td class="col-md-1">
+							<span style="float: right">
 								<button type="submit" class="btn btn-default btn-block"
-									style="WIDTH: 100pt;" onclick="/">조회</button>
-						</span></td>
+									style="WIDTH: 100pt;">조회</button>
+							</span>
+						</td>
 					</tr>
 				</table>
 
@@ -58,20 +65,17 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center cursor tr-hover" data-url="counselingList.jsp">
-							<td>201532020</td>
-							<td>송지은</td>
-							<td>소프트웨어공학과</td>
-							<td>2018.09.09</td>
-						</tr>
-						<tr class="text-center cursor tr-hover" data-url="counselingList.jsp">
-							<td>201432019</td>
-							<td>신정호</td>
-							<td>소프트웨어공학과</td>
-							<td>2018.07.21</td>
-						</tr>
+						<c:forEach var="student" items="${ students }">
+							<tr data-url="counselingList?id=${ student.id }" class="text-center cursor tr-hover">
+								<td>${ student.studentNumber }</td>
+								<td>${ student.name }</td>
+								<td>${ student.department.name }</td>
+								<td><fmt:formatDate pattern="yy-MM-dd hh:ss" value="${ student.action.date }" /></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
+				</form:form>
 			</div>
 		</div>
 	</div>

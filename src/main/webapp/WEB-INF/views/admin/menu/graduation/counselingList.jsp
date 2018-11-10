@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,15 +29,15 @@
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">학번</td>
-						<td class="col-md-1">201532020</td>
+						<td class="col-md-1">${ student.studentNumber }</td>
 						<td class="title col-md-1">이름</td>
-						<td class="col-md-1">송지은</td>
+						<td class="col-md-1">${ student.name }</td>
 						<td class="title col-md-1">학과</td>
-						<td class="col-md-2">소프트웨어공학과</td>
+						<td class="col-md-2">${ student.department.name }</td>
 
 						<td class="col-md-1"><span style="float: right">
 								<button type="submit" class="btn btn-info btn-block"
-									style="WIDTH: 100pt;" onclick="/" data-url="counselingAdd.jsp">추가</button>
+									style="WIDTH: 100pt;" data-url="counselingAdd?id=${ action.id }">추가</button>
 						</span></td>
 					</tr>
 				</table>
@@ -49,16 +51,13 @@
 						<td class="title col-md-3">조치제목</td>
 						<td class="title col-md-1">조치 관리자</td>
 					</tr>
-					<tr class="cursor tr-hover" data-url="counselingDetail.jsp">
-						<td class="col-md-1">2018.09.09</td>
-						<td class="col-md-3">전공학점 관련</td>
-						<td class="col-md-1">행정직원</td>
-					</tr>
-					<tr class="cursor tr-hover" data-url="counselingDetail.jsp">
-						<td class="col-md-1">2018.03.28</td>
-						<td class="col-md-3">진로 관련</td>
-						<td class="col-md-1">홍은지</td>
-					</tr>
+					<c:forEach var="action" items="${ actions }">
+							<tr data-url="counselingDetail?id=${ action.id }" class="text-center cursor tr-hover">
+								<td><fmt:formatDate pattern="yy-MM-dd hh:ss" value="${ action.date }" /></td>
+								<td>${ action.name }</td>
+								<td>${ action.admin.name }</td>
+							</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</div>

@@ -12,13 +12,19 @@
 		where studentNumber = #{studentNumber} and password = #{password};
 	</select>
 	<select id="findAllWithCounseling" resultMap="counselingResultMap">
-		select s.id, s.studentNumber, s.name studentName, d.id departmentId, d.name departmentName, a.id actionId, max(a.date) date from student s 
+		select s.*, d.id departmentId, d.name departmentName, a.id actionId, max(a.date) date 
+		from student s 
 		left join action a on s.id = a.studentId
 		left join department d on s.departmentId = d.id
 		<where>
-			<if test="#{student.departmentId}">
-			d.id = #{student.departmentId} and s.studentNumber = #{student.studentNumber} and s.name = #{student.name}
-		group by s.studentNumber
+			<if test="condition.departmentId != 0 and condition.departmentId != null">
+				and d.id = #{condition.departmentId}
+			</if>
+			<if test='searchType == "0" and searchText != null and searchText != ""'>
+				and s.studentNumber = #{searchText}
+			</if>
+			<if test='searchType == "1" and searchText != null and searchText != ""'>
+				and s.name = #{searchText}
 			</if>
 		</where> 
 	</select>
