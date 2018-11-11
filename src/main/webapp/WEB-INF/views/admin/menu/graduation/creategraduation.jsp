@@ -132,16 +132,20 @@
 					<button type="submit"
 						class="btn btn-info mb-25 col-md-2 col-md-offset-5">확인</button>
 				</form:form>
-				<form method="post" enctype="multipart/form-data"
+				<form method="post" enctype="multipart/form-data" action="createexcel"
 					class="create-upload">
 					<div class="form-group">
 					<hr/>
 						<label>양식</label><br/>
-						<a href="/" download="양식">다운로드</a>
+						<a href="downgradegraduation">성적졸업요건양식</a><br/>
+						<a href="downsubjectgraduation">과목졸업요건양식</a>
 						<hr/>
-						<label>파일</label>
+						<label>성적졸업요건파일</label>
 						<input type="file" class="form-control form-width form-height"
-							name="scoreFile" />
+							name="gradeFile" />
+						<label>과목졸업요건파일</label>
+						<input type="file" class="form-control form-width form-height"
+							name="subjectFile" />
 					</div>
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary">

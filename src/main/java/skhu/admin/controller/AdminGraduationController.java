@@ -2,7 +2,6 @@ package skhu.admin.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,8 +60,8 @@ public class AdminGraduationController {
 		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByCommon();
 		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByCommon();
 		List<CompleteScore> completeScores = completeScoreMapper.findAll();
-		Map<Year, List<GraduationGrade>> graduationGradeMap = new HashMap<Year, List<GraduationGrade>>();
-		Map<Year, List<GraduationSubject>> graduationSubjectMap = new HashMap<Year, List<GraduationSubject>>();
+		Map<String, List<GraduationGrade>> graduationGradeMap = new HashMap<String, List<GraduationGrade>>();
+		Map<String, List<GraduationSubject>> graduationSubjectMap = new HashMap<String, List<GraduationSubject>>();
 		List<GraduationGrade> gradeTemp = new ArrayList<GraduationGrade>();
 		List<GraduationSubject> subjectTemp = new ArrayList<GraduationSubject>();
 
@@ -183,7 +182,7 @@ public class AdminGraduationController {
 			completeScoreMapper.delete();
 			for(Map<String, String> map : completeExcel) {
 				CompleteScore completeScore = new CompleteScore();
-				completeScore.setYear(map.get("B").equals("공통") || map.get("B").equals("") ? "0" : map.get("B"));
+				completeScore.setYear(map.get("B").equals("공통") ? map.get("B") : map.get("B").substring(0, map.get("B").length() - 2));
 				completeScore.setGrade((int)Double.parseDouble(map.get("C")));
 				completeScore.setScore((int)Double.parseDouble(map.get("D")));
 				completeScoreMapper.insert(completeScore);
@@ -269,24 +268,17 @@ public class AdminGraduationController {
 
 	@RequestMapping(value="gradelist", method=RequestMethod.GET)
 	public String gradelist(Model model, HttpServletRequest request, GraduationGrade condition, @RequestParam(value="pg", required=false) String pg, @RequestParam(value="searchText", required=false) String searchText) {
-		String st = "";
-		if(searchText != null)
-			st = "%" + searchText + "%";
-
-		else
+		if(searchText == null)
 			searchText = "";
 
-		if(searchText.equals("공통"))
-			st = "0";
-
 		Page page = new Page();
-		int total = graduationGradeMapper.countByOption(condition, searchText);
+		int total = graduationGradeMapper.countByOption(condition, "%" + searchText + "%");
 		int currentPage = 1;
 
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
 
-		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByOption(condition, st);
+		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByOption(condition, "%" + searchText + "%");
 		List<Department> departments = departmentMapper.findAll();
 		List<Graduation> graduations = graduationMapper.findAll();
 		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
@@ -331,24 +323,17 @@ public class AdminGraduationController {
 
 	@RequestMapping(value="subjectlist", method=RequestMethod.GET)
 	public String subjectlist(Model model, HttpServletRequest request, GraduationSubject condition, @RequestParam(value="pg", required=false) String pg, @RequestParam(value="searchText", required=false) String searchText) {
-		String st = "";
-		if(searchText != null)
-			st = "%" + searchText + "%";
-
-		else
+		if(searchText == null)
 			searchText = "";
 
-		if(searchText.equals("공통"))
-			st = "0";
-
 		Page page = new Page();
-		int total = graduationSubjectMapper.countByOption(condition, searchText);
+		int total = graduationSubjectMapper.countByOption(condition, "%" + searchText + "%");
 		int currentPage = 1;
 
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
 
-		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByOption(condition, st);
+		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByOption(condition, "%" + searchText + "%");
 		List<Department> departments = departmentMapper.findAll();
 		List<Graduation> graduations = graduationMapper.findAll();
 		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
@@ -413,8 +398,68 @@ public class AdminGraduationController {
 		return "admin/menu/graduation/creategraduation";
 	}
 
+	@RequestMapping(value="downgradegraduation")
+	public void downGradegGraduation(HttpServletResponse response) throws Exception {
+		File destDetailFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\form\\양식_학점졸업요건.xlsx");
+
+		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("학점졸업요건.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
+		response.setHeader("Content-Length", ""+ destDetailFile.length());
+		response.setHeader("Pragma", "no-cache;");
+		response.setHeader("Expires", "-1;");
+
+		if(!destDetailFile.exists()){
+			throw new RuntimeException("file not found");
+		}
+
+		FileInputStream fis = null;
+		try{
+			fis = new FileInputStream(destDetailFile);
+			FileCopyUtils.copy(fis, response.getOutputStream());
+			response.getOutputStream().flush();
+		}catch(Exception ex){
+			throw new RuntimeException(ex);
+		}finally {
+			try {
+				fis.close();
+			}catch(Exception ex){
+			}
+		}
+	}
+
+	@RequestMapping(value="downsubjectgraduation")
+	public void downSubjectGraduation(HttpServletResponse response) throws Exception {
+		File destDetailFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\form\\양식_과목졸업요건.xlsx");
+
+		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("과목졸업요건.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
+		response.setHeader("Content-Length", ""+ destDetailFile.length());
+		response.setHeader("Pragma", "no-cache;");
+		response.setHeader("Expires", "-1;");
+
+		if(!destDetailFile.exists()){
+			throw new RuntimeException("file not found");
+		}
+
+		FileInputStream fis = null;
+		try{
+			fis = new FileInputStream(destDetailFile);
+			FileCopyUtils.copy(fis, response.getOutputStream());
+			response.getOutputStream().flush();
+		}catch(Exception ex){
+			throw new RuntimeException(ex);
+		}finally {
+			try {
+				fis.close();
+			}catch(Exception ex){
+			}
+		}
+	}
+
 	@RequestMapping(value="creategrade", method=RequestMethod.POST)
-	public String creategrade(Model model, GraduationGrade graduationGrade) {
+	public String createGrade(Model model, GraduationGrade graduationGrade) {
 		if((graduationGrade.getYear().length() != 0 && !graduationGrade.getYear().equals("")) &&
 				(graduationGrade.getName().length() != 0 && !graduationGrade.getName().equals("")))
 			graduationGradeMapper.insert(graduationGrade);
@@ -423,7 +468,7 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="createsubject", method=RequestMethod.POST)
-	public String createsubject(Model model, GraduationSubject graduationSubject, @RequestParam("code") String code) {
+	public String createSubject(Model model, GraduationSubject graduationSubject, @RequestParam("code") String code) {
 		Subject subject = subjectMapper.findByCode(code);
 
 		if(subject == null)
@@ -435,6 +480,85 @@ public class AdminGraduationController {
 			graduationSubjectMapper.insert(graduationSubject);
 
 		return "redirect:subjectlist";
+	}
+
+	@RequestMapping(value="createexcel", method=RequestMethod.POST)
+	public String createExcel(Model model, MultipartHttpServletRequest request) throws Exception {
+		MultipartFile gradeFile = request.getFile("gradeFile");
+		MultipartFile subjectFile = request.getFile("subjectFile");
+		List<Department> departments = departmentMapper.findAll();
+		Map<String, Integer> departmentMap = new HashMap<String, Integer>();
+		List<Graduation> graduations = graduationMapper.findAll();
+		Map<String, Integer> graduationMap = new HashMap<String, Integer>();
+
+		for(Department department : departments) {
+			departmentMap.put(department.getName(), department.getId());
+		}
+
+		for(Graduation graduation : graduations) {
+			graduationMap.put(graduation.getName(), graduation.getId());
+		}
+
+		ExcelReaderOption excelReaderOption = new ExcelReaderOption();
+		excelReaderOption.setStartRow(3);
+		excelReaderOption.setSheetRow(1);
+
+		if(!gradeFile.isEmpty()) {
+			File destGradeFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\admin\\학점졸업요건.xlsx");
+			gradeFile.transferTo(destGradeFile);
+
+			excelReaderOption.setFilePath(destGradeFile.getAbsolutePath());
+			excelReaderOption.setOutputColumns("B","C","D", "E", "F", "G");
+			List<Map<String, String>> gradeExcel = ExcelReader.read(excelReaderOption);
+
+			for(Map<String, String> map : gradeExcel) {
+				GraduationGrade graduationGrade = new GraduationGrade();
+				graduationGrade.setYear(map.get("B").equals("공통") ? map.get("B") : map.get("B").substring(0, map.get("B").length() - 2));
+				graduationGrade.setDepartmentId(departmentMap.get(map.get("C")));
+				graduationGrade.setGraduationId(graduationMap.get(map.get("D")));
+				graduationGrade.setName(map.get("E"));
+				graduationGrade.setScore((int)Double.parseDouble(map.get("F")));
+				graduationGrade.setNote(map.get("G"));
+
+				graduationGradeMapper.insert(graduationGrade);
+			}
+		}
+
+		if(!subjectFile.isEmpty()) {
+			System.out.println("?");
+			File destSubjectFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\admin\\과목졸업요건.xlsx");
+			System.out.println("??");
+			subjectFile.transferTo(destSubjectFile);
+			System.out.println("???");
+
+			excelReaderOption.setFilePath(destSubjectFile.getAbsolutePath());
+			excelReaderOption.setOutputColumns("B","C","D", "E", "F", "G", "H");
+			List<Map<String, String>> subjectExcel = ExcelReader.read(excelReaderOption);
+			System.out.println("test");
+
+			for(Map<String, String> map : subjectExcel) {
+				Subject subject = subjectMapper.findByCode(map.get("E"));
+				System.out.println("subject");
+				if(subject == null) {
+					System.out.println("??");
+					return "redirect:creategraduation";
+				}
+
+				System.out.println("test");
+
+				GraduationSubject graduationSubject = new GraduationSubject();
+				graduationSubject.setYear(map.get("B").equals("공통") ? map.get("B") : map.get("B").substring(0, map.get("B").length() - 2));
+				graduationSubject.setDepartmentId(departmentMap.get(map.get("C")));
+				graduationSubject.setGraduationId(graduationMap.get(map.get("D")));
+				graduationSubject.setSubjectId(subject.getId());
+				graduationSubject.setSemester(map.get("F").equals("공통") ? 0 : (int)Double.parseDouble(map.get("F")));
+				graduationSubject.setNote(map.get("G"));
+				graduationSubject.setEssential(map.get("H").equals("O") ? true : false);
+
+				graduationSubjectMapper.insert(graduationSubject);
+			}
+		}
+		return "redirect:creategraduation";
 	}
 
 	@RequestMapping(value="graduationlist", method=RequestMethod.GET)

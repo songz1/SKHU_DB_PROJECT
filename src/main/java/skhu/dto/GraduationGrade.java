@@ -1,10 +1,8 @@
 package skhu.dto;
 
-import java.time.Year;
-
 public class GraduationGrade {
 	int id;
-	Year year;
+	String year;
 	int departmentId;
 	Department department;
 	int graduationId;
@@ -18,10 +16,10 @@ public class GraduationGrade {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Year getYear() {
+	public String getYear() {
 		return year;
 	}
-	public void setYear(Year year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 	public int getDepartmentId() {

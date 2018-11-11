@@ -1,6 +1,5 @@
 package skhu.user.controller;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,8 +50,8 @@ public class UserGraduationController {
 		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByCommon();
 		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByCommon();
 		List<CompleteScore> completeScores = completeScoreMapper.findAll();
-		Map<Year, List<GraduationGrade>> graduationGradeMap = new HashMap<Year, List<GraduationGrade>>();
-		Map<Year, List<GraduationSubject>> graduationSubjectMap = new HashMap<Year, List<GraduationSubject>>();
+		Map<String, List<GraduationGrade>> graduationGradeMap = new HashMap<String, List<GraduationGrade>>();
+		Map<String, List<GraduationSubject>> graduationSubjectMap = new HashMap<String, List<GraduationSubject>>();
 		List<GraduationGrade> gradeTemp = new ArrayList<GraduationGrade>();
 		List<GraduationSubject> subjectTemp = new ArrayList<GraduationSubject>();
 

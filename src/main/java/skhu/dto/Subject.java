@@ -1,10 +1,8 @@
 package skhu.dto;
 
-import java.time.Year;
-
 public class Subject {
 	int id;
-	Year year;
+	String year;
 	int semester;
 	String code;
 	String subjectClass;
@@ -24,10 +22,10 @@ public class Subject {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Year getYear() {
+	public String getYear() {
 		return year;
 	}
-	public void setYear(Year year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 	public int getSemester() {

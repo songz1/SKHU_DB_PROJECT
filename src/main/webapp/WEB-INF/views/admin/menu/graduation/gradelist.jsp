@@ -78,7 +78,7 @@
 							<c:forEach var="graduationGrade" items="${ graduationGrades }">
 								<tr class="text-center tr-hover">
 									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.id }</td>
-									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.year }<c:if test="${graduationGrade.year eq '0'}">(공통)</c:if></td>
+									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.year }</td>
 									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.department.name }</td>
 									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.graduation.name }</td>
 									<td class="cursor" data-url="editgrade?id=${ graduationGrade.id }">${ graduationGrade.name }</td>
