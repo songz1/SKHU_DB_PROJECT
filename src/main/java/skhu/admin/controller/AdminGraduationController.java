@@ -103,8 +103,7 @@ public class AdminGraduationController {
 
 	@RequestMapping(value="downcompletescore")
 	public void downCompleteScore(HttpServletResponse response) throws Exception {
-		File destCompleteFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\form\\양식_학년별수료학점.xlsx");
-
+		File destCompleteFile = new File("src\\main\\webapp\\res\\file\\form\\양식_학년별수료학점.xlsx");
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("양식_학년별수료학점.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
@@ -133,7 +132,7 @@ public class AdminGraduationController {
 
 	@RequestMapping(value="downdetail")
 	public void downDetail(HttpServletResponse response) throws Exception {
-		File destDetailFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\user\\통합_졸업요건.pdf");
+		File destDetailFile = new File("src\\main\\webapp\\res\\file\\user\\통합_졸업요건.pdf");
 
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("통합_졸업요건.pdf".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
@@ -169,7 +168,7 @@ public class AdminGraduationController {
 
 		if(!completeFile.isEmpty()) {
 			System.out.println("?");
-			File destCompleteFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\admin\\학년별수료학점.xlsx");
+			File destCompleteFile = new File("src\\main\\webapp\\res\\file\\admin\\학년별수료학점.xlsx");
 			completeFile.transferTo(destCompleteFile);
 
 			ExcelReaderOption excelReaderOption = new ExcelReaderOption();
@@ -190,7 +189,7 @@ public class AdminGraduationController {
 		}
 
 		if(!detailFile.isEmpty()) {
-			File destDetailFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\user\\통합_졸업요건.pdf");
+			File destDetailFile = new File("src\\main\\webapp\\res\\file\\user\\통합_졸업요건.pdf");
 			detailFile.transferTo(destDetailFile);
 		}
 
@@ -400,7 +399,7 @@ public class AdminGraduationController {
 
 	@RequestMapping(value="downgradegraduation")
 	public void downGradegGraduation(HttpServletResponse response) throws Exception {
-		File destDetailFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\form\\양식_학점졸업요건.xlsx");
+		File destDetailFile = new File("src\\main\\webapp\\res\\file\\form\\양식_학점졸업요건.xlsx");
 
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("학점졸업요건.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
@@ -430,7 +429,7 @@ public class AdminGraduationController {
 
 	@RequestMapping(value="downsubjectgraduation")
 	public void downSubjectGraduation(HttpServletResponse response) throws Exception {
-		File destDetailFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\form\\양식_과목졸업요건.xlsx");
+		File destDetailFile = new File("src\\main\\webapp\\res\\file\\form\\양식_과목졸업요건.xlsx");
 
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("과목졸업요건.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
@@ -504,7 +503,7 @@ public class AdminGraduationController {
 		excelReaderOption.setSheetRow(1);
 
 		if(!gradeFile.isEmpty()) {
-			File destGradeFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\admin\\학점졸업요건.xlsx");
+			File destGradeFile = new File("src\\main\\webapp\\res\\file\\admin\\학점졸업요건.xlsx");
 			gradeFile.transferTo(destGradeFile);
 
 			excelReaderOption.setFilePath(destGradeFile.getAbsolutePath());
@@ -526,7 +525,7 @@ public class AdminGraduationController {
 
 		if(!subjectFile.isEmpty()) {
 			System.out.println("?");
-			File destSubjectFile = new File("C:\\Users\\user\\Documents\\workspace-sts-3.9.5.RELEASE\\SKHU_DB_PROJECT\\src\\main\\webapp\\res\\file\\admin\\과목졸업요건.xlsx");
+			File destSubjectFile = new File("src\\main\\webapp\\res\\file\\admin\\과목졸업요건.xlsx");
 			System.out.println("??");
 			subjectFile.transferTo(destSubjectFile);
 			System.out.println("???");
