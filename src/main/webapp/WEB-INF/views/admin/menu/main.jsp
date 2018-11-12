@@ -43,7 +43,7 @@
 								<td class="title col md-1">${ action.student.department.name }</td>
 								<td class="title col-md-3">${ action.name }</td>
 								<td class="title col-md-1">${ action.admin.name }</td>
-								<td class="title col-md-2"><fmt:formatDate pattern="yy-MM-dd hh:ss" value="${ action.date }" /></td>
+								<td class="title col-md-2"><fmt:formatDate pattern="yy-MM-dd HH:MM:SS" value="${ action.date }" /></td>
 							</tr>
 						</c:forEach>
 					</table>

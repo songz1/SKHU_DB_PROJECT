@@ -25,7 +25,7 @@ public interface StudentMapper {
 		@Param("searchType") String searchType, @Param("majorCheck") boolean majorCheck,
 		@Param("minorCheck") boolean minorCheck
 	);
-	List<Student> findAllWithCounseling(Student student);
+	List<Student> findAllWithCounseling(@Param("condition")Student condition, @Param("searchType")String searchType, @Param("searchText")String searchText);
 	void update(Student student);
 	void insert(Student student);
 	void delete(@Param("id")int id);

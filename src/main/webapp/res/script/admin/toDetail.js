@@ -5,6 +5,6 @@ $(function() {
 	})
 	
 	$("[data-confirm-delete]").click(function() {
-		return confirm("계정을 삭제하시겠습니까?");
+		return confirm("삭제하시겠습니까?");
 	})
 })

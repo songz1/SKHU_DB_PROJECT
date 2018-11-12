@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +28,12 @@
 				<hr />
 				<form:form action="insert" method="post" modelAttribute="action">
 				<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
-					<textarea name="reportContent" class="form-control"
-						maxlength="1024" style="height: 100px"></textarea>
+				<form:input path="loginId" class="form-control" />
+					제목 <form:input path="name" class="form-control"
+						maxlength="1024" /><p />
+					
+					내용 <form:textarea path="content" class="form-control"
+						maxlength="1024" style="height: 100px" />
 				</div>
 				<div>
 					<button type="submit"

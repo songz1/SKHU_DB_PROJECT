@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import skhu.dto.Action;
+import skhu.dto.Admin;
 import skhu.dto.College;
 import skhu.dto.CompleteScore;
 import skhu.dto.Department;
@@ -29,6 +31,7 @@ import skhu.dto.GraduationSubject;
 import skhu.dto.Score;
 import skhu.dto.Student;
 import skhu.dto.Subject;
+import skhu.mapper.ActionMapper;
 import skhu.mapper.CollegeMapper;
 import skhu.mapper.CompleteScoreMapper;
 import skhu.mapper.DepartmentMapper;
@@ -54,6 +57,7 @@ public class AdminGraduationController {
 	@Autowired ScoreMapper scoreMapper;
 	@Autowired SubjectMapper subjectMapper;
 	@Autowired CompleteScoreMapper completeScoreMapper;
+	@Autowired ActionMapper actionMapper;
 
 	@RequestMapping(value="basic", method=RequestMethod.GET)
 	public String basic(Model model) throws Exception{
@@ -716,23 +720,72 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="counseling", method=RequestMethod.GET)
-	public String counseling() {
+	public String counseling(Model model, Student condition,
+			@RequestParam(value="searchText", required=false) String searchText,
+			@RequestParam(value="searchType", required=false) String searchType) {
+		
+		if(searchText == null)
+			searchText = "";
+
+		if(searchType == null)
+			searchType = "0";
+
+		List<Student> students = studentMapper.findAllWithCounseling(condition, "%" + searchText + "%", searchType);
+		List<Department> departments = departmentMapper.findWithoutCommon();
+		Student student = new Student();
+		
+		model.addAttribute("condition", condition);
+		model.addAttribute("searchText", searchText);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("students", students);
+		model.addAttribute("departments", departments);
+		model.addAttribute("student", student);
+		
 		return "admin/menu/graduation/counseling";
 	}
 
 	@RequestMapping(value="counselingList", method=RequestMethod.GET)
-	public String counselingList() {
+	public String counselingList(Model model, @RequestParam("id") int id) {
+		
+		Student student = studentMapper.findById(id);
+		List<Action> actions = actionMapper.findById(id);
+		
+		model.addAttribute("student", student);
+		model.addAttribute("actions", actions);
+		
 		return "admin/menu/graduation/counselingList";
 	}
 
 	@RequestMapping(value="counselingDetail", method=RequestMethod.GET)
-	public String counselingDetail() {
+	public String counselingDetail(Model model, @RequestParam("id") int id) {
+		
+		Action action = actionMapper.findByActionId(id);
+
+		model.addAttribute("action", action);
+		
 		return "admin/menu/graduation/counselingDetail";
 	}
 
 	@RequestMapping(value="counselingAdd", method=RequestMethod.GET)
-	public String counselingAdd() {
+	public String counselingAdd(Model model, Action action) {
+
+		model.addAttribute("action", action);
 		return "admin/menu/graduation/counselingAdd";
+	}
+	
+	@RequestMapping(value="insert", method=RequestMethod.POST)
+	public String insert(Model model, Action action) {
+		if((action.getName().length() != 0 && !action.getName().equals("")) &&
+		(action.getContent().length() != 0 && !action.getContent().equals("")))
+			actionMapper.insert(action);
+
+		return "redirect:counseling";
+	}
+	
+	@RequestMapping("delete")
+	public String delete(Model model, @RequestParam("id") int id) {
+		actionMapper.delete(id);
+		return "redirect:counseling";
 	}
 
 }

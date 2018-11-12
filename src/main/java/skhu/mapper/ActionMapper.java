@@ -12,6 +12,8 @@ import skhu.dto.Admin;
 public interface ActionMapper {
 	List<Action> findActionRecently(@Param("start")int start, @Param("end")int end);
 	int count();
-	List<Action> findAll();
+	List<Action> findById(@Param("id")int id);
+	Action findByActionId(@Param("id")int id);
 	void insert(Action action);
+	void delete(@Param("id")int id);
 }

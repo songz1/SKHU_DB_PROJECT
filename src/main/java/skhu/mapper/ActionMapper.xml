@@ -39,11 +39,23 @@
 		</association>
 	</resultMap>
 	
-	<select id="findAll" resultMap="counselingResultMap">
+	<select id="findByActionId" resultMap="counselingResultMap">
 		select a.*, s.id studentId, s.studentNumber, s.name studentName, s.departmentId, d.id departmentId, d.name departmentName
+		, ad.id adminId, ad.name adminName, ad.authority 
 		from action a
 		left join student s on s.id = a.studentId
 		left join department d on d.id = s.departmentId
+		left join admin ad on ad.id = a.adminId
+		where a.id = #{id}
+	</select>
+	<select id="findById" resultMap="counselingResultMap">
+		select a.*, s.id studentId, s.studentNumber, s.name studentName, s.departmentId, d.id departmentId, d.name departmentName
+		, ad.id adminId, ad.name adminName, ad.authority 
+		from action a
+		left join student s on s.id = a.studentId
+		left join department d on d.id = s.departmentId
+		left join admin ad on ad.id = a.adminId
+		where a.studentId = #{id}
 	</select>
 	<resultMap id="counselingResultMap" type="Action">
 		<id property="id" column="id" />
@@ -61,10 +73,20 @@
 				<result property="name" column="departmentName" />
 			</association>
 		</association>
+		<association property="admin" javaType="Admin">
+			<id property="id" column="adminId" />
+			<result property="name" column="adminName" />
+			<result property="loginId" column="loginId" />
+			<result property="authority" column="authority" />
+		</association>
 	</resultMap>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		insert into action(studentId, name, content, date, adminId)
 		values(#{studentId}, #{name}, #{content}, #{date}, #{adminId});
 	</insert>
+	
+	<delete id="delete">
+		DELETE FROM action WHERE id = #{id}
+	</delete>
 </mapper>

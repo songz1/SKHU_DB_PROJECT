@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,22 +32,23 @@
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">학번</td>
-						<td class="col-md-1">201532020</td>
+						<td class="col-md-1">${ action.student.studentNumber }</td>
 						<td class="title col-md-1">이름</td>
-						<td class="col-md-1">송지은</td>
+						<td class="col-md-1">${ action.student.name }</td>
 						<td class="title col-md-1">학과</td>
-						<td class="col-md-2">소프트웨어공학과</td>
+						<td class="col-md-2">${ action.student.department.name }</td>
 					</tr>
 					<tr>
 						<td class="title col-md-1">조치 관리자</td>
-						<td class="col-md-1">행정직원</td>
+						<td class="col-md-1">${ action.admin.name }</td>
 						<td class="title col-md-1">조치일시</td>
-						<td class="col-md-2">2018.09.09</td>
+						<td class="col-md-2"><fmt:formatDate pattern="yy-MM-dd HH:MM:SS" value="${ action.date }" /></td>
 						<td class="col-md-1"></td>
-						<td class="col-md-2"><span style="float: center">
-								<button type="submit" class="btn btn-danger"
-									style="WIDTH: 100pt;">삭제</button>
-						</span></td>
+						<td class="col-md-2">
+							<c:if test="${ action.id > 0 }">
+								<a href="delete?id=${ action.id }" class="btn btn-danger" data-confirm-delete>삭제</a>
+							</c:if>
+						</td>
 					</tr>
 				</table>
 
@@ -53,7 +57,7 @@
 						<td class="title" colspan="4">조치 내용</td>
 					</tr>
 					<tr>
-						<td class="col-md-3">!!!지은아 공부해!!!</td>
+						<td class="col-md-3">${ action.content }</td>
 					</tr>
 				</table>
 			</div>
