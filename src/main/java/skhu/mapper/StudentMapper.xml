@@ -102,6 +102,7 @@
 	<resultMap id="studentResultMap" type="Student">
 		<id property="id" column="id" />
 		<result property="studentNumber" column="studentNumber" />
+		<result property="password" column="password" />
 		<result property="name" column="name" />
 		<result property="year" column="year" />
 		<result property="semester" column="semester" />
@@ -230,37 +231,37 @@
 		update student
 		<set>
 			<if test='password != null and password != ""'>
-				password = #{password}
+				password = #{password},
 			</if>
 			<if test='name != null and name != ""'>
-				name = #{name}
+				name = #{name},
 			</if>
 			<if test="year != null and year != 0">
-				, year = #{year}
+				year = #{year},
 			</if>
 			<if test="departmentId != 0 and departmentId != null">
-				, departmentId = #{departmentId}
+				departmentId = #{departmentId},
 			</if>
 			<if test='email != null and email != ""'>
-				, email = #{email}
+				email = #{email},
 			</if>
 			<if test="semester != null and semester != 0">
-				, semester = #{semester}
+				semester = #{semester},
 			</if>
 			<if test='graduation != null and graduation != "0" and graduation != ""'>
-				, graduation = #{graduation}
+				graduation = #{graduation},
 			</if>
 			<if test='minor != null and minor != "0" and minor != ""'>
-				, minor = #{minor}
+				minor = #{minor},
 			</if>
-			<if test='doubleMajor != null doubleMajor != "0" doubleMajor != ""'>
-				, doubleMajor = #{doubleMajor}
+			<if test='doubleMajor != null and doubleMajor != "0" and doubleMajor != ""'>
+				doubleMajor = #{doubleMajor},
 			</if>
-			<if test="majorEssential != null majorEssential != 0">
-				, majorEssential = #{majorEssential}
+			<if test="majorEssential != null and majorEssential != 0">
+				majorEssential = #{majorEssential},
 			</if>
 			<if test="liberalEssential != null and liberalEssential != 0">
-				, liberalEssential = #{liberalEssential}
+				liberalEssential = #{liberalEssential}
 			</if>
 		</set>
 		where id = #{id}
@@ -268,7 +269,7 @@
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		insert
 		into student(studentNumber, password, name, year, departmentId, email, semester, graduation, minor, doubleMajor, majorEssential, liberalEssential)
-		values(#{studentNumber}, #{password}, #{name}, #{year}, #{departmentId}, #{email}, 0, '0', '0', '0', 0, 0);
+		values(#{studentNumber}, #{password}, #{name}, #{year}, #{departmentId}, #{email}, #{semester}, '0', '0', '0', 0, 0);
 	</insert>
 	<delete id="delete">
 		DELETE FROM student WHERE id = #{id}

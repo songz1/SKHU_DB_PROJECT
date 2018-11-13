@@ -33,8 +33,7 @@
 						</div>
 						<div class="form-group title">패스워드 변경</div>
 						<div class="form-group">
-							<input type="password" class="form-control" name="password"
-								placeholder="비밀번호">
+							<form:input path="password" class="form-control" placeholder="비밀번호" />
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="passwordConfirm"

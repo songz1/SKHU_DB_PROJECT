@@ -43,7 +43,7 @@
 								id="option-show">
 									<c:forEach var="graduation" items="${ graduations }">
 										<c:if test="${ graduation.division eq 'a' }">
-											<option value="${ graduation.id }">${ graduation.name }</option>
+											<option value="${ graduation.id }" <c:if test="${graduation.id eq mainGraduationId}">selected</c:if>>${ graduation.name }</option>
 										</c:if>
 									</c:forEach>
 							</select></td>
@@ -52,7 +52,7 @@
 									<option value="0">미선택</option>
 									<c:forEach var="department" items="${ departments }">
 										<c:if test="${ department.id != student.departmentId }">
-											<option value="${ department.id }">${ department.name }</option>
+											<option value="${ department.id }" <c:if test="${department.id eq minorId && doubleMajorId eq 0}">selected</c:if>>${ department.name }</option>
 										</c:if>
 									</c:forEach>
 							</select></td>
@@ -61,7 +61,7 @@
 									<option value="0">미선택</option>
 									<c:forEach var="department" items="${ departments }">
 										<c:if test="${ department.id != student.departmentId }">
-											<option value="${ department.id }">${ department.name }</option>
+											<option value="${ department.id }" <c:if test="${department.id eq minorId && doubleMajorId ne 0}">selected</c:if>>${ department.name }</option>
 										</c:if>
 									</c:forEach>
 							</select></td>
@@ -69,8 +69,8 @@
 							<td class="col-md-1 td-double"><select name="doubleMajor2">
 									<option value="0">미선택</option>
 									<c:forEach var="department" items="${ departments }">
-										<c:if test="${ department.id != student.departmentId }">
-											<option value="${ department.id }">${ department.name }</option>
+										<c:if test="${ department.id != student.departmentId && department.id != minorId }">
+											<option value="${ department.id }" <c:if test="${department.id eq doubleMajorId}">selected</c:if>>${ department.name }</option>
 										</c:if>
 									</c:forEach>
 							</select></td>
@@ -80,10 +80,10 @@
 						<tr>
 							<td class="title col-md-1">상세졸업과정</td>
 							<td class="col-md-1"><select name="subGraduation">
-									<option value="0">없음</option>
+									<option value="0">미선택</option>
 									<c:forEach var="graduation" items="${ graduations }">
 										<c:if test="${ graduation.division eq 'c' }">
-											<option value="${ graduation.id }">${ graduation.name }</option>
+											<option value="${ graduation.id }" <c:if test="${graduation.id eq subGraduationId}">selected</c:if>>${ graduation.name }</option>
 										</c:if>
 									</c:forEach>
 							</select></td>

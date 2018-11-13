@@ -40,7 +40,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">비밀번호</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="password" name="password" class="form-control">
+							<form:password path="password" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -52,7 +52,7 @@
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">이메일</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<form:input path="email" class="form-control" />
+							<input type="email" class="form-control" name="email" placeholder="이메일">
 						</div>
 					</div>
 					<div class="form-group mb-50">

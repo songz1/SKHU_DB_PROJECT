@@ -19,7 +19,6 @@ $(function(){
 
 	$("#option-show").change(function() {
 		var optionShowValue = optionShow.options[optionShow.selectedIndex].value;
-		alert(optionShowValue);
 		if(optionShowValue == "부전공") {
 			$(".div-minor").show();
 			$(".div-double").hide();

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -14,7 +15,7 @@ import skhu.mapper.StudentMapper;
 @RequestMapping("user/login")
 public class UserLoginController {
 	@Autowired StudentMapper studentMapper;
-	
+
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	public String login(Student student, HttpSession session) {
 		Student login = studentMapper.login(student.getStudentNumber(), student.getPassword());
@@ -27,18 +28,22 @@ public class UserLoginController {
 		}
 
 		else {
-			return "user/login/login";
+			return "redirect:login";
 		}
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String login(HttpSession session) {
+	public String login(HttpSession session, Model model) {
 		if(session.getAttribute("userInfo") != null)
 			return "redirect:../menu/main";
-		
+
+		Student login = new Student();
+
+		model.addAttribute("login", login);
+
 		return "user/login/login";
 	}
-	
+
 	@RequestMapping(value="logout", method=RequestMethod.POST)
 	public String logout(HttpSession session) {
 		session.invalidate();

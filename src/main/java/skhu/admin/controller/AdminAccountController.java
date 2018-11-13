@@ -33,14 +33,12 @@ public class AdminAccountController {
 		if(searchType == null)
 			searchType = "0";
 
-		List<Department> departments = departmentMapper.findWithoutCommon();
+		List<Department> departments = departmentMapper.findAll();
 		List<Admin> admins = adminMapper.findAllWithDepartment(condition, searchType, "%" + searchText + "%");
-		Admin admin = new Admin();
 
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
 		model.addAttribute("admins", admins);
-		model.addAttribute("admin", admin);
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("searchType", searchType);
 
@@ -94,7 +92,10 @@ public class AdminAccountController {
 	}
 
 	@RequestMapping(value="pwdconfirm", method=RequestMethod.GET)
-	public String pwdConfirm() {
+	public String pwdConfirm(Model model) {
+		Admin confirm = new Admin();
+
+		model.addAttribute("confirm", confirm);
 		return "admin/menu/account/pwdconfirm";
 	}
 
@@ -112,8 +113,12 @@ public class AdminAccountController {
 
 	@RequestMapping(value="pwdupdate", method=RequestMethod.POST)
 	public String pwdupdate(HttpSession session, Model model, Admin account, @RequestParam("passwordConfirm") String passwordConfirm) {
-		if(account.getPassword().equals(passwordConfirm))
+		System.out.println(account.getPassword());
+		System.out.println(passwordConfirm);
+		if(account.getPassword().equals(passwordConfirm)) {
+			System.out.println("test");
 			adminMapper.update(account);
+		}
 
 		return "redirect:../main";
 	}

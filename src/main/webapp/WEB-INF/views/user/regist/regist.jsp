@@ -29,12 +29,10 @@
 						</div>
 						<div class="form-group title">회원가입</div>
 						<div class="form-group">
-							<input type="text" class="form-control" name="name"
-								placeholder="이름">
+							<form:input path="name" class="form-control" placeholder="이름" />
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" name="studentNumber"
-								placeholder="학번">
+							<form:input path="studentNumber" class="form-control" placeholder="학번" />
 						</div>
 						<div class="form-group">
 							<input type="email" class="form-control" name="email"
@@ -44,16 +42,21 @@
 							<form:select path="departmentId" class="form-control" itemValue="id" itemLabel="name" items="${ departments }" />
 						</div>
 						<div class="form-group">
-							<select name="year" class="form-control">
-								<option value="1">1학년</option>
-								<option value="2">2학년</option>
-								<option value="3">3학년</option>
-								<option value="4">4학년 이상</option>
-							</select>
+							<form:select path="year" class="form-control">
+								<form:option value="1" label="1학년" />
+								<form:option value="2" label="2학년" />
+								<form:option value="3" label="3학년" />
+								<form:option value="4" label="4학년" />
+							</form:select>
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" name="password"
-								placeholder="비밀번호">
+							<form:select path="semester" class="form-control">
+								<form:option value="1" label="1학기" />
+								<form:option value="2" label="2학기" />
+							</form:select>
+						</div>
+						<div class="form-group">
+							<form:password path="password" class="form-control" placeholder="비밀번호" />
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control"

@@ -1,8 +1,25 @@
 $(function(){
+	var optionShow = document.getElementById("option-show");
+	var startOptionValue = optionShow.options[optionShow.selectedIndex].value;
+	
+	if(startOptionValue == 3) {
+		$(".td-minor").show();
+		$(".td-double").hide();
+	}
+	
+	else if(startOptionValue == 4) {
+		$(".td-minor").hide();
+		$(".td-double").show();
+	}
+	
+	else {
+		$(".td-minor").hide();
+		$(".td-double").hide();
+	}
+	
 	$(".way-detail").hide();
 	$(".subject-detail").hide();
-	$(".td-minor").hide();
-	$(".td-double").hide();
+	
 	
 	$(".way-essential").click(function() {
 		if ($('.way-detail').is(":visible")) { 
@@ -21,7 +38,6 @@ $(function(){
 	})
 	
 	$("#option-show").change(function() {
-		var optionShow = document.getElementById("option-show");
 		var optionShowValue = optionShow.options[optionShow.selectedIndex].value;
 		
 		if(optionShowValue == 3) {

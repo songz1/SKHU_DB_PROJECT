@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import skhu.dto.Admin;
 import skhu.dto.Department;
 import skhu.dto.Student;
 import skhu.mapper.DepartmentMapper;
@@ -24,14 +23,14 @@ public class UserRegistController {
 	@RequestMapping(value = "regist", method = RequestMethod.GET)
 	public String regist(Model model) {
 		Student student = new Student();
-		List<Department> departments = departmentMapper.findAll();
+		List<Department> departments = departmentMapper.findWithoutCommon();
 
 		model.addAttribute("student", student);
 		model.addAttribute("departments", departments);
-		
+
 		return "user/regist/regist";
 	}
-	
+
 	@RequestMapping(value="insert", method=RequestMethod.POST)
 	public String insert(Model model, Student student, @RequestParam("passwordConfirm") String passwordConfirm) {
 		if((student.getEmail().length() != 0 && !student.getEmail().equals("")) &&
@@ -46,7 +45,7 @@ public class UserRegistController {
 
 	@RequestMapping(value = "confirm", method = RequestMethod.GET)
 	public String confirm() {
-		return "user/login/login";
+		return "redirect:/user/login/login";
 	}
 
 }

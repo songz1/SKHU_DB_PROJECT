@@ -28,7 +28,7 @@
 					<div>
 						<div class="input-group mb-25 col-md-4 col-md-offset-1">
 							<div class="input-group-addon">변경 패스워드</div>
-							<input type="password" class="form-control" name="password">
+							<form:password class="form-control" path="password" />
 						</div>
 					</div>
 					<div>

@@ -171,6 +171,11 @@ public class UserGraduationController {
 		List<GraduationSubject> graduationSubjects = null;
 		Map<GraduationGrade, Integer> graduationGradeMap = new HashMap<GraduationGrade, Integer>();
 		Map<GraduationSubject, Integer> graduationSubjectMap = new HashMap<GraduationSubject, Integer>();
+		int mainGraduationId = 0;
+		int subGraduationId = 0;
+		int minorId = 0;
+		int doubleMajorId = 0;
+
 		if(!student.getGraduation().equals("0")) {
 			String[] splitGraduations = student.getGraduation().split(" ", 2);
 
@@ -179,11 +184,8 @@ public class UserGraduationController {
 				splitGraduations[0] = student.getGraduation();
 				splitGraduations[1] = "";
 			}
-			int mainGraduationId = 0;
-			int subGraduationId = 0;
+
 			int differentDepartmentGraduationId = 0;
-			int minorId = 0;
-			int doubleMajorId = 0;
 
 			for(Graduation graduation : graduations) {
 				if(graduation.getName().equals("타과학생 복수전공")) {
@@ -273,6 +275,10 @@ public class UserGraduationController {
 			student.setGraduation("미설정");
 
 		model.addAttribute("student", student);
+		model.addAttribute("minorId", minorId);
+		model.addAttribute("mainGraduationId", mainGraduationId);
+		model.addAttribute("subGraduationId", subGraduationId);
+		model.addAttribute("doubleMajorId", doubleMajorId);
 		model.addAttribute("graduations", graduations);
 		model.addAttribute("departments", departments);
 		model.addAttribute("graduationGradeMap", graduationGradeMap);
@@ -384,6 +390,10 @@ public class UserGraduationController {
 			student.setGraduation("미설정");
 
 		model.addAttribute("student", student);
+		model.addAttribute("minorId", minor);
+		model.addAttribute("mainGraduationId", mainGraduation);
+		model.addAttribute("subGraduationId", subGraduation);
+		model.addAttribute("doubleMajorId", doubleMajor2);
 		model.addAttribute("graduations", graduations);
 		model.addAttribute("departments", departments);
 		model.addAttribute("graduationGradeMap", graduationGradeMap);

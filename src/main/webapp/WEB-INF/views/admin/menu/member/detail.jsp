@@ -17,7 +17,7 @@
 <script type="text/javascript"
 	src="../../../res/script/admin/toDetail.js?ver=1"></script>
 <script type="text/javascript"
-	src="../../../res/script/admin/hideSelect.js?ver=1"></script>
+	src="../../../res/script/common/hideSelect.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -62,6 +62,15 @@
 						</div>
 					</div>
 					<div class="form-group mb-50">
+						<label class="col-sm-2 control-label col-md-offset-1">학기</label>
+						<div class="mb-25 col-md-4 col-md-offset-1">
+							<form:select path="semester" class="form-control">
+								<form:option value="1" label="1학기" />
+								<form:option value="2" label="2학기" />
+							</form:select>
+						</div>
+					</div>
+					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label col-md-offset-1">이메일</label>
 						<div class="mb-25 col-md-4 col-md-offset-1">
 							<form:input path="email" class="form-control" />
@@ -84,7 +93,7 @@
 								<option value="0">미선택</option>
 								<c:forEach var="department" items="${ departments }">
 									<c:if test="${ department.id != student.departmentId }">
-										<option value="${ department.name }" <c:if test="${department.name eq student.minor}">selected</c:if>>${ department.name }</option>
+										<option value="${ department.name }" <c:if test="${department.name eq student.minor && student.doubleMajor eq '0'}">selected</c:if>>${ department.name }</option>
 									</c:if>
 								</c:forEach>
 							</select>
@@ -97,7 +106,7 @@
 								<option value="0">미선택</option>
 								<c:forEach var="department" items="${ departments }">
 									<c:if test="${ department.id != student.departmentId }">
-										<option value="${ department.name }" <c:if test="${department.name eq student.minor}">selected</c:if>>${ department.name }</option>
+										<option value="${ department.name }" <c:if test="${department.name eq student.minor && student.doubleMajor ne '0'}">selected</c:if>>${ department.name }</option>
 									</c:if>
 								</c:forEach>
 							</select>
@@ -109,7 +118,7 @@
 							<select name="doubleMajor2" class="form-control">
 								<option value="0">미선택</option>
 								<c:forEach var="department" items="${ departments }">
-									<c:if test="${ department.id != student.departmentId }">
+									<c:if test="${ department.id != student.departmentId && department.name ne student.minor }">
 										<option value="${ department.name }" <c:if test="${department.name eq student.doubleMajor}">selected</c:if>>${ department.name }</option>
 									</c:if>
 								</c:forEach>

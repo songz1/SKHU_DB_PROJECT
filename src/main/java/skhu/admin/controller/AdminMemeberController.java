@@ -71,8 +71,6 @@ public class AdminMemeberController {
 			splitGraduations[1] = "";
 		}
 
-		System.out.println(splitGraduations[0]);
-		System.out.println(splitGraduations[1]);
 
 		model.addAttribute("student", student);
 		model.addAttribute("mainSelect", splitGraduations[0]);
@@ -86,9 +84,7 @@ public class AdminMemeberController {
 
 	@RequestMapping(value = "edit", method = RequestMethod.POST)
 	public String edit(Model model, Student student, @RequestParam("mainGraduation") String mainGraduation, @RequestParam("minor") String minor, @RequestParam("doubleMajor1") String doubleMajor1, @RequestParam("doubleMajor2") String doubleMajor2, @RequestParam("detailGraduation") String detailGraduation) {
-		System.out.println(minor);
-		System.out.println(doubleMajor1);
-		System.out.println(doubleMajor2);
+		student.setSemester((student.getYear() - 1) * 2 + student.getSemester());
 
 		if(detailGraduation.equals("0"))
 			student.setGraduation(mainGraduation);
@@ -96,30 +92,20 @@ public class AdminMemeberController {
 		else
 			student.setGraduation(mainGraduation + " " + detailGraduation);
 
-		if(doubleMajor1.equals("0"))
-			doubleMajor2 = "0";
+		if((minor.equals("0") && doubleMajor1.equals("0") && doubleMajor2.equals("0")) ||
+			(minor.equals("0") && !doubleMajor1.equals("0") && !doubleMajor2.equals("0")) ||
+			(!minor.equals("0") && doubleMajor1.equals("0") && doubleMajor2.equals("0"))) {
+			if(minor.equals("0"))
+				minor = doubleMajor1;
 
-		else if(doubleMajor2.equals("0"))
-			doubleMajor1 = "0";
-
-		if(!minor.equals("0") && !doubleMajor1.equals("0")) {
-			student.setMinor("0");
-			student.setDoubleMajor("0");
-		}
-
-		else if(!doubleMajor1.equals("0")) {
-			student.setMinor(doubleMajor1);
-			student.setDoubleMajor(doubleMajor2);
-		}
-
-		else if(!minor.equals("0")) {
 			student.setMinor(minor);
 			student.setDoubleMajor(doubleMajor2);
 		}
 
-		System.out.println(student.getDoubleMajor());
-		System.out.println(student.getMinor());
-		System.out.println(student.getName());
+		else {
+			student.setMinor("0");
+			student.setDoubleMajor("0");
+		}
 
 		studentMapper.update(student);
 

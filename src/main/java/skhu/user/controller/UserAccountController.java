@@ -1,6 +1,5 @@
 package skhu.user.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import skhu.dto.Admin;
 import skhu.dto.Department;
 import skhu.dto.Graduation;
 import skhu.dto.Student;
@@ -29,29 +27,54 @@ public class UserAccountController {
 
 	@RequestMapping(value = "acntchange", method = RequestMethod.GET)
 	public String acntchange(HttpSession session, Model model) {
-		List<Department> departments = departmentMapper.findAll();
-		List<Graduation> graduations = graduationMapper.findAll();
-		
-		List<Graduation> base = new ArrayList<Graduation>();
-		List<Graduation> detail = new ArrayList<Graduation>();
-		
-		for(int i = 0; i < graduations.size(); ++i) {
-			if(graduations.get(i).getDivision().equals('0'))
-				base.add(graduations.get(i));
-			
-			else
-				detail.add(graduations.get(i));
+		Student account = ((Student)session.getAttribute("userInfo"));
+		List<Department> departments = departmentMapper.findWithoutCommon();
+		List<Graduation> graduations = graduationMapper.findWithoutCommon();
+
+		String[] splitGraduations = account.getGraduation().split(" ", 2);
+
+		if(splitGraduations.length == 1) {
+			splitGraduations = new String[2];
+			splitGraduations[0] = account.getGraduation();
+			splitGraduations[1] = "";
 		}
-		
-		model.addAttribute("student", session.getAttribute("userInfo"));
+
+		model.addAttribute("account", account);
+		model.addAttribute("mainSelect", splitGraduations[0]);
+		model.addAttribute("detailSelect", splitGraduations[1]);
 		model.addAttribute("departments", departments);
-		model.addAttribute("base", base);
-		model.addAttribute("detail", detail);
+		model.addAttribute("graduations", graduations);
 		return "user/menu/account/acntchange";
 	}
-	
+
 	@RequestMapping(value="acntupdate", method=RequestMethod.POST)
-	public String anctupdate(HttpSession session, Model model, Student account) {
+	public String anctupdate(HttpSession session, Model model, Student account,
+			@RequestParam("mainGraduation") String mainGraduation, @RequestParam("minor") String minor,
+			@RequestParam("doubleMajor2") String doubleMajor1, @RequestParam("doubleMajor2") String doubleMajor2,
+			@RequestParam("detailGraduation") String detailGraduation) {
+		account.setSemester((account.getYear() - 1) * 2 + account.getSemester());
+
+		if(detailGraduation.equals("0"))
+			account.setGraduation(mainGraduation);
+
+		else
+			account.setGraduation(mainGraduation + " " + detailGraduation);
+
+		if((minor.equals("0") && doubleMajor1.equals("0") && doubleMajor2.equals("0")) ||
+			(minor.equals("0") && !doubleMajor1.equals("0") && !doubleMajor2.equals("0")) ||
+			(!minor.equals("0") && doubleMajor1.equals("0") && doubleMajor2.equals("0"))) {
+			if(minor.equals("0"))
+				minor = doubleMajor1;
+
+			account.setMinor(minor);
+			account.setDoubleMajor(doubleMajor2);
+		}
+
+		else {
+			account.setMinor("0");
+			account.setDoubleMajor("0");
+		}
+
 		studentMapper.update(account);
 		account.setPassword(null);
 		session.removeAttribute("userInfo");
@@ -62,11 +85,14 @@ public class UserAccountController {
 	}
 
 	@RequestMapping(value = "pwdconfirm", method = RequestMethod.GET)
-	public String pwdconfirm() {
-		
+	public String pwdconfirm(Model model) {
+		Student confirm = new Student();
+
+		model.addAttribute("confirm", confirm);
+
 		return "user/menu/account/pwdconfirm";
 	}
-	
+
 	@RequestMapping(value="pwdchange", method=RequestMethod.POST)
 	public String pwdchange(HttpSession session, Model model, Student confirm) {
 		int id = ((Student)session.getAttribute("userInfo")).getId();
@@ -78,7 +104,7 @@ public class UserAccountController {
 		}
 		return "redirect:pwdconfirm";
 	}
-	
+
 	@RequestMapping(value="pwdupdate", method=RequestMethod.POST)
 	public String pwdupdate(HttpSession session, Model model, Student account, @RequestParam("passwordConfirm") String passwordConfirm) {
 		if(account.getPassword().equals(passwordConfirm))

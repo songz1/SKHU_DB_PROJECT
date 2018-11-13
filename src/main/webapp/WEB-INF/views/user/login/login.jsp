@@ -22,19 +22,17 @@
 		<div class="outer">
 			<div class="inner">
 				<div class="centered">
-					<form:form method="post" action="login">
+					<form:form method="post" action="login" modelAttribute="login">
 						<img src="../../res/image/login_logo.png"
 							class="img-responsive center-block" alt="Responsive image" />
 						<div class="form-group mt-10">
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="studentNumber"
-									placeholder="아이디">
+								<form:input path="studentNumber" class="form-control" placeholder="아이디" />
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-12">
-								<input type="password" class="form-control" name="password"
-									placeholder="패스워드">
+								<form:password path="password" class="form-control" placeholder="패스워드" />
 							</div>
 						</div>
 						<div>
