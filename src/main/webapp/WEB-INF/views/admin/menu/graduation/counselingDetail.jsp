@@ -42,7 +42,7 @@
 						<td class="title col-md-1">조치 관리자</td>
 						<td class="col-md-1">${ action.admin.name }</td>
 						<td class="title col-md-1">조치일시</td>
-						<td class="col-md-2"><fmt:formatDate pattern="yy-MM-dd HH:MM:SS" value="${ action.date }" /></td>
+						<td class="col-md-2"><fmt:formatDate pattern="yy-MM-dd HH:MM" value="${ action.date }" /></td>
 						<td class="col-md-1"></td>
 						<td class="col-md-2">
 							<c:if test="${ action.id > 0 }">

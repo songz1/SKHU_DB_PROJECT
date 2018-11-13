@@ -27,8 +27,8 @@
 				<h3 class="text-center">조치사항 추가</h3>
 				<hr />
 				<form:form action="insert" method="post" modelAttribute="action">
+					<form:hidden path="studentId"/>
 				<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
-				<form:input path="loginId" class="form-control" />
 					제목 <form:input path="name" class="form-control"
 						maxlength="1024" /><p />
 					

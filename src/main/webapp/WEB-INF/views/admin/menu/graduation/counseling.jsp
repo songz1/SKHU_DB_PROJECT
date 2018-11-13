@@ -71,7 +71,7 @@
 								<td>${ student.studentNumber }</td>
 								<td>${ student.name }</td>
 								<td>${ student.department.name }</td>
-								<td><fmt:formatDate pattern="yy-MM-dd HH:MM:SS" value="${ student.action.date }" /></td>
+								<td><fmt:formatDate pattern="yy-MM-dd HH:MM" value="${ student.action.date }" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -93,12 +93,7 @@
 								<td>${ student.studentNumber }</td>
 								<td>${ student.name }</td>
 								<td>${ student.department.name }</td>
-								<td>
-									<c:if test="${ student.year == 1 }">1학년</c:if> 
-									<c:if test="${ student.year == 2 }">2학년</c:if> 
-									<c:if test="${ student.year == 3 }">3학년</c:if> 
-									<c:if test="${ student.year == 4 }">4학년</c:if>
-								</td>
+								<td>${ student.year }학년</td>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -27,7 +27,6 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<h3 class="text-center">조치사항</h3>
-				<form:form method="get" modelAttribute="action" action="counselingAdd">
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">학번</td>
@@ -36,14 +35,15 @@
 						<td class="col-md-1">${ student.name }</td>
 						<td class="title col-md-1">학과</td>
 						<td class="col-md-2">${ student.department.name }</td>
-
-						<td class="col-md-1"><span style="float: right">
-								<button type="submit" class="btn btn-info btn-block"
-									style="WIDTH: 100pt;">추가</button>
-						</span></td>
+						<td class="col-md-1">
+							<span style="float: right">
+								<a href="counselingAdd?id=${ student.id }">
+									<button type="submit" class="btn btn-info btn-block" style="WIDTH: 100pt;">추가</button>
+								</a>
+							</span>
+						</td>
 					</tr>
 				</table>
-				</form:form>
 				<table class="table text-center">
 					<tr>
 						<td class="title" colspan="4">조치사항 목록</td>
@@ -55,7 +55,7 @@
 					</tr>
 					<c:forEach var="action" items="${ actions }">
 							<tr data-url="counselingDetail?id=${ action.id }" class="text-center cursor tr-hover">
-								<td><fmt:formatDate pattern="yy-MM-dd HH:MM:SS" value="${ action.date }" /></td>
+								<td><fmt:formatDate pattern="yy-MM-dd HH:MM" value="${ action.date }" /></td>
 								<td>${ action.name }</td>
 								<td>${ action.admin.name }</td>
 							</tr>

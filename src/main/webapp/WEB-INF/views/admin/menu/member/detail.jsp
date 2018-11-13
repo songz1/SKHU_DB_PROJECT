@@ -16,6 +16,8 @@
 	href="../../../res/css/common/main.css?ver=1">
 <script type="text/javascript"
 	src="../../../res/script/admin/toDetail.js?ver=1"></script>
+<script type="text/javascript"
+	src="../../../res/script/admin/hideSelect.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -68,24 +70,63 @@
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label col-md-offset-1">졸업과정</label>
 						<div class="mb-25 col-md-4 col-md-offset-1">
-							<form:select path="graduation" class="form-control">
-								<form:option value="1" label="주전공" />
-								<form:option value="2" label="편입" />
-							</form:select>
-						</div>
-					</div>
-					<div class="form-group mb-50">
-						<label class="col-sm-2 control-label col-md-offset-1">상세졸업과정</label>
-						<div class="mb-25 col-md-4 col-md-offset-1">
-							<select name="graduation2" class="form-control">
-								<option value="1">없음</option>
-								<option value="2">전공기초</option>
-								<option value="3">전공심화</option>
-								<option value="4">인도창</option>
+							<select name="mainGraduation" class="form-control" id="option-show">
+								<c:forEach var="graduation" items="${ mainGraduations }">
+									<option value="${ graduation.name }" <c:if test="${graduation.name eq mainSelect}">selected</c:if>>${ graduation.name }</option>
+								</c:forEach>
 							</select>
 						</div>
 					</div>
-
+					<div class="form-group mb-50 div-minor">
+						<label class="col-sm-2 control-label col-md-offset-1">타학과부전공</label>
+						<div class="mb-25 col-md-4 col-md-offset-1">
+							<select name="minor" class="form-control">
+								<option value="0">미선택</option>
+								<c:forEach var="department" items="${ departments }">
+									<c:if test="${ department.id != student.departmentId }">
+										<option value="${ department.name }" <c:if test="${department.name eq student.minor}">selected</c:if>>${ department.name }</option>
+									</c:if>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-50 div-double">
+						<label class="col-sm-2 control-label col-md-offset-1">타학과복수전공1</label>
+						<div class="mb-25 col-md-4 col-md-offset-1">
+							<select name="doubleMajor1" class="form-control">
+								<option value="0">미선택</option>
+								<c:forEach var="department" items="${ departments }">
+									<c:if test="${ department.id != student.departmentId }">
+										<option value="${ department.name }" <c:if test="${department.name eq student.minor}">selected</c:if>>${ department.name }</option>
+									</c:if>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-50 div-double">
+						<label class="col-sm-2 control-label col-md-offset-1">타학과복수전공2</label>
+						<div class="mb-25 col-md-4 col-md-offset-1">
+							<select name="doubleMajor2" class="form-control">
+								<option value="0">미선택</option>
+								<c:forEach var="department" items="${ departments }">
+									<c:if test="${ department.id != student.departmentId }">
+										<option value="${ department.name }" <c:if test="${department.name eq student.doubleMajor}">selected</c:if>>${ department.name }</option>
+									</c:if>
+								</c:forEach>
+							</select>
+						</div>
+					</div>	
+					<div class="form-group mb-50">
+						<label class="col-sm-2 control-label col-md-offset-1">상세졸업과정</label>
+						<div class="mb-25 col-md-4 col-md-offset-1">
+							<select name="detailGraduation" class="form-control">
+								<option value="0">미선택</option>
+								<c:forEach var="graduation" items="${ detailGraduations }">
+									<option value="${ graduation.name }" <c:if test="${graduation.name eq detailSelect}">selected</c:if>>${ graduation.name }</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
 					<c:if test="${ student.id > 0 }">
 						<a href="delete?id=${ student.id }"
 							class="btn btn-danger mb-20 col-md-2 col-md-offset-3"

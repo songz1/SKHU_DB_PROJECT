@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import skhu.dto.Admin;
 import skhu.dto.Student;
 
 @Mapper
@@ -17,12 +16,12 @@ public interface StudentMapper {
 	Student findByAccount(@Param("name")String name, @Param("studentNumber")String studentNumber);
 	List<Student> findByGraduation(
 		@Param("start")int start, @Param("end")int end, @Param("condition") Student condition,
-		@Param("searchText") String searchText, @Param("searchType") String searchType,
+		@Param("searchType") String searchType, @Param("searchText") String searchText,
 		@Param("majorCheck") boolean majorCheck, @Param("minorCheck") boolean minorCheck
 	);
 	int countByGraduation(
-		@Param("condition") Student condition, @Param("searchText") String searchText,
-		@Param("searchType") String searchType, @Param("majorCheck") boolean majorCheck,
+		@Param("condition") Student condition, @Param("searchType") String searchType,
+		@Param("searchText") String searchText, @Param("majorCheck") boolean majorCheck,
 		@Param("minorCheck") boolean minorCheck
 	);
 	List<Student> findAllWithCounseling(@Param("condition")Student condition, @Param("searchType")String searchType, @Param("searchText")String searchText);

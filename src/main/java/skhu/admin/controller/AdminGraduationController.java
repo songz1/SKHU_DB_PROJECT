@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import skhu.dto.Action;
-import skhu.dto.Admin;
 import skhu.dto.College;
 import skhu.dto.CompleteScore;
 import skhu.dto.Department;
@@ -567,7 +566,7 @@ public class AdminGraduationController {
 	@RequestMapping(value="graduationlist", method=RequestMethod.GET)
 	public String graduationList(Model model, HttpServletRequest request, Student condition,
 			@RequestParam(value="searchText", required=false) String searchText, @RequestParam(value="pg", required=false) String pg,
-			@RequestParam(value="searchType", required=false) String searchType,@RequestParam(value="majorCheck", required=false) boolean majorCheck,
+			@RequestParam(value="searchType", required=false) String searchType, @RequestParam(value="majorCheck", required=false) boolean majorCheck,
 			@RequestParam(value="minorCheck", required=false) boolean minorCheck) {
 
 		if(searchText == null)
@@ -577,13 +576,13 @@ public class AdminGraduationController {
 			searchType = "0";
 
 		Page page = new Page();
-		int total = studentMapper.countByGraduation(condition, "%" + searchText + "%", searchType, majorCheck, minorCheck);
+		int total = studentMapper.countByGraduation(condition, searchType, "%" + searchText + "%", majorCheck, minorCheck);
 		int currentPage = 1;
 
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
 
-		List<Student> students = studentMapper.findByGraduation((currentPage - 1) * 10, 10, condition, "%" + searchText + "%", searchType, majorCheck, minorCheck);
+		List<Student> students = studentMapper.findByGraduation((currentPage - 1) * 10, 10, condition, searchType, "%" + searchText + "%", majorCheck, minorCheck);
 		List<Department> departments = departmentMapper.findWithoutCommon();
 		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
 
@@ -723,56 +722,56 @@ public class AdminGraduationController {
 	public String counseling(Model model, Student condition,
 			@RequestParam(value="searchText", required=false) String searchText,
 			@RequestParam(value="searchType", required=false) String searchType) {
-		
+
 		if(searchText == null)
 			searchText = "";
 
 		if(searchType == null)
 			searchType = "0";
 
-		List<Student> students = studentMapper.findAllWithCounseling(condition, "%" + searchText + "%", searchType);
+		List<Student> students = studentMapper.findAllWithCounseling(condition, searchType, "%" + searchText + "%");
 		List<Department> departments = departmentMapper.findWithoutCommon();
-		Student student = new Student();
-		
+
 		model.addAttribute("condition", condition);
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("students", students);
 		model.addAttribute("departments", departments);
-		model.addAttribute("student", student);
-		
+
 		return "admin/menu/graduation/counseling";
 	}
 
 	@RequestMapping(value="counselingList", method=RequestMethod.GET)
 	public String counselingList(Model model, @RequestParam("id") int id) {
-		
+
 		Student student = studentMapper.findById(id);
 		List<Action> actions = actionMapper.findById(id);
-		
+
 		model.addAttribute("student", student);
 		model.addAttribute("actions", actions);
-		
+
 		return "admin/menu/graduation/counselingList";
 	}
 
 	@RequestMapping(value="counselingDetail", method=RequestMethod.GET)
 	public String counselingDetail(Model model, @RequestParam("id") int id) {
-		
+
 		Action action = actionMapper.findByActionId(id);
 
 		model.addAttribute("action", action);
-		
+
 		return "admin/menu/graduation/counselingDetail";
 	}
 
 	@RequestMapping(value="counselingAdd", method=RequestMethod.GET)
-	public String counselingAdd(Model model, Action action) {
-
+	public String counselingAdd(Model model, @RequestParam("id") int id) {
+		Action action = new Action();
+		action.setStudentId(id);
 		model.addAttribute("action", action);
+
 		return "admin/menu/graduation/counselingAdd";
 	}
-	
+
 	@RequestMapping(value="insert", method=RequestMethod.POST)
 	public String insert(Model model, Action action) {
 		if((action.getName().length() != 0 && !action.getName().equals("")) &&
@@ -781,7 +780,7 @@ public class AdminGraduationController {
 
 		return "redirect:counseling";
 	}
-	
+
 	@RequestMapping("delete")
 	public String delete(Model model, @RequestParam("id") int id) {
 		actionMapper.delete(id);

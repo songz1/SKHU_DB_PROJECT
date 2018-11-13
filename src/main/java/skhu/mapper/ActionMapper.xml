@@ -61,6 +61,7 @@
 		<id property="id" column="id" />
 		<result property="date" column="date" />
 		<result property="name" column="name" />
+		<result property="content" column="content" />
 		<result property="studentId" column="studentId" />
 		<result property="adminId" column="adminId" />
 		<association property="student" javaType="Student">

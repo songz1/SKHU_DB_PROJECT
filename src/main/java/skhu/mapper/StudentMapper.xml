@@ -21,12 +21,14 @@
 				and d.id = #{condition.departmentId}
 			</if>
 			<if test='searchType == "0" and searchText != null and searchText != ""'>
-				and s.studentNumber = #{searchText}
+				and s.studentNumber like #{searchText}
 			</if>
 			<if test='searchType == "1" and searchText != null and searchText != ""'>
-				and s.name = #{searchText}
+				and s.name like #{searchText}
 			</if>
 		</where> 
+		group by s.id
+		order by s.studentNumber, d.id asc
 	</select>
 	<resultMap id="counselingResultMap" type="Student">
 		<id property="id" column="id" />
@@ -61,10 +63,10 @@
 				and d.id = #{condition.departmentId}
 			</if>
 			<if test='searchType == "0" and searchText != null and searchText != ""'>
-				and s.studentNumber = #{searchText}
+				and s.studentNumber like #{searchText}
 			</if>
 			<if test='searchType == "1" and searchText != null and searchText != ""'>
-				and s.name = #{searchText}
+				and s.name like #{searchText}
 			</if>
 			<if test="condition.year != 0 and condition.year != null">
 				and s.year = #{condition.year}

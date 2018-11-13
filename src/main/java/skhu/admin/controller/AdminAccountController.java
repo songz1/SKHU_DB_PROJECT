@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import skhu.dto.Admin;
 import skhu.dto.Department;
-import skhu.dto.Graduation;
 import skhu.mapper.AdminMapper;
 import skhu.mapper.DepartmentMapper;
-import skhu.mapper.GraduationMapper;
 
 @Controller
 @RequestMapping("admin/menu/account")
@@ -28,24 +26,24 @@ public class AdminAccountController {
 	public String adminList(Model model, Admin condition,
 			@RequestParam(value="searchText", required=false) String searchText, @RequestParam(value="pg", required=false) String pg,
 			@RequestParam(value="searchType", required=false) String searchType) {
-		
+
 		if(searchText == null)
 			searchText = "";
-		
+
 		if(searchType == null)
 			searchType = "0";
-		
+
 		List<Department> departments = departmentMapper.findWithoutCommon();
-		List<Admin> admins = adminMapper.findAllWithDepartment(condition, "%" + searchText + "%", searchType);
+		List<Admin> admins = adminMapper.findAllWithDepartment(condition, searchType, "%" + searchText + "%");
 		Admin admin = new Admin();
-		
+
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
 		model.addAttribute("admins", admins);
 		model.addAttribute("admin", admin);
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("searchType", searchType);
-		
+
 		return "admin/menu/account/adminList";
 	}
 
@@ -53,7 +51,7 @@ public class AdminAccountController {
 	public String adminEdit(Model model, @RequestParam("id") int id) {
 		Admin admin = adminMapper.findById(id);
 		List<Department> departments = departmentMapper.findAll();
-		
+
 		model.addAttribute("admin", admin);
 		model.addAttribute("departments", departments);
 
@@ -62,12 +60,12 @@ public class AdminAccountController {
 
 	@RequestMapping(value = "edit", method = RequestMethod.POST)
 	public String edit(Model model, Admin admin) {
-		
+
 		adminMapper.update(admin);
-		
+
 		return "redirect:adminList";
 	}
-	
+
 	@RequestMapping("delete")
 	public String delete(Model model, @RequestParam("id") int id) {
 		adminMapper.delete(id);
@@ -77,7 +75,7 @@ public class AdminAccountController {
 	@RequestMapping(value="acntchange", method=RequestMethod.GET)
 	public String acntchange(HttpSession session, Model model) {
 		List<Department> departments = departmentMapper.findAll();
-		
+
 		model.addAttribute("admin", session.getAttribute("adminInfo"));
 		model.addAttribute("departments", departments);
 

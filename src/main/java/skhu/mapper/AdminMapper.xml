@@ -48,10 +48,10 @@
 				and d.id = #{condition.departmentId}
 			</if>
 			<if test='searchType == "0" and searchText != null and searchText != ""'>
-				and a.loginId = #{searchText}
+				and a.loginId like #{searchText}
 			</if>
 			<if test='searchType == "1" and searchText != null and searchText != ""'>
-				and a.name = #{searchText}
+				and a.name like #{searchText}
 			</if>
 		</where>
 	</select>
