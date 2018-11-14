@@ -34,9 +34,9 @@
 							aria-expanded="false">학생 성적/과목 관리<span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu">
-								<li><a href="/admin/menu/course/changerequestList">대체과목</a></li>
-								<li><a href="/admin/menu/course/majorrequestList">전공인정</a></li>
-								<li><a href="/admin/menu/course/gradeList">성적</a></li>
+								<li><a href="/admin/menu/course/changerequestlist">대체과목</a></li>
+								<li><a href="/admin/menu/course/majorrequestlist">전공인정</a></li>
+								<li><a href="/admin/menu/course/gradelist">성적</a></li>
 							</ul>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"

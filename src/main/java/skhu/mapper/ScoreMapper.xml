@@ -30,4 +30,29 @@
 			</association>
 		</association>
 	</resultMap>
+	<select id="findBySubstitutionCode" resultMap="changeRequestScoreResultMap">
+		select sc.*, sj.id subjectId, sj.code subjectCode, sj.name subjectName, sj.score subjectScore, sj.division subjectDivision
+		from score sc
+		left join subject sj on sc.subjectId = sj.id
+		where sc.studentId = #{ studentId } and sc.substitutionCode != #{ substitutionCode };   
+	</select>
+	<resultMap id="changeRequestScoreResultMap" type="Score">
+		<id property="id" column="id" />
+		<result property="score" column="score" />
+		<result property="majorAdmit" column="majorAdmit" />
+		<result property="substitutionCode" column="substitutionCode" />
+		<result property="subjectId" column="subjectId" />
+		<association property="subject" javaType="Subject">
+			<id property="id" column="subjectId" />
+			<result property="code" column="subjectCode" />
+			<result property="name" column="subjectName" />
+			<result property="score" column="subjectScore" />
+			<result property="division" column="subjectDivision" />
+		</association>
+	</resultMap>
+	<update id="cancelChangeRequest">
+		update score
+		set substitutionCode = '0'
+		where id = 5;
+	</update>
 </mapper>

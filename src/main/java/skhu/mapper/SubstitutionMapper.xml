@@ -2,5 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="skhu.mapper.SubstitutionMapper">
-
+	<delete id="delete">
+		start transaction;
+		set sql_safe_updates = 0;
+		delete from substitution;
+		set sql_safe_updates = 1;
+		alter table substitution auto_increment = 1;
+		commit;
+	</delete>
+	<insert id="insert">
+		insert into substitution(name, content) values(#{ name }, #{ value })
+	</insert>
 </mapper>

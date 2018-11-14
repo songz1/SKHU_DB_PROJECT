@@ -170,8 +170,8 @@ public class AdminGraduationController {
 		MultipartFile detailFile = request.getFile("detailFile");
 
 		if(!completeFile.isEmpty()) {
-			System.out.println("?");
 			File destCompleteFile = new File("src\\main\\webapp\\res\\file\\admin\\학년별수료학점.xlsx");
+			System.out.println(destCompleteFile.getAbsolutePath());
 			completeFile.transferTo(destCompleteFile);
 
 			ExcelReaderOption excelReaderOption = new ExcelReaderOption();
