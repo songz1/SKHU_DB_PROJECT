@@ -126,7 +126,7 @@ public class AdminCourseController {
 		MultipartFile listFile = request.getFile("listFile");
 
 		if(!listFile.isEmpty()) {
-			File destListFile = new File("src\\main\\webapp\\res\\file\\admin\\대체과목목록.xlsx");
+			File destListFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\admin\\대체과목목록.xlsx");
 			listFile.transferTo(destListFile);
 
 			ExcelReaderOption excelReaderOption = new ExcelReaderOption();

@@ -11,6 +11,6 @@
 		commit;
 	</delete>
 	<insert id="insert">
-		insert into substitution(name, content) values(#{ name }, #{ value })
+		insert into substitution(subjectCode, substitutionCode) values(#{ subjectCode }, #{ substitutionCode })
 	</insert>
 </mapper>

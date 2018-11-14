@@ -170,8 +170,7 @@ public class AdminGraduationController {
 		MultipartFile detailFile = request.getFile("detailFile");
 
 		if(!completeFile.isEmpty()) {
-			File destCompleteFile = new File("src\\main\\webapp\\res\\file\\admin\\학년별수료학점.xlsx");
-			System.out.println(destCompleteFile.getAbsolutePath());
+			File destCompleteFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\admin\\학년별수료학점.xlsx");
 			completeFile.transferTo(destCompleteFile);
 
 			ExcelReaderOption excelReaderOption = new ExcelReaderOption();
@@ -192,7 +191,7 @@ public class AdminGraduationController {
 		}
 
 		if(!detailFile.isEmpty()) {
-			File destDetailFile = new File("src\\main\\webapp\\res\\file\\user\\통합_졸업요건.pdf");
+			File destDetailFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\user\\통합_졸업요건.pdf");
 			detailFile.transferTo(destDetailFile);
 		}
 
@@ -506,7 +505,7 @@ public class AdminGraduationController {
 		excelReaderOption.setSheetRow(1);
 
 		if(!gradeFile.isEmpty()) {
-			File destGradeFile = new File("src\\main\\webapp\\res\\file\\admin\\학점졸업요건.xlsx");
+			File destGradeFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\admin\\학점졸업요건.xlsx");
 			gradeFile.transferTo(destGradeFile);
 
 			excelReaderOption.setFilePath(destGradeFile.getAbsolutePath());
@@ -528,7 +527,7 @@ public class AdminGraduationController {
 
 		if(!subjectFile.isEmpty()) {
 			System.out.println("?");
-			File destSubjectFile = new File("src\\main\\webapp\\res\\file\\admin\\과목졸업요건.xlsx");
+			File destSubjectFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\admin\\과목졸업요건.xlsx");
 			System.out.println("??");
 			subjectFile.transferTo(destSubjectFile);
 			System.out.println("???");
