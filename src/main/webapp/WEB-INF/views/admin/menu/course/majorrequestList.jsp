@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,78 +25,87 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-				<hr />
-				<table>
-					<tr>
-						<td class="title col-md-5 col-md-offset-5 text-center">양식
-							다운로드</td>
-						<td class="col-md-5 col-md-offset-5 text-center">1. <a
-							href="/" download="규칙">규칙</a></td>
-					</tr>
-				</table>
-				<hr />
-				<table class="table text-center">
-					<tr>
-						<td class="title col-md-3">규칙 업로드</td>
-						<td class="title col-md-2"><input type="file"
-							class="form-control form-width" name="rule" /></td>
-						<td class="title col-md-1"><a href=""><button
-									type="submit" class="btn btn-default">확인</button></a></td>
-					</tr>
-				</table>
-
+				<form:form method="post" action="editrule" modelAttribute="rule">
+					<form:hidden path="name" />
+					<table class="table">
+						<tr>
+							<td class="title col-md-4 text-center">규칙수정</td>
+							<td class="title col-md-4">
+								<button type="submit" class="btn btn-default">수정하기</button>
+							</td>
+						</tr>
+					</table>
+				</form:form>
 				<hr />
 				<h3 class="text-center">전공인정 신청 목록</h3>
 				<hr />
-				<table class="table text-center">
-					<tr>
-						<td class="title col-md-1">학과(부)</td>
-						<td class="col-md-1"><select name="department">
-								<option value="0">전체</option>
-								<option value="1">소프트웨어공학과</option>
-								<option value="2">컴퓨터공학과</option>
-								<option value="3">글로컬IT학과</option>
-								<option value="4">정보통신공학과</option>
-						</select></td>
-						<td class="title col-md-1">학번</td>
-						<td class="col-md-1"><input type="text" name="studentNumber"></input>
-						</td>
-						<td class="title col-md-1">이름</td>
-						<td class="col-md-1"><input type="text" name="studentName"></input>
-						</td>
-						<td class="col-md-1"><span style="float: right">
-								<button type="submit" class="btn btn-default btn-block"
-									style="WIDTH: 100pt;" onclick="/">조회</button>
-						</span></td>
-					</tr>
-				</table>
+				<form:form action="changerequestlist" method="get" modelAttribute="condition">
+					<table class="table text-center">
+						<tr>
+							<td class="title col-md-2">학과(부)</td>
+							<td class="col-md-1"><form:select path="departmentId"
+									class="form-control">
+									<form:option value="0" label="전체" />
+									<form:options itemValue="id" itemLabel="name"
+										items="${ departments }" />
+								</form:select></td>
+							<td class="title col-md-2"><select name="searchType">
+									<option value="0">학번</option>
+									<option value="1">이름</option>
+							</select></td>
+							<td><input type="text" name="searchText"
+								value="${ searchText }" class="form-control" /></td>
+							<td class="col-md-1" />
+						</tr>
+						<tr>
+							<td class="title col-md-2">학년</td>
+							<td class="col-md-1"><form:select path="year"
+									class="form-control">
+									<form:option value="0" label="전체" />
+									<form:option value="1" label="1학년" />
+									<form:option value="2" label="2학년" />
+									<form:option value="3" label="3학년" />
+									<form:option value="4" label="4학년" />
+								</form:select></td>
+							<td class="title col-md-2">이수학기</td>
+							<td class="col-md-1"><form:select path="semester"
+									class="form-control">
+									<form:option value="0" label="전체" />
+									<form:option value="1" label="1학기" />
+									<form:option value="2" label="2학기" />
+									<form:option value="3" label="3학기" />
+									<form:option value="4" label="4학기" />
+									<form:option value="5" label="5학기" />
+									<form:option value="6" label="6학기" />
+									<form:option value="7" label="7학기" />
+									<form:option value="8" label="8학기" />
+								</form:select></td>
+							<td class="col-md-1"><span style="float: right">
+									<button type="submit" class="btn btn-default btn-block"
+										style="WIDTH: 100pt;">조회</button>
+							</span></td>
+						</tr>
+					</table>
+				</form:form>
 				<table class="table table-bordered mt5">
 					<thead>
 						<tr class="title">
 							<th class="text-center">학번</th>
 							<th class="text-center">이름</th>
 							<th class="text-center">학과</th>
+							<th class="text-center">학년</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-center cursor tr-hover"
-							data-url="majorrequestDetail.jsp">
-							<td>201432019</td>
-							<td>신정호</td>
-							<td>소프트웨어공학과</td>
-						</tr>
-						<tr class="text-center cursor tr-hover"
-							data-url="majorrequestDetail.jsp">
-							<td>201333099</td>
-							<td>홍길동</td>
-							<td>정보통신공학과</td>
-						</tr>
-						<tr class="text-center cursor tr-hover"
-							data-url="majorrequestDetail.jsp">
-							<td>201631099</td>
-							<td>이순신</td>
-							<td>컴퓨터공학과</td>
-						</tr>
+						<c:forEach var="student" items="${ students }">
+							<tr data-url="majordetail?id=${ student.id }"
+								class="text-center cursor tr-hover">
+								<td>${ student.studentNumber }</td>
+								<td>${ student.name }</td>
+								<td>${ student.department.name }</td>
+								<td>${ student.year }학년</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

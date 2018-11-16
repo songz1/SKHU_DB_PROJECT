@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,27 +23,30 @@
 	<main>
 	<div class="container">
 		<div id="header" class="panel panel-default">
-			<div class="panel-body">
-				<h3 class="text-center">규칙 추가</h3>
-				<hr />
-				<form:form action="insertrule" method="post" modelAttribute="rule">
-					<form:hidden path="studentId"/>
-				<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
-					제목 <form:input path="name" class="form-control"
-						maxlength="1024" /><p />
-					
-					내용 <form:textarea path="content" class="form-control"
-						maxlength="1024" style="height: 100px" />
+			<form:form action="updaterule" method="post" modelAttribute="rule">
+				<div class="panel-body">
+					<h3 class="text-center">${ rule.name }</h3>
+					<hr />
+
+					<form:hidden path="id" />
+					<form:hidden path="name" />
+					<div class="form-group col-md-6 col-md-offset-3 mt-25 mb-25">
+						내용
+						<form:textarea path="content" class="form-control"
+							maxlength="1024" style="height: 100px" />
+					</div>
+					<div>
+						<button type="submit"
+							class="btn btn-info col-md-2 col-md-offset-3">확인</button>
+					</div>
+
+					<div>
+						<button type="submit"
+							class="btn btn-danger col-md-2 col-md-offset-2"
+							data-url="../main">취소</button>
+					</div>
 				</div>
-				<div>
-					<button type="submit"
-						class="btn btn-danger col-md-2 col-md-offset-3" data-url="../main">취소</button>
-				</div>
-				<div>
-					<button type="submit" class="btn btn-info col-md-2 col-md-offset-2">확인</button>
-				</div>
-				</form:form>
-			</div>
+			</form:form>
 		</div>
 	</div>
 	</main>

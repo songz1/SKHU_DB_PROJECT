@@ -36,6 +36,12 @@
 		left join subject sj on sc.subjectId = sj.id
 		where sc.studentId = #{ studentId } and sc.substitutionCode != #{ substitutionCode };   
 	</select>
+	<select id="findByMajorAdmit" resultMap="changeRequestScoreResultMap">
+		select sc.*, sj.id subjectId, sj.code subjectCode, sj.name subjectName, sj.score subjectScore, sj.division subjectDivision
+		from score sc
+		left join subject sj on sc.subjectId = sj.id
+		where sc.studentId = #{ studentId } and sc.majorAdmit = #{ majorAdmit };   
+	</select>
 	<resultMap id="changeRequestScoreResultMap" type="Score">
 		<id property="id" column="id" />
 		<result property="score" column="score" />
@@ -52,7 +58,12 @@
 	</resultMap>
 	<update id="cancelChangeRequest">
 		update score
-		set substitutionCode = '0'
-		where id = 5;
+		set substitutionCode = #{ substitutionCode }
+		where id = #{ id };
+	</update>
+	<update id="cancelMajorRequest">
+		update score
+		set majorAdmit = #{ majorAdmit }
+		where id = #{ id };
 	</update>
 </mapper>

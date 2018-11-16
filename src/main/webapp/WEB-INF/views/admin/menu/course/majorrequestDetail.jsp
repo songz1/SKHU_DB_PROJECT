@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,13 +30,15 @@
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">학번</td>
-						<td class="col-md-1">201432019</td>
+						<td class="col-md-1">${ student.studentNumber }</td>
 						<td class="title col-md-1">이름</td>
-						<td class="col-md-1">신정호</td>
+						<td class="col-md-1">${ student.name }</td>
 						<td class="title col-md-1">학과</td>
-						<td class="col-md-2">소프트웨어공학과</td>
-						<td class="col-md-1"><button type="submit"
-					class="btn btn-info" data-url="majorrequestConfirm.jsp">전공인정 추가</button></td>
+						<td class="col-md-2">${ student.department.name }</td>
+						<td class="col-md-1">
+							<button type="submit" class="btn btn-info"
+								data-url="changerequestConfirm.jsp">대체과목추가</button>
+						</td>
 					</tr>
 				</table>
 
@@ -49,14 +53,17 @@
 						<td class="title col-md-1">학점</td>
 						<td class="title col-md-1"></td>
 					</tr>
-					<tr>
-						<td class="col-md-1">AC00049</td>
-						<td class="col-md-2">어쩌구저쩌구</td>
-						<td class="col-md-1">교선</td>
-						<td class="col-md-1">3.0</td>
-						<td class="col-md-1"><button type="submit"
-					class="btn btn-danger">취소</button></td>
-					</tr>
+					<c:forEach var="score" items="${ scores }">
+						<tr>
+							<td class="col-md-1">${ score.subject.code }</td>
+							<td class="col-md-2">${ score.subject.name }</td>
+							<td class="col-md-1">${ score.subject.division }</td>
+							<td class="col-md-1">${ score.subject.score }</td>
+							<td class="col-md-1">
+								<button type="submit" class="btn btn-danger" data-url="majorcancel?id=${ score.id }">취소</button>
+							</td>
+						</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</div>

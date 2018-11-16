@@ -35,7 +35,8 @@
 					</tr>
 				</table>
 				<hr />
-				<form method="post" action="editrule">
+				<form:form method="post" action="editrule" modelAttribute="rule">
+					<form:hidden path="name"/>
 					<table class="table">
 						<tr>
 							<td class="title col-md-4 text-center">규칙수정</td>
@@ -44,7 +45,7 @@
 							</td>
 						</tr>
 					</table>
-				</form>
+				</form:form>
 				<hr />
 				<form method="post" enctype="multipart/form-data" action="addlist">
 					<table class="table text-center">

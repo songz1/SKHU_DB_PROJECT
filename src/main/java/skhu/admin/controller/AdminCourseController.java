@@ -19,11 +19,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import skhu.dto.Department;
+import skhu.dto.Rule;
 import skhu.dto.Score;
 import skhu.dto.Student;
 import skhu.dto.Subject;
 import skhu.dto.Substitution;
 import skhu.mapper.DepartmentMapper;
+import skhu.mapper.RuleMapper;
 import skhu.mapper.ScoreMapper;
 import skhu.mapper.StudentMapper;
 import skhu.mapper.SubjectMapper;
@@ -39,11 +41,15 @@ public class AdminCourseController {
 	@Autowired DepartmentMapper departmentMapper;
 	@Autowired ScoreMapper scoreMapper;
 	@Autowired SubstitutionMapper substitutionMapper;
+	@Autowired RuleMapper ruleMapper;
 
 	@RequestMapping(value="changerequestlist", method=RequestMethod.GET)
 	public String changerequestList(Model model, Student condition,
 			@RequestParam(value="searchText", required=false) String searchText,
 			@RequestParam(value="searchType", required=false) String searchType) {
+
+		Rule rule = new Rule();
+		rule.setName("대체과목");
 
 		if(searchText == null)
 			searchText = "";
@@ -54,6 +60,7 @@ public class AdminCourseController {
 		List<Department> departments = departmentMapper.findWithoutCommon();
 		List<Student> students = studentMapper.findAllWithDepartment(condition, searchType, "%" + searchText + "%");
 
+		model.addAttribute("rule", rule);
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
 		model.addAttribute("students", students);
@@ -148,7 +155,7 @@ public class AdminCourseController {
 		return "redirect:changerequestlist";
 	}
 
-	@RequestMapping(value="changedetail", method=RequestMethod.POST)
+	@RequestMapping(value="changedetail", method=RequestMethod.GET)
 	public String changerequestDetail(Model model, @RequestParam("id") int id) {
 		Student student = studentMapper.findById(id);
 		List<Score> abolishes = scoreMapper.findBySubstitutionCode(id, "0");
@@ -201,8 +208,13 @@ public class AdminCourseController {
 		return "admin/menu/course/changerequestDetail";
 	}
 
-	@RequestMapping(value="cancelchange", method=RequestMethod.GET)
-	public String cancelchange() {
+	@RequestMapping(value="changecancel", method=RequestMethod.GET)
+	public String changeCancel(@RequestParam("id") int id) {
+		Score score = new Score();
+		score.setId(id);
+		score.setSubstitutionCode("0");
+		scoreMapper.cancelChangeRequest(score);
+
 		return "redirect:changedetail";
 	}
 
@@ -212,18 +224,89 @@ public class AdminCourseController {
 	}
 
 	@RequestMapping(value="majorrequestlist", method=RequestMethod.GET)
-	public String majorrequestList() {
+	public String majorrequestList(Model model, Student condition,
+			@RequestParam(value="searchText", required=false) String searchText,
+			@RequestParam(value="searchType", required=false) String searchType) {
+
+		Rule rule = new Rule();
+		rule.setName("전공인정");
+
+		if(searchText == null)
+			searchText = "";
+
+		if(searchType == null)
+			searchType = "0";
+
+		List<Department> departments = departmentMapper.findWithoutCommon();
+		List<Student> students = studentMapper.findAllWithDepartment(condition, searchType, "%" + searchText + "%");
+
+		model.addAttribute("rule", rule);
+		model.addAttribute("condition", condition);
+		model.addAttribute("departments", departments);
+		model.addAttribute("students", students);
+		model.addAttribute("searchText", searchText);
+		model.addAttribute("searchType", searchType);
+
 		return "admin/menu/course/majorrequestList";
 	}
 
-	@RequestMapping(value="majorrequestdetail", method=RequestMethod.GET)
-	public String majorrequestDetail() {
+	@RequestMapping(value="majordetail", method=RequestMethod.GET)
+	public String majorrequestDetail(Model model, @RequestParam("id") int id) {
+		Student student = studentMapper.findById(id);
+		List<Score> scores = scoreMapper.findByMajorAdmit(id, true);
+
+		model.addAttribute("student", student);
+		model.addAttribute("scores", scores);
+
 		return "admin/menu/course/majorrequestDetail";
+	}
+
+	@RequestMapping(value="majorcancel", method=RequestMethod.GET)
+	public String majorCancel(@RequestParam("id") int id) {
+		Score score = new Score();
+		score.setId(id);
+		score.setMajorAdmit(false);
+		scoreMapper.cancelMajorRequest(score);
+
+		return "redirect:changedetail";
 	}
 
 	@RequestMapping(value="majorrequestconfrim", method=RequestMethod.GET)
 	public String majorrequestConfirm() {
 		return "admin/menu/course/majorrequestConfirm";
+	}
+
+	@RequestMapping(value="editrule", method=RequestMethod.POST)
+	public String editRule(Model model, Rule rule) {
+		Rule ruleEdit = ruleMapper.findByName(rule.getName());
+
+		if(ruleEdit == null) {
+			ruleEdit = new Rule();
+			ruleEdit.setId(0);
+			ruleEdit.setName(rule.getName());
+			ruleEdit.setContent("");
+		}
+
+		model.addAttribute("rule", ruleEdit);
+		return "admin/menu/course/ruleEdit";
+	}
+
+	@RequestMapping(value="updaterule", method=RequestMethod.POST)
+	public String updateRule(Rule rule) {
+		if(rule.getId() == 0 )
+			ruleMapper.insert(rule);
+
+		else
+			ruleMapper.update(rule);
+
+		if(rule.getName().equals("대체과목"))
+			return "redirect:changerequestlist";
+
+		else if(rule.getName().equals("전공인정"))
+			return "redirect:majorrequestlist";
+
+		else
+			return "redirect:../main";
 	}
 
 	@RequestMapping(value="gradelist", method=RequestMethod.GET)
