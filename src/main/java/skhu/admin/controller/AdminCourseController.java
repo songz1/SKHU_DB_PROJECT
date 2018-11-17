@@ -3,6 +3,7 @@ package skhu.admin.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -218,8 +219,33 @@ public class AdminCourseController {
 		return "redirect:changedetail";
 	}
 
-	@RequestMapping(value="changerequestconfrim", method=RequestMethod.GET)
-	public String changerequestConfirm() {
+	@RequestMapping(value="addchangesubject", method=RequestMethod.GET)
+	public String changerequestConfirm(Model model, @RequestParam("id") int id) {
+		Rule rule = ruleMapper.findByName("대체과목");
+		List<Score> scores = scoreMapper.findWithSubstitution(id);
+		Map<Score, List<Subject>> changeMap = new HashMap<Score, List<Subject>>();
+
+		if(scores != null) {
+			for(Score score : scores) {
+				List<Subject> subjects = new ArrayList<Subject>();
+				if(score.getSubstitutionCode().equals("전공선택")) {
+					subjects = subjectMapper.findByDivision("전공선택");
+				}
+
+				else if(score.getSubstitutionCode().contains("전공")) {
+					subjects = subjectMapper.findBySubtitle(score.getSubstitutionCode());
+				}
+
+				else {
+					subjects.add(subjectMapper.findByCode(score.getSubstitutionCode()));
+				}
+
+				changeMap.put(score, subjects);
+			}
+		}
+
+		model.addAttribute("changeMap", changeMap);
+		model.addAttribute("rule", rule);
 		return "admin/menu/course/changerequestConfirm";
 	}
 

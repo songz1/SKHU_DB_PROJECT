@@ -11,6 +11,9 @@
 	<select id="findById" resultType="Admin">
 		select * from admin where id = #{id}
 	</select>
+	<select id="findTest" resultType="Admin">
+		select * from admin where loginId = #{ loginId } limit 1;
+	</select>
 	<update id="update">
 		update admin
 		<set>

@@ -9,13 +9,28 @@ public class Subject {
 	String name;
 	Admin admin;
 	int professorId;
-	int score;
+	double score;
 	String division;
 	String establish;
 	Department department;
 	int departmentId;
 	SubjectDetail subjectDetail;
 	int detailId;
+	Substitution substitution;
+	boolean abolish;
+
+	public Substitution getSubstitution() {
+		return substitution;
+	}
+	public void setSubstitution(Substitution substitution) {
+		this.substitution = substitution;
+	}
+	public boolean isAbolish() {
+		return abolish;
+	}
+	public void setAbolish(boolean abolish) {
+		this.abolish = abolish;
+	}
 	public int getId() {
 		return id;
 	}
@@ -64,10 +79,10 @@ public class Subject {
 	public void setProfessorId(int professorId) {
 		this.professorId = professorId;
 	}
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
-	public void setScore(int score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 	public String getDivision() {
@@ -106,12 +121,5 @@ public class Subject {
 	public void setDetailId(int detailId) {
 		this.detailId = detailId;
 	}
-	public String getAbolish() {
-		return abolish;
-	}
-	public void setAbolish(String abolish) {
-		this.abolish = abolish;
-	}
-	String abolish;
 
 }

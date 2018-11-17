@@ -36,7 +36,7 @@
 						<td class="title col-md-1">학과</td>
 						<td class="col-md-2">${ student.department.name }</td>
 						<td class="col-md-1">
-							<button type="submit" class="btn btn-info" data-url="changerequestConfirm.jsp">대체과목추가</button>
+							<button type="submit" class="btn btn-info" data-url="addchangesubject?id=${ student.id }">대체과목추가</button>
 						</td>
 					</tr>
 				</table>

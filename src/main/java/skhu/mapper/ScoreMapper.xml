@@ -56,6 +56,40 @@
 			<result property="division" column="subjectDivision" />
 		</association>
 	</resultMap>
+	<select id="findWithSubstitution" resultMap="substitutionResultMap">
+		select sc.*, 
+		sj.id subjectId, sj.code subjectCode, sj.name subjectName, sj.score subjectScore, sj.division subjectDivision,
+		sd.id detailId, sd.title, sd.subtitle,
+		sb.id substitutionId, sb.substitutionCode subCode
+		from score sc
+		left join subject sj on sc.subjectId = sj.id
+		left join substitution sb on sj.code = sb.subjectCode
+		left join subject_detail sd on sj.detailId = sd.id
+		where abolish = 1 and studentId = #{ id };
+	</select>
+	<resultMap id="substitutionResultMap" type="Score">
+		<id property="id" column="id" />
+		<result property="score" column="score" />
+		<result property="majorAdmit" column="majorAdmit" />
+		<result property="substitutionCode" column="substitutionCode" />
+		<result property="subjectId" column="subjectId" />
+		<association property="subject" javaType="Subject">
+			<id property="id" column="subjectId" />
+			<result property="code" column="subjectCode" />
+			<result property="name" column="subjectName" />
+			<result property="score" column="subjectScore" />
+			<result property="division" column="subjectDivision" />
+			<association property="subjectDetail" javaType="SubjectDetail">
+				<id property="id" column="detailId" />
+				<result property="title" column="title" />
+				<result property="subtitle" column="subtitle" />
+			</association>
+		</association>
+		<association property="substitution" javaType="Substitution">
+			<id property="id" column="substitutionId" />
+			<result property="substitutionCode" column="subCode" />
+		</association>
+	</resultMap>
 	<update id="cancelChangeRequest">
 		update score
 		set substitutionCode = #{ substitutionCode }

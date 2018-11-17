@@ -30,7 +30,7 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<h3 class="text-center">졸업요건 생성</h3>
-				<select name="department" class="option" id="show-form">
+				<select class="option" id="show-form">
 					<option value="0">선택</option>
 					<option value="1">학점</option>
 					<option value="2">과목</option>

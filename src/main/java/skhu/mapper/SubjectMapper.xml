@@ -5,4 +5,39 @@
 	<select id="findByCode" resultType="Subject">
 		select * from subject where code = #{ code } limit 1
 	</select>
+	<select id="findTest" resultType="Subject">
+		select * from subject where code = #{ code } and year = #{ year } limit 1
+	</select>
+	<select id="findByDivision" resultType="Subject">
+		select * from subject where division = #{ division };
+	</select>
+	<select id="findBySubTitle" resultMap="subjectDetailResultMap">
+		select sj.*, sd.id detailId, sd.title title, sd.subtitle subtitle from subject sj
+		left join subject_detail sd on sj.detailId = sd.id
+		where sd.subtitle = #{ subtitle }
+	</select>
+	<resultMap id="subjectDetailResultMap" type="Subject">
+		<id property="id" column="id" />
+		<result property="year" column="year" />
+		<result property="semester" column="semester" />
+		<result property="code" column="code" />
+		<result property="subjectClass" column="subjectClass" />
+		<result property="name" column="name" />
+		<result property="professorId" column="professorId" />
+		<result property="score" column="score" />
+		<result property="division" column="division" />
+		<result property="establish" column="establish" />
+		<result property="departmentId" column="departmentId" />
+		<result property="detailId" column="detailId" />
+		<result property="abolish" column="abolish" />
+		<association property="subjectDetail" javaType="SubjectDetail">
+			<id property="id" column="detailId" />
+			<result property="title" column="title" />
+			<result property="subtitle" column="subtitle" />
+		</association>
+	</resultMap>
+	<insert id="insert">
+		insert into subject(year, semester, code, subjectClass, name, professorId, score, division, establish, departmentId, detailId, abolish)
+		values(#{ year }, #{ semester }, #{ code }, #{ subjectClass }, #{ name }, #{ professorId }, #{ score }, #{ division }, #{ establish }, #{ departmentId }, #{ detailId }, #{ abolish })
+	</insert>
 </mapper>

@@ -37,7 +37,7 @@
 						<td class="col-md-2">${ student.department.name }</td>
 						<td class="col-md-1">
 							<button type="submit" class="btn btn-info"
-								data-url="changerequestConfirm.jsp">대체과목추가</button>
+								data-url="addmajoradmit?id=${ studentId }">전공인정추가</button>
 						</td>
 					</tr>
 				</table>

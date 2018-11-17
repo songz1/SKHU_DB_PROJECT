@@ -14,4 +14,5 @@ public interface ScoreMapper {
 	List<Score> findByMajorAdmit(@Param("studentId") int studentId, @Param("majorAdmit") boolean majorAdmit);
 	void cancelChangeRequest(Score score);
 	void cancelMajorRequest(Score score);
+	List<Score> findWithSubstitution(int studentId);
 }

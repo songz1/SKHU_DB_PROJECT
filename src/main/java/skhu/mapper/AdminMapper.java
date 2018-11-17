@@ -10,6 +10,7 @@ import skhu.dto.Admin;
 @Mapper
 public interface AdminMapper {
 	List<Admin> findAll();
+	Admin findTest(@Param("loginId") String loginId);
 	List<Admin> findAllWithDepartment(@Param("condition")Admin condition, @Param("searchType")String searchType, @Param("searchText")String searchText);
 	Admin login(@Param("loginId")String loginId, @Param("password")String password);
 	Admin findById(@Param("id")int id);
