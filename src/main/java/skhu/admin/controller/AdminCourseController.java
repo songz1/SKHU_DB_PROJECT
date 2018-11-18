@@ -372,12 +372,210 @@ public class AdminCourseController {
 	}
 
 	@RequestMapping(value="gradelist", method=RequestMethod.GET)
-	public String gradeList() {
+	public String gradeList(Model model, Student condition,
+			@RequestParam(value="searchText", required=false) String searchText,
+			@RequestParam(value="searchType", required=false) String searchType) {
+
+		if(searchText == null)
+			searchText = "";
+
+		if(searchType == null)
+			searchType = "0";
+
+		List<Department> departments = departmentMapper.findWithoutCommon();
+		List<Student> students = studentMapper.findAllWithDepartment(condition, searchType, "%" + searchText + "%");
+
+		model.addAttribute("condition", condition);
+		model.addAttribute("departments", departments);
+		model.addAttribute("students", students);
+		model.addAttribute("searchText", searchText);
+		model.addAttribute("searchType", searchType);
+
 		return "admin/menu/course/gradeList";
 	}
 
+	@RequestMapping(value="downscores")
+	public void downScores(HttpServletResponse response) throws Exception {
+		File destCompleteFile = new File("src\\main\\webapp\\res\\file\\form\\양식_성적업로드.xlsx");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("성적업로드.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
+		response.setHeader("Content-Length", ""+ destCompleteFile.length());
+		response.setHeader("Pragma", "no-cache;");
+		response.setHeader("Expires", "-1;");
+
+		if(!destCompleteFile.exists()){
+			throw new RuntimeException("file not found");
+		}
+
+		FileInputStream fis = null;
+		try{
+			fis = new FileInputStream(destCompleteFile);
+			FileCopyUtils.copy(fis, response.getOutputStream());
+			response.getOutputStream().flush();
+		}catch(Exception ex){
+			throw new RuntimeException(ex);
+		}finally {
+			try {
+				fis.close();
+			}catch(Exception ex){
+			}
+		}
+	}
+
 	@RequestMapping(value="gradedetail", method=RequestMethod.GET)
-	public String gradeDetail() {
+	public String gradeDetail(Model model, @RequestParam("id") int id) {
+		Student student = studentMapper.findById(id);
+		List<Score> scores = scoreMapper.findByStudentId(id);
+		List<String> scoreChar = new ArrayList<String>();
+		double requestGrade = 0.0;
+		double getGrade = 0.0;
+		double averageGrade = 0.0;
+		int scoreCount = 0;
+
+		for(Score score : scores) {
+			if((score.getSubject().getDivision().equals("전공선택") || score.getSubject().getDivision().equals("전공필수")) &&
+					!student.getDepartment().getRealName().equals(score.getSubject().getEstablish()))
+				score.getSubject().setDivision("교양선택");
+
+			if(score.isMajorAdmit())
+				score.getSubject().setDivision("전공선택");
+
+			requestGrade += score.getSubject().getScore();
+
+			if(score.getSubstitutionCode().equals("0") && !(score.getScore() < 0.0)) {
+				getGrade += score.getSubject().getScore();
+
+				if(!(score.getScore() > 4.5)) {
+					++scoreCount;
+					averageGrade += score.getScore();
+				}
+			}
+
+			if(score.getScore() == 4.5)
+				scoreChar.add("A+");
+
+			else if(score.getScore() == 4.0)
+				scoreChar.add("A0");
+
+			else if(score.getScore() == 3.5)
+				scoreChar.add("B+");
+
+			else if(score.getScore() == 3.0)
+				scoreChar.add("B0");
+
+			else if(score.getScore() == 2.5)
+				scoreChar.add("C+");
+
+			else if(score.getScore() == 2.0)
+				scoreChar.add("C0");
+
+			else if(score.getScore() == 1.5)
+				scoreChar.add("D+");
+
+			else if(score.getScore() == 1.0)
+				scoreChar.add("D0");
+
+			else if(score.getScore() > 4.5)
+				scoreChar.add("P");
+
+			else if(score.getScore() < 0.0)
+				scoreChar.add("N");
+
+			else
+				scoreChar.add("error");
+
+
+		}
+
+		averageGrade /= scoreCount;
+
+		model.addAttribute("student", student);
+		model.addAttribute("scores", scores);
+		model.addAttribute("scoreChar", scoreChar);
+		model.addAttribute("requestGrade", requestGrade);
+		model.addAttribute("getGrade", getGrade);
+		model.addAttribute("averageGrade", Double.parseDouble(String.format("%.2f", averageGrade)));
+
 		return "admin/menu/course/gradeDetail";
+	}
+
+	@RequestMapping(value="addscore", method=RequestMethod.POST)
+	public String addScore(Model model, MultipartHttpServletRequest request, @RequestParam("studentNumber") String studentNumber, @RequestParam("id") int id) throws Exception {
+		MultipartFile listFile = request.getFile("listFile");
+
+		if(!listFile.isEmpty()) {
+			File destListFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\admin\\학생성적_" + studentNumber + ".xlsx");
+			listFile.transferTo(destListFile);
+
+			ExcelReaderOption excelReaderOption = new ExcelReaderOption();
+			excelReaderOption.setFilePath(destListFile.getAbsolutePath());
+			excelReaderOption.setOutputColumns("B","C", "D", "H");
+			excelReaderOption.setStartRow(3);
+			excelReaderOption.setSheetRow(0);
+
+			List<Map<String, String>> listExcel = ExcelReader.read(excelReaderOption);
+			List<Score> scores = scoreMapper.findByStudentId(id);
+			Map<String, Double> scoreMap = new HashMap<String, Double>();
+			scoreMap.put("A+", 4.5);
+			scoreMap.put("A0", 4.0);
+			scoreMap.put("B+", 3.5);
+			scoreMap.put("B0", 3.0);
+			scoreMap.put("C+", 2.5);
+			scoreMap.put("C0", 2.0);
+			scoreMap.put("D+", 1.5);
+			scoreMap.put("D0", 1.0);
+			scoreMap.put("P", 10.0);
+			scoreMap.put("N", -1.0);
+
+			for(Map<String, String> map : listExcel) {
+				Subject subject = new Subject();
+
+				String temp = map.get("B");
+
+				subject.setYear(temp.substring(0, temp.indexOf(".")));
+				subject.setCode(map.get("D"));
+
+				String tmp = map.get("C");
+
+				if(tmp.equals("여름학기"))
+					subject.setSemester(3);
+
+				else if(tmp.equals("겨울학기"))
+					subject.setSemester(4);
+
+				else
+					subject.setSemester((int)Double.parseDouble(tmp.substring(0, 1)));
+
+				subject = subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester());
+				Score insert = new Score();
+				insert.setStudentId(id);
+				insert.setSubjectId(subject.getId());
+				insert.setMajorAdmit(false);
+				insert.setSubstitutionCode("0");
+				insert.setScore(scoreMap.get(map.get("H")));
+
+				if(subject != null) {
+					if(scores != null) {
+						for(int i = 0; i < scores.size(); ++i) {
+							if(subject.getYear().equals(scores.get(i).getSubject().getYear()) && subject.getCode().equals(scores.get(i).getSubject().getCode()) && subject.getSemester() == scores.get(i).getSubject().getSemester()) {
+								insert.setId(scores.get(i).getId());
+								scoreMapper.update(insert);
+								break;
+							}
+
+							else if(i == scores.size() - 1)
+								scoreMapper.insert(insert);
+						}
+					}
+
+					else {
+						scoreMapper.insert(insert);
+					}
+				}
+			}
+		}
+
+		return "redirect:gradelist";
 	}
 }

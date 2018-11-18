@@ -37,7 +37,7 @@
 					</table>
 				</form:form>
 				<hr />
-				<h3 class="text-center">전공인정 신청 목록</h3>
+				<h3 class="text-center">학생 목록</h3>
 				<hr />
 				<form:form action="changerequestlist" method="get" modelAttribute="condition">
 					<table class="table text-center">

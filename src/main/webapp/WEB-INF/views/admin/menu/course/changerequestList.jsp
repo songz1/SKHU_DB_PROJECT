@@ -31,7 +31,7 @@
 					<tr>
 						<td class="title col-md-5 col-md-offset-5 text-center">다운로드</td>
 						<td class="col-md-5 col-md-offset-5 text-center"><a
-							href="downchangerequestlist">대체과목 목록</a></td>
+							href="downchangerequestlist">학생 목록</a></td>
 					</tr>
 				</table>
 				<hr />

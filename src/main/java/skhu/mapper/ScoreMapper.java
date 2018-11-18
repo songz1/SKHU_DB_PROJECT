@@ -15,4 +15,5 @@ public interface ScoreMapper {
 	List<Score> findByEstablish(@Param("departmentId") int departmentId, @Param("establish") String establish);
 	void update(Score score);
 	List<Score> findWithSubstitution(int studentId);
+	void insert(Score score);
 }

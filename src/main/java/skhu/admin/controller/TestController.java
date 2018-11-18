@@ -96,8 +96,9 @@ public class TestController {
 
 			subject.setCode(map.get("C"));
 			subject.setYear(map.get("A"));
+			subject.setSemester((int)Double.parseDouble(map.get("B")));
 
-			if(subjectMapper.findTest(subject.getCode(), subject.getYear()) == null) {
+			if(subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester()) == null) {
 				subject.setAbolish(false);
 				subject.setDepartmentId(7);
 				subject.setDetailId(1);
@@ -112,7 +113,6 @@ public class TestController {
 					subject.setProfessorId(1);
 
 				subject.setScore(Double.parseDouble(map.get("F")));
-				subject.setSemester((int)Double.parseDouble(map.get("B")));
 				subject.setSubjectClass(map.get("D"));
 
 				subjectMapper.insert(subject);
@@ -152,14 +152,21 @@ public class TestController {
 			for(Department department : departments) {
 				deptMap.put(department.getRealName(), department.getId());
 			}
-			String temp = map.get("A");
-			System.out.println(temp);
-			String tt = temp.substring(0, temp.indexOf("."));
-			System.out.println(tt);
+			subject.setYear(map.get("A"));
 			subject.setCode(map.get("C"));
-			subject.setYear(tt);
 
-			if(subjectMapper.findTest(subject.getCode(), subject.getYear()) == null) {
+			String tmp = map.get("B");
+
+			if(tmp.equals("여름학기"))
+				subject.setSemester(3);
+
+			else if(tmp.equals("겨울학기"))
+				subject.setSemester(4);
+
+			else
+				subject.setSemester((int)Double.parseDouble(map.get("B")));
+
+			if(subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester()) == null) {
 				subject.setAbolish(false);
 				subject.setDetailId(1);
 				subject.setEstablish(map.get("E"));
@@ -174,16 +181,70 @@ public class TestController {
 				subject.setDivision(map.get("G"));
 				subject.setName(map.get("F"));
 				subject.setScore(Double.parseDouble(map.get("H")));
-				String tmp = map.get("B");
-				if(tmp.equals("여름학기"))
-					subject.setSemester(3);
+				subject.setSubjectClass(map.get("D"));
 
-				else if(tmp.equals("겨울학기"))
-					subject.setSemester(4);
+				subjectMapper.insert(subject);
+			}
+		}
+
+		destFile.delete();
+		return "redirect:test2";
+	}
+
+	@RequestMapping(value="myTest4", method = RequestMethod.POST)
+	public String excelUploadTest4(MultipartHttpServletRequest request, Model model)  throws Exception{
+		MultipartFile excelFile =request.getFile("excelFile");
+
+		File destFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\admin\\테스트.xlsx");
+
+		excelFile.transferTo(destFile);
+
+		ExcelReaderOption excelReaderOption = new ExcelReaderOption();
+		excelReaderOption.setFilePath(destFile.getAbsolutePath());
+		excelReaderOption.setOutputColumns("A","B", "C", "D", "E", "F", "G", "H");
+		excelReaderOption.setStartRow(2);
+		excelReaderOption.setSheetRow(1);
+
+
+		List<Map<String, String>>excelContent = ExcelReader.read(excelReaderOption);
+
+		for(Map<String, String> map : excelContent){
+			Subject subject = new Subject();
+			List<Department> departments = new ArrayList<Department>();
+			Map<String, Integer> deptMap = new HashMap<String, Integer>();
+
+			for(Department department : departments) {
+				deptMap.put(department.getRealName(), department.getId());
+			}
+			subject.setYear(map.get("A"));
+			subject.setCode(map.get("C"));
+
+			String tmp = map.get("B");
+
+			if(tmp.equals("여름학기"))
+				subject.setSemester(3);
+
+			else if(tmp.equals("겨울학기"))
+				subject.setSemester(4);
+
+			else
+				subject.setSemester((int)Double.parseDouble(map.get("B")));
+
+			if(subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester()) == null) {
+				subject.setAbolish(false);
+				subject.setDetailId(1);
+				subject.setEstablish(map.get("E"));
+
+				if(deptMap.containsKey(subject.getEstablish()))
+					subject.setDepartmentId(deptMap.get(subject.getEstablish()));
 
 				else
-					subject.setSemester((int)Double.parseDouble(map.get("B")));
+					subject.setDepartmentId(1);
 
+				subject.setProfessorId(1);
+				subject.setDivision(map.get("G"));
+				subject.setName(map.get("F"));
+				subject.setScore(Double.parseDouble(map.get("H")));
 				subject.setSubjectClass(map.get("D"));
 
 				subjectMapper.insert(subject);

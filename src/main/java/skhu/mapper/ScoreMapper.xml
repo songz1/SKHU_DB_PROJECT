@@ -4,12 +4,15 @@
 <mapper namespace="skhu.mapper.ScoreMapper">
 	<select id="findByStudentId" resultMap="graduationDetailScoreResultMap">
 		select sc.*, 
-		sj.id subjectId, sj.code subjectCode, sj.name subjectName, sj.score subjectScore, sj.division subjectDivision,
-		sd.id detailId, sd.title, sd.subtitle
+		sj.id subjectId, sj.code subjectCode, sj.year subjectYear, sj.semester subjectSemester, sj.name subjectName, sj.score subjectScore, sj.division subjectDivision,
+		sd.id detailId, sd.title, sd.subtitle,
+		a.id adminId, a.name adminName
 		from score sc
 		left join subject sj on sc.subjectId = sj.id
 		left join subject_detail sd on sj.detailId = sd.id
-		where sc.studentId = #{ studentId };
+		left join admin a on a.id = sj.professorId
+		where sc.studentId = #{ studentId }
+		order by year, semester
 	</select>
 	<resultMap id="graduationDetailScoreResultMap" type="Score">
 		<id property="id" column="id" />
@@ -23,10 +26,16 @@
 			<result property="name" column="subjectName" />
 			<result property="score" column="subjectScore" />
 			<result property="division" column="subjectDivision" />
+			<result property="semester" column="subjectSemester" />
+			<result property="year" column="subjectYear" />
 			<association property="subjectDetail" javaType="SubjectDetail">
 				<id property="id" column="detailId" />
 				<result property="title" column="title" />
 				<result property="subtitle" column="subtitle" />
+			</association>
+			<association property="admin" javaType="Admin">
+				<id property="id" column="adminId" />
+				<result property="name" column="adminName" />
 			</association>
 		</association>
 	</resultMap>
@@ -103,15 +112,19 @@
 	update score
 	<set>
 		<if test="score != null and score != 0.0">
-			score = #{ score }
+			score = #{ score },
 		</if>
 		<if test="majorAdmit != null">
-			score = #{ majorAdmit }
+			majorAdmit = #{ majorAdmit },
 		</if>
-		<if test='substituionCode != null and substituionCode != ""'>
+		<if test='substitutionCode != null and substitutionCode != ""'>
 			substitutionCode = #{ substitutionCode }
 		</if>
 	</set> 
 	where id = #{ id };
 	</update>
+	<insert id="insert">
+		insert into score(studentId, subjectId, score, majorAdmit, substitutionCode)
+		values(#{ studentId }, #{ subjectId }, #{ score }, #{ majorAdmit }, #{ substitutionCode }); #새로운 성적이라면 insert
+	</insert>
 </mapper>
