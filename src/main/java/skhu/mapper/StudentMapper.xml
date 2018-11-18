@@ -95,7 +95,7 @@
 		</association>
 	</resultMap>
 	<select id="findById" resultMap="studentResultMap">
-		select s.*, d.id departmentId, d.name departmentName, d.collegeId from student s
+		select s.*, d.id departmentId, d.name departmentName, d.realName departmentRealName, d.collegeId from student s
 		left join department d on s.departmentId = d.id
 		where s.id = #{id}
 	</select>
@@ -116,6 +116,7 @@
 		<association property="department" javaType="Department">
 			<id property="id" column="departmentId" />
 			<result property="name" column="departmentName" />
+			<result property="realName" column="departmentRealName" />
 			<result property="graduationId" column="graduationId" />
 		</association>
 	</resultMap>

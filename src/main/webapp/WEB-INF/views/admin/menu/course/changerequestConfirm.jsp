@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +46,7 @@
 					</select>
 				</div>
 				<c:forEach var="map" items="${ changeMap }">
-					<form action="majorselectionrequest" id="${ map.key.id }">
+					<form action="changerequest" id="${ map.key.id }" method="post">
 						<div class="form-group text-center col-md-2">
 							<i class="glyphicon glyphicon-arrow-right"></i>
 						</div>

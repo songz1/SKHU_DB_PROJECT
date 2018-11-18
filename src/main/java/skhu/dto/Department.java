@@ -5,9 +5,19 @@ import java.util.List;
 public class Department {
 	int id;
 	String name;
+	String realName;
 	int collegeId;
 	College college;
 	List<GraduationGrade> graduationGrades;
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+	public void setGraduationGrades(List<GraduationGrade> graduationGrades) {
+		this.graduationGrades = graduationGrades;
+	}
 	public int getId() {
 		return id;
 	}

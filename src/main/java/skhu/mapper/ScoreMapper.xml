@@ -42,6 +42,15 @@
 		left join subject sj on sc.subjectId = sj.id
 		where sc.studentId = #{ studentId } and sc.majorAdmit = #{ majorAdmit };   
 	</select>
+	<select id="findByEstablish" resultMap="changeRequestScoreResultMap" >
+		select sc.* from score sc
+		left join subject sj on sc.subjectId = sj.id
+		where 
+			sc.majorAdmit = 0 and
+		    sj.division = '전공선택' and
+		    sj.departmentId != #{ departmentId } and
+		    sj.establish like #{ establish };
+	</select>
 	<resultMap id="changeRequestScoreResultMap" type="Score">
 		<id property="id" column="id" />
 		<result property="score" column="score" />
@@ -90,14 +99,19 @@
 			<result property="substitutionCode" column="subCode" />
 		</association>
 	</resultMap>
-	<update id="cancelChangeRequest">
-		update score
-		set substitutionCode = #{ substitutionCode }
-		where id = #{ id };
-	</update>
-	<update id="cancelMajorRequest">
-		update score
-		set majorAdmit = #{ majorAdmit }
-		where id = #{ id };
+	<update id="update">
+	update score
+	<set>
+		<if test="score != null and score != 0.0">
+			score = #{ score }
+		</if>
+		<if test="majorAdmit != null">
+			score = #{ majorAdmit }
+		</if>
+		<if test='substituionCode != null and substituionCode != ""'>
+			substitutionCode = #{ substitutionCode }
+		</if>
+	</set> 
+	where id = #{ id };
 	</update>
 </mapper>

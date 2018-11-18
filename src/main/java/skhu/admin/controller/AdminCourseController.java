@@ -214,13 +214,13 @@ public class AdminCourseController {
 		Score score = new Score();
 		score.setId(id);
 		score.setSubstitutionCode("0");
-		scoreMapper.cancelChangeRequest(score);
+		scoreMapper.update(score);
 
 		return "redirect:changedetail";
 	}
 
 	@RequestMapping(value="addchangesubject", method=RequestMethod.GET)
-	public String changerequestConfirm(Model model, @RequestParam("id") int id) {
+	public String addChangeSubject(Model model, @RequestParam("id") int id) {
 		Rule rule = ruleMapper.findByName("대체과목");
 		List<Score> scores = scoreMapper.findWithSubstitution(id);
 		Map<Score, List<Subject>> changeMap = new HashMap<Score, List<Subject>>();
@@ -247,6 +247,21 @@ public class AdminCourseController {
 		model.addAttribute("changeMap", changeMap);
 		model.addAttribute("rule", rule);
 		return "admin/menu/course/changerequestConfirm";
+	}
+
+	@RequestMapping(value="changerequest", method=RequestMethod.POST)
+	public String changeRequest(Model model, @RequestParam("id") int id, @RequestParam("change") String code) {
+		Score score = new Score();
+
+		if(id == 0)
+			return "redirect:changerequestlist";
+
+		score.setId(id);
+		score.setSubstitutionCode(code);
+
+		scoreMapper.update(score);
+
+		return "redirect:changerequestlist";
 	}
 
 	@RequestMapping(value="majorrequestlist", method=RequestMethod.GET)
@@ -292,14 +307,35 @@ public class AdminCourseController {
 		Score score = new Score();
 		score.setId(id);
 		score.setMajorAdmit(false);
-		scoreMapper.cancelMajorRequest(score);
+		scoreMapper.update(score);
 
 		return "redirect:changedetail";
 	}
 
-	@RequestMapping(value="majorrequestconfrim", method=RequestMethod.GET)
-	public String majorrequestConfirm() {
+	@RequestMapping(value="addmajoradmit", method=RequestMethod.GET)
+	public String majorrequestConfirm(Model model, @RequestParam("id") int id) {
+		Rule rule = ruleMapper.findByName("전공인정");
+		Student student = studentMapper.findById(id);
+		List<Score> scores = scoreMapper.findByEstablish(student.getDepartmentId(), student.getDepartment().getRealName().substring(0, student.getDepartment().getRealName().indexOf(" ")));
+
+		model.addAttribute("scores", scores);
+		model.addAttribute("rule", rule);
+
 		return "admin/menu/course/majorrequestConfirm";
+	}
+
+	@RequestMapping(value="majoradmit", method=RequestMethod.POST)
+	public String majorAdmit(Model model, @RequestParam("subject") int id) {
+		Score score = new Score();
+		if(id == 0)
+			return "redirect:changerequestlist";
+
+		score.setId(id);
+		score.setMajorAdmit(true);
+
+		scoreMapper.update(score);
+
+		return "redirect:changerequestlist";
 	}
 
 	@RequestMapping(value="editrule", method=RequestMethod.POST)
