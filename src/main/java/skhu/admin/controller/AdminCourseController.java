@@ -301,6 +301,7 @@ public class AdminCourseController {
 	public String majorrequestDetail(Model model, @RequestParam("id") int id) {
 		Student student = studentMapper.findById(id);
 		List<Score> scores = scoreMapper.findByMajorAdmit(id, true);
+		System.out.println(scores.size());
 
 		model.addAttribute("student", student);
 		model.addAttribute("scores", scores);
@@ -315,14 +316,14 @@ public class AdminCourseController {
 		score.setMajorAdmit(false);
 		scoreMapper.update(score);
 
-		return "redirect:changedetail";
+		return "redirect:majorrequestlist";
 	}
 
 	@RequestMapping(value="addmajoradmit", method=RequestMethod.GET)
 	public String majorrequestConfirm(Model model, @RequestParam("id") int id) {
 		Rule rule = ruleMapper.findByName("전공인정");
 		Student student = studentMapper.findById(id);
-		List<Score> scores = scoreMapper.findByEstablish(student.getDepartmentId(), "%" + student.getDepartment().getName() + "%");
+		List<Score> scores = scoreMapper.findByEstablish(student.getId(), student.getDepartmentId(), "%" + student.getDepartment().getRealName().substring(0, student.getDepartment().getRealName().indexOf(" ")) + "%");
 
 		System.out.println(scores.size());
 
@@ -336,14 +337,14 @@ public class AdminCourseController {
 	public String majorAdmit(Model model, @RequestParam("subject") int id) {
 		Score score = new Score();
 		if(id == 0)
-			return "redirect:changerequestlist";
+			return "redirect:majorrequestlist";
 
 		score.setId(id);
 		score.setMajorAdmit(true);
 
 		scoreMapper.update(score);
 
-		return "redirect:changerequestlist";
+		return "redirect:majorrequestlist";
 	}
 
 	@RequestMapping(value="editrule", method=RequestMethod.POST)
@@ -433,8 +434,10 @@ public class AdminCourseController {
 
 	@RequestMapping(value="gradedetail", method=RequestMethod.GET)
 	public String gradeDetail(Model model, @RequestParam("id") int id) {
+		Subject subject = new Subject();
+		subject.setSemester(0);
 		Student student = studentMapper.findById(id);
-		List<Score> scores = scoreMapper.findByStudentId(id);
+		List<Score> scores = scoreMapper.findByStudentId(id, "", subject);
 		List<String> scoreChar = new ArrayList<String>();
 		double requestGrade = 0.0;
 		double getGrade = 0.0;
@@ -522,8 +525,10 @@ public class AdminCourseController {
 			excelReaderOption.setStartRow(3);
 			excelReaderOption.setSheetRow(1);
 
+			Subject temp = new Subject();
+			temp.setSemester(0);
 			List<Map<String, String>> listExcel = ExcelReader.read(excelReaderOption);
-			List<Score> scores = scoreMapper.findByStudentId(id);
+			List<Score> scores = scoreMapper.findByStudentId(id, "", temp);
 			Map<String, Double> scoreMap = new HashMap<String, Double>();
 			Student student = studentMapper.findById(id);
 			int major = 0;
@@ -685,8 +690,10 @@ public class AdminCourseController {
 				String stdNum = map.get("F");
 
 				if(stdNum != null && !stdNum.equals("") && stdNum.length() != 0) {
+					Subject subjectTemp = new Subject();
+					subject.setSemester(0);
 					student = studentMapper.findByStudentNumber(stdNum);
-					scores = scoreMapper.findByStudentId(student.getId());
+					scores = scoreMapper.findByStudentId(student.getId(), "", subjectTemp);
 				}
 
 				if(subject != null) {
@@ -735,7 +742,9 @@ public class AdminCourseController {
 			excelReaderOption.setSheetRow(1);
 
 			List<Map<String, String>> listExcel = ExcelReader.read(excelReaderOption);
-			List<Score> scores = scoreMapper.findByStudentId(id);
+			Subject subjectTemp = new Subject();
+			subjectTemp.setSemester(0);
+			List<Score> scores = scoreMapper.findByStudentId(id, "", subjectTemp);
 			Map<String, Double> scoreMap = new HashMap<String, Double>();
 			scoreMap.put("A+", 4.5);
 			scoreMap.put("A0", 4.0);

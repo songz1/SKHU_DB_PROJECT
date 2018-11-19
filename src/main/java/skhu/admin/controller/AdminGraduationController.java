@@ -599,8 +599,10 @@ public class AdminGraduationController {
 
 	@RequestMapping(value="graduationdetail", method=RequestMethod.GET)
 	public String graduationDetail(Model model, @RequestParam("id") int id) {
+		Subject subject = new Subject();
+		subject.setSemester(0);
 		Student student = studentMapper.findById(id);
-		List<Score> scores = scoreMapper.findByStudentId(student.getId());
+		List<Score> scores = scoreMapper.findByStudentId(student.getId(), "", subject);
 		List<Graduation> graduations = graduationMapper.findWithoutCommon();
 		List<Department> departments = departmentMapper.findWithoutCommon();
 		String year = student.getStudentNumber().substring(0, 4);

@@ -62,11 +62,12 @@
 		where sc.studentId = #{ studentId } and sc.majorAdmit = #{ majorAdmit };   
 	</select>
 	<select id="findByEstablish" resultMap="changeRequestScoreResultMap" >
-		select sc.* from score sc
+		select sc.*, sj.id subjectId, sj.code subjectCode, sj.name subjectname, sj.score subjectScore, sj.division subjectDivision from score sc
 		left join subject sj on sc.subjectId = sj.id
 		where 
+			sc.studentId = #{ studentId } and
 			sc.majorAdmit = 0 and
-		    sj.division like '%전공%' and
+		    (sj.division like '전공필수' or sj.division like '전공선택') and
 		    sj.departmentId != #{ departmentId } and
 		    sj.establish like #{ establish };
 	</select>
