@@ -151,7 +151,9 @@ public class UserCourseController {
 	public String majorrequest(Model model, HttpSession session) {
 		Student student = ((Student)session.getAttribute("userInfo"));
 		Rule rule = ruleMapper.findByName("전공인정");
-		List<Score> scores = scoreMapper.findByEstablish(student.getId(), student.getDepartmentId(), student.getDepartment().getRealName().substring(0, student.getDepartment().getRealName().indexOf(" ")));
+		System.out.println(student.getDepartment().getRealName());
+		System.out.println(student.getDepartment().getId());
+		List<Score> scores = scoreMapper.findByEstablish(student.getId(), student.getDepartmentId(), "%" + student.getDepartment().getRealName().substring(0, student.getDepartment().getRealName().indexOf(" ")) + "%");
 
 		model.addAttribute("scores", scores);
 		model.addAttribute("rule", rule);

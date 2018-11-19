@@ -9,9 +9,11 @@
 	<select id="findByStudentNumber" resultType="Student">
 		select * from student where studentNumber = #{ studentNumber } limit 1
 	</select>
-	<select id="login" resultType="Student">
-		select id, studentNumber, name, year, semester, departmentId, email, graduation, minor, doubleMajor, majorEssential, liberalEssential
-		from student 
+	<select id="login" resultMap="studentResultMap">
+		select s.id, s.studentNumber, s.name, s.year, s.semester, s.departmentId, s.email, s.graduation, s.minor, s.doubleMajor, s.majorEssential, s.liberalEssential,
+		d.id departmentId, d.name departmentName, d.realName departmentRealName, d.collegeId
+		from student s
+		left join department d on s.departmentId = d.id
 		where studentNumber = #{studentNumber} and password = #{password};
 	</select>
 	<select id="findAllWithCounseling" resultMap="counselingResultMap">
