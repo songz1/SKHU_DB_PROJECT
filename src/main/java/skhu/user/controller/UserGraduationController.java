@@ -22,6 +22,7 @@ import skhu.dto.GraduationGrade;
 import skhu.dto.GraduationSubject;
 import skhu.dto.Score;
 import skhu.dto.Student;
+import skhu.dto.Subject;
 import skhu.mapper.CollegeMapper;
 import skhu.mapper.CompleteScoreMapper;
 import skhu.mapper.DepartmentMapper;
@@ -163,9 +164,12 @@ public class UserGraduationController {
 	@RequestMapping(value = "mygraduation", method = RequestMethod.GET)
 	public String mygraduation(Model model, HttpSession session) {
 		Student student = ((Student)session.getAttribute("userInfo"));
+		Subject sub = new Subject();
+		sub.setSemester(0);
+		
 		List<Graduation> graduations = graduationMapper.findWithoutCommon();
 		List<Department> departments = departmentMapper.findWithoutCommon();
-		List<Score> scores = scoreMapper.findByStudentId(student.getId());
+		List<Score> scores = scoreMapper.findByStudentId(student.getId(), "", sub);
 		String year = student.getStudentNumber().substring(0, 4);
 		List<GraduationGrade> graduationGrades = null;
 		List<GraduationSubject> graduationSubjects = null;
@@ -293,9 +297,12 @@ public class UserGraduationController {
 			@RequestParam("doubleMajor1") int doubleMajor1, @RequestParam("doubleMajor2") int doubleMajor2,
 			@RequestParam("subGraduation") int subGraduation) {
 		Student student = ((Student)session.getAttribute("userInfo"));
+		Subject sub = new Subject();
+		sub.setSemester(0);
+		
 		List<Graduation> graduations = graduationMapper.findWithoutCommon();
 		List<Department> departments = departmentMapper.findWithoutCommon();
-		List<Score> scores = scoreMapper.findByStudentId(student.getId());
+		List<Score> scores = scoreMapper.findByStudentId(student.getId(), "", sub);
 		String year = student.getStudentNumber().substring(0, 4);
 		List<GraduationGrade> graduationGrades = null;
 		List<GraduationSubject> graduationSubjects = null;
