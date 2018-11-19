@@ -94,7 +94,7 @@
 		left join subject sj on sc.subjectId = sj.id
 		left join substitution sb on sj.code = sb.subjectCode
 		left join subject_detail sd on sj.detailId = sd.id
-		where abolish = 1 and studentId = #{ id };
+		where abolish = 1 and studentId = #{ studentId };
 	</select>
 	<resultMap id="substitutionResultMap" type="Score">
 		<id property="id" column="id" />

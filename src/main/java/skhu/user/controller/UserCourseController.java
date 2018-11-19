@@ -2,7 +2,6 @@ package skhu.user.controller;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,9 +40,10 @@ public class UserCourseController {
 	public String changerequest(Model model, HttpSession session) {
 		Student student = ((Student)session.getAttribute("userInfo"));
 		Rule rule = ruleMapper.findByName("대체과목");
+		System.out.println(student.getId());
 		List<Score> scores = scoreMapper.findWithSubstitution(student.getId());
 		Map<Score, List<Subject>> changeMap = new HashMap<Score, List<Subject>>();
-
+		System.out.println(student.getId());
 		if(scores != null) {
 			for(Score score : scores) {
 				List<Subject> subjects = new ArrayList<Subject>();
@@ -62,12 +62,13 @@ public class UserCourseController {
 				changeMap.put(score, subjects);
 			}
 		}
+		System.out.println(student.getId());
 
 		model.addAttribute("changeMap", changeMap);
 		model.addAttribute("rule", rule);
 		return "user/menu/course/changerequest";
 	}
-	
+
 	@RequestMapping(value="changerequest", method=RequestMethod.POST)
 	public String changeRequest(Model model, @RequestParam("id") int id, @RequestParam("change") String code) {
 		Score score = new Score();
@@ -157,7 +158,7 @@ public class UserCourseController {
 
 		return "user/menu/course/majorrequest";
 	}
-	
+
 	@RequestMapping(value="majoradmit", method=RequestMethod.POST)
 	public String majorAdmit(Model model, @RequestParam("subject") int id) {
 		Score score = new Score();
@@ -195,13 +196,13 @@ public class UserCourseController {
 
 	@RequestMapping(value="grades", method=RequestMethod.GET)
 	public String grades(Model model, Subject condition,
-			@RequestParam(value="searchText", required=false) String searchText, 
+			@RequestParam(value="searchText", required=false) String searchText,
 			HttpSession session) {
-		
+
 		Student student = ((Student)session.getAttribute("userInfo"));
 		if(searchText == null)
 			searchText = "";
-		
+
 		List<Score> scores = scoreMapper.findByStudentId(student.getId(), "%" + searchText + "%", condition);
 		List<String> scoreChar = new ArrayList<String>();
 		double requestGrade = 0.0;
@@ -281,7 +282,7 @@ public class UserCourseController {
 	@RequestMapping(value="addscore", method=RequestMethod.POST)
 	public String addScore(Model model, MultipartHttpServletRequest request, @RequestParam("studentNumber") String studentNumber, @RequestParam("id") int id) throws Exception {
 		MultipartFile listFile = request.getFile("listFile");
-		
+
 		Subject sub = new Subject();
 		sub.setSemester(0);
 
