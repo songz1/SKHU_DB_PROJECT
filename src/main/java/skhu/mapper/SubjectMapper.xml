@@ -36,6 +36,7 @@
 			<result property="subtitle" column="subtitle" />
 		</association>
 	</resultMap>
+	
 	<insert id="insert">
 		insert into subject(year, semester, code, subjectClass, name, professorId, score, division, establish, departmentId, detailId, abolish)
 		values(#{ year }, #{ semester }, #{ code }, #{ subjectClass }, #{ name }, #{ professorId }, #{ score }, #{ division }, #{ establish }, #{ departmentId }, #{ detailId }, #{ abolish })

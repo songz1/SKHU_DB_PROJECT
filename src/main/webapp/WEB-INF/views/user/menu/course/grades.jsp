@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,50 +23,58 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-
 				<table class="table text-center">
 					<h3 class="text-center">성적 조회</h3>
 					<tr>
 						<td class="title col-md-1">학번</td>
-						<td class="col-md-1">201532020</td>
+						<td class="col-md-1">${ student.studentNumber }</td>
 						<td class="title col-md-1">이름</td>
-						<td class="col-md-1">송지은</td>
+						<td class="col-md-1">${ student.name }</td>
 						<td class="title col-md-1">학과</td>
-						<td class="col-md-2">소프트웨어공학과</td>
+						<td class="col-md-2">${ student.department.name }</td>
 					</tr>
 				</table>
 
+				<form:form method="get" modelAttribute="condition" action="grades">
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">년도</td>
-						<td class="col-md-1"><input type="text" name="year"
-							value="2018"></input></td>
+						<td class="col-md-1">
+							<input type="text" name="year" value="${ searchText }" class="form-control"/>
+						</td>
 						<td class="title col-md-1">학기</td>
-						<td class="col-md-1"><select name="semester">
-								<option value="1">1학기</option>
-								<option value="2">2학기</option>
-								<option value="summer">여름학기</option>
-								<option value="winter">겨울학기</option>
-						</select></td>
-						<td class="col-md-1"><span style="float: left"> <input
-								type="checkbox"> 전체학기
-								</button>
-						</span></td>
-						<td class="col-md-1"><span style="float: right">
-								<button type="submit" class="btn btn-default btn-block"
-									style="WIDTH: 100pt;" onclick="/">조회</button>
-						</span></td>
+						<td class="col-md-1">
+							<form:select path="semester" class="form-control">
+								<form:option value="0" label="전체" />
+								<form:option value="1" label="1학기" />
+								<form:option value="2" label="2학기" />
+								<form:option value="summer" label="여름학기" />
+								<form:option value="winter" label="겨울학기" />
+							</form:select>
+						</td>
+						
+						<td class="col-md-1">
+							<span style="float: right">
+								<button type="submit" class="btn btn-default btn-block" style="WIDTH: 100pt;">조회</button>
+							</span>
+						</td>
 					</tr>
 				</table>
-				<table class="table text-center">
-					<tr>
-						<td class="title col-md-3">수강과목 및 성적 업로드</td>
-						<td class="title col-md-2"><input type="file"
-							class="form-control form-width" name="grades" /></td>
-						<td class="title col-md-1"><a href=""><button
-									type="submit" class="btn btn-default">확인</button></a></td>
-					</tr>
-				</table>
+				</form:form>
+				 
+				<form method="post" enctype="multipart/form-data" action="addscore">
+					<input type="hidden" name="studentNumber" value="${ student.studentNumber }" />
+					<input type="hidden" name="id" value="${ student.id }" />
+					<table class="table text-center">
+						<tr>
+							<td class="title col-md-3">성적 일괄 업로드</td>
+							<td class="title col-md-2"><input type="file"
+								class="form-control form-width" name="listFile" /></td>
+							<td class="title col-md-1"><button type="submit"
+									class="btn btn-default">확인</button></td>
+						</tr>
+					</table>
+				</form>
 
 				<table class="table text-center">
 					<tr class="title">
@@ -78,105 +88,32 @@
 						<td class="col-md-1">성적등급</td>
 						<td class="col-md-1">비고</td>
 					</tr>
-
-					<tr>
-						<td class="col-md-1">2018</td>
-						<td class="col-md-1">1학기</td>
-						<td class="col-md-1">IC00043</td>
-						<td class="col-md-4">과정지도5</td>
-						<td class="col-md-1">이승진</td>
-						<td class="col-md-1">전필</td>
-						<td class="col-md-1">1.0</td>
-						<td class="col-md-1">P</td>
-						<td class="col-md-1">-</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">2018</td>
-						<td class="col-md-1">1학기</td>
-						<td class="col-md-1">IC00029</td>
-						<td class="col-md-4">사물인터넷기초</td>
-						<td class="col-md-1">유상신</td>
-						<td class="col-md-1">전선</td>
-						<td class="col-md-1">3.0</td>
-						<td class="col-md-1">A0</td>
-						<td class="col-md-1">-</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">2018</td>
-						<td class="col-md-1">1학기</td>
-						<td class="col-md-1">IC00011</td>
-						<td class="col-md-4">고급웹프로그래밍I</td>
-						<td class="col-md-1">이승진</td>
-						<td class="col-md-1">전선</td>
-						<td class="col-md-1">3.0</td>
-						<td class="col-md-1">B+</td>
-						<td class="col-md-1">-</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">2018</td>
-						<td class="col-md-1">1학기</td>
-						<td class="col-md-1">IC00010</td>
-						<td class="col-md-4">알고리즘</td>
-						<td class="col-md-1">이승진</td>
-						<td class="col-md-1">전필</td>
-						<td class="col-md-1">3.0</td>
-						<td class="col-md-1">C+</td>
-						<td class="col-md-1">-</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">2018</td>
-						<td class="col-md-1">1학기</td>
-						<td class="col-md-1">IC00004</td>
-						<td class="col-md-4">웹페이지구축II</td>
-						<td class="col-md-1">정영희</td>
-						<td class="col-md-1">전선</td>
-						<td class="col-md-1">3.0</td>
-						<td class="col-md-1">C0</td>
-						<td class="col-md-1">전공인정</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">2018</td>
-						<td class="col-md-1">1학기</td>
-						<td class="col-md-1">IC00002</td>
-						<td class="col-md-4">컴퓨터구조</td>
-						<td class="col-md-1">유상신</td>
-						<td class="col-md-1">전필</td>
-						<td class="col-md-1">3.0</td>
-						<td class="col-md-1">A+</td>
-						<td class="col-md-1">-</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">2018</td>
-						<td class="col-md-1">1학기</td>
-						<td class="col-md-1">AE00074</td>
-						<td class="col-md-4">젠더로세상보기</td>
-						<td class="col-md-1">김영선</td>
-						<td class="col-md-1">교선</td>
-						<td class="col-md-1">3.0</td>
-						<td class="col-md-1">A+</td>
-						<td class="col-md-1">-</td>
-					</tr>
-					<tr>
-						<td class="col-md-1">2018</td>
-						<td class="col-md-1">1학기</td>
-						<td class="col-md-1">AD00001</td>
-						<td class="col-md-4">영어회화I</td>
-						<td class="col-md-1">Steve</td>
-						<td class="col-md-1">교선</td>
-						<td class="col-md-1">2.0</td>
-						<td class="col-md-1">B0</td>
-						<td class="col-md-1">대체</td>
-					</tr>
+					<c:forEach var="score" items="${ scores }" varStatus="status">
+						<tr>
+							<td class="col-md-1">${ score.subject.year }</td>
+							<td class="col-md-1">${ score.subject.semester }학기</td>
+							<td class="col-md-1">${ score.subject.code }</td>
+							<td class="col-md-4">${ score.subject.name }</td>
+							<td class="col-md-1">${ score.subject.admin.name }</td>
+							<td class="col-md-1">${ score.subject.division }</td>
+							<td class="col-md-1">${ score.subject.score }</td>
+							<td class="col-md-1">${ scoreChar[status.index] }</td>
+							<td class="col-md-1">
+								<c:if test="${ score.majorAdmit }">전공인정신청<br /></c:if> 
+								<c:if test="${ score.substitutionCode ne '0' }">대체과목신청: ${ score.substitutionCode }</c:if>
+							</td>
+						</tr>
+					</c:forEach>
 				</table>
 
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">신청학점</td>
-						<td class="col-md-1">21.0</td>
+						<td class="col-md-1">${ requestGrade }</td>
 						<td class="title col-md-1">취득학점</td>
-						<td class="col-md-1">21.0</td>
+						<td class="col-md-1">${ getGrade }</td>
 						<td class="title col-md-1">평점</td>
-						<td class="col-md-1">3.85</td>
+						<td class="col-md-1">${ averageGrade }</td>
 					</tr>
 				</table>
 			</div>

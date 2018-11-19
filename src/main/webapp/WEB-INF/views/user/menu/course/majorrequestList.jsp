@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +14,10 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../../res/css/common/main.css?ver=1">
+<script type="text/javascript"
+	src="../../../res/script/admin/toDetail.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
-
 <body>
 	<jsp:include page="../header.jsp" flush="true"></jsp:include>
 	<main>
@@ -24,33 +27,36 @@
 				<table class="table text-center">
 					<tr>
 						<td class="title col-md-1">학번</td>
-						<td class="col-md-1">201532020</td>
+						<td class="col-md-1">${ student.studentNumber }</td>
 						<td class="title col-md-1">이름</td>
-						<td class="col-md-1">송지은</td>
+						<td class="col-md-1">${ student.name }</td>
 						<td class="title col-md-1">학과</td>
-						<td class="col-md-2">소프트웨어공학과</td>
+						<td class="col-md-2">${ student.department.name }</td>
 					</tr>
 				</table>
 
 				<table class="table text-center">
 					<tr>
-						<td class="title" colspan="5">전공인정 신청내역</td>
+						<td class="title" colspan="5">전공인정 신청 과목</td>
 					</tr>
 					<tr>
 						<td class="title col-md-1">과목코드</td>
 						<td class="title col-md-2">과목명</td>
 						<td class="title col-md-1">이수구분</td>
 						<td class="title col-md-1">학점</td>
-						<td class="title col-md-1">신청 취소</td>
+						<td class="title col-md-1"></td>
 					</tr>
-					<tr>
-						<td class="col-md-1">IC00048</td>
-						<td class="col-md-2">보안시스템</td>
-						<td class="col-md-1">전선</td>
-						<td class="col-md-1">3.0</td>
-						<td class="col-md-1"><button type="submit"
-							class="btn btn-danger">취소</button></td>
-					</tr>
+					<c:forEach var="score" items="${ scores }">
+						<tr>
+							<td class="col-md-1">${ score.subject.code }</td>
+							<td class="col-md-2">${ score.subject.name }</td>
+							<td class="col-md-1">${ score.subject.division }</td>
+							<td class="col-md-1">${ score.subject.score }</td>
+							<td class="col-md-1">
+								<button type="submit" class="btn btn-danger" data-url="majorcancel?id=${ score.id }">취소</button>
+							</td>
+						</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</div>
