@@ -57,4 +57,11 @@ public class Score {
 	public void setSubstitutionCode(String substitutionCode) {
 		this.substitutionCode = substitutionCode;
 	}
+	@Override
+	public String toString() {
+		return "Score [id=" + id + ", studentId=" + studentId + ", student=" + student + ", subjectId=" + subjectId
+				+ ", subject=" + subject + ", score=" + score + ", majorAdmit=" + majorAdmit + ", substitutionCode="
+				+ substitutionCode + "]";
+	}
+	
 }
