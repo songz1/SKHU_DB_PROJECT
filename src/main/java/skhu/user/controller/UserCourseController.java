@@ -150,7 +150,7 @@ public class UserCourseController {
 	public String majorrequest(Model model, HttpSession session) {
 		Student student = ((Student)session.getAttribute("userInfo"));
 		Rule rule = ruleMapper.findByName("전공인정");
-		List<Score> scores = scoreMapper.findByEstablish(student.getDepartmentId(), student.getDepartment().getRealName().substring(0, student.getDepartment().getRealName().indexOf(" ")));
+		List<Score> scores = scoreMapper.findByEstablish(student.getId(), student.getDepartmentId(), student.getDepartment().getRealName().substring(0, student.getDepartment().getRealName().indexOf(" ")));
 
 		model.addAttribute("scores", scores);
 		model.addAttribute("rule", rule);
@@ -202,8 +202,7 @@ public class UserCourseController {
 		if(searchText == null)
 			searchText = "";
 		
-		//List<Score> scores = scoreMapper.findAll(condition, "%" + searchText + "%");
-		List<Score> scores = scoreMapper.findByStudentId(student.getId());
+		List<Score> scores = scoreMapper.findByStudentId(student.getId(), "%" + searchText + "%", condition);
 		List<String> scoreChar = new ArrayList<String>();
 		double requestGrade = 0.0;
 		double getGrade = 0.0;
@@ -282,6 +281,9 @@ public class UserCourseController {
 	@RequestMapping(value="addscore", method=RequestMethod.POST)
 	public String addScore(Model model, MultipartHttpServletRequest request, @RequestParam("studentNumber") String studentNumber, @RequestParam("id") int id) throws Exception {
 		MultipartFile listFile = request.getFile("listFile");
+		
+		Subject sub = new Subject();
+		sub.setSemester(0);
 
 		if(!listFile.isEmpty()) {
 			File destListFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\admin\\학생성적_" + studentNumber + ".xlsx");
@@ -294,7 +296,7 @@ public class UserCourseController {
 			excelReaderOption.setSheetRow(0);
 
 			List<Map<String, String>> listExcel = ExcelReader.read(excelReaderOption);
-			List<Score> scores = scoreMapper.findByStudentId(id);
+			List<Score> scores = scoreMapper.findByStudentId(id, "", sub);
 			Map<String, Double> scoreMap = new HashMap<String, Double>();
 			scoreMap.put("A+", 4.5);
 			scoreMap.put("A0", 4.0);
