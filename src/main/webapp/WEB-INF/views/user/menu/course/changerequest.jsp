@@ -40,13 +40,13 @@
 					</div>
 					<select id="option-show" class="option form-control">
 						<option value="0">미선택</option>
-						<c:forEach var="map" items="${ changeMap }">
+						<c:forEach var="map" items="${ changeMap }" varStatus="status">
 							<option value="${ map.key.id }">${ map.key.subject.name }</option>
 						</c:forEach>
 					</select>
 				</div>
 				<c:forEach var="map" items="${ changeMap }">
-					<form action="changerequest" id="${ map.key.id }" method="post">
+					<form action="changerequest" id="${ map.key.id }" class="hide-form" method="post">
 						<div class="form-group text-center col-md-2">
 							<i class="glyphicon glyphicon-arrow-right"></i>
 						</div>
