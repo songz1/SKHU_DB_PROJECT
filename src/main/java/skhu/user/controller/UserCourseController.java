@@ -47,11 +47,11 @@ public class UserCourseController {
 		if(scores != null) {
 			for(Score score : scores) {
 				List<Subject> subjects = new ArrayList<Subject>();
-				if(score.getSubstitutionCode().equals("전공선택")) {
+				if(score.getSubstitution().getSubstitutionCode().equals("전공선택")) {
 					subjects = subjectMapper.findByDivision("전공선택", student.getDepartmentId());
 				}
 
-				else if(score.getSubstitutionCode().contains("전공")) {
+				else if(score.getSubstitution().getSubstitutionCode().contains("전공")) {
 					subjects = subjectMapper.findBySubtitle(score.getSubstitutionCode());
 				}
 
@@ -62,7 +62,6 @@ public class UserCourseController {
 				changeMap.put(score, subjects);
 			}
 		}
-		System.out.println(student.getId());
 
 		model.addAttribute("changeMap", changeMap);
 		model.addAttribute("rule", rule);
