@@ -322,7 +322,9 @@ public class AdminCourseController {
 	public String majorrequestConfirm(Model model, @RequestParam("id") int id) {
 		Rule rule = ruleMapper.findByName("전공인정");
 		Student student = studentMapper.findById(id);
-		List<Score> scores = scoreMapper.findByEstablish(student.getDepartmentId(), student.getDepartment().getRealName().substring(0, student.getDepartment().getRealName().indexOf(" ")));
+		List<Score> scores = scoreMapper.findByEstablish(student.getDepartmentId(), "%" + student.getDepartment().getName() + "%");
+
+		System.out.println(scores.size());
 
 		model.addAttribute("scores", scores);
 		model.addAttribute("rule", rule);

@@ -171,8 +171,9 @@ public class TestController {
 				subject.setDetailId(1);
 				subject.setEstablish(map.get("E"));
 
-				if(deptMap.containsKey(subject.getEstablish()))
+				if(deptMap.containsKey(subject.getEstablish())) {
 					subject.setDepartmentId(deptMap.get(subject.getEstablish()));
+				}
 
 				else
 					subject.setDepartmentId(1);

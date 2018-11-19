@@ -61,7 +61,7 @@
 		left join subject sj on sc.subjectId = sj.id
 		where 
 			sc.majorAdmit = 0 and
-		    sj.division = '전공선택' and
+		    sj.division like '%전공%' and
 		    sj.departmentId != #{ departmentId } and
 		    sj.establish like #{ establish };
 	</select>
