@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -605,8 +606,8 @@ public class AdminGraduationController {
 		String year = student.getStudentNumber().substring(0, 4);
 		List<GraduationGrade> graduationGrades = null;
 		List<GraduationSubject> graduationSubjects = null;
-		Map<GraduationGrade, Integer> graduationGradeMap = new HashMap<GraduationGrade, Integer>();
-		Map<GraduationSubject, Integer> graduationSubjectMap = new HashMap<GraduationSubject, Integer>();
+		Map<GraduationGrade, Integer> graduationGradeMap = new LinkedHashMap<GraduationGrade, Integer>();
+		Map<GraduationSubject, Integer> graduationSubjectMap = new LinkedHashMap<GraduationSubject, Integer>();
 		if(!student.getGraduation().equals("0")) {
 			String[] splitGraduations = student.getGraduation().split(" ", 2);
 
@@ -659,7 +660,7 @@ public class AdminGraduationController {
 				for(Score score : scores) {
 					if(score.getSubstitutionCode().equals("0")) {
 						if(graduationGrade.getName().contains("채플")) {
-							if(score.getSubject().getName().contains("채플")) {
+							if(score.getSubject().getName().contains("채플") && score.getScore() > 0) {
 								total += 1;
 								graduationGradeMap.put(graduationGrade, total);
 							}
@@ -685,20 +686,26 @@ public class AdminGraduationController {
 			}
 
 			for(GraduationSubject graduationSubject : graduationSubjects) {
-				if(!graduationSubject.getNote().equals("") || graduationSubject.getNote().length() != 0)
-					graduationSubjectMap.put(graduationSubject, 2);
-				else
-					graduationSubjectMap.put(graduationSubject, 0);
 				for(Score score : scores) {
-					if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
-						graduationSubjectMap.put(graduationSubject, 1);
+					if(!graduationSubject.getNote().equals("") && graduationSubject.getNote().length() != 0) {
+						if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
+							graduationSubjectMap.put(graduationSubject, 1);
+							break;
+						}
+
+						else
+							graduationSubjectMap.put(graduationSubject, 2);
 					}
 
-					else if(!graduationSubject.getNote().equals("") || graduationSubject.getNote().length() != 0)
-						graduationSubjectMap.put(graduationSubject, 2);
+					else {
+						if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
+							graduationSubjectMap.put(graduationSubject, 1);
+							break;
+						}
 
-					else
-						graduationSubjectMap.put(graduationSubject, 0);
+						else
+							graduationSubjectMap.put(graduationSubject, 0);
+					}
 				}
 			}
 
@@ -774,7 +781,7 @@ public class AdminGraduationController {
 	@RequestMapping(value="insert", method=RequestMethod.POST)
 	public String insert(Model model, Action action) {
 		if((action.getName().length() != 0 && !action.getName().equals("")) &&
-		(action.getContent().length() != 0 && !action.getContent().equals("")))
+				(action.getContent().length() != 0 && !action.getContent().equals("")))
 			actionMapper.insert(action);
 
 		return "redirect:counseling";

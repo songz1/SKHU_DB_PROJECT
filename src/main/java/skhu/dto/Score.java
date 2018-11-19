@@ -9,6 +9,13 @@ public class Score {
 	double score;
 	boolean majorAdmit;
 	String substitutionCode;
+	Substitution substitution;
+	public Substitution getSubstitution() {
+		return substitution;
+	}
+	public void setSubstitution(Substitution substitution) {
+		this.substitution = substitution;
+	}
 	public int getId() {
 		return id;
 	}
@@ -63,5 +70,5 @@ public class Score {
 				+ ", subject=" + subject + ", score=" + score + ", majorAdmit=" + majorAdmit + ", substitutionCode="
 				+ substitutionCode + "]";
 	}
-	
+
 }

@@ -6,6 +6,9 @@
 	<select id="findAll" resultType="Student">
 		select * from student
 	</select>
+	<select id="findByStudentNumber" resultType="Student">
+		select * from student where studentNumber = #{ studentNumber } limit 1
+	</select>
 	<select id="login" resultType="Student">
 		select id, studentNumber, name, year, semester, departmentId, email, graduation, minor, doubleMajor, majorEssential, liberalEssential
 		from student 

@@ -38,7 +38,7 @@
 				</table>
 				<hr />
 				<hr />
-				<form method="post" enctype="multipart/form-data" action="addscore">
+				<form method="post" enctype="multipart/form-data" action="addscores">
 					<table class="table text-center">
 						<tr>
 							<td class="title col-md-3">성적 일괄 업로드</td>

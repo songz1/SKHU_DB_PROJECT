@@ -145,11 +145,16 @@ public class AdminCourseController {
 
 			List<Map<String, String>> listExcel = ExcelReader.read(excelReaderOption);
 			substitutionMapper.delete();
+			subjectMapper.abolishChange();
 			for(Map<String, String> map : listExcel) {
 				Substitution substitution = new Substitution();
 				substitution.setSubjectCode(map.get("A"));
 				substitution.setSubstitutionCode(map.get("B"));
 				substitutionMapper.insert(substitution);
+				Subject subject = new Subject();
+				subject.setAbolish(true);
+				subject.setCode(substitution.getSubjectCode());
+				subjectMapper.update(subject);
 			}
 		}
 
@@ -216,7 +221,7 @@ public class AdminCourseController {
 		score.setSubstitutionCode("0");
 		scoreMapper.update(score);
 
-		return "redirect:changedetail";
+		return "redirect:changerequestlist";
 	}
 
 	@RequestMapping(value="addchangesubject", method=RequestMethod.GET)
@@ -224,15 +229,16 @@ public class AdminCourseController {
 		Rule rule = ruleMapper.findByName("대체과목");
 		List<Score> scores = scoreMapper.findWithSubstitution(id);
 		Map<Score, List<Subject>> changeMap = new HashMap<Score, List<Subject>>();
+		Student student = studentMapper.findById(id);
 
 		if(scores != null) {
 			for(Score score : scores) {
 				List<Subject> subjects = new ArrayList<Subject>();
-				if(score.getSubstitutionCode().equals("전공선택")) {
-					subjects = subjectMapper.findByDivision("전공선택");
+				if(score.getSubstitution().getSubstitutionCode().equals("전공선택")) {
+					subjects = subjectMapper.findByDivision("전공선택", student.getDepartmentId());
 				}
 
-				else if(score.getSubstitutionCode().contains("전공")) {
+				else if(score.getSubstitution().getSubstitutionCode().contains("전공")) {
 					subjects = subjectMapper.findBySubtitle(score.getSubstitutionCode());
 				}
 
@@ -396,8 +402,8 @@ public class AdminCourseController {
 
 	@RequestMapping(value="downscores")
 	public void downScores(HttpServletResponse response) throws Exception {
-		File destCompleteFile = new File("src\\main\\webapp\\res\\file\\form\\양식_성적업로드.xlsx");
-		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("성적업로드.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
+		File destCompleteFile = new File("src\\main\\webapp\\res\\file\\form\\양식_일괄학생성적.xlsx");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("일괄학생성적업로드.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
 		response.setHeader("Content-Length", ""+ destCompleteFile.length());
@@ -505,14 +511,226 @@ public class AdminCourseController {
 		MultipartFile listFile = request.getFile("listFile");
 
 		if(!listFile.isEmpty()) {
-			File destListFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\admin\\학생성적_" + studentNumber + ".xlsx");
+			File destListFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\admin\\scores\\학생성적_" + studentNumber + ".xlsx");
+			listFile.transferTo(destListFile);
+
+			ExcelReaderOption excelReaderOption = new ExcelReaderOption();
+			excelReaderOption.setFilePath(destListFile.getAbsolutePath());
+			excelReaderOption.setOutputColumns("B","C", "D", "E");
+			excelReaderOption.setStartRow(3);
+			excelReaderOption.setSheetRow(1);
+
+			List<Map<String, String>> listExcel = ExcelReader.read(excelReaderOption);
+			List<Score> scores = scoreMapper.findByStudentId(id);
+			Map<String, Double> scoreMap = new HashMap<String, Double>();
+			Student student = studentMapper.findById(id);
+			int major = 0;
+			int liberal = 0;
+			scoreMap.put("A+", 4.5);
+			scoreMap.put("A0", 4.0);
+			scoreMap.put("B+", 3.5);
+			scoreMap.put("B0", 3.0);
+			scoreMap.put("C+", 2.5);
+			scoreMap.put("C0", 2.0);
+			scoreMap.put("D+", 1.5);
+			scoreMap.put("D0", 1.0);
+			scoreMap.put("P", 10.0);
+			scoreMap.put("N", -1.0);
+
+			for(Score score : scores) {
+				if((score.getSubject().getDivision().equals("전공선택") || score.getSubject().getDivision().equals("전공필수")) &&
+						!student.getDepartment().getRealName().equals(score.getSubject().getEstablish()))
+					score.getSubject().setDivision("교양선택");
+
+				if(score.isMajorAdmit())
+					score.getSubject().setDivision("전공선택");
+
+				if(score.getSubstitutionCode().equals("0") && !(score.getScore() < 0.0)) {
+					if(score.getSubject().getDivision().contains("전공")) {
+						major += score.getSubject().getScore();
+					}
+
+					else if(score.getSubject().getDivision().contains("교양"))
+						liberal += score.getSubject().getScore();
+				}
+			}
+
+			for(Map<String, String> map : listExcel) {
+				Subject subject = new Subject();
+
+				subject.setYear(map.get("B"));
+				subject.setCode(map.get("D"));
+
+				String tmp = map.get("C");
+
+				if(tmp.equals("여름학기"))
+					subject.setSemester(3);
+
+				else if(tmp.equals("겨울학기"))
+					subject.setSemester(4);
+
+				else
+					subject.setSemester((int)Double.parseDouble(tmp));
+
+				subject = subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester());
+
+				if(subject != null) {
+					Score insert = new Score();
+					insert.setStudentId(id);
+					insert.setSubjectId(subject.getId());
+					insert.setMajorAdmit(false);
+					insert.setSubstitutionCode("0");
+					insert.setScore(scoreMap.get(map.get("E")));
+					if(scores != null) {
+						for(int i = 0; i < scores.size(); ++i) {
+							if(subject.getYear().equals(scores.get(i).getSubject().getYear()) && subject.getCode().equals(scores.get(i).getSubject().getCode()) && subject.getSemester() == scores.get(i).getSubject().getSemester()) {
+								insert.setId(scores.get(i).getId());
+								scoreMapper.update(insert);
+								break;
+							}
+
+							else if(i == scores.size() - 1) {
+								scoreMapper.insert(insert);
+
+								if(!(insert.getScore() < 0.0)) {
+									if(subject.getDivision().contains("전공"))
+										major += subject.getScore();
+
+									else if(subject.getDivision().contains("교양"))
+										liberal += subject.getScore();
+								}
+							}
+						}
+					}
+
+					else {
+						scoreMapper.insert(insert);
+
+						if(!(insert.getScore() < 0.0)) {
+							if(subject.getDivision().contains("전공"))
+								major += subject.getScore();
+
+							else if(subject.getDivision().contains("교양"))
+								liberal += subject.getScore();
+						}
+					}
+				}
+			}
+			if(student.getMajorEssential() != major || student.getLiberalEssential() != liberal) {
+				Student update = new Student();
+				update.setId(student.getId());
+				update.setMajorEssential(major);
+				update.setLiberalEssential(liberal);
+				studentMapper.update(update);
+			}
+		}
+
+		return "redirect:gradelist";
+	}
+
+	@RequestMapping(value="addscores", method=RequestMethod.POST)
+	public String addScores(Model model, MultipartHttpServletRequest request) throws Exception {
+		MultipartFile listFile = request.getFile("listFile");
+
+		if(!listFile.isEmpty()) {
+			File destListFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\admin\\scores\\학생성적_일괄.xlsx");
+			listFile.transferTo(destListFile);
+
+			ExcelReaderOption excelReaderOption = new ExcelReaderOption();
+			excelReaderOption.setFilePath(destListFile.getAbsolutePath());
+			excelReaderOption.setOutputColumns("B","C", "D", "E", "F");
+			excelReaderOption.setStartRow(3);
+			excelReaderOption.setSheetRow(1);
+
+			List<Map<String, String>> listExcel = ExcelReader.read(excelReaderOption);
+			Map<String, Double> scoreMap = new HashMap<String, Double>();
+			Student student = null;
+			List<Score> scores = null;
+
+			scoreMap.put("A+", 4.5);
+			scoreMap.put("A0", 4.0);
+			scoreMap.put("B+", 3.5);
+			scoreMap.put("B0", 3.0);
+			scoreMap.put("C+", 2.5);
+			scoreMap.put("C0", 2.0);
+			scoreMap.put("D+", 1.5);
+			scoreMap.put("D0", 1.0);
+			scoreMap.put("P", 10.0);
+			scoreMap.put("N", -1.0);
+
+			for(Map<String, String> map : listExcel) {
+				if(map.get("B") == null || map.get("B").equals(""))
+					break;
+
+				Subject subject = new Subject();
+
+				subject.setYear(map.get("B"));
+				subject.setCode(map.get("D"));
+
+				String tmp = map.get("C");
+
+				if(tmp.equals("여름학기"))
+					subject.setSemester(3);
+
+				else if(tmp.equals("겨울학기"))
+					subject.setSemester(4);
+
+				else
+					subject.setSemester((int)Double.parseDouble(tmp));
+
+				subject = subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester());
+
+				String stdNum = map.get("F");
+
+				if(stdNum != null && !stdNum.equals("") && stdNum.length() != 0) {
+					student = studentMapper.findByStudentNumber(stdNum);
+					scores = scoreMapper.findByStudentId(student.getId());
+				}
+
+				if(subject != null) {
+					Score insert = new Score();
+					insert.setStudentId(student.getId());
+					insert.setSubjectId(subject.getId());
+					insert.setMajorAdmit(false);
+					insert.setSubstitutionCode("0");
+					insert.setScore(scoreMap.get(map.get("E")));
+					if(scores != null && scores.size() != 0) {
+						for(int i = 0; i < scores.size(); ++i) {
+							if(subject.getYear().equals(scores.get(i).getSubject().getYear()) && subject.getCode().equals(scores.get(i).getSubject().getCode()) && subject.getSemester() == scores.get(i).getSubject().getSemester()) {
+								insert.setId(scores.get(i).getId());
+								scoreMapper.update(insert);
+								break;
+							}
+
+							else if(i == scores.size() - 1)
+								scoreMapper.insert(insert);
+						}
+					}
+
+					else {
+						System.out.println("tt");
+						scoreMapper.insert(insert);
+					}
+				}
+			}
+		}
+
+		return "redirect:gradelist";
+	}
+
+	@RequestMapping(value="addscoret", method=RequestMethod.POST)
+	public String addScoret(Model model, MultipartHttpServletRequest request, @RequestParam("studentNumber") String studentNumber, @RequestParam("id") int id) throws Exception {
+		MultipartFile listFile = request.getFile("listFile");
+
+		if(!listFile.isEmpty()) {
+			File destListFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\admin\\scores\\학생성적_" + studentNumber + ".xlsx");
 			listFile.transferTo(destListFile);
 
 			ExcelReaderOption excelReaderOption = new ExcelReaderOption();
 			excelReaderOption.setFilePath(destListFile.getAbsolutePath());
 			excelReaderOption.setOutputColumns("B","C", "D", "H");
 			excelReaderOption.setStartRow(3);
-			excelReaderOption.setSheetRow(0);
+			excelReaderOption.setSheetRow(1);
 
 			List<Map<String, String>> listExcel = ExcelReader.read(excelReaderOption);
 			List<Score> scores = scoreMapper.findByStudentId(id);
@@ -548,14 +766,14 @@ public class AdminCourseController {
 					subject.setSemester((int)Double.parseDouble(tmp.substring(0, 1)));
 
 				subject = subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester());
-				Score insert = new Score();
-				insert.setStudentId(id);
-				insert.setSubjectId(subject.getId());
-				insert.setMajorAdmit(false);
-				insert.setSubstitutionCode("0");
-				insert.setScore(scoreMap.get(map.get("H")));
 
 				if(subject != null) {
+					Score insert = new Score();
+					insert.setStudentId(id);
+					insert.setSubjectId(subject.getId());
+					insert.setMajorAdmit(false);
+					insert.setSubstitutionCode("0");
+					insert.setScore(scoreMap.get(map.get("H")));
 					if(scores != null) {
 						for(int i = 0; i < scores.size(); ++i) {
 							if(subject.getYear().equals(scores.get(i).getSubject().getYear()) && subject.getCode().equals(scores.get(i).getSubject().getCode()) && subject.getSemester() == scores.get(i).getSubject().getSemester()) {

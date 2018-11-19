@@ -74,7 +74,7 @@
 	</select>
 	<select id="findByStudent" resultMap="graduationSubjectResultMap">
 		select gs.*, g.id graduationId, g.name graduationName, g.division graduationDivision, 
-		s.id subjectId, s.year subjectYear, s.code, s.subjectClass, s.name subjectName, s.score, s.division subjectDivision,
+		s.id subjectId, s.year subjectYear, s.code code, s.subjectClass subjectClass, s.name subjectName, s.score, s.division subjectDivision,
 		d.id departmentId, d.name departmentName
 		from graduation_subject gs
 		left join graduation g on gs.graduationId = g.id
@@ -91,7 +91,7 @@
 			<if test='student.doubleMajor != "0" and student.doubleMajor != null'>
 				or (d.id = #{ doubleMajorId } and g.name = #{ differentDepartmentGraduationId })
 			</if>
-		order by g.id
+		order by gs.graduationId, gs.departmentId
 	</select>
 	<resultMap id="graduationSubjectResultMap" type="GraduationSubject">
 		<id property="id" column="id" />

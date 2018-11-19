@@ -9,7 +9,7 @@
 		select * from subject where code = #{ code } and year = #{ year } and semester = #{ semester } limit 1
 	</select>
 	<select id="findByDivision" resultType="Subject">
-		select * from subject where division = #{ division };
+		select * from subject where division = #{ division } and departmentId = #{ departmentId } group by code;
 	</select>
 	<select id="findBySubTitle" resultMap="subjectDetailResultMap">
 		select sj.*, sd.id detailId, sd.title title, sd.subtitle subtitle from subject sj
@@ -41,4 +41,20 @@
 		insert into subject(year, semester, code, subjectClass, name, professorId, score, division, establish, departmentId, detailId, abolish)
 		values(#{ year }, #{ semester }, #{ code }, #{ subjectClass }, #{ name }, #{ professorId }, #{ score }, #{ division }, #{ establish }, #{ departmentId }, #{ detailId }, #{ abolish })
 	</insert>
+	<update id="abolishChange">
+		start transaction;
+		set sql_safe_updates = 0;
+		update subject set abolish = 0;
+		set sql_safe_updates = 1;
+		commit;
+	</update>
+	<update id="update">
+		start transaction;
+		set sql_safe_updates = 0;
+		update subject
+		set abolish = #{ abolish }
+		where code = #{ code };
+		set sql_safe_updates = 1;
+		commit;
+	</update>
 </mapper>

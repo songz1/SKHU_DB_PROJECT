@@ -85,7 +85,7 @@
 			<if test='student.doubleMajor != "0" and student.doubleMajor != null'>
 				or (d.id = #{ doubleMajorId } and g.id = #{ differentDepartmentGraduationId })
 			</if>
-		order by g.id
+		order by gg.graduationId, gg.departmentId;
 	</select>
 	<resultMap id="graduationGradeResultMap" type="GraduationGrade">
 		<id property="id" column="id" />
