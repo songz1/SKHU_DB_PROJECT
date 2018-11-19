@@ -36,35 +36,32 @@
 				</table>
 
 				<form:form method="get" modelAttribute="condition" action="grades">
-				<table class="table text-center">
-					<tr>
-						<td class="title col-md-1">년도</td>
-						<td class="col-md-1">
-							<input type="text" name="year" value="${ searchText }" class="form-control"/>
-						</td>
-						<td class="title col-md-1">학기</td>
-						<td class="col-md-1">
-							<form:select path="semester" class="form-control">
-								<form:option value="0" label="전체" />
-								<form:option value="1" label="1학기" />
-								<form:option value="2" label="2학기" />
-								<form:option value="summer" label="여름학기" />
-								<form:option value="winter" label="겨울학기" />
-							</form:select>
-						</td>
-						
-						<td class="col-md-1">
-							<span style="float: right">
-								<button type="submit" class="btn btn-default btn-block" style="WIDTH: 100pt;">조회</button>
-							</span>
-						</td>
-					</tr>
-				</table>
+					<table class="table text-center">
+						<tr>
+							<td class="title col-md-1">년도</td>
+							<td class="col-md-1"><input type="text" name="searchText"
+								value="${ searchText }" class="form-control" /></td>
+							<td class="title col-md-1">학기</td>
+							<td class="col-md-1"><form:select path="semester"
+									class="form-control">
+									<form:option value="0" label="전체" />
+									<form:option value="1" label="1학기" />
+									<form:option value="2" label="2학기" />
+									<form:option value="3" label="여름학기" />
+									<form:option value="4" label="겨울학기" />
+								</form:select></td>
+							<td class="col-md-1"><span style="float: right">
+									<button type="submit" class="btn btn-default btn-block"
+										style="WIDTH: 100pt;">조회</button>
+							</span></td>
+						</tr>
+					</table>
 				</form:form>
-				 
+
 				<form method="post" enctype="multipart/form-data" action="addscore">
-					<input type="hidden" name="studentNumber" value="${ student.studentNumber }" />
-					<input type="hidden" name="id" value="${ student.id }" />
+					<input type="hidden" name="studentNumber"
+						value="${ student.studentNumber }" /> <input type="hidden"
+						name="id" value="${ student.id }" />
 					<table class="table text-center">
 						<tr>
 							<td class="title col-md-3">성적 일괄 업로드</td>
@@ -98,9 +95,8 @@
 							<td class="col-md-1">${ score.subject.division }</td>
 							<td class="col-md-1">${ score.subject.score }</td>
 							<td class="col-md-1">${ scoreChar[status.index] }</td>
-							<td class="col-md-1">
-								<c:if test="${ score.majorAdmit }">전공인정신청<br /></c:if> 
-								<c:if test="${ score.substitutionCode ne '0' }">대체과목신청: ${ score.substitutionCode }</c:if>
+							<td class="col-md-1"><c:if test="${ score.majorAdmit }">전공인정신청<br />
+								</c:if> <c:if test="${ score.substitutionCode ne '0' }">대체과목신청: ${ score.substitutionCode }</c:if>
 							</td>
 						</tr>
 					</c:forEach>

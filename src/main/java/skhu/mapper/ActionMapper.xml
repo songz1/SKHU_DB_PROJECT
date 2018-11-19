@@ -84,7 +84,7 @@
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		insert into action(studentId, name, content, date, adminId)
-		values(#{studentId}, #{name}, #{content}, #{date}, #{adminId});
+		values(#{studentId}, #{name}, #{content}, now(), #{adminId});
 	</insert>
 	
 	<delete id="delete">

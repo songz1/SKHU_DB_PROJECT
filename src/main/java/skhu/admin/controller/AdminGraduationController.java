@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import skhu.dto.Action;
+import skhu.dto.Admin;
 import skhu.dto.College;
 import skhu.dto.CompleteScore;
 import skhu.dto.Department;
@@ -781,7 +783,10 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="insert", method=RequestMethod.POST)
-	public String insert(Model model, Action action) {
+	public String insert(Model model, Action action, HttpSession session) {
+		Admin admin = ((Admin)session.getAttribute("adminInfo"));
+		action.setAdminId(admin.getId());
+
 		if((action.getName().length() != 0 && !action.getName().equals("")) &&
 				(action.getContent().length() != 0 && !action.getContent().equals("")))
 			actionMapper.insert(action);

@@ -204,6 +204,8 @@ public class UserCourseController {
 		if(searchText == null)
 			searchText = "";
 
+		System.out.println(searchText);
+
 		List<Score> scores = scoreMapper.findByStudentId(student.getId(), "%" + searchText + "%", condition);
 		List<String> scoreChar = new ArrayList<String>();
 		double requestGrade = 0.0;

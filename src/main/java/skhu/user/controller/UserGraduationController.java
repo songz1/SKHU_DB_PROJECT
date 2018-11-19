@@ -2,6 +2,7 @@ package skhu.user.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -166,15 +167,15 @@ public class UserGraduationController {
 		Student student = ((Student)session.getAttribute("userInfo"));
 		Subject sub = new Subject();
 		sub.setSemester(0);
-		
+
 		List<Graduation> graduations = graduationMapper.findWithoutCommon();
 		List<Department> departments = departmentMapper.findWithoutCommon();
 		List<Score> scores = scoreMapper.findByStudentId(student.getId(), "", sub);
 		String year = student.getStudentNumber().substring(0, 4);
 		List<GraduationGrade> graduationGrades = null;
 		List<GraduationSubject> graduationSubjects = null;
-		Map<GraduationGrade, Integer> graduationGradeMap = new HashMap<GraduationGrade, Integer>();
-		Map<GraduationSubject, Integer> graduationSubjectMap = new HashMap<GraduationSubject, Integer>();
+		Map<GraduationGrade, Integer> graduationGradeMap = new LinkedHashMap<GraduationGrade, Integer>();
+		Map<GraduationSubject, Integer> graduationSubjectMap = new LinkedHashMap<GraduationSubject, Integer>();
 		int mainGraduationId = 0;
 		int subGraduationId = 0;
 		int minorId = 0;
@@ -229,7 +230,7 @@ public class UserGraduationController {
 				for(Score score : scores) {
 					if(score.getSubstitutionCode().equals("0")) {
 						if(graduationGrade.getName().contains("채플")) {
-							if(score.getSubject().getName().contains("채플")) {
+							if(score.getSubject().getName().contains("채플") && score.getScore() > 0) {
 								total += 1;
 								graduationGradeMap.put(graduationGrade, total);
 							}
@@ -255,20 +256,26 @@ public class UserGraduationController {
 			}
 
 			for(GraduationSubject graduationSubject : graduationSubjects) {
-				if(!graduationSubject.getNote().equals("") || graduationSubject.getNote().length() != 0)
-					graduationSubjectMap.put(graduationSubject, 2);
-				else
-					graduationSubjectMap.put(graduationSubject, 0);
 				for(Score score : scores) {
-					if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
-						graduationSubjectMap.put(graduationSubject, 1);
+					if(!graduationSubject.getNote().equals("") && graduationSubject.getNote().length() != 0) {
+						if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
+							graduationSubjectMap.put(graduationSubject, 1);
+							break;
+						}
+
+						else
+							graduationSubjectMap.put(graduationSubject, 2);
 					}
 
-					else if(!graduationSubject.getNote().equals("") || graduationSubject.getNote().length() != 0)
-						graduationSubjectMap.put(graduationSubject, 2);
+					else {
+						if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
+							graduationSubjectMap.put(graduationSubject, 1);
+							break;
+						}
 
-					else
-						graduationSubjectMap.put(graduationSubject, 0);
+						else
+							graduationSubjectMap.put(graduationSubject, 0);
+					}
 				}
 			}
 
@@ -299,15 +306,15 @@ public class UserGraduationController {
 		Student student = ((Student)session.getAttribute("userInfo"));
 		Subject sub = new Subject();
 		sub.setSemester(0);
-		
+
 		List<Graduation> graduations = graduationMapper.findWithoutCommon();
 		List<Department> departments = departmentMapper.findWithoutCommon();
 		List<Score> scores = scoreMapper.findByStudentId(student.getId(), "", sub);
 		String year = student.getStudentNumber().substring(0, 4);
 		List<GraduationGrade> graduationGrades = null;
 		List<GraduationSubject> graduationSubjects = null;
-		Map<GraduationGrade, Integer> graduationGradeMap = new HashMap<GraduationGrade, Integer>();
-		Map<GraduationSubject, Integer> graduationSubjectMap = new HashMap<GraduationSubject, Integer>();
+		Map<GraduationGrade, Integer> graduationGradeMap = new LinkedHashMap<GraduationGrade, Integer>();
+		Map<GraduationSubject, Integer> graduationSubjectMap = new LinkedHashMap<GraduationSubject, Integer>();
 		if(!student.getGraduation().equals("0")) {
 
 			int differentDepartmentGraduationId = 0;
@@ -347,7 +354,7 @@ public class UserGraduationController {
 				for(Score score : scores) {
 					if(score.getSubstitutionCode().equals("0")) {
 						if(graduationGrade.getName().contains("채플")) {
-							if(score.getSubject().getName().contains("채플")) {
+							if(score.getSubject().getName().contains("채플") && score.getScore() > 0) {
 								total += 1;
 								graduationGradeMap.put(graduationGrade, total);
 							}
@@ -373,20 +380,26 @@ public class UserGraduationController {
 			}
 
 			for(GraduationSubject graduationSubject : graduationSubjects) {
-				if(!graduationSubject.getNote().equals("") || graduationSubject.getNote().length() != 0)
-					graduationSubjectMap.put(graduationSubject, 2);
-				else
-					graduationSubjectMap.put(graduationSubject, 0);
 				for(Score score : scores) {
-					if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
-						graduationSubjectMap.put(graduationSubject, 1);
+					if(!graduationSubject.getNote().equals("") && graduationSubject.getNote().length() != 0) {
+						if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
+							graduationSubjectMap.put(graduationSubject, 1);
+							break;
+						}
+
+						else
+							graduationSubjectMap.put(graduationSubject, 2);
 					}
 
-					else if(!graduationSubject.getNote().equals("") || graduationSubject.getNote().length() != 0)
-						graduationSubjectMap.put(graduationSubject, 2);
+					else {
+						if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
+							graduationSubjectMap.put(graduationSubject, 1);
+							break;
+						}
 
-					else
-						graduationSubjectMap.put(graduationSubject, 0);
+						else
+							graduationSubjectMap.put(graduationSubject, 0);
+					}
 				}
 			}
 
