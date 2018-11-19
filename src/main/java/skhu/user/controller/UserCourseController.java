@@ -48,7 +48,7 @@ public class UserCourseController {
 			for(Score score : scores) {
 				List<Subject> subjects = new ArrayList<Subject>();
 				if(score.getSubstitutionCode().equals("전공선택")) {
-					subjects = subjectMapper.findByDivision("전공선택");
+					subjects = subjectMapper.findByDivision("전공선택", student.getDepartmentId());
 				}
 
 				else if(score.getSubstitutionCode().contains("전공")) {

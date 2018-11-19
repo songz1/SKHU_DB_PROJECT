@@ -11,6 +11,11 @@
 		left join subject sj on sc.subjectId = sj.id
 		left join subject_detail sd on sj.detailId = sd.id
 		left join admin a on a.id = sj.professorId
+		<where>
+			<if test="condition.semester != 0 and condition.semester != null">
+				and sj.semester = #{condition.semester}
+			</if>
+		</where>
 		where sc.studentId = #{ studentId }
 		order by year, semester
 	</select>
