@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import skhu.dto.Action;
 import skhu.mapper.ActionMapper;
+import skhu.util.PageOption;
 import skhu.vo.Page;
 
 @Controller
@@ -26,10 +27,7 @@ public class AdminMainController {
 	public String main(Model model, HttpSession session, HttpServletRequest request, @RequestParam(value="pg", required=false) String pg) {
 		Page page = new Page();
 		int total = actionMapper.count();
-		int currentPage = 1;
-
-    	if(pg != null)
-    		currentPage = Integer.parseInt(pg);
+		int currentPage = PageOption.setPage(pg, total);
 
 		List<Action> actions = actionMapper.findActionRecently((currentPage - 1) * 10, 10);
 		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());

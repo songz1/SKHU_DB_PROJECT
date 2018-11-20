@@ -76,6 +76,9 @@ public class UserAccountController {
 		}
 
 		studentMapper.update(account);
+
+
+		account.setDepartment(departmentMapper.findById(account.getDepartmentId()));
 		account.setPassword(null);
 		session.removeAttribute("userInfo");
 		session.setAttribute("userInfo", account);

@@ -315,8 +315,10 @@ public class UserCourseController {
 
 			for(Map<String, String> map : listExcel) {
 				Subject subject = new Subject();
-
 				String temp = map.get("B");
+
+				if(temp == null || temp.length() == 0 || temp.equals(""))
+					break;
 
 				subject.setYear(temp.substring(0, temp.indexOf(".")));
 				subject.setCode(map.get("D"));
