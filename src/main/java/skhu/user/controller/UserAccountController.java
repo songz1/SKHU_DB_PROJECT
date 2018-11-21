@@ -31,6 +31,8 @@ public class UserAccountController {
 		List<Department> departments = departmentMapper.findWithoutCommon();
 		List<Graduation> graduations = graduationMapper.findWithoutCommon();
 
+		System.out.println(account.getMinor());
+
 		String[] splitGraduations = account.getGraduation().split(" ", 2);
 
 		if(splitGraduations.length == 1) {
@@ -50,7 +52,7 @@ public class UserAccountController {
 	@RequestMapping(value="acntupdate", method=RequestMethod.POST)
 	public String anctupdate(HttpSession session, Model model, Student account,
 			@RequestParam("mainGraduation") String mainGraduation, @RequestParam("minor") String minor,
-			@RequestParam("doubleMajor2") String doubleMajor1, @RequestParam("doubleMajor2") String doubleMajor2,
+			@RequestParam("doubleMajor1") String doubleMajor1, @RequestParam("doubleMajor2") String doubleMajor2,
 			@RequestParam("detailGraduation") String detailGraduation) {
 		account.setSemester((account.getYear() - 1) * 2 + account.getSemester());
 
@@ -60,26 +62,33 @@ public class UserAccountController {
 		else
 			account.setGraduation(mainGraduation + " " + detailGraduation);
 
-		if((minor.equals("0") && doubleMajor1.equals("0") && doubleMajor2.equals("0")) ||
-			(minor.equals("0") && !doubleMajor1.equals("0") && !doubleMajor2.equals("0")) ||
-			(!minor.equals("0") && doubleMajor1.equals("0") && doubleMajor2.equals("0"))) {
-			if(minor.equals("0"))
-				minor = doubleMajor1;
+		if(mainGraduation.equals("부전공")) {
+			doubleMajor1 = "";
+		}
 
-			account.setMinor(minor);
-			account.setDoubleMajor(doubleMajor2);
+		else if(mainGraduation.equals("복수전공")) {
+			if(!doubleMajor1.equals("0") && !doubleMajor2.equals("0")) {
+				minor = doubleMajor1;
+				doubleMajor1 = doubleMajor2;
+			}
+
+			else {
+				minor = "0";
+				doubleMajor1 ="0";
+			}
 		}
 
 		else {
-			account.setMinor("0");
-			account.setDoubleMajor("0");
+			minor = "0";
+			doubleMajor1 = "0";
 		}
+
+		account.setMinor(minor);
+		account.setDoubleMajor(doubleMajor1);
 
 		studentMapper.update(account);
 
-
-		account.setDepartment(departmentMapper.findById(account.getDepartmentId()));
-		account.setPassword(null);
+		account = studentMapper.findById(account.getId());
 		session.removeAttribute("userInfo");
 		session.setAttribute("userInfo", account);
 		session.setMaxInactiveInterval(5400);

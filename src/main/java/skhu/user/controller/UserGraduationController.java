@@ -1,16 +1,20 @@
 package skhu.user.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -91,6 +95,36 @@ public class UserGraduationController {
 
 
 		return "user/menu/graduation/basic";
+	}
+
+	@RequestMapping(value="downdetail")
+	public void downDetail(HttpServletResponse response) throws Exception {
+		File destDetailFile = new File("src\\main\\webapp\\res\\file\\user\\통합_졸업요건.pdf");
+
+		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("통합_졸업요건.pdf".getBytes("UTF-8"), "ISO8859_1") + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
+		response.setHeader("Content-Length", ""+ destDetailFile.length());
+		response.setHeader("Pragma", "no-cache;");
+		response.setHeader("Expires", "-1;");
+
+		if(!destDetailFile.exists()){
+			throw new RuntimeException("file not found");
+		}
+
+		FileInputStream fis = null;
+		try{
+			fis = new FileInputStream(destDetailFile);
+			FileCopyUtils.copy(fis, response.getOutputStream());
+			response.getOutputStream().flush();
+		}catch(Exception ex){
+			throw new RuntimeException(ex);
+		}finally {
+			try {
+				fis.close();
+			}catch(Exception ex){
+			}
+		}
 	}
 
 	@RequestMapping(value="detail", method=RequestMethod.GET)

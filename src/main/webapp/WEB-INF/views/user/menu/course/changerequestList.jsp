@@ -38,7 +38,7 @@
 
 				<hr />
 				<h5 class="text-center">
-					<a href="/" download="대체과목목록">대체과목 목록 다운로드</a>
+					<a href="downchangerequestlist">대체과목목록</a>
 				</h5>
 				<hr />
 

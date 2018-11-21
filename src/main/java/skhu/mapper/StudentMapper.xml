@@ -257,10 +257,10 @@
 			<if test='graduation != null and graduation != "0" and graduation != ""'>
 				graduation = #{graduation},
 			</if>
-			<if test='minor != null and minor != "0" and minor != ""'>
+			<if test='minor != null and minor != ""'>
 				minor = #{minor},
 			</if>
-			<if test='doubleMajor != null and doubleMajor != "0" and doubleMajor != ""'>
+			<if test='doubleMajor != null and doubleMajor != ""'>
 				doubleMajor = #{doubleMajor},
 			</if>
 			<if test="majorEssential != null and majorEssential != 0">

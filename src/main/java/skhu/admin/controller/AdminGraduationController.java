@@ -185,6 +185,11 @@ public class AdminGraduationController {
 			List<Map<String, String>> completeExcel = ExcelReader.read(excelReaderOption);
 			completeScoreMapper.delete();
 			for(Map<String, String> map : completeExcel) {
+				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
+						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
+						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("")
+						)
+					break;
 				CompleteScore completeScore = new CompleteScore();
 				completeScore.setYear(map.get("B").equals("공통") ? map.get("B") : map.get("B").substring(0, map.get("B").length() - 2));
 				completeScore.setGrade((int)Double.parseDouble(map.get("C")));
@@ -516,6 +521,13 @@ public class AdminGraduationController {
 			List<Map<String, String>> gradeExcel = ExcelReader.read(excelReaderOption);
 
 			for(Map<String, String> map : gradeExcel) {
+				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
+						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
+						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") &&
+						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("") &&
+						!map.containsKey("F") || map.get("F") == null || map.get("F").equals("")
+						)
+					break;
 				GraduationGrade graduationGrade = new GraduationGrade();
 				graduationGrade.setYear(map.get("B").equals("공통") ? map.get("B") : map.get("B").substring(0, map.get("B").length() - 2));
 				graduationGrade.setDepartmentId(departmentMap.get(map.get("C")));
@@ -541,6 +553,14 @@ public class AdminGraduationController {
 			System.out.println("test");
 
 			for(Map<String, String> map : subjectExcel) {
+				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
+						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
+						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") &&
+						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("") &&
+						!map.containsKey("F") || map.get("F") == null || map.get("F").equals("") &&
+						!map.containsKey("G") || map.get("G") == null || map.get("G").equals("")
+						)
+					break;
 				Subject subject = subjectMapper.findByCode(map.get("E"));
 				System.out.println("subject");
 				if(subject == null) {

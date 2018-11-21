@@ -147,6 +147,10 @@ public class AdminCourseController {
 			substitutionMapper.delete();
 			subjectMapper.abolishChange();
 			for(Map<String, String> map : listExcel) {
+				if(!map.containsKey("A") || map.get("A") == null || map.get("A").equals("") &&
+						!map.containsKey("B") || map.get("B") == null || map.get("B").equals("")
+						)
+					break;
 				Substitution substitution = new Substitution();
 				substitution.setSubjectCode(map.get("A"));
 				substitution.setSubstitutionCode(map.get("B"));
@@ -563,6 +567,12 @@ public class AdminCourseController {
 			}
 
 			for(Map<String, String> map : listExcel) {
+				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
+						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
+						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") &&
+						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("")
+						)
+					break;
 				Subject subject = new Subject();
 
 				subject.setYear(map.get("B"));
@@ -666,7 +676,11 @@ public class AdminCourseController {
 			scoreMap.put("N", -1.0);
 
 			for(Map<String, String> map : listExcel) {
-				if(map.get("B") == null || map.get("B").equals(""))
+				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
+						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
+						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") &&
+						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("")
+						)
 					break;
 
 				Subject subject = new Subject();

@@ -77,45 +77,6 @@
 							</select>
 						</div>
 					</div>
-					<div class="form-group mb-50 div-minor">
-						<label class="col-sm-2 control-label">타학과부전공</label>
-						<div class="mb-25 col-md-4 col-md-offset-2">
-							<select name="minor" class="form-control">
-								<option value="0">미선택</option>
-								<c:forEach var="department" items="${ departments }">
-									<c:if test="${ department.id != student.departmentId }">
-										<option value="${ department.name }" <c:if test="${department.name eq student.minor && student.doubleMajor eq '0'}">selected</c:if>>${ department.name }</option>
-									</c:if>
-								</c:forEach>
-							</select>
-						</div>
-					</div>
-					<div class="form-group mb-50 div-double">
-						<label class="col-sm-2 control-label">타학과복수전공1</label>
-						<div class="mb-25 col-md-4 col-md-offset-2">
-							<select name="doubleMajor1" class="form-control">
-								<option value="0">미선택</option>
-								<c:forEach var="department" items="${ departments }">
-									<c:if test="${ department.id != student.departmentId }">
-										<option value="${ department.name }" <c:if test="${department.name eq student.minor && student.doubleMajor ne '0'}">selected</c:if>>${ department.name }</option>
-									</c:if>
-								</c:forEach>
-							</select>
-						</div>
-					</div>
-					<div class="form-group mb-50 div-double">
-						<label class="col-sm-2 control-label">타학과복수전공2</label>
-						<div class="mb-25 col-md-4 col-md-offset-2">
-							<select name="doubleMajor2" class="form-control">
-								<option value="0">미선택</option>
-								<c:forEach var="department" items="${ departments }">
-									<c:if test="${ department.id != student.departmentId && department.name ne student.minor }">
-										<option value="${ department.name }" <c:if test="${department.name eq student.doubleMajor}">selected</c:if>>${ department.name }</option>
-									</c:if>
-								</c:forEach>
-							</select>
-						</div>
-					</div>	
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">상세졸업과정</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
@@ -129,6 +90,45 @@
 							</select>
 						</div>
 					</div>
+					<div class="form-group mb-50 div-minor">
+						<label class="col-sm-2 control-label">타학과부전공</label>
+						<div class="mb-25 col-md-4 col-md-offset-2">
+							<select name="minor" class="form-control">
+								<option value="0">미선택</option>
+								<c:forEach var="department" items="${ departments }">
+									<c:if test="${ department.id ne account.departmentId }">
+										<option value="${ department.name }" <c:if test="${department.name eq account.minor && account.doubleMajor eq '0'}">selected</c:if>>${ department.name }</option>
+									</c:if>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-50 div-double">
+						<label class="col-sm-2 control-label">타학과복수전공1</label>
+						<div class="mb-25 col-md-4 col-md-offset-2">
+							<select name="doubleMajor1" class="form-control">
+								<option value="0">미선택</option>
+								<c:forEach var="department" items="${ departments }">
+									<c:if test="${ department.id ne account.departmentId }">
+										<option value="${ department.name }" <c:if test="${department.name eq account.minor && account.doubleMajor ne '0'}">selected</c:if>>${ department.name }</option>
+									</c:if>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-50 div-double">
+						<label class="col-sm-2 control-label">타학과복수전공2</label>
+						<div class="mb-25 col-md-4 col-md-offset-2">
+							<select name="doubleMajor2" class="form-control">
+								<option value="0">미선택</option>
+								<c:forEach var="department" items="${ departments }">
+									<c:if test="${ department.id ne account.departmentId }">
+										<option value="${ department.name }" <c:if test="${department.name eq account.doubleMajor}">selected</c:if>>${ department.name }</option>
+									</c:if>
+								</c:forEach>
+							</select>
+						</div>
+					</div>	
 					<button type="submit"
 						class="btn btn-info mb-25 col-md-2 col-md-offset-5">확인</button>
 				</form:form>

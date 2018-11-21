@@ -1,16 +1,19 @@
 package skhu.user.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -134,6 +137,35 @@ public class UserCourseController {
 		model.addAttribute("scores", scores);
 
 		return "user/menu/course/changerequestList";
+	}
+
+	@RequestMapping(value="downchangerequestlist")
+	public void downChangeRequestList(HttpServletResponse response) throws Exception {
+		File destCompleteFile = new File("src\\main\\webapp\\res\\file\\form\\양식_대체과목목록.xlsx");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("대체과목목록.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
+		response.setHeader("Content-Length", ""+ destCompleteFile.length());
+		response.setHeader("Pragma", "no-cache;");
+		response.setHeader("Expires", "-1;");
+
+		if(!destCompleteFile.exists()){
+			throw new RuntimeException("file not found");
+		}
+
+		FileInputStream fis = null;
+		try{
+			fis = new FileInputStream(destCompleteFile);
+			FileCopyUtils.copy(fis, response.getOutputStream());
+			response.getOutputStream().flush();
+		}catch(Exception ex){
+			throw new RuntimeException(ex);
+		}finally {
+			try {
+				fis.close();
+			}catch(Exception ex){
+			}
+		}
 	}
 
 	@RequestMapping(value="changecancel", method=RequestMethod.GET)
@@ -314,6 +346,12 @@ public class UserCourseController {
 			scoreMap.put("N", -1.0);
 
 			for(Map<String, String> map : listExcel) {
+				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
+						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
+						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") &&
+						!map.containsKey("H") || map.get("H") == null || map.get("H").equals("")
+						)
+					break;
 				Subject subject = new Subject();
 				String temp = map.get("B");
 

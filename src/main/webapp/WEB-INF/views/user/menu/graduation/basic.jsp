@@ -79,7 +79,7 @@
 					<c:forEach var="map" items="${ graduationGradeMap }">
 						<tr>
 							<td class="col-md-1">${ map.key }</td>
-							<td class="col-md-2"><a href="#"><i
+							<td class="col-md-2"><a href="downdetail"><i
 									class="glyphicon glyphicon-download-alt"></i></a>
 						</tr>
 					</c:forEach>
