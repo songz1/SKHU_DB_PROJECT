@@ -19,6 +19,16 @@
 		left join subject s on g.subjectId = s.id
 		where g.id = #{ id }
 	</select>
+	<select id="findByBasic" resultMap="graduationSubjectDetailResultMap">
+		select gs.*, sj.id subjectId, sj.code, sj.name subjectName, sj.score,
+		sd.id detailId, sd.title title, sd.subtitle subtitle
+		from graduation_subject gs
+		left join subject sj on gs.subjectId = sj.id
+		left join subject_detail sd on gs.subjectId = sd.id
+		where 
+			gs.departmentId = 1 and gs.graduationId= 1 and
+			(gs.year = '2014' or gs.year = '0');
+	</select>
 	<resultMap id="graduationSubjectSimpleResultMap" type="GraduationSubject">
 		<id property="id" column="id" />
 		<result property="year" column="year" />
@@ -33,6 +43,27 @@
 			<result property="code" column="code" />
 			<result property="name" column="subjectName" />
 			<result property="score" column="score" />
+		</association>
+	</resultMap>
+	<resultMap id="graduationSubjectDetailResultMap" type="GraduationSubject">
+		<id property="id" column="id" />
+		<result property="year" column="year" />
+		<result property="semester" column="semester" />
+		<result property="note" column="note" />
+		<result property="essential" column="essential" />
+		<result property="departmentId" column="departmentId" />
+		<result property="graduationId" column="graduationId" />
+		<result property="subjectId" column="subjectId" />
+		<association property="subject" javaType="Subject">
+			<id property="id" column="subjectId" />
+			<result property="code" column="code" />
+			<result property="name" column="subjectName" />
+			<result property="score" column="score" />
+			<association property="subjectDetail" javaType="SubjectDetail">
+				<id property="id" column="detailId" />
+				<result property="title" column="title" />
+				<result property="subtitle" column="subtitle" />
+			</association>
 		</association>
 	</resultMap>
 	<select id="findByOption" resultMap="graduationSubjectResultMap">
