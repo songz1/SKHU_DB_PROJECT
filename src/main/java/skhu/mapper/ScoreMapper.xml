@@ -4,7 +4,7 @@
 <mapper namespace="skhu.mapper.ScoreMapper">
 	<select id="findByStudentId" resultMap="graduationDetailScoreResultMap">
 		select sc.*, 
-		sj.id subjectId, sj.code subjectCode, sj.year subjectYear, sj.semester subjectSemester, sj.name subjectName, sj.score subjectScore, sj.division subjectDivision,
+		sj.id subjectId, sj.code subjectCode, sj.year subjectYear, sj.semester subjectSemester, sj.name subjectName, sj.score subjectScore, sj.division subjectDivision, sj.departmentId departmentId,
 		sd.id detailId, sd.title, sd.subtitle,
 		a.id adminId, a.name adminName
 		from score sc
@@ -38,6 +38,7 @@
 			<result property="division" column="subjectDivision" />
 			<result property="semester" column="subjectSemester" />
 			<result property="year" column="subjectYear" />
+			<result property="departmentId" column="departmentId" />
 			<association property="subjectDetail" javaType="SubjectDetail">
 				<id property="id" column="detailId" />
 				<result property="title" column="title" />

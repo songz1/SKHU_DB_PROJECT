@@ -6,6 +6,9 @@
 		select * from subject where code = #{ code } limit 1
 	</select>
 	<select id="findBySpecific" resultType="Subject">
+		select * from subject where code = #{ code } and year = #{ year } and semester = #{ semester } and subjectClass = #{ subjectClass } limit 1
+	</select>
+	<select id="findBySimpleSpecific" resultType="Subject">
 		select * from subject where code = #{ code } and year = #{ year } and semester = #{ semester } limit 1
 	</select>
 	<select id="findByDivision" resultType="Subject">

@@ -372,7 +372,7 @@ public class UserCourseController {
 				else
 					subject.setSemester((int)Double.parseDouble(tmp.substring(0, 1)));
 
-				subject = subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester());
+				subject = subjectMapper.findBySimpleSpecific(subject.getCode(), subject.getYear(), subject.getSemester());
 				Score insert = new Score();
 				insert.setStudentId(id);
 				insert.setSubjectId(subject.getId());

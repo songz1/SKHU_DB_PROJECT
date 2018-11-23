@@ -10,7 +10,8 @@ import skhu.dto.Subject;
 @Mapper
 public interface SubjectMapper {
 	Subject findByCode(@Param("code") String code);
-	Subject findBySpecific(@Param("code") String code, @Param("year") String year, @Param("semester") int semester);
+	Subject findBySpecific(@Param("code") String code, @Param("year") String year, @Param("semester") int semester, @Param("subjectClass") String subjectClass);
+	Subject findBySimpleSpecific(@Param("code") String code, @Param("year") String year, @Param("semester") int semester);
 	List<Subject> findByDivision(@Param("division") String division, @Param("departmentId") int departmentId);
 	List<Subject> findBySubtitle(String subtitle);
 	void insert(Subject subject);

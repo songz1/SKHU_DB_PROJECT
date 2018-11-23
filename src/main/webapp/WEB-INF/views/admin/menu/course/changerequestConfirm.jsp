@@ -60,10 +60,9 @@
 									<option value="${ subject.code }">${ subject.name }</option>
 								</c:forEach>
 							</select>
-							<div>
-								<button type="submit"
-									class="btn btn-info col-md-2 col-md-offset-5 mb-25">신청</button>
-							</div>
+						</div>
+						<div>
+							<button type="submit" class="btn btn-info col-md-2 col-md-offset-5 mb-25">신청</button>
 						</div>
 					</form>
 				</c:forEach>

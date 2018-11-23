@@ -11,9 +11,11 @@
 	</select>
 	<select id="login" resultMap="studentResultMap">
 		select s.id, s.studentNumber, s.name, s.year, s.semester, s.departmentId, s.email, s.graduation, s.minor, s.doubleMajor, s.majorEssential, s.liberalEssential,
-		d.id departmentId, d.name departmentName, d.realName departmentRealName, d.collegeId
+		d.id departmentId, d.name departmentName, d.realName departmentRealName, d.collegeId collegeId,
+		c.id collegeId, c.name collegeName, c.realName collegeRealName
 		from student s
 		left join department d on s.departmentId = d.id
+		left join college c on d.collegeId = c.id
 		where studentNumber = #{studentNumber} and password = #{password};
 	</select>
 	<select id="findAllWithCounseling" resultMap="counselingResultMap">
@@ -100,8 +102,12 @@
 		</association>
 	</resultMap>
 	<select id="findById" resultMap="studentResultMap">
-		select s.*, d.id departmentId, d.name departmentName, d.realName departmentRealName, d.collegeId from student s
+		select s.id, s.studentNumber, s.name, s.year, s.semester, s.departmentId, s.email, s.graduation, s.minor, s.doubleMajor, s.majorEssential, s.liberalEssential,
+		d.id departmentId, d.name departmentName, d.realName departmentRealName, d.collegeId collegeId,
+		c.id collegeId, c.name collegeName, c.realName collegeRealName
+		from student s
 		left join department d on s.departmentId = d.id
+		left join college c on c.id = d.collegeId
 		where s.id = #{id}
 	</select>
 	<resultMap id="studentResultMap" type="Student">
@@ -123,6 +129,12 @@
 			<result property="name" column="departmentName" />
 			<result property="realName" column="departmentRealName" />
 			<result property="graduationId" column="graduationId" />
+			<result property="collegeId" column="collegeId" />
+			<association property="college" javaType="College">
+				<id property="id" column="collegeId" />
+				<result property="name" column="collegeName" />
+				<result property="realName" column="collegeRealName" />
+			</association>
 		</association>
 	</resultMap>
 	<select id="findByAccount" resultType="Student">

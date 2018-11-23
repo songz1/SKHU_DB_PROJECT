@@ -112,8 +112,9 @@ public class TestController {
 			subject.setCode(map.get("C"));
 			subject.setYear(map.get("A"));
 			subject.setSemester((int)Double.parseDouble(map.get("B")));
+			subject.setSubjectClass(map.get("D"));
 
-			if(subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester()) == null) {
+			if(subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester(), subject.getSubjectClass()) == null) {
 				subject.setAbolish(false);
 				subject.setDepartmentId(7);
 				subject.setDetailId(1);
@@ -128,7 +129,6 @@ public class TestController {
 					subject.setProfessorId(1);
 
 				subject.setScore(Double.parseDouble(map.get("F")));
-				subject.setSubjectClass(map.get("D"));
 
 				subjectMapper.insert(subject);
 			}
@@ -191,7 +191,9 @@ public class TestController {
 			else
 				subject.setSemester((int)Double.parseDouble(map.get("B")));
 
-			if(subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester()) == null) {
+			subject.setSubjectClass(map.get("D"));
+
+			if(subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester(), subject.getSubjectClass()) == null) {
 				subject.setAbolish(false);
 				subject.setDetailId(1);
 				subject.setEstablish(map.get("E"));
@@ -207,7 +209,6 @@ public class TestController {
 				subject.setDivision(map.get("G"));
 				subject.setName(map.get("F"));
 				subject.setScore(Double.parseDouble(map.get("H")));
-				subject.setSubjectClass(map.get("D"));
 
 				subjectMapper.insert(subject);
 			}
@@ -267,7 +268,9 @@ public class TestController {
 			else
 				subject.setSemester((int)Double.parseDouble(map.get("B")));
 
-			if(subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester()) == null) {
+			subject.setSubjectClass(map.get("D"));
+
+			if(subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester(), subject.getSubjectClass()) == null) {
 				subject.setAbolish(false);
 				subject.setDetailId(1);
 				subject.setEstablish(map.get("E"));
@@ -282,7 +285,6 @@ public class TestController {
 				subject.setDivision(map.get("G"));
 				subject.setName(map.get("F"));
 				subject.setScore(Double.parseDouble(map.get("H")));
-				subject.setSubjectClass(map.get("D"));
 
 				subjectMapper.insert(subject);
 			}

@@ -27,7 +27,7 @@
 		left join subject_detail sd on gs.subjectId = sd.id
 		where 
 			gs.departmentId = 1 and gs.graduationId= 1 and
-			(gs.year = '2014' or gs.year = '0');
+			(gs.year = #{ year } or gs.year = '0');
 	</select>
 	<resultMap id="graduationSubjectSimpleResultMap" type="GraduationSubject">
 		<id property="id" column="id" />

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +14,7 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../res/css/common/main.css?ver=1">
-<script type="text/javascript"
-	src="../../res/script/user/main.js?ver=1"></script>
+<script type="text/javascript" src="../../res/script/user/main.js?ver=1"></script>
 <title>SKHU 졸업관리</title>
 </head>
 
@@ -23,114 +24,86 @@
 	<div class="container">
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
-				<div class="table-responsive">
-					<h3 class="text-center">졸업 학점 현황</h3>
-					<table class="table text-center">
-						<tr class="warning essential cursor">
-							<td class="col-md-4"></td>
-							<td class="col-md-4">교양 필수 11/16</td>
-							<td class="col-md-4"></td>
-						</tr>
-						<tr class="essential-detail">
-							<td class="col-md-4 warning">채플 1/2</td>
-							<td class="col-md-4 danger">사회봉사 0/2</td>
-							<td class="col-md-4 success">대학생활세미나I 2/2</td>
-						</tr>
-						<tr class="essential-detail">
-							<td class="col-md-4 success">대학생활세미나II 2/2</td>
-							<td class="col-md-4 danger">인권과평화 0/2</td>
-							<td class="col-md-4 success">말과글 2/2</td>
-						</tr>
-						<tr class="essential-detail">
-							<td class="col-md-4 success">과학기술과에콜로지 2/2</td>
-							<td class="col-md-4 success">데이터활용및분석 2/2</td>
-							<td class="col-md-4"></td>
-						</tr>
-					</table>
-				</div>
+				<h3 class="text-center">졸업 학점 현황</h3>
 				<div class="table-responsive">
 					<table class="table text-center">
-						<tr class="warning area-essential cursor">
-							<td class="col-md-4"></td>
-							<td class="col-md-4">영역 필수 9/18</td>
-							<td class="col-md-4"></td>
-						</tr>
-						<tr class="area-detail">
-							<td class="col-md-4 success">가치역량 6/6</td>
-							<td class="col-md-4 warning">대안역량 3/6</td>
-							<td class="col-md-4 danger">실천역량 0/6</td>
+						<tr>
+							<c:forEach var="map" items="${ graduationGradeMap }" varStatus="status">
+								<c:if test="${ status.index % 3 == 2 }"></tr><tr>
+							</c:if>
+							<td class="col-md-4 
+								<c:choose> 
+									<c:when test="${ map.key.score <= map.value }">success</c:when>
+									<c:otherwise>danger</c:otherwise>
+								</c:choose>">${ map.key.name } ${ map.value }/${ map.key.score }
+							</td>
+							</c:forEach>
 						</tr>
 					</table>
-				</div>
-				<div class="table-responsive">
 					<table class="table text-center">
-						<tr class="warning major-searching cursor">
-							<td class="col-md-4 warning"></td>
-							<td class="col-md-4">전공 탐색 7/19</td>
-							<td class="col-md-4"></td>
+						<tr>
+							<c:forEach var="map" items="${ graduationSubjectMap }"
+								varStatus="status">
+								<c:if test="${ status.index % 3 == 2 }">
 						</tr>
-						<tr class="major-detail">
-							<td class="col-md-4 success">전공탐색세미나 1/1</td>
-							<td class="col-md-4 success">IT융합자율학부 개설과목 6/3</td>
-							<td class="col-md-4 danger">타 학부 개설과목 0/3</td>
-						</tr>
-					</table>
-				</div>
-				<div class="table-responsive">
-					<table class="table text-center">
-						<thead>
-							<tr class="info">
-								<td class="col-md-3">분류</td>
-								<td class="col-md-3">필수</td>
-								<td class="col-md-3">선택</td>
-								<td class="col-md-3">계</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="active">
-								<td class="col-md-3">전공</td>
-								<td class="col-md-3">19</td>
-								<td class="col-md-3">6</td>
-								<td class="col-md-3">25</td>
-							</tr>
-							<tr class="active">
-								<td class="col-md-3">부전공</td>
-								<td class="col-md-3">6</td>
-								<td class="col-md-3">3</td>
-								<td class="col-md-3">9</td>
-							</tr>
-							<tr class="active">
-								<td class="col-md-3">복수전공</td>
-								<td class="col-md-3">6</td>
-								<td class="col-md-3">3</td>
-								<td class="col-md-3">9</td>
-							</tr>
-							<tr class="active">
-								<td class="col-md-3">편입</td>
-								<td class="col-md-3">3</td>
-								<td class="col-md-3">3</td>
-								<td class="col-md-3">6</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="table-responsive">
-					<table class="table text-center">
-						<tr class="info">
-							<td class="col-md-4">기타</td>
-							<td class="col-md-4">교직</td>
-							<td class="col-md-4">평교</td>
-						</tr>
-						<tr class="active">
-							<td class="col-md-4">3</td>
-							<td class="col-md-4">3</td>
-							<td class="col-md-4">3</td>
+						<tr>
+							</c:if>
+							<td
+								class="col-md-4 <c:choose> 
+											<c:when test="${ map.value == 0 }">danger</c:when>
+											<c:when test="${ map.value == 1 }">success</c:when>
+											<c:when test="${ map.value == 2 }">active</c:when>
+										</c:choose>">${ map.key.subject.name }</td>
+							</c:forEach>
 						</tr>
 					</table>
+					<div class="table-responsive">
+						<table class="table text-center">
+							<thead>
+								<tr class="info">
+									<td class="col-md-3">분류</td>
+									<td class="col-md-3">필수</td>
+									<td class="col-md-3">선택</td>
+									<td class="col-md-3">계</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="active">
+									<td class="col-md-3">전공</td>
+									<td class="col-md-3">${ majorEssential }</td>
+									<td class="col-md-3">${ majorSelection }</td>
+									<td class="col-md-3">${ majorEssential + majorSelection }</td>
+								</tr>
+								<tr class="active">
+									<td class="col-md-3">교양</td>
+									<td class="col-md-3">${ liberalEssential }</td>
+									<td class="col-md-3">${ liberalSelection }</td>
+									<td class="col-md-3">${ liberalEssential + liberalSelection }</td>
+								</tr>
+								<tr class="active">
+									<td class="col-md-3">부전공<c:if test="${ student.minor ne '0' && student.doubleMajor eq '0' }">(${ student.minor })</c:if></td>
+									<td class="col-md-3">${ minorEssential }</td>
+									<td class="col-md-3">${ minorSelection }</td>
+									<td class="col-md-3">${ minorEssential + minorSelection }</td>
+								</tr>
+								<tr class="active">
+									<td class="col-md-3">복수전공1<c:if test="${ student.minor ne '0' && student.doubleMajor ne '0' }">(${ student.minor })</c:if></td>
+									<td class="col-md-3">${ doubleMajorEssential1 }</td>
+									<td class="col-md-3">${ doubleMajorSelection1 }</td>
+									<td class="col-md-3">${ dobuleMajorEssential1 + doubleMajorSelection1 }</td>
+								</tr>
+								<tr class="active">
+									<td class="col-md-3">복수전공2<c:if test="${ student.doubleMajor ne '0' }">(${ student.doubleMajor })</c:if></td>
+									<td class="col-md-3">${ doubleMajorEssential2 }</td>
+									<td class="col-md-3">${ doubleMajorSelection2 }</td>
+									<td class="col-md-3">${ dobuleMajorEssential2 + doubleMajorSelection2 }</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</main>
 	<footer> </footer>
 </body>

@@ -3,6 +3,7 @@ package skhu.dto;
 public class College {
 	int id;
 	String name;
+	String realName;
 
 	public int getId() {
 		return id;
@@ -15,6 +16,12 @@ public class College {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
 

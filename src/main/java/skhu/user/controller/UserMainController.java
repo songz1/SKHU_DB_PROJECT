@@ -1,6 +1,8 @@
 package skhu.user.controller;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,13 +34,16 @@ public class UserMainController {
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String main(Model model, HttpSession session) {
 		Student student = ((Student)session.getAttribute("userInfo"));
-		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByBasic();
-		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByBasic();
+		String year = student.getStudentNumber().substring(0, 4);
+		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByBasic(year);
+		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByBasic(year);
 		Subject subject = new Subject();
 		subject.setSemester(0);
 		List<Score> scores = scoreMapper.findByStudentId(student.getId(), "", subject);
 		int total = 0;
+		int majorEssential = 0;
 		int majorSelection = 0;
+		int liberalEssential = 0;
 		int liberalSelection = 0;
 		int minorEssential = 0;
 		int minorSelection = 0;
@@ -46,9 +51,13 @@ public class UserMainController {
 		int doubleMajorSelection1 = 0;
 		int doubleMajorEssential2 = 0;
 		int doubleMajorSelection2 = 0;
+		int chapel = 0;
+		int majorSearch = 0;
 		List<Department> departments = departmentMapper.findWithoutCommon();
 		Department minorDepartment = null;
 		Department doubleMajorDepartment = null;
+		Map<GraduationGrade, Integer> graduationGradeMap = new LinkedHashMap<GraduationGrade, Integer>();
+		Map<GraduationSubject, Integer> graduationSubjectMap = new LinkedHashMap<GraduationSubject, Integer>();
 
 		for(Department department : departments) {
 			if(department.getName().equals(student.getMinor()))
@@ -60,58 +69,140 @@ public class UserMainController {
 
 		for(Score score : scores) {
 			int subjectScore = (int)(score.getSubject().getScore());
-			if(!(score.getScore() < 0.0) && !score.getSubstitutionCode().equals("0")) {
-				total = subjectScore;
+			int subjectDepartmentId = score.getSubject().getDepartmentId();
+
+			if(!(subjectScore < 0) && score.getSubstitutionCode().equals("0")) {
+				total += subjectScore;
+
+				for(GraduationGrade graduationGrade : graduationGrades) {
+					String graduationName = graduationGrade.getName();
+
+					if(!(score.getScore() < 0) && score.getSubstitutionCode().equals("0")) {
+						String subjectName = score.getSubject().getName();
+						if(graduationName.equals("졸업"))
+							graduationGradeMap.put(graduationGrade, total);
+
+						else if(graduationName.equals("채플")) {
+							if(subjectName.contains("채플") || subjectName.contains("기도모임"))
+								graduationGradeMap.put(graduationGrade, ++chapel);
+						}
+
+						else if(graduationName.contains("학부")) {
+							if(score.getSubject().getEstablish().equals(student.getDepartment().getCollege().getRealName()))
+								graduationGradeMap.put(graduationGrade, subjectScore);
+						}
+
+						else if(graduationName.contains("학과")) {
+							if(score.getSubject().getEstablish().equals(student.getDepartment().getRealName()))
+								graduationGradeMap.put(graduationGrade, subjectScore);
+						}
+
+						else if(graduationName.contains(score.getSubject().getDivision())) {
+							graduationGradeMap.put(graduationGrade, subjectScore);
+						}
+
+						else if(graduationName.equals(score.getSubject().getSubjectDetail().getSubtitle()))
+							graduationGradeMap.put(graduationGrade, subjectScore);
+
+						else if(graduationName.equals(score.getSubject().getSubjectDetail().getTitle()))
+							graduationGradeMap.put(graduationGrade, subjectScore);
+
+					}
+				}
+
+				for(GraduationSubject graduationSubject : graduationSubjects) {
+					if(!(score.getScore() < 0) && score.getSubstitutionCode().equals("0")) {
+						if(graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
+							if(!graduationSubject.getNote().equals("") && graduationSubject.getNote().length() != 0)
+								graduationSubjectMap.put(graduationSubject, 2);
+
+							else
+								graduationSubjectMap.put(graduationSubject, 1);
+
+							break;
+						}
+
+						else if(graduationSubjectMap.containsKey(graduationSubject))
+							continue;
+
+						else
+							graduationSubjectMap.put(graduationSubject, 0);
+					}
+				}
 
 				if(doubleMajorDepartment != null) {
-					if(score.getSubject().getDepartmentId() == doubleMajorDepartment.getId()) {
+					if(subjectDepartmentId == doubleMajorDepartment.getId()) {
 						if(score.getSubject().getDivision().equals("전공필수"))
-							doubleMajorEssential1 = subjectScore;
+							doubleMajorEssential1 += subjectScore;
 
 						else
-							doubleMajorSelection1 = subjectScore;
+							doubleMajorSelection1 += subjectScore;
+
+						continue;
 					}
 
-					else if(score.getSubject().getDepartmentId() == minorDepartment.getId()) {
-						minorEssential = subjectScore;
+					else if(subjectDepartmentId == minorDepartment.getId()) {
+						minorEssential += subjectScore;
 
 						if(score.getSubject().getDivision().equals("전공필수"))
-							doubleMajorEssential2 = subjectScore;
+							doubleMajorEssential2 += subjectScore;
 
 						else
-							doubleMajorSelection2 = subjectScore;
+							doubleMajorSelection2 += subjectScore;
+
+						continue;
 					}
 				}
 
 				else if(minorDepartment != null) {
-					if(score.getSubject().getDepartmentId() == minorDepartment.getId()) {
-						minorEssential = subjectScore;
+					if(subjectDepartmentId == minorDepartment.getId()) {
+						minorEssential += subjectScore;
 
 						if(score.getSubject().getDivision().equals("전공필수"))
-							minorEssential = subjectScore;
+							minorEssential += subjectScore;
 
 						else
-							minorSelection = subjectScore;
+							minorSelection += subjectScore;
+
+						continue;
 					}
+				}
+
+				if(subjectDepartmentId == student.getDepartmentId()) {
+					if(score.isMajorAdmit() || score.getSubject().getDivision().equals("전공선택"))
+						majorSelection += subjectScore;
+
+					else if(score.getSubject().getDivision().equals("전공필수"))
+						majorEssential += subjectScore;
+
+					else if(score.getSubject().getDivision().equals("전공선택"))
+						majorSearch += subjectScore;
 				}
 
 				else {
-					if(score.isMajorAdmit() || (score.getSubject().getDepartmentId() == student.getDepartmentId() && score.getSubject().getDivision().equals("전공선택"))) {
-						majorSelection = subjectScore;
-					}
+					if(score.getSubject().getDivision().equals("교양선택"))
+						liberalSelection += subjectScore;
 
-					else if(score.getSubject().getDivision().equals("교양선택") || (score.getSubject().getDepartmentId() != 1 && score.getSubject().getDepartmentId() != student.getDepartmentId()))
-						minorSelection = subjectScore;
+					else if(score.getSubject().getDivision().equals("교양필수"))
+						liberalEssential += subjectScore;
 				}
 			}
-			for(GraduationGrade graduationGrade : graduationGrades) {
-
-			}
-
-			for(GraduationSubject graduationSubject : graduationSubjects) {
-
-			}
 		}
+
+		model.addAttribute("graduationGradeMap", graduationGradeMap);
+		model.addAttribute("graduationSubjectMap", graduationSubjectMap);
+		model.addAttribute("total", total);
+		model.addAttribute("majorSelection", majorSelection);
+		model.addAttribute("liberalSelection", liberalSelection);
+		model.addAttribute("minorSelection", minorSelection);
+		model.addAttribute("doubleMajorSelection1", doubleMajorSelection1);
+		model.addAttribute("doubleMajorSelection2", doubleMajorSelection2);
+		model.addAttribute("majorEssential", majorEssential);
+		model.addAttribute("liberalEssential", liberalEssential);
+		model.addAttribute("minorEssential", minorEssential);
+		model.addAttribute("doubleMajorEssential1", doubleMajorEssential1);
+		model.addAttribute("doubleMajorEssential2", doubleMajorEssential2);
+		model.addAttribute("student", student);
 
 		return "user/menu/main";
 	}

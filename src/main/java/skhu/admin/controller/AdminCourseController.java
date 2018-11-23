@@ -235,7 +235,7 @@ public class AdminCourseController {
 		Map<Score, List<Subject>> changeMap = new HashMap<Score, List<Subject>>();
 		Student student = studentMapper.findById(id);
 
-		if(scores != null) {
+		if(scores != null && scores.size() != 0) {
 			for(Score score : scores) {
 				List<Subject> subjects = new ArrayList<Subject>();
 				if(score.getSubstitution().getSubstitutionCode().equals("전공선택")) {
@@ -589,7 +589,7 @@ public class AdminCourseController {
 				else
 					subject.setSemester((int)Double.parseDouble(tmp));
 
-				subject = subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester());
+				subject = subjectMapper.findBySimpleSpecific(subject.getCode(), subject.getYear(), subject.getSemester());
 
 				if(subject != null) {
 					Score insert = new Score();
@@ -598,7 +598,7 @@ public class AdminCourseController {
 					insert.setMajorAdmit(false);
 					insert.setSubstitutionCode("0");
 					insert.setScore(scoreMap.get(map.get("E")));
-					if(scores != null) {
+					if(scores != null && scores.size() != 0) {
 						for(int i = 0; i < scores.size(); ++i) {
 							if(subject.getYear().equals(scores.get(i).getSubject().getYear()) && subject.getCode().equals(scores.get(i).getSubject().getCode()) && subject.getSemester() == scores.get(i).getSubject().getSemester()) {
 								insert.setId(scores.get(i).getId());
@@ -622,6 +622,7 @@ public class AdminCourseController {
 
 					else {
 						scoreMapper.insert(insert);
+						System.out.println("??");
 
 						if(!(insert.getScore() < 0.0)) {
 							if(subject.getDivision().contains("전공"))
@@ -699,7 +700,7 @@ public class AdminCourseController {
 				else
 					subject.setSemester((int)Double.parseDouble(tmp));
 
-				subject = subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester());
+				subject = subjectMapper.findBySimpleSpecific(subject.getCode(), subject.getYear(), subject.getSemester());
 
 				String stdNum = map.get("F");
 
@@ -731,7 +732,6 @@ public class AdminCourseController {
 					}
 
 					else {
-						System.out.println("tt");
 						scoreMapper.insert(insert);
 					}
 				}

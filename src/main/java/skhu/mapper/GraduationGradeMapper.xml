@@ -19,7 +19,7 @@
 		select * from graduation_grade
 		where 
 		departmentId = 1 and graduationId= 1 and
-		(year = '2014' or year = '0');
+		(year = #{ year } or year = '0');
 	</select>
 	<select id="findByOption" resultMap="graduationGradeResultMap">
 		select gg.*, 

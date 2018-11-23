@@ -63,7 +63,7 @@ public class UserAccountController {
 			account.setGraduation(mainGraduation + " " + detailGraduation);
 
 		if(mainGraduation.equals("부전공")) {
-			doubleMajor1 = "";
+			doubleMajor1 = "0";
 		}
 
 		else if(mainGraduation.equals("복수전공")) {
