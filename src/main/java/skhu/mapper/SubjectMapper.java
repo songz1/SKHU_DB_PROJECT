@@ -17,4 +17,5 @@ public interface SubjectMapper {
 	void insert(Subject subject);
 	void abolishChange();
 	void update(Subject subject);
+	void test(@Param("id") int id, @Param("detailId") int detailId);
 }

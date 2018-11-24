@@ -31,5 +31,13 @@
 			<input type="submit"/>
 		</div>
 	</form>
+	일반과목 detail
+	<form name="excelUploadForm" enctype="multipart/form-data" method="post"
+		action="myTest4">
+		<input type="file" name="excelFile" />
+		<div class="bottom">
+			<input type="submit"/>
+		</div>
+	</form>
 </body>
 </html>

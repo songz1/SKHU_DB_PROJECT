@@ -228,9 +228,9 @@ public class TestController {
 
 		ExcelReaderOption excelReaderOption = new ExcelReaderOption();
 		excelReaderOption.setFilePath(destFile.getAbsolutePath());
-		excelReaderOption.setOutputColumns("A","B", "C", "D", "E", "F", "G", "H");
+		excelReaderOption.setOutputColumns("A","B", "C", "D", "E", "F");
 		excelReaderOption.setStartRow(2);
-		excelReaderOption.setSheetRow(1);
+		excelReaderOption.setSheetRow(0);
 
 
 		List<Map<String, String>>excelContent = ExcelReader.read(excelReaderOption);
@@ -240,53 +240,36 @@ public class TestController {
 					!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
 					!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
 					!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") &&
-					!map.containsKey("E") || map.get("E") == null || map.get("E").equals("") &&
-					!map.containsKey("F") || map.get("F") == null || map.get("F").equals("") &&
-					!map.containsKey("G") || map.get("G") == null || map.get("G").equals("") &&
-					!map.containsKey("H") || map.get("H") == null || map.get("H").equals("")
+					!map.containsKey("E") || map.get("E") == null || map.get("E").equals("")
 					)
 				break;
 
 			Subject subject = new Subject();
-			List<Department> departments = new ArrayList<Department>();
-			Map<String, Integer> deptMap = new HashMap<String, Integer>();
-
-			for(Department department : departments) {
-				deptMap.put(department.getRealName(), department.getId());
-			}
-			subject.setYear(map.get("A"));
 			subject.setCode(map.get("C"));
-
-			String tmp = map.get("B");
-
-			if(tmp.equals("여름학기"))
-				subject.setSemester(3);
-
-			else if(tmp.equals("겨울학기"))
-				subject.setSemester(4);
-
-			else
-				subject.setSemester((int)Double.parseDouble(map.get("B")));
-
+			subject.setYear(map.get("A"));
+			subject.setSemester((int)Double.parseDouble(map.get("B")));
 			subject.setSubjectClass(map.get("D"));
 
-			if(subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester(), subject.getSubjectClass()) == null) {
-				subject.setAbolish(false);
+			subject = subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester(), subject.getSubjectClass());
+
+			String temp = map.get("F");
+
+			if(temp.equals("대안역량"))
+				subject.setDetailId(2);
+
+			else if(temp.equals("가치역량"))
+				subject.setDetailId(3);
+
+			else if(temp.equals("실천역량"))
+				subject.setDetailId(4);
+
+			else
 				subject.setDetailId(1);
-				subject.setEstablish(map.get("E"));
 
-				if(deptMap.containsKey(subject.getEstablish()))
-					subject.setDepartmentId(deptMap.get(subject.getEstablish()));
+			System.out.println(subject.getDetailId());
 
-				else
-					subject.setDepartmentId(1);
-
-				subject.setProfessorId(1);
-				subject.setDivision(map.get("G"));
-				subject.setName(map.get("F"));
-				subject.setScore(Double.parseDouble(map.get("H")));
-
-				subjectMapper.insert(subject);
+			if(subject != null && subject.getId() != 0 && subject.getDetailId() != 1) {
+				subjectMapper.test(subject.getId(), subject.getDetailId());
 			}
 		}
 

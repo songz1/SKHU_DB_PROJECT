@@ -60,4 +60,13 @@
 		set sql_safe_updates = 1;
 		commit;
 	</update>
+	<update id="test">
+		update subject
+		<set>
+			<if test="detailId != 0">
+				detailId = #{ detailId },
+			</if>
+		</set>
+		where id = #{ id }
+	</update>
 </mapper>
