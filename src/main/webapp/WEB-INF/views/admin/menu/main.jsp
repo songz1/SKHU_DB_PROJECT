@@ -38,12 +38,12 @@
 						</tr>
 						<c:forEach var="action" items="${ actions }">
 							<tr>
-								<td class="title col-md-2">${ action.student.studentNumber }</td>
-								<td class="title col-md-1">${ action.student.name }</td>
-								<td class="title col md-1">${ action.student.department.name }</td>
-								<td class="title col-md-3">${ action.name }</td>
-								<td class="title col-md-1">${ action.admin.name }</td>
-								<td class="title col-md-2"><fmt:formatDate pattern="yy-MM-dd HH:MM" value="${ action.date }" /></td>
+								<td class="col-md-2">${ action.student.studentNumber }</td>
+								<td class="col-md-1">${ action.student.name }</td>
+								<td class="col md-1">${ action.student.department.name }</td>
+								<td class="col-md-3">${ action.name }</td>
+								<td class="col-md-1">${ action.admin.name }</td>
+								<td class="col-md-2"><fmt:formatDate pattern="yy-MM-dd HH:MM" value="${ action.date }" /></td>
 							</tr>
 						</c:forEach>
 					</table>

@@ -30,24 +30,24 @@
 					<table class="table text-center">
 						<tr>
 							<td class="title col-md-2">학과(부)</td>
-							<td class="col-md-1">
-								<form:select path="departmentId" class="form-control">
+							<td>
+								<form:select path="departmentId" class="form-control col-md-2">
 									<form:option value="0" label="전체" />
 									<form:options itemValue="id" itemLabel="name" items="${ departments }"/>
 								</form:select>
 							</td>
-							<td class="title col-md-2">
-								<select name="searchType">
+							<td class="title">
+								<select name="searchType" class="form-control col-md-2">
 									<option value="0">학번</option>
 									<option value="1">이름</option>
 								</select></td>
-							<td><input type="text" name="searchText" value="${ searchText }" class="form-control"/></td>
+							<td><input type="text" name="searchText" value="${ searchText }" class="form-control col-md-2"/></td>
 							<td class="col-md-1" />
 						</tr>
 						<tr>
 							<td class="title col-md-2">학년</td>
-							<td class="col-md-1">
-								<form:select path="year" class="form-control">
+							<td>
+								<form:select path="year" class="form-control col-md-2">
 									<form:option value="0" label="전체" />
 									<form:option value="1" label="1학년" />
 									<form:option value="2" label="2학년" />
@@ -56,8 +56,8 @@
 								</form:select>
 							</td>
 							<td class="title col-md-2">이수학기</td>
-							<td class="col-md-1">
-								<form:select path="semester" class="form-control">
+							<td>
+								<form:select path="semester" class="form-control col-md-2">
 									<form:option value="0" label="전체" />
 									<form:option value="1" label="1학기" />
 									<form:option value="2" label="2학기" />

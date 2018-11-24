@@ -35,18 +35,18 @@
 					<table class="table text-center">
 						<tr>
 							<td class="title col-md-1">적용년도</td>
-							<td class="col-md-1"><input type="text" name="searchText"
+							<td class="col-md-1"><input class="form-control" type="text" name="searchText"
 								value="${ searchText }" /></td>
 							<td class="title col-md-1">학과</td>
 							<td class="col-md-1">
-								<form:select path="departmentId">
+								<form:select class="form-control" path="departmentId">
 									<form:option value="0" label="전체" />
 									<form:options itemValue="id" itemLabel="name" items="${ departments }"/>
 								</form:select>
 							</td>
 							<td class="title col-md-1">졸업요건</td>
 							<td class="col-md-1">
-								<form:select path="graduationId">
+								<form:select class="form-control" path="graduationId">
 									<form:option value="0" label="전체" />
 									<form:options itemValue="id" itemLabel="name" items="${ graduations }"/>
 								</form:select>

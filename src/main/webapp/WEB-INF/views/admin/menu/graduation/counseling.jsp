@@ -38,13 +38,13 @@
 							</form:select>
 						</td>
 						<td class="title col-md-1">
-							<select name="searchType">
+							<select class="form-control" name="searchType">
 									<option value="0">학번</option>
 									<option value="1">이름</option>
 							</select>
 						</td>
 						<td class="col-md-2">
-							<input type="text" name="searchText" value="${ searchText }" />
+							<input class="form-control" type="text" name="searchText" value="${ searchText }" />
 						</td>
 					
 						<td class="col-md-1">
@@ -76,6 +76,15 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<nav>
+					  <ul class="pager">
+					    <c:forEach var="page" items="${ pages }">
+							<li>
+								<a href="counseling?${ page.queryString }"> ${ page.label }</a>
+							</li>
+						</c:forEach>
+					  </ul>
+				</nav>
 				</form:form>
 			</div>
 		</div>

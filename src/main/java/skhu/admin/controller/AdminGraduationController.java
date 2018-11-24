@@ -45,6 +45,7 @@ import skhu.mapper.StudentMapper;
 import skhu.mapper.SubjectMapper;
 import skhu.util.ExcelReader;
 import skhu.util.ExcelReaderOption;
+import skhu.util.PageOption;
 import skhu.vo.Page;
 
 @Controller
@@ -791,14 +792,15 @@ public class AdminGraduationController {
 	@RequestMapping(value="counseling", method=RequestMethod.GET)
 	public String counseling(Model model, Student condition,
 			@RequestParam(value="searchText", required=false) String searchText,
-			@RequestParam(value="searchType", required=false) String searchType) {
+			@RequestParam(value="searchType", required=false) String searchType,
+			@RequestParam(value="pg", required=false) String pg) {
 
 		if(searchText == null)
 			searchText = "";
 
 		if(searchType == null)
 			searchType = "0";
-
+		
 		List<Student> students = studentMapper.findAllWithCounseling(condition, searchType, "%" + searchText + "%");
 		List<Department> departments = departmentMapper.findWithoutCommon();
 

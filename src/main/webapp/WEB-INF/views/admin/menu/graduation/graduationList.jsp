@@ -30,15 +30,15 @@
 					<form:form method="get" modelAttribute="condition" action="graduationlist">
 						<tr>
 							<td class="title col-md-2">학과</td>
-							<td class="col-md-1">
-								<form:select path="departmentId">
+							<td>
+								<form:select class="form-control col-md-2" path="departmentId">
 									<form:option value="0" label="전체" />
 									<form:options itemValue="id" itemLabel="name" items="${ departments }"/>
 								</form:select>
 							</td>
-							<td class="title col-md-1">학년</td>
+							<td class="title col-md-2">학년</td>
 							<td>
-								<form:select path="year">
+								<form:select class="form-control col-md-2" path="year">
 									<form:option value="0" label="전체" />
 									<form:option value="1" label="1학년" />
 									<form:option value="2" label="2학년" />
@@ -46,9 +46,9 @@
 									<form:option value="4" label="4학년" />
 								</form:select>
 							</td>
-							<td class="title col-md-1">이수학기</td>
+							<td class="title col-md-2">이수학기</td>
 							<td>
-								<form:select path="semester">
+								<form:select class="form-control col-md-2" path="semester">
 									<form:option value="0" label="전체" />
 									<form:option value="1" label="1학기" />
 									<form:option value="2" label="2학기" />
@@ -62,21 +62,22 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="col-md-1">
+							<td class="col-md-2">
 								<input type="checkbox" name="majorCheck" <c:if test='${ majorCheck }'>checked</c:if>>전공필수 미충족
 							</td>
-							<td class="col-md-1">
+							<td class="col-md-2">
 								<input type="checkbox" name="minorCheck" <c:if test='${ minorCheck }'>checked</c:if> />교양필수 미충족
 							</td>
-							<td class="col-md-1">
-								<select name="searchType">
+							<td class="title">
+								<select class="form-control col-md-1" name="searchType">
 									<option value="0" <c:if test="${searchType eq '0'}">selected</c:if> label="학번" />
 									<option value="1" label="이름" <c:if test="${searchType eq '1'}">selected</c:if>/>
 								</select>
 							</td>
-							<td class="col-md-1">
-								<input type="text" name="searchText" value="${ searchText }" />
+							<td>
+								<input class="form-control col-md-1" type="text" name="searchText" value="${ searchText }" />
 							</td>
+							<td></td>
 							<td class="col-md-1">
 								<span style="float: right">
 									<button type="submit" class="btn btn-default btn-block" style="WIDTH: 100pt;">조회</button>
@@ -106,6 +107,15 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<nav>
+					  <ul class="pager">
+					    <c:forEach var="page" items="${ pages }">
+							<li>
+								<a href="graduationList?${ page.queryString }"> ${ page.label }</a>
+							</li>
+						</c:forEach>
+					  </ul>
+				</nav>
 			</div>
 		</div>
 	</div>

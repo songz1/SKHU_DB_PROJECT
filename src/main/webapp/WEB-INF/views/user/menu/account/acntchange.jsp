@@ -44,7 +44,7 @@
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">이메일</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<input type="email" class="form-control" name="email" placeholder="이메일">
+							<form:input path="email" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group mb-50">
