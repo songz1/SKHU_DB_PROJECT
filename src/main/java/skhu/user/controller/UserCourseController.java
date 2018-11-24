@@ -327,9 +327,9 @@ public class UserCourseController {
 
 			ExcelReaderOption excelReaderOption = new ExcelReaderOption();
 			excelReaderOption.setFilePath(destListFile.getAbsolutePath());
-			excelReaderOption.setOutputColumns("B","C", "D", "H");
+			excelReaderOption.setOutputColumns("B","C", "D", "H", "E");
 			excelReaderOption.setStartRow(3);
-			excelReaderOption.setSheetRow(0);
+			excelReaderOption.setSheetRow(1);
 
 			List<Map<String, String>> listExcel = ExcelReader.read(excelReaderOption);
 			List<Score> scores = scoreMapper.findByStudentId(id, "", sub);
@@ -346,10 +346,11 @@ public class UserCourseController {
 			scoreMap.put("N", -1.0);
 
 			for(Map<String, String> map : listExcel) {
-				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
-						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
-						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") &&
-						!map.containsKey("H") || map.get("H") == null || map.get("H").equals("")
+				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") ||
+						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") ||
+						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") ||
+						!map.containsKey("H") || map.get("H") == null || map.get("H").equals("") ||
+						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("")
 						)
 					break;
 				Subject subject = new Subject();
@@ -372,7 +373,9 @@ public class UserCourseController {
 				else
 					subject.setSemester((int)Double.parseDouble(tmp.substring(0, 1)));
 
-				subject = subjectMapper.findBySimpleSpecific(subject.getCode(), subject.getYear(), subject.getSemester());
+				subject.setName(map.get("E"));
+
+				subject = subjectMapper.findBySpecificName(subject.getCode(), subject.getYear(), subject.getSemester(), subject.getName());
 				Score insert = new Score();
 				insert.setStudentId(id);
 				insert.setSubjectId(subject.getId());
@@ -380,8 +383,9 @@ public class UserCourseController {
 				insert.setSubstitutionCode("0");
 				insert.setScore(scoreMap.get(map.get("H")));
 
+
 				if(subject != null) {
-					if(scores != null) {
+					if(scores != null && scores.size() != 0) {
 						for(int i = 0; i < scores.size(); ++i) {
 							if(subject.getYear().equals(scores.get(i).getSubject().getYear()) && subject.getCode().equals(scores.get(i).getSubject().getCode()) && subject.getSemester() == scores.get(i).getSubject().getSemester()) {
 								insert.setId(scores.get(i).getId());

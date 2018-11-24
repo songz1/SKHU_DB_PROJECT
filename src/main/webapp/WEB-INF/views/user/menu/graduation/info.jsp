@@ -31,7 +31,7 @@
 				<td class="col-md-1">${ graduation.name }</td>
 				<td class="col-md-1">
 					<c:forEach var="graduationGrade" items="${ graduationGradeMap[graduation.id] }">
-						${ graduationGrade.name } ${ graduationGrade.score } 이상 ${ graduationGrade.note }<br />
+						<c:if test="${ graduationGrade.name ne '상세졸업과정'}">${ graduationGrade.name } ${ graduationGrade.score } 학점 이상 <c:if test="${ graduationGrade.note ne '' }">(${ graduationGrade.note })</c:if><br /></c:if>
 					</c:forEach>
 				</td>
 				<td class="col-md-1">
@@ -39,7 +39,11 @@
 						${ graduationSubject.subject.name }(${ graduationSubject.subject.score }) ${ graduationSubject.note }<br />
 					</c:forEach>
 				</td>
-				<td class="col-md-1"></td>
+				<td class="col-md-1">
+					<c:forEach var="graduationGrade" items="${ graduationGradeMap[graduation.id] }">
+						<c:if test="${ graduationGrade.name eq '상세졸업과정'}">${ graduationGrade.name } ${ graduationGrade.note }<br /></c:if>
+					</c:forEach>
+				</td>
 			</tr>
 			</c:forEach>
 		</tbody>

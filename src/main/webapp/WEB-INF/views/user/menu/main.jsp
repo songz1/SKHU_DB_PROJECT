@@ -27,35 +27,47 @@
 				<h3 class="text-center">졸업 학점 현황</h3>
 				<div class="table-responsive">
 					<table class="table text-center">
-						<tr>
-							<c:forEach var="map" items="${ graduationGradeMap }" varStatus="status">
-								<c:if test="${ status.index % 3 == 2 }"></tr><tr>
-							</c:if>
-							<td class="col-md-4 
+							<c:forEach var="map" items="${ graduationGradeMap }"
+								varStatus="status">
+							<tr>
+							<td
+								class="col-md-4 
 								<c:choose> 
 									<c:when test="${ map.key.score <= map.value }">success</c:when>
 									<c:otherwise>danger</c:otherwise>
-								</c:choose>">${ map.key.name } ${ map.value }/${ map.key.score }
-							</td>
+								</c:choose>">${ map.key.name } ${ map.value }/${ map.key.score }</td>
+														</tr>
 							</c:forEach>
-						</tr>
 					</table>
 					<table class="table text-center">
-						<tr>
-							<c:forEach var="map" items="${ graduationSubjectMap }"
-								varStatus="status">
-								<c:if test="${ status.index % 3 == 2 }">
-						</tr>
-						<tr>
-							</c:if>
-							<td
-								class="col-md-4 <c:choose> 
+						<c:forEach var="map" items="${ graduationSubjectMap }"
+							varStatus="status">
+							<c:choose>
+								<c:when test="${ status.index == 0 }">
+									<c:if test="${ map.key.note ne '' }">
+									<tr>
+										<td class="col-md-3 active">${ map.key.note }</td>
+									</tr>
+									</c:if>
+								</c:when>
+								<c:when
+									test="${ map.key.note ne graduationSubjects[status.index - 1].note }">
+									<c:if test="${ map.key.note ne '' }">
+									<tr>
+										<td class="col-md-3 active">${ map.key.note }</td>
+									</tr>
+									</c:if>
+								</c:when>
+							</c:choose>
+							<tr>
+								<td
+									class="col-md-4 <c:choose> 
 											<c:when test="${ map.value == 0 }">danger</c:when>
 											<c:when test="${ map.value == 1 }">success</c:when>
 											<c:when test="${ map.value == 2 }">active</c:when>
 										</c:choose>">${ map.key.subject.name }</td>
-							</c:forEach>
-						</tr>
+							</tr>
+						</c:forEach>
 					</table>
 					<div class="table-responsive">
 						<table class="table text-center">
@@ -81,19 +93,22 @@
 									<td class="col-md-3">${ liberalEssential + liberalSelection }</td>
 								</tr>
 								<tr class="active">
-									<td class="col-md-3">부전공<c:if test="${ student.minor ne '0' && student.doubleMajor eq '0' }">(${ student.minor })</c:if></td>
+									<td class="col-md-3">부전공<c:if
+											test="${ student.minor ne '0' && student.doubleMajor eq '0' }">(${ student.minor })</c:if></td>
 									<td class="col-md-3">${ minorEssential }</td>
 									<td class="col-md-3">${ minorSelection }</td>
 									<td class="col-md-3">${ minorEssential + minorSelection }</td>
 								</tr>
 								<tr class="active">
-									<td class="col-md-3">복수전공1<c:if test="${ student.minor ne '0' && student.doubleMajor ne '0' }">(${ student.minor })</c:if></td>
+									<td class="col-md-3">복수전공1<c:if
+											test="${ student.minor ne '0' && student.doubleMajor ne '0' }">(${ student.minor })</c:if></td>
 									<td class="col-md-3">${ doubleMajorEssential1 }</td>
 									<td class="col-md-3">${ doubleMajorSelection1 }</td>
 									<td class="col-md-3">${ dobuleMajorEssential1 + doubleMajorSelection1 }</td>
 								</tr>
 								<tr class="active">
-									<td class="col-md-3">복수전공2<c:if test="${ student.doubleMajor ne '0' }">(${ student.doubleMajor })</c:if></td>
+									<td class="col-md-3">복수전공2<c:if
+											test="${ student.doubleMajor ne '0' }">(${ student.doubleMajor })</c:if></td>
 									<td class="col-md-3">${ doubleMajorEssential2 }</td>
 									<td class="col-md-3">${ doubleMajorSelection2 }</td>
 									<td class="col-md-3">${ dobuleMajorEssential2 + doubleMajorSelection2 }</td>

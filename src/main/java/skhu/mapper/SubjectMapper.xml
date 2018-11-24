@@ -8,8 +8,11 @@
 	<select id="findBySpecific" resultType="Subject">
 		select * from subject where code = #{ code } and year = #{ year } and semester = #{ semester } and subjectClass = #{ subjectClass } limit 1
 	</select>
-	<select id="findBySimpleSpecific" resultType="Subject">
-		select * from subject where code = #{ code } and year = #{ year } and semester = #{ semester } limit 1
+	<select id="findBySpecificName" resultType="Subject">
+		select * from subject where code = #{ code } and year = #{ year } and semester = #{ semester } and name = #{ name } limit 1
+	</select>
+	<select id="findBySpecificClass" resultType="Subject">
+		select * from subject where code = #{ code } and year = #{ year } and semester = #{ semester } and subjectClass = #{ subjectClass } limit 1
 	</select>
 	<select id="findByDivision" resultType="Subject">
 		select * from subject where division = #{ division } and departmentId = #{ departmentId } group by code;

@@ -66,38 +66,49 @@ public class AdminGraduationController {
 		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByCommon();
 		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByCommon();
 		List<CompleteScore> completeScores = completeScoreMapper.findAll();
-		Map<String, List<GraduationGrade>> graduationGradeMap = new HashMap<String, List<GraduationGrade>>();
-		Map<String, List<GraduationSubject>> graduationSubjectMap = new HashMap<String, List<GraduationSubject>>();
+		Map<String, List<GraduationGrade>> graduationGradeMap = new LinkedHashMap<String, List<GraduationGrade>>();
+		Map<String, List<GraduationSubject>> graduationSubjectMap = new LinkedHashMap<String, List<GraduationSubject>>();
 		List<GraduationGrade> gradeTemp = new ArrayList<GraduationGrade>();
 		List<GraduationSubject> subjectTemp = new ArrayList<GraduationSubject>();
 
 		for(int i = 0; i < graduationGrades.size(); ++i) {
 			if(i != 0) {
 				if(!graduationGrades.get(i).getYear().equals(graduationGrades.get(i-1).getYear())) {
-					graduationGradeMap.put(graduationGrades.get(i).getYear(), gradeTemp);
+					graduationGradeMap.put(graduationGrades.get(i-1).getYear(), gradeTemp);
 					gradeTemp = new ArrayList<GraduationGrade>();
 				}
-
 			}
+
 			gradeTemp.add(graduationGrades.get(i));
 		}
 
 		if(gradeTemp.size() > 0)
-			graduationGradeMap.put(gradeTemp.get(0).getYear(), gradeTemp);
+			graduationGradeMap.put(gradeTemp.get(gradeTemp.size() - 1).getYear(), gradeTemp);
 
+		int idx = 0;
+		int flag = 0;
 		for(int i = 0; i < graduationSubjects.size(); ++i) {
+			if(graduationSubjects.get(i).getNote().contains("봉사") && graduationSubjects.get(i).getYear().equals(graduationSubjects.get(idx).getYear())) {
+				if(flag > 0)
+					continue;
+
+				flag = 1;
+			}
+
 			if(i != 0) {
-				if(!graduationSubjects.get(i).getYear().equals(graduationSubjects.get(i-1).getYear())) {
-					graduationSubjectMap.put(graduationSubjects.get(i).getYear(), subjectTemp);
+				if(!graduationSubjects.get(i).getYear().equals(graduationSubjects.get(idx).getYear())) {
+					graduationSubjectMap.put(graduationSubjects.get(idx).getYear(), subjectTemp);
 					subjectTemp = new ArrayList<GraduationSubject>();
 				}
 
+				idx = i;
 			}
+
 			subjectTemp.add(graduationSubjects.get(i));
 		}
 
 		if(subjectTemp.size() > 0)
-			graduationSubjectMap.put(subjectTemp.get(0).getYear(), subjectTemp);
+			graduationSubjectMap.put(subjectTemp.get(subjectTemp.size() - 1).getYear(), subjectTemp);
 
 		model.addAttribute("graduationGradeMap", graduationGradeMap);
 		model.addAttribute("graduationSubjectMap", graduationSubjectMap);
@@ -185,8 +196,8 @@ public class AdminGraduationController {
 			List<Map<String, String>> completeExcel = ExcelReader.read(excelReaderOption);
 			completeScoreMapper.delete();
 			for(Map<String, String> map : completeExcel) {
-				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
-						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
+				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") ||
+						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") ||
 						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("")
 						)
 					break;
@@ -242,31 +253,47 @@ public class AdminGraduationController {
 		for(int i = 0; i < graduationGrades.size(); ++i) {
 			if(i != 0) {
 				if(graduationGrades.get(i).getGraduationId() != graduationGrades.get(i-1).getGraduationId()) {
-					graduationGradeMap.put(graduations.get(k++).getId(), gradeTemp);
+					graduationGradeMap.put(graduationGrades.get(i-1).getGraduationId(), gradeTemp);
 					gradeTemp = new ArrayList<GraduationGrade>();
 				}
 			}
 			gradeTemp.add(graduationGrades.get(i));
+			k = graduationGrades.get(i).getGraduationId();
 		}
 
 		if(gradeTemp.size() > 0)
-			graduationGradeMap.put(graduations.get(k++).getId(), gradeTemp);
+			graduationGradeMap.put(k, gradeTemp);
 
 		k = 0;
+		int flag = 0;
+		int idx = 0;
+
 
 		for(int i = 0; i < graduationSubjects.size(); ++i) {
+			k = graduationSubjects.get(i).getGraduationId();
+
+			if(graduationSubjects.get(i).getGraduationId() == graduationSubjects.get(idx).getGraduationId() && graduationSubjects.get(i).getNote().equals(graduationSubjects.get(idx).getNote()) && !(graduationSubjects.get(i).getNote().equals(""))) {
+				if(flag > 0)
+					continue;
+
+				flag = 1;
+			}
+
 			if(i != 0) {
-				if(!graduationSubjects.get(i).getYear().equals(graduationSubjects.get(i-1).getYear())) {
-					graduationSubjectMap.put(graduations.get(k++).getId(), subjectTemp);
+				if(graduationSubjects.get(i).getGraduationId() != graduationSubjects.get(idx).getGraduationId()) {
+					graduationSubjectMap.put(graduationSubjects.get(idx).getGraduationId(), subjectTemp);
 					subjectTemp = new ArrayList<GraduationSubject>();
+					flag = 0;
 				}
 
+				idx = i;
 			}
+
 			subjectTemp.add(graduationSubjects.get(i));
 		}
 
 		if(gradeTemp.size() > 0)
-			graduationGradeMap.put(graduations.get(k++).getId(), gradeTemp);
+			graduationSubjectMap.put(k, subjectTemp);
 
 		model.addAttribute("graduations", graduations);
 		model.addAttribute("graduationGradeMap", graduationGradeMap);
@@ -521,10 +548,10 @@ public class AdminGraduationController {
 			List<Map<String, String>> gradeExcel = ExcelReader.read(excelReaderOption);
 
 			for(Map<String, String> map : gradeExcel) {
-				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
-						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
-						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") &&
-						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("") &&
+				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") ||
+						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") ||
+						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") ||
+						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("") ||
 						!map.containsKey("F") || map.get("F") == null || map.get("F").equals("")
 						)
 					break;
@@ -534,41 +561,37 @@ public class AdminGraduationController {
 				graduationGrade.setGraduationId(graduationMap.get(map.get("D")));
 				graduationGrade.setName(map.get("E"));
 				graduationGrade.setScore((int)Double.parseDouble(map.get("F")));
-				graduationGrade.setNote(map.get("G"));
+
+				if(map.containsKey("G"))
+					graduationGrade.setNote(map.get("G"));
+
+				else
+					graduationGrade.setNote("");
 
 				graduationGradeMapper.insert(graduationGrade);
 			}
 		}
 
 		if(!subjectFile.isEmpty()) {
-			System.out.println("?");
 			File destSubjectFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\admin\\과목졸업요건.xlsx");
-			System.out.println("??");
 			subjectFile.transferTo(destSubjectFile);
-			System.out.println("???");
 
 			excelReaderOption.setFilePath(destSubjectFile.getAbsolutePath());
 			excelReaderOption.setOutputColumns("B","C","D", "E", "F", "G", "H");
 			List<Map<String, String>> subjectExcel = ExcelReader.read(excelReaderOption);
-			System.out.println("test");
 
 			for(Map<String, String> map : subjectExcel) {
-				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
-						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
-						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") &&
-						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("") &&
-						!map.containsKey("F") || map.get("F") == null || map.get("F").equals("") &&
-						!map.containsKey("G") || map.get("G") == null || map.get("G").equals("")
+				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") ||
+						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") ||
+						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") ||
+						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("") ||
+						!map.containsKey("F") || map.get("F") == null || map.get("F").equals("")
 						)
 					break;
 				Subject subject = subjectMapper.findByCode(map.get("E"));
-				System.out.println("subject");
 				if(subject == null) {
-					System.out.println("??");
 					return "redirect:creategraduation";
 				}
-
-				System.out.println("test");
 
 				GraduationSubject graduationSubject = new GraduationSubject();
 				graduationSubject.setYear(map.get("B").equals("공통") ? map.get("B") : map.get("B").substring(0, map.get("B").length() - 2));
@@ -576,6 +599,13 @@ public class AdminGraduationController {
 				graduationSubject.setGraduationId(graduationMap.get(map.get("D")));
 				graduationSubject.setSubjectId(subject.getId());
 				graduationSubject.setSemester(map.get("F").equals("공통") ? 0 : (int)Double.parseDouble(map.get("F")));
+
+				if(map.containsKey("H"))
+					graduationSubject.setNote(map.get("H"));
+
+				else
+					graduationSubject.setNote("");
+
 				graduationSubject.setNote(map.get("G"));
 				graduationSubject.setEssential(map.get("H").equals("O") ? true : false);
 
@@ -701,6 +731,16 @@ public class AdminGraduationController {
 
 							else if(graduationGrade.getName().equals("교양필수") && score.getSubject().getDivision().equals("교양선택"))
 								continue;
+
+							else if(graduationGrade.getGraduationId() == differentDepartmentGraduationId) {
+								if(graduationGrade.getGraduation().getName().contains("부전공") && score.getSubject().getDepartmentId() != minorId)
+									continue;
+
+								else if(graduationGrade.getGraduation().getName().contains("복수전공")) {
+									if(graduationGrade.getDepartmentId() != minorId || graduationGrade.getDepartmentId() != doubleMajorId)
+										continue;
+								}
+							}
 
 							total += score.getSubject().getScore();
 							graduationGradeMap.put(graduationGrade, total);

@@ -147,7 +147,7 @@ public class AdminCourseController {
 			substitutionMapper.delete();
 			subjectMapper.abolishChange();
 			for(Map<String, String> map : listExcel) {
-				if(!map.containsKey("A") || map.get("A") == null || map.get("A").equals("") &&
+				if(!map.containsKey("A") || map.get("A") == null || map.get("A").equals("") ||
 						!map.containsKey("B") || map.get("B") == null || map.get("B").equals("")
 						)
 					break;
@@ -525,7 +525,7 @@ public class AdminCourseController {
 
 			ExcelReaderOption excelReaderOption = new ExcelReaderOption();
 			excelReaderOption.setFilePath(destListFile.getAbsolutePath());
-			excelReaderOption.setOutputColumns("B","C", "D", "E");
+			excelReaderOption.setOutputColumns("B","C", "D", "E", "F");
 			excelReaderOption.setStartRow(3);
 			excelReaderOption.setSheetRow(1);
 
@@ -567,10 +567,11 @@ public class AdminCourseController {
 			}
 
 			for(Map<String, String> map : listExcel) {
-				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
-						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
-						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") &&
-						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("")
+				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") ||
+						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") ||
+						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") ||
+						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("") ||
+						!map.containsKey("F") || map.get("F") == null || map.get("F").equals("")
 						)
 					break;
 				Subject subject = new Subject();
@@ -589,7 +590,9 @@ public class AdminCourseController {
 				else
 					subject.setSemester((int)Double.parseDouble(tmp));
 
-				subject = subjectMapper.findBySimpleSpecific(subject.getCode(), subject.getYear(), subject.getSemester());
+				subject.setSubjectClass(map.get("F"));
+
+				subject = subjectMapper.findBySpecificClass(subject.getCode(), subject.getYear(), subject.getSemester(), subject.getSubjectClass());
 
 				if(subject != null) {
 					Score insert = new Score();
@@ -656,7 +659,7 @@ public class AdminCourseController {
 
 			ExcelReaderOption excelReaderOption = new ExcelReaderOption();
 			excelReaderOption.setFilePath(destListFile.getAbsolutePath());
-			excelReaderOption.setOutputColumns("B","C", "D", "E", "F");
+			excelReaderOption.setOutputColumns("B","C", "D", "E", "F", "G");
 			excelReaderOption.setStartRow(3);
 			excelReaderOption.setSheetRow(1);
 
@@ -677,10 +680,11 @@ public class AdminCourseController {
 			scoreMap.put("N", -1.0);
 
 			for(Map<String, String> map : listExcel) {
-				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
-						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
-						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") &&
-						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("")
+				if(!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") ||
+						!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") ||
+						!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") ||
+						!map.containsKey("E") || map.get("E") == null || map.get("E").equals("") ||
+						!map.containsKey("G") || map.get("G") == null || map.get("G").equals("")
 						)
 					break;
 
@@ -700,7 +704,9 @@ public class AdminCourseController {
 				else
 					subject.setSemester((int)Double.parseDouble(tmp));
 
-				subject = subjectMapper.findBySimpleSpecific(subject.getCode(), subject.getYear(), subject.getSemester());
+				subject.setSubjectClass(map.get("G"));
+
+				subject = subjectMapper.findBySpecificClass(subject.getCode(), subject.getYear(), subject.getSemester(), subject.getSubjectClass());
 
 				String stdNum = map.get("F");
 

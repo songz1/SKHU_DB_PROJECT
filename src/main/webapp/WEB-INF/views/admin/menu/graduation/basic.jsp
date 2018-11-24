@@ -76,7 +76,7 @@
 								<td class="col-md-1">${ map.key }</td>
 								<td class="col-md-1"><c:forEach var="graduation"
 										items="${ map.value }">
-											${ graduation.subject.name } ${ graduation.subject.score }학점<br />
+											${ graduation.subject.name } ${ graduation.subject.score } 학점<br />
 									</c:forEach></td>
 							</tr>
 						</table>

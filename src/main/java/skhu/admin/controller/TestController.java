@@ -53,7 +53,7 @@ public class TestController {
 		List<Map<String, String>>excelContent =ExcelReader.read(excelReaderOption);
 
 		for(Map<String, String> map : excelContent){
-			if(!map.containsKey("A") || map.get("A") == null || map.get("A").equals("") &&
+			if(!map.containsKey("A") || map.get("A") == null || map.get("A").equals("") ||
 					!map.containsKey("B") || map.get("B") == null || map.get("B").equals("")
 					)
 				break;
@@ -103,8 +103,7 @@ public class TestController {
 					!map.containsKey("E") || map.get("E") == null || map.get("E").equals("") &&
 					!map.containsKey("F") || map.get("F") == null || map.get("F").equals("") &&
 					!map.containsKey("G") || map.get("G") == null || map.get("G").equals("") &&
-					!map.containsKey("H") || map.get("H") == null || map.get("H").equals("") &&
-					!map.containsKey("I") || map.get("I") == null || map.get("I").equals("")
+					!map.containsKey("H") || map.get("H") == null || map.get("H").equals("")
 					)
 				break;
 			Subject subject = new Subject();
@@ -236,10 +235,10 @@ public class TestController {
 		List<Map<String, String>>excelContent = ExcelReader.read(excelReaderOption);
 
 		for(Map<String, String> map : excelContent){
-			if(!map.containsKey("A") || map.get("A") == null || map.get("A").equals("") &&
-					!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") &&
-					!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") &&
-					!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") &&
+			if(!map.containsKey("A") || map.get("A") == null || map.get("A").equals("") ||
+					!map.containsKey("B") || map.get("B") == null || map.get("B").equals("") ||
+					!map.containsKey("C") || map.get("C") == null || map.get("C").equals("") ||
+					!map.containsKey("D") || map.get("D") == null || map.get("D").equals("") ||
 					!map.containsKey("E") || map.get("E") == null || map.get("E").equals("")
 					)
 				break;
@@ -253,6 +252,12 @@ public class TestController {
 			subject = subjectMapper.findBySpecific(subject.getCode(), subject.getYear(), subject.getSemester(), subject.getSubjectClass());
 
 			String temp = map.get("F");
+
+			if(temp == null || temp.equals(""))
+				continue;
+
+			if(subject == null)
+				continue;
 
 			if(temp.equals("대안역량"))
 				subject.setDetailId(2);

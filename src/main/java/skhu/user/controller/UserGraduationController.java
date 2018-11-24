@@ -64,30 +64,41 @@ public class UserGraduationController {
 		for(int i = 0; i < graduationGrades.size(); ++i) {
 			if(i != 0) {
 				if(!graduationGrades.get(i).getYear().equals(graduationGrades.get(i-1).getYear())) {
-					graduationGradeMap.put(graduationGrades.get(i).getYear(), gradeTemp);
+					graduationGradeMap.put(graduationGrades.get(i-1).getYear(), gradeTemp);
 					gradeTemp = new ArrayList<GraduationGrade>();
 				}
-
 			}
+
 			gradeTemp.add(graduationGrades.get(i));
 		}
 
 		if(gradeTemp.size() > 0)
-			graduationGradeMap.put(gradeTemp.get(0).getYear(), gradeTemp);
+			graduationGradeMap.put(gradeTemp.get(gradeTemp.size() - 1).getYear(), gradeTemp);
 
+		int idx = 0;
+		int flag = 0;
 		for(int i = 0; i < graduationSubjects.size(); ++i) {
+			if(graduationSubjects.get(i).getNote().contains("봉사") && graduationSubjects.get(i).getYear().equals(graduationSubjects.get(idx).getYear())) {
+				if(flag > 0)
+					continue;
+
+				flag = 1;
+			}
+
 			if(i != 0) {
-				if(!graduationSubjects.get(i).getYear().equals(graduationSubjects.get(i-1).getYear())) {
-					graduationSubjectMap.put(graduationSubjects.get(i).getYear(), subjectTemp);
+				if(!graduationSubjects.get(i).getYear().equals(graduationSubjects.get(idx).getYear())) {
+					graduationSubjectMap.put(graduationSubjects.get(idx).getYear(), subjectTemp);
 					subjectTemp = new ArrayList<GraduationSubject>();
 				}
 
+				idx = i;
 			}
+
 			subjectTemp.add(graduationSubjects.get(i));
 		}
 
 		if(subjectTemp.size() > 0)
-			graduationSubjectMap.put(subjectTemp.get(0).getYear(), subjectTemp);
+			graduationSubjectMap.put(subjectTemp.get(subjectTemp.size() - 1).getYear(), subjectTemp);
 
 		model.addAttribute("graduationGradeMap", graduationGradeMap);
 		model.addAttribute("graduationSubjectMap", graduationSubjectMap);
@@ -154,8 +165,8 @@ public class UserGraduationController {
 		List<Graduation> graduations = graduationMapper.findWithoutCommon();
 		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByDepartment(id, year);
 		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByDepartment(id, year);
-		Map<Integer, List<GraduationGrade>> graduationGradeMap = new HashMap<Integer, List<GraduationGrade>>();
-		Map<Integer, List<GraduationSubject>> graduationSubjectMap = new HashMap<Integer, List<GraduationSubject>>();
+		Map<Integer, List<GraduationGrade>> graduationGradeMap = new LinkedHashMap<Integer, List<GraduationGrade>>();
+		Map<Integer, List<GraduationSubject>> graduationSubjectMap = new LinkedHashMap<Integer, List<GraduationSubject>>();
 		List<GraduationGrade> gradeTemp = new ArrayList<GraduationGrade>();
 		List<GraduationSubject> subjectTemp = new ArrayList<GraduationSubject>();
 		int k = 0;
@@ -163,31 +174,47 @@ public class UserGraduationController {
 		for(int i = 0; i < graduationGrades.size(); ++i) {
 			if(i != 0) {
 				if(graduationGrades.get(i).getGraduationId() != graduationGrades.get(i-1).getGraduationId()) {
-					graduationGradeMap.put(graduations.get(k++).getId(), gradeTemp);
+					graduationGradeMap.put(graduationGrades.get(i-1).getGraduationId(), gradeTemp);
 					gradeTemp = new ArrayList<GraduationGrade>();
 				}
 			}
 			gradeTemp.add(graduationGrades.get(i));
+			k = graduationGrades.get(i).getGraduationId();
 		}
 
 		if(gradeTemp.size() > 0)
-			graduationGradeMap.put(graduations.get(k++).getId(), gradeTemp);
+			graduationGradeMap.put(k, gradeTemp);
 
 		k = 0;
+		int flag = 0;
+		int idx = 0;
+
 
 		for(int i = 0; i < graduationSubjects.size(); ++i) {
+			k = graduationSubjects.get(i).getGraduationId();
+
+			if(graduationSubjects.get(i).getGraduationId() == graduationSubjects.get(idx).getGraduationId() && graduationSubjects.get(i).getNote().equals(graduationSubjects.get(idx).getNote()) && !(graduationSubjects.get(i).getNote().equals(""))) {
+				if(flag > 0)
+					continue;
+
+				flag = 1;
+			}
+
 			if(i != 0) {
-				if(!graduationSubjects.get(i).getYear().equals(graduationSubjects.get(i-1).getYear())) {
-					graduationSubjectMap.put(graduations.get(k++).getId(), subjectTemp);
+				if(graduationSubjects.get(i).getGraduationId() != graduationSubjects.get(idx).getGraduationId()) {
+					graduationSubjectMap.put(graduationSubjects.get(idx).getGraduationId(), subjectTemp);
 					subjectTemp = new ArrayList<GraduationSubject>();
+					flag = 0;
 				}
 
+				idx = i;
 			}
+
 			subjectTemp.add(graduationSubjects.get(i));
 		}
 
 		if(gradeTemp.size() > 0)
-			graduationGradeMap.put(graduations.get(k++).getId(), gradeTemp);
+			graduationSubjectMap.put(k, subjectTemp);
 
 		model.addAttribute("graduations", graduations);
 		model.addAttribute("graduationGradeMap", graduationGradeMap);
@@ -282,6 +309,16 @@ public class UserGraduationController {
 							else if(graduationGrade.getName().equals("교양필수") && score.getSubject().getDivision().equals("교양선택"))
 								continue;
 
+							else if(graduationGrade.getGraduationId() == differentDepartmentGraduationId) {
+								if(graduationGrade.getGraduation().getName().contains("부전공") && score.getSubject().getDepartmentId() != minorId)
+									continue;
+
+								else if(graduationGrade.getGraduation().getName().contains("복수전공")) {
+									if(graduationGrade.getDepartmentId() != minorId || graduationGrade.getDepartmentId() != doubleMajorId)
+										continue;
+								}
+							}
+
 							total += score.getSubject().getScore();
 							graduationGradeMap.put(graduationGrade, total);
 						}
@@ -326,6 +363,8 @@ public class UserGraduationController {
 		model.addAttribute("doubleMajorId", doubleMajorId);
 		model.addAttribute("graduations", graduations);
 		model.addAttribute("departments", departments);
+		model.addAttribute("graduationGrades", graduationGrades);
+		model.addAttribute("graduationSubjects", graduationSubjects);
 		model.addAttribute("graduationGradeMap", graduationGradeMap);
 		model.addAttribute("graduationSubjectMap", graduationSubjectMap);
 
@@ -358,7 +397,7 @@ public class UserGraduationController {
 					if(graduation.getName().equals("부전공")) {
 						for(Graduation temp : graduations) {
 							if(temp.getName().equals("타과학생 부전공")) {
-								differentDepartmentGraduationId = graduation.getId();
+								differentDepartmentGraduationId = temp.getId();
 								break;
 							}
 						}
@@ -367,7 +406,7 @@ public class UserGraduationController {
 					else if(graduation.getName().equals("복수전공")) {
 						for(Graduation temp : graduations) {
 							if(temp.getName().equals("타과학생 복수전공")) {
-								differentDepartmentGraduationId = graduation.getId();
+								differentDepartmentGraduationId = temp.getId();
 								break;
 							}
 						}
@@ -406,6 +445,16 @@ public class UserGraduationController {
 							else if(graduationGrade.getName().equals("교양필수") && score.getSubject().getDivision().equals("교양선택"))
 								continue;
 
+							else if(graduationGrade.getGraduationId() == differentDepartmentGraduationId) {
+								if(graduationGrade.getGraduation().getName().contains("부전공") && score.getSubject().getDepartmentId() != minor)
+									continue;
+
+								else if(graduationGrade.getGraduation().getName().contains("복수전공")) {
+									if(graduationGrade.getDepartmentId() != minor || graduationGrade.getDepartmentId() != doubleMajor2)
+										continue;
+								}
+							}
+
 							total += score.getSubject().getScore();
 							graduationGradeMap.put(graduationGrade, total);
 						}
@@ -437,7 +486,6 @@ public class UserGraduationController {
 				}
 			}
 
-
 		}
 
 		else
@@ -450,6 +498,8 @@ public class UserGraduationController {
 		model.addAttribute("doubleMajorId", doubleMajor2);
 		model.addAttribute("graduations", graduations);
 		model.addAttribute("departments", departments);
+		model.addAttribute("graduationGrades", graduationGrades);
+		model.addAttribute("graduationSubjects", graduationSubjects);
 		model.addAttribute("graduationGradeMap", graduationGradeMap);
 		model.addAttribute("graduationSubjectMap", graduationSubjectMap);
 		return "user/menu/graduation/mygraduation";

@@ -113,20 +113,21 @@ public class UserMainController {
 				for(GraduationSubject graduationSubject : graduationSubjects) {
 					if(!(score.getScore() < 0) && score.getSubstitutionCode().equals("0")) {
 						if(graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
-							if(!graduationSubject.getNote().equals("") && graduationSubject.getNote().length() != 0)
-								graduationSubjectMap.put(graduationSubject, 2);
-
-							else
-								graduationSubjectMap.put(graduationSubject, 1);
-
+							graduationSubjectMap.put(graduationSubject, 1);
 							break;
 						}
 
 						else if(graduationSubjectMap.containsKey(graduationSubject))
 							continue;
 
-						else
-							graduationSubjectMap.put(graduationSubject, 0);
+						else {
+							if(!graduationSubject.getNote().equals("") && graduationSubject.getNote().length() != 0)
+								graduationSubjectMap.put(graduationSubject, 2);
+
+							else
+								graduationSubjectMap.put(graduationSubject, 0);
+
+						}
 					}
 				}
 
@@ -180,17 +181,19 @@ public class UserMainController {
 				}
 
 				else {
-					if(score.getSubject().getDivision().equals("교양선택"))
+					if(score.getSubject().getDivision().equals("교양필수"))
+						liberalEssential += subjectScore;
+
+					else
 						liberalSelection += subjectScore;
 
-					else if(score.getSubject().getDivision().equals("교양필수"))
-						liberalEssential += subjectScore;
 				}
 			}
 		}
 
 		model.addAttribute("graduationGradeMap", graduationGradeMap);
 		model.addAttribute("graduationSubjectMap", graduationSubjectMap);
+		model.addAttribute("graduationSubjects", graduationSubjects);
 		model.addAttribute("total", total);
 		model.addAttribute("majorSelection", majorSelection);
 		model.addAttribute("liberalSelection", liberalSelection);
