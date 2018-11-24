@@ -17,6 +17,8 @@
 	href="../../../res/css/common/main.css?ver=1">
 <script type="text/javascript"
 	src="../../../res/script/admin/toDetail.js?ver=1"></script>
+	<script type="text/javascript"
+	src="../../../res/script/common/textArea.js?ver=1"></script>
 <title>조치사항</title>
 </head>
 <body>
