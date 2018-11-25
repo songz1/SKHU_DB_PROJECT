@@ -53,7 +53,7 @@
 					<div class="uib-button-bar navbar-right">
 						<div class="divItem">
 							<div>
-								<i class="glyphicon glyphicon-user"></i>${ adminInfo.loginId }<br />
+								<i class="glyphicon glyphicon-user"></i>${ adminInfo.loginId } ${ adminInfo.name }<br />
 							</div>
 							<form action="/admin/login/logout" method="post">
 								<button type="submit" class="btn btn-default btn-block">로그아웃</button>

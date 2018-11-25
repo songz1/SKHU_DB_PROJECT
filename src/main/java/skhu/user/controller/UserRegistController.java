@@ -1,6 +1,10 @@
 package skhu.user.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +48,11 @@ public class UserRegistController {
 	}
 
 	@RequestMapping(value = "confirm", method = RequestMethod.GET)
-	public String confirm() {
+	public String confirm(HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('회원가입 완료');location.href='../main';</script>");
+		out.flush();
 		return "redirect:/user/login/login";
 	}
 

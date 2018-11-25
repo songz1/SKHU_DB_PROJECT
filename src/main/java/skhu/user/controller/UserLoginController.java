@@ -1,5 +1,10 @@
 package skhu.user.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +22,7 @@ public class UserLoginController {
 	@Autowired StudentMapper studentMapper;
 
 	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String login(Student student, HttpSession session) {
+	public String login(Student student, HttpSession session, HttpServletResponse response) throws IOException {
 		Student login = studentMapper.login(student.getStudentNumber(), student.getPassword());
 
 		if(login != null) {
@@ -28,6 +33,11 @@ public class UserLoginController {
 		}
 
 		else {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인 정보를 확인해주세요.');location.href='login';</script>");
+			out.flush(); 
+
 			return "redirect:login";
 		}
 	}
@@ -45,9 +55,13 @@ public class UserLoginController {
 	}
 
 	@RequestMapping(value="logout", method=RequestMethod.POST)
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, HttpServletResponse response) throws IOException {
 		session.invalidate();
 
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('로그아웃 되었습니다.');location.href='login';</script>");
+		out.flush();
 		return "redirect:login";
 	}
 

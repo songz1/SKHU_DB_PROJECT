@@ -1,5 +1,9 @@
 package skhu.admin.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +21,7 @@ public class AdminLoginController {
 	@Autowired AdminMapper adminMapper;
 
 	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String login(Admin admin, HttpSession session) {
+	public String login(Admin admin, HttpSession session, HttpServletResponse response) throws IOException {
 		Admin login = adminMapper.login(admin.getLoginId(), admin.getPassword());
 		if(login != null) {
 			session.removeAttribute("userInfo");
@@ -27,6 +31,10 @@ public class AdminLoginController {
 		}
 
 		else {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인 정보를 확인해주세요.');location.href='login';</script>");
+			out.flush();
 			return "redirect:login";
 		}
 	}
@@ -44,9 +52,13 @@ public class AdminLoginController {
 	}
 
 	@RequestMapping(value="logout", method=RequestMethod.POST)
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, HttpServletResponse response) throws IOException {
 		session.invalidate();
 
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('로그아웃 되었습니다.');location.href='login';</script>");
+		out.flush();
 		return "redirect:login";
 	}
 }

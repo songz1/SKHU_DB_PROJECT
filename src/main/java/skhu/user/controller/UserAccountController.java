@@ -1,7 +1,10 @@
 package skhu.user.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +56,8 @@ public class UserAccountController {
 	public String anctupdate(HttpSession session, Model model, Student account,
 			@RequestParam("mainGraduation") String mainGraduation, @RequestParam("minor") String minor,
 			@RequestParam("doubleMajor1") String doubleMajor1, @RequestParam("doubleMajor2") String doubleMajor2,
-			@RequestParam("detailGraduation") String detailGraduation) {
+			@RequestParam("detailGraduation") String detailGraduation,
+			HttpServletResponse response) throws IOException {
 		account.setSemester((account.getYear() - 1) * 2 + account.getSemester());
 
 		if(detailGraduation.equals("0"))
@@ -93,7 +97,11 @@ public class UserAccountController {
 		session.setAttribute("userInfo", account);
 		session.setMaxInactiveInterval(5400);
 
-		return "redirect:../main";
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('회원정보 수정 완료');location.href='acntchange';</script>");
+		out.flush();
+		return "redirect:acntchange";
 	}
 
 	@RequestMapping(value = "pwdconfirm", method = RequestMethod.GET)
@@ -106,7 +114,7 @@ public class UserAccountController {
 	}
 
 	@RequestMapping(value="pwdchange", method=RequestMethod.POST)
-	public String pwdchange(HttpSession session, Model model, Student confirm) {
+	public String pwdchange(HttpSession session, Model model, Student confirm, HttpServletResponse response) throws IOException {
 		int id = ((Student)session.getAttribute("userInfo")).getId();
 		Student account = studentMapper.findById(id);
 		if(confirm != null && account != null && confirm.getPassword().equals(account.getPassword())) {
@@ -114,15 +122,26 @@ public class UserAccountController {
 
 			return "user/menu/account/pwdchange";
 		}
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('패스워드 불일치');location.href='pwdconfirm';</script>");
+		out.flush();
 		return "redirect:pwdconfirm";
 	}
 
 	@RequestMapping(value="pwdupdate", method=RequestMethod.POST)
-	public String pwdupdate(HttpSession session, Model model, Student account, @RequestParam("passwordConfirm") String passwordConfirm) {
+	public String pwdupdate(HttpSession session, Model model, Student account, 
+							@RequestParam("passwordConfirm") String passwordConfirm,
+							HttpServletResponse response) throws IOException {
 		if(account.getPassword().equals(passwordConfirm))
 			studentMapper.update(account);
 
-		return "redirect:../main";
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('패스워드 변경 완료');location.href='pwdconfirm';</script>");
+		out.flush();
+		return "redirect:pwdconfirm";
 	}
 
 }
