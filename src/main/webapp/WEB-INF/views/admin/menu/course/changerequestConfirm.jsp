@@ -38,7 +38,7 @@
 					<div class="text-center">
 						<label>폐지과목</label>
 					</div>
-					<select id="option-show" class="option">
+					<select id="option-show" class="option form-control">
 						<option value="0">미선택</option>
 						<c:forEach var="map" items="${ changeMap }" varStatus="status">
 							<option value="${ map.key.id }">${ map.key.subject.name }</option>
