@@ -48,12 +48,14 @@ public class UserRegistController {
 	}
 
 	@RequestMapping(value = "confirm", method = RequestMethod.GET)
-	public String confirm(HttpServletResponse response) throws IOException {
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>alert('회원가입 완료');location.href='../main';</script>");
-		out.flush();
-		return "redirect:/user/login/login";
+	public String confirm(Model model) {
+		String message = "회원가입 완료";
+	    String location = "../login/login";
+	
+	    model.addAttribute("message", message);
+	    model.addAttribute("location", location);
+	
+	    return "user/error/error";
 	}
 
 }

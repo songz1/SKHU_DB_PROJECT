@@ -35,7 +35,7 @@ public class UserForgotController {
 	}
 	
 	@RequestMapping(value="changepwd", method=RequestMethod.POST)
-	public String changepwd(HttpSession session, Model model, Student student, HttpServletResponse response) throws IOException {
+	public String changepwd(HttpSession session, Model model, Student student) {
 		Student account = studentMapper.findByAccount(student.getName(), student.getStudentNumber());
 		
 		if(account != null) {
@@ -43,24 +43,27 @@ public class UserForgotController {
 			return "user/forgot/changepwd";
 		}
 		
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>alert('사용자가 존재하지 않습니다.');location.href='forgotpwd';</script>");
-		out.flush();
-		return "redirect:forgotpwd";
+		String message = "사용자가 존재하지 않습니다.";
+	    String location = "forgotpwd";
+	
+	    model.addAttribute("message", message);
+	    model.addAttribute("location", location);
+	
+	    return "user/error/error";
 	}
 	
 	@RequestMapping(value="updatepwd", method=RequestMethod.POST)
 	public String updatepwd(HttpSession session, Model model, Student account, 
-							@RequestParam("passwordConfirm") String passwordConfirm,
-							HttpServletResponse response) throws IOException {
+							@RequestParam("passwordConfirm") String passwordConfirm) {
 		if(account.getPassword().equals(passwordConfirm))
 			studentMapper.update(account);
 
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>alert('비밀번호 변경 완료');location.href='../main';</script>");
-		out.flush();
-		return "redirect:../main";
+		String message = "비밀번호 변경 완료";
+	    String location = "../login/login";
+	
+	    model.addAttribute("message", message);
+	    model.addAttribute("location", location);
+	
+	    return "user/error/error";
 	}
 }

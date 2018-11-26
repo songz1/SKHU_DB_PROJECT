@@ -98,7 +98,7 @@ public class UserAccountController {
 		session.setMaxInactiveInterval(5400);
 
 		String message = "회원정보 수정 완료";
-	    String location = "../account/acntchange";
+	    String location = "acntchange";
 	
 	    model.addAttribute("message", message);
 	    model.addAttribute("location", location);
@@ -126,7 +126,7 @@ public class UserAccountController {
 		}
 
 		String message = "패스워드 불일치";
-	    String location = "../account/pwdconfirm";
+	    String location = "pwdconfirm";
 	
 	    model.addAttribute("message", message);
 	    model.addAttribute("location", location);
