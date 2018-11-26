@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,71 +19,33 @@
 	<table class="table table-bordered text-center align-middle">
 		<thead>
 			<tr class="test">
-				<td class="col-md-1">대상</td>
-				<td class="col-md-1">부/복수전공</td>
-				<td class="col-md-1">졸업조건</td>
-				<td class="col-md-1">기타졸업조건</td>
+				<td class="col-md-1">전공</td>
+				<td class="col-md-1">학점졸업조건</td>
+				<td class="col-md-1">과목졸업조건</td>
 				<td class="col-md-1">비고</td>
 			</tr>
 		</thead>
 		<tbody>
+			<c:forEach var="graduation" items="${ graduations }">
 			<tr>
-				<td rowspan="4" class="col-md-1"><h3>OO학과학생</h3></td>
-				<td class="col-md-1">OO학과 주전공</td>
-				<td class="col-md-1">[2008~2013학번까지]<br /> 전필37학점 포함하여 전공 60학점
-					이상 이수<br /> [2014학번부터]<br /> 전필31학점 포함하여 전공 60학점 이상 이수
+				<td class="col-md-1">${ graduation.name }</td>
+				<td class="col-md-1">
+					<c:forEach var="graduationGrade" items="${ graduationGradeMap[graduation.id] }">
+						<c:if test="${ graduationGrade.name ne '상세졸업과정'}">${ graduationGrade.name } ${ graduationGrade.score } 학점 이상 <c:if test="${ graduationGrade.note ne '' }">(${ graduationGrade.note })</c:if><br /></c:if>
+					</c:forEach>
 				</td>
-				<td class="col-md-1">전공기초과정(이산수학, 대학수학, 정보 사회론, 컴퓨터 활용 중 2과목
-					이상을 포함하여 교양 15학점 이상 이수, 총 교양 47학점 이상)</br> 전공심화과정(전공 15학점 이상 추가 이수, 총 전공
-					75학 점 이상)</br> 타과복수전공과정, 타과부전 공과정, 연계전공과정, 자기설계과정, 해외창과정 등의 특별과정 중 한 과정
-					이상 이수
+				<td class="col-md-1">
+					<c:forEach var="graduationSubject" items="${ graduationSubjectMap[graduation.id] }">
+						${ graduationSubject.subject.name }(${ graduationSubject.subject.score }) ${ graduationSubject.note }<br />
+					</c:forEach>
 				</td>
-				<td class="col-md-1">TOEIC 750점 이상</td>
-			</tr>
-			<tr>
-				<td class="col-md-1">OO학과 (타과)복수전공</td>
-				<td class="col-md-1">전필 31학점 포함하여 전공 40학점 이수</td>
-				<td class="col-md-1">졸업학점 이외 조건 없음</td>
-				<td class="col-md-1"></td>
-			</tr>
-			<tr>
-				<td class="col-md-1">OO학과 (타과)부전공</td>
-				<td class="col-md-1">전필 31학점 포함하여 전공 60학점 이상 이수</td>
-				<td class="col-md-1">졸업학점 이외 조건 없음</td>
-				<td class="col-md-1"></td>
-			</tr>
-			<tr>
-				<td class="col-md-1">OO학과 편입</td>
-				<td class="col-md-1">1, 2학년 지도과목을 제외하고 전필 27학점을 포함하여 전공 60학점 이상
-					이수</td>
-				<td class="col-md-1">졸업학점 이외 조건 없음</td>
-				<td class="col-md-1"></td>
-			</tr>
-			<tr>
-				<td rowspan="3" class="col-md-1"><h3>타과학생</h3></td>
-				<td class="col-md-1">OO학과 전과</td>
-				<td class="col-md-1">학번에 따라 전공필수 이수 전과 이전 학기의 지도과목은 제외하되, 그만큼의
-					학점은 전선을 이수하여 전공학점을 채워야 함</td>
-				<td class="col-md-1">전공기초과정(이산수학, 대학수학, 정보 사회론, 컴퓨터 활용 중 2과목
-					이상을 포함하여 교양 15학점 이상 이수, 총 교양 47학점 이상)</br> 전공심화과정(전공 15학점 이상 추가 이수, 총 전공
-					75학 점 이상)</br> 타과복수전공과정, 타과부전 공과정, 연계전공과정, 자기설계과정, 해외창과정 등의 특별과정 중 한 과정
-					이상 이수
+				<td class="col-md-1">
+					<c:forEach var="graduationGrade" items="${ graduationGradeMap[graduation.id] }">
+						<c:if test="${ graduationGrade.name eq '상세졸업과정'}">${ graduationGrade.name } ${ graduationGrade.note }<br /></c:if>
+					</c:forEach>
 				</td>
-				<td class="col-md-1"></td>
 			</tr>
-			<tr>
-				<td class="col-md-1">OO학과 복수전공</td>
-				<td class="col-md-1">지도 과목 제외하고 전필 24학점 포함하여 전공 40학점 이상 이수(지도
-					과목은 선택)</td>
-				<td class="col-md-1">졸업학점 이외 조건 없음</td>
-				<td class="col-md-1"></td>
-			</tr>
-			<tr>
-				<td class="col-md-1">OO학과 부전공</td>
-				<td class="col-md-1">전필, 전선 관계없이 21학점 이상 이수</td>
-				<td class="col-md-1">졸업학점 이외 조건 없음</td>
-				<td class="col-md-1"></td>
-			</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 </body>

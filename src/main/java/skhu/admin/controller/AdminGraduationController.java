@@ -127,8 +127,8 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="downcompletescore")
-	public void downCompleteScore(HttpServletResponse response) throws Exception {
-		File destCompleteFile = new File("src\\main\\webapp\\res\\file\\form\\양식_학년별수료학점.xlsx");
+	public void downCompleteScore(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		File destCompleteFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\form\\양식_학년별수료학점.xlsx");
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("양식_학년별수료학점.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
@@ -156,8 +156,8 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="downdetail")
-	public void downDetail(HttpServletResponse response) throws Exception {
-		File destDetailFile = new File("src\\main\\webapp\\res\\file\\user\\통합_졸업요건.pdf");
+	public void downDetail(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		File destDetailFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\user\\통합_졸업요건.pdf");
 
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("통합_졸업요건.pdf".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
@@ -457,23 +457,23 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="downgradegraduation")
-	public void downGradegGraduation(HttpServletResponse response) throws Exception {
-		File destDetailFile = new File("src\\main\\webapp\\res\\file\\form\\양식_학점졸업요건.xlsx");
+	public void downGradegGraduation(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		File destGraduationFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\form\\양식_학점졸업요건.xlsx");
 
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("학점졸업요건.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
-		response.setHeader("Content-Length", ""+ destDetailFile.length());
+		response.setHeader("Content-Length", ""+ destGraduationFile.length());
 		response.setHeader("Pragma", "no-cache;");
 		response.setHeader("Expires", "-1;");
 
-		if(!destDetailFile.exists()){
+		if(!destGraduationFile.exists()){
 			throw new RuntimeException("file not found");
 		}
 
 		FileInputStream fis = null;
 		try{
-			fis = new FileInputStream(destDetailFile);
+			fis = new FileInputStream(destGraduationFile);
 			FileCopyUtils.copy(fis, response.getOutputStream());
 			response.getOutputStream().flush();
 		}catch(Exception ex){
@@ -487,23 +487,23 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="downsubjectgraduation")
-	public void downSubjectGraduation(HttpServletResponse response) throws Exception {
-		File destDetailFile = new File("src\\main\\webapp\\res\\file\\form\\양식_과목졸업요건.xlsx");
+	public void downSubjectGraduation(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		File destGraduationFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\form\\양식_과목졸업요건.xlsx");
 
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("과목졸업요건.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
-		response.setHeader("Content-Length", ""+ destDetailFile.length());
+		response.setHeader("Content-Length", ""+ destGraduationFile.length());
 		response.setHeader("Pragma", "no-cache;");
 		response.setHeader("Expires", "-1;");
 
-		if(!destDetailFile.exists()){
+		if(!destGraduationFile.exists()){
 			throw new RuntimeException("file not found");
 		}
 
 		FileInputStream fis = null;
 		try{
-			fis = new FileInputStream(destDetailFile);
+			fis = new FileInputStream(destGraduationFile);
 			FileCopyUtils.copy(fis, response.getOutputStream());
 			response.getOutputStream().flush();
 		}catch(Exception ex){

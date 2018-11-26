@@ -44,8 +44,8 @@
 							href="/user/forgot/forgotpwd">비밀번호 찾기</a>
 					</div>
 					<div class="account">
-						<a href="guest/basic.jsp">기본 졸업 요건</a> * <a
-							href="guest/detail.jsp">학과/학부별 졸업 요건</a>
+						<a href="guest/basic">기본 졸업 요건</a> * <a
+							href="guest/detail">학과/학부별 졸업 요건</a>
 					</div>
 				</div>
 			</div>

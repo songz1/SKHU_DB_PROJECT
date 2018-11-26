@@ -34,7 +34,6 @@ import skhu.mapper.SubjectMapper;
 import skhu.mapper.SubstitutionMapper;
 import skhu.util.ExcelReader;
 import skhu.util.ExcelReaderOption;
-import skhu.util.PageOption;
 import skhu.vo.Page;
 
 @Controller
@@ -68,11 +67,11 @@ public class AdminCourseController {
 
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
-		
+
 		List<Department> departments = departmentMapper.findWithoutCommon();
 		List<Student> students = studentMapper.findAllWithDepartment((currentPage - 1) * 15, 15, condition, searchType, "%" + searchText + "%");
 		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());
-		
+
 		model.addAttribute("rule", rule);
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
@@ -85,22 +84,23 @@ public class AdminCourseController {
 	}
 
 	@RequestMapping(value="downchangerequestlist")
-	public void downChangeRequestList(HttpServletResponse response) throws Exception {
-		File destCompleteFile = new File("src\\main\\webapp\\res\\file\\form\\양식_대체과목목록.xlsx");
+	public void downChangeRequestList(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		File destListFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\form\\양식_대체과목목록.xlsx");
+
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("대체과목목록.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
-		response.setHeader("Content-Length", ""+ destCompleteFile.length());
+		response.setHeader("Content-Length", ""+ destListFile.length());
 		response.setHeader("Pragma", "no-cache;");
 		response.setHeader("Expires", "-1;");
 
-		if(!destCompleteFile.exists()){
+		if(!destListFile.exists()){
 			throw new RuntimeException("file not found");
 		}
 
 		FileInputStream fis = null;
 		try{
-			fis = new FileInputStream(destCompleteFile);
+			fis = new FileInputStream(destListFile);
 			FileCopyUtils.copy(fis, response.getOutputStream());
 			response.getOutputStream().flush();
 		}catch(Exception ex){
@@ -114,8 +114,9 @@ public class AdminCourseController {
 	}
 
 	@RequestMapping(value="downchangerequestrule")
-	public void downChangeRequestRule(HttpServletResponse response) throws Exception {
-		File destCompleteFile = new File("src\\main\\webapp\\res\\file\\form\\양식_대체과목규칙.xlsx");
+	public void downChangeRequestRule(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		File destCompleteFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\form\\양식_대체과목목록.xlsx");
+
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("대체과목규칙.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
@@ -308,11 +309,11 @@ public class AdminCourseController {
 
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
-		
+
 		List<Department> departments = departmentMapper.findWithoutCommon();
 		List<Student> students = studentMapper.findAllWithDepartment((currentPage - 1) * 15, 15, condition, searchType, "%" + searchText + "%");
 		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());
-		
+
 		model.addAttribute("rule", rule);
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
@@ -425,11 +426,11 @@ public class AdminCourseController {
 
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
-		
+
 		List<Department> departments = departmentMapper.findWithoutCommon();
 		List<Student> students = studentMapper.findAllWithDepartment((currentPage - 1) * 15, 15, condition, searchType, "%" + searchText + "%");
 		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());
-		
+
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
 		model.addAttribute("students", students);
@@ -441,22 +442,23 @@ public class AdminCourseController {
 	}
 
 	@RequestMapping(value="downscores")
-	public void downScores(HttpServletResponse response) throws Exception {
-		File destCompleteFile = new File("src\\main\\webapp\\res\\file\\form\\양식_일괄학생성적.xlsx");
+	public void downScores(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		File destScoreFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\form\\양식_일괄학생성적.xlsx");
+
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("일괄학생성적업로드.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
-		response.setHeader("Content-Length", ""+ destCompleteFile.length());
+		response.setHeader("Content-Length", ""+ destScoreFile.length());
 		response.setHeader("Pragma", "no-cache;");
 		response.setHeader("Expires", "-1;");
 
-		if(!destCompleteFile.exists()){
+		if(!destScoreFile.exists()){
 			throw new RuntimeException("file not found");
 		}
 
 		FileInputStream fis = null;
 		try{
-			fis = new FileInputStream(destCompleteFile);
+			fis = new FileInputStream(destScoreFile);
 			FileCopyUtils.copy(fis, response.getOutputStream());
 			response.getOutputStream().flush();
 		}catch(Exception ex){

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,40 +31,15 @@
 					<table class="table mt-25">
 						<thead>
 							<tr>
-								<th class="col-md-12">영어학과</th>
+								<th class="col-md-12">${ department.name }</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="tr-hover cursor" data-url="info.jsp">
-								<td>2018학번</td>
-							</tr>
-							<tr class="tr-hover cursor" data-url="info.jsp">
-								<td>2017학번</td>
-							</tr>
-							<tr class="tr-hover cursor" data-url="info.jsp">
-								<td>2016학번</td>
-							</tr>
-							<tr class="tr-hover cursor" data-url="info.jsp">
-								<td>2015학번</td>
-							</tr>
-							<tr class="tr-hover cursor">
-								<td>2014학번</td>
-							</tr>
-							<tr class="tr-hover cursor">
-								<td>2013학번</td>
-							</tr>
-							<tr class="tr-hover cursor">
-								<td>2012학번</td>
-							</tr>
-							<tr class="tr-hover cursor">
-								<td>2011학번</td>
-							</tr>
-							<tr class="tr-hover cursor">
-								<td>2010학번</td>
-							</tr>
-							<tr class="tr-hover cursor">
-								<td>2009학번</td>
-							</tr>
+							<c:forEach var="year" items="${ years }">
+								<tr class="tr-hover cursor" data-url="info?id=${ department.id }&year=${ year.year }">
+									<td>${ year.year }학번</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</form>
