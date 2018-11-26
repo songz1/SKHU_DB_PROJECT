@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -115,14 +116,14 @@ public class UserAccountController {
 
 	@RequestMapping(value="pwdchange", method=RequestMethod.POST)
 	public String pwdchange(HttpSession session, Model model, Student confirm, HttpServletResponse response) throws IOException {
-		int id = ((Student)session.getAttribute("userInfo")).getId();
-		Student account = studentMapper.findById(id);
-		if(confirm != null && account != null && confirm.getPassword().equals(account.getPassword())) {
-			model.addAttribute("account", account);
+		Student student = ((Student)session.getAttribute("userInfo"));
+
+		if(studentMapper.login(student.getStudentNumber(), confirm.getPassword()) != null) {
+			model.addAttribute("account", student);
 
 			return "user/menu/account/pwdchange";
 		}
-		
+
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>alert('패스워드 불일치');location.href='pwdconfirm';</script>");
@@ -131,16 +132,19 @@ public class UserAccountController {
 	}
 
 	@RequestMapping(value="pwdupdate", method=RequestMethod.POST)
-	public String pwdupdate(HttpSession session, Model model, Student account, 
+	public String pwdupdate(HttpSession session, Model model, Student account,
 							@RequestParam("passwordConfirm") String passwordConfirm,
-							HttpServletResponse response) throws IOException {
-		if(account.getPassword().equals(passwordConfirm))
+							HttpServletResponse response, HttpServletRequest request) throws IOException {
+		if(passwordConfirm != null && !passwordConfirm.equals("") && account.getPassword().equals(passwordConfirm)) {
 			studentMapper.update(account);
+			return "redirect:../main";
+		}
 
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>alert('패스워드 변경 완료');location.href='pwdconfirm';</script>");
 		out.flush();
+
 		return "redirect:pwdconfirm";
 	}
 
