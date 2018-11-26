@@ -48,8 +48,8 @@ public class AdminMemeberController {
 			currentPage = Integer.parseInt(pg);
 		
 		List<Department> departments = departmentMapper.findWithoutCommon();
-		List<Student> students = studentMapper.findAllWithDepartment((currentPage - 1) * 10, 10, condition, searchType, "%" + searchText + "%");
-		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
+		List<Student> students = studentMapper.findAllWithDepartment((currentPage - 1) * 15, 15, condition, searchType, "%" + searchText + "%");
+		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());
 
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);

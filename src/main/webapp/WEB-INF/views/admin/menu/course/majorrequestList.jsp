@@ -112,7 +112,7 @@
 					  <ul class="pager">
 					    <c:forEach var="page" items="${ pages }">
 							<li>
-								<a href="majorrequestList?${ page.queryString }"> ${ page.label }</a>
+								<a href="majorrequestlist?${ page.queryString }"> ${ page.label }</a>
 							</li>
 						</c:forEach>
 					  </ul>

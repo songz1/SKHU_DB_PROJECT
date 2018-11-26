@@ -45,8 +45,8 @@ public class AdminAccountController {
 			currentPage = Integer.parseInt(pg);
 		
 		List<Department> departments = departmentMapper.findAll();
-		List<Admin> admins = adminMapper.findAllWithDepartment((currentPage - 1) * 10, 10, condition, searchType, "%" + searchText + "%");
-		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
+		List<Admin> admins = adminMapper.findAllWithDepartment((currentPage - 1) * 15, 15, condition, searchType, "%" + searchText + "%");
+		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());
 
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);

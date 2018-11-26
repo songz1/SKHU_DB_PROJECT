@@ -126,7 +126,7 @@
 					  <ul class="pager">
 					    <c:forEach var="page" items="${ pages }">
 							<li>
-								<a href="gradeList?${ page.queryString }"> ${ page.label }</a>
+								<a href="gradelist?${ page.queryString }"> ${ page.label }</a>
 							</li>
 						</c:forEach>
 					  </ul>

@@ -317,10 +317,10 @@ public class AdminGraduationController {
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
 
-		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByOption((currentPage - 1) * 10, 10, condition, "%" + searchText + "%");
+		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByOption((currentPage - 1) * 15, 15, condition, "%" + searchText + "%");
 		List<Department> departments = departmentMapper.findAll();
 		List<Graduation> graduations = graduationMapper.findAll();
-		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
+		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());
 
 		model.addAttribute("condition", condition);
 		model.addAttribute("searchText", searchText);
@@ -374,10 +374,10 @@ public class AdminGraduationController {
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
 
-		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByOption((currentPage - 1) * 10, 10, condition, "%" + searchText + "%");
+		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByOption((currentPage - 1) * 15, 15, condition, "%" + searchText + "%");
 		List<Department> departments = departmentMapper.findAll();
 		List<Graduation> graduations = graduationMapper.findAll();
-		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
+		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());
 
 		model.addAttribute("condition", condition);
 		model.addAttribute("searchText", searchText);
@@ -639,9 +639,9 @@ public class AdminGraduationController {
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
 
-		List<Student> students = studentMapper.findByGraduation((currentPage - 1) * 10, 10, condition, searchType, "%" + searchText + "%", majorCheck, minorCheck);
+		List<Student> students = studentMapper.findByGraduation((currentPage - 1) * 15, 15, condition, searchType, "%" + searchText + "%", majorCheck, minorCheck);
 		List<Department> departments = departmentMapper.findWithoutCommon();
-		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
+		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());
 
 		model.addAttribute("condition", condition);
 		model.addAttribute("searchText", searchText);
@@ -813,9 +813,9 @@ public class AdminGraduationController {
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
 		
-		List<Student> students = studentMapper.findAllWithCounseling((currentPage - 1) * 10, 10, condition, searchType, "%" + searchText + "%");
+		List<Student> students = studentMapper.findAllWithCounseling((currentPage - 1) * 15, 15, condition, searchType, "%" + searchText + "%");
 		List<Department> departments = departmentMapper.findWithoutCommon();
-		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
+		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());
 
 		model.addAttribute("condition", condition);
 		model.addAttribute("searchText", searchText);

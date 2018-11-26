@@ -29,8 +29,8 @@ public class AdminMainController {
 		int total = actionMapper.count();
 		int currentPage = PageOption.setPage(pg, total);
 
-		List<Action> actions = actionMapper.findActionRecently((currentPage - 1) * 10, 10);
-		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
+		List<Action> actions = actionMapper.findActionRecently((currentPage - 1) * 15, 15);
+		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());
 
 		model.addAttribute("actions", actions);
 		model.addAttribute("pages", pages);
