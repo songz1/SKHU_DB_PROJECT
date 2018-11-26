@@ -45,7 +45,6 @@ import skhu.mapper.StudentMapper;
 import skhu.mapper.SubjectMapper;
 import skhu.util.ExcelReader;
 import skhu.util.ExcelReaderOption;
-import skhu.util.PageOption;
 import skhu.vo.Page;
 
 @Controller
@@ -94,6 +93,14 @@ public class AdminGraduationController {
 					continue;
 
 				flag = 1;
+			}
+
+			if(graduationSubjects.get(i).getSubject().getName().contains("(")) {
+				String subjectName = graduationSubjects.get(i).getSubject().getName();
+				int start = graduationSubjects.get(i).getSubject().getName().indexOf("(");
+				int end = graduationSubjects.get(i).getSubject().getName().indexOf(")");
+
+				graduationSubjects.get(i).getSubject().setName(subjectName.substring(0, start) + subjectName.substring(end + 1, subjectName.length()));
 			}
 
 			if(i != 0) {
@@ -304,7 +311,7 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="gradelist", method=RequestMethod.GET)
-	public String gradelist(Model model, GraduationGrade condition, 
+	public String gradelist(Model model, GraduationGrade condition,
 							@RequestParam(value="searchText", required=false) String searchText,
 							HttpServletRequest request, @RequestParam(value="pg", required=false) String pg) {
 		if(searchText == null)
@@ -378,6 +385,16 @@ public class AdminGraduationController {
 		List<Department> departments = departmentMapper.findAll();
 		List<Graduation> graduations = graduationMapper.findAll();
 		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());
+
+		for(int i = 0; i < graduationSubjects.size(); ++i) {
+			if(graduationSubjects.get(i).getSubject().getName().contains("(")) {
+				String subjectName = graduationSubjects.get(i).getSubject().getName();
+				int start = graduationSubjects.get(i).getSubject().getName().indexOf("(");
+				int end = graduationSubjects.get(i).getSubject().getName().indexOf(")");
+
+				graduationSubjects.get(i).getSubject().setName(subjectName.substring(0, start) + subjectName.substring(end + 1, subjectName.length()));
+			}
+		}
 
 		model.addAttribute("condition", condition);
 		model.addAttribute("searchText", searchText);
@@ -651,7 +668,7 @@ public class AdminGraduationController {
 		model.addAttribute("students", students);
 		model.addAttribute("departments", departments);
 		model.addAttribute("pages", pages);
-		
+
 		return "admin/menu/graduation/graduationList";
 	}
 
@@ -756,6 +773,14 @@ public class AdminGraduationController {
 			}
 
 			for(GraduationSubject graduationSubject : graduationSubjects) {
+				if(graduationSubject.getSubject().getName().contains("(")) {
+					String subjectName = graduationSubject.getSubject().getName();
+					int start = graduationSubject.getSubject().getName().indexOf("(");
+					int end = graduationSubject.getSubject().getName().indexOf(")");
+
+					graduationSubject.getSubject().setName(subjectName.substring(0, start) + subjectName.substring(end + 1, subjectName.length()));
+				}
+
 				for(Score score : scores) {
 					if(!graduationSubject.getNote().equals("") && graduationSubject.getNote().length() != 0) {
 						if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
@@ -805,14 +830,14 @@ public class AdminGraduationController {
 
 		if(searchType == null)
 			searchType = "0";
-		
+
 		Page page = new Page();
 		int total = studentMapper.count(condition, searchType, "%" + searchText + "%");
 		int currentPage = 1;
 
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
-		
+
 		List<Student> students = studentMapper.findAllWithCounseling((currentPage - 1) * 15, 15, condition, searchType, "%" + searchText + "%");
 		List<Department> departments = departmentMapper.findWithoutCommon();
 		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());

@@ -59,6 +59,16 @@ public class UserMainController {
 		Map<GraduationGrade, Integer> graduationGradeMap = new LinkedHashMap<GraduationGrade, Integer>();
 		Map<GraduationSubject, Integer> graduationSubjectMap = new LinkedHashMap<GraduationSubject, Integer>();
 
+		for(int i = 0; i < graduationSubjects.size(); ++i) {
+			if(graduationSubjects.get(i).getSubject().getName().contains("(")) {
+				String subjectName = graduationSubjects.get(i).getSubject().getName();
+				int start = graduationSubjects.get(i).getSubject().getName().indexOf("(");
+				int end = graduationSubjects.get(i).getSubject().getName().indexOf(")");
+
+				graduationSubjects.get(i).getSubject().setName(subjectName.substring(0, start) + subjectName.substring(end + 1, subjectName.length()));
+			}
+		}
+
 		for(Department department : departments) {
 			if(department.getName().equals(student.getMinor()))
 				minorDepartment = department;

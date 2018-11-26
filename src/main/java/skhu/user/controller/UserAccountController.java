@@ -140,12 +140,13 @@ public class UserAccountController {
 			return "redirect:../main";
 		}
 
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>alert('패스워드 변경 완료');location.href='pwdconfirm';</script>");
-		out.flush();
+		String message = "일치하지 않습니다!";
+		String location = "../account/pwdconfirm";
 
-		return "redirect:pwdconfirm";
+		model.addAttribute("message", message);
+		model.addAttribute("location", location);
+
+		return "user/error/error";
 	}
 
 }

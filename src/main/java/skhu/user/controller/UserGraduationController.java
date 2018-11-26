@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -85,6 +86,14 @@ public class UserGraduationController {
 				flag = 1;
 			}
 
+			if(graduationSubjects.get(i).getSubject().getName().contains("(")) {
+				String subjectName = graduationSubjects.get(i).getSubject().getName();
+				int start = graduationSubjects.get(i).getSubject().getName().indexOf("(");
+				int end = graduationSubjects.get(i).getSubject().getName().indexOf(")");
+
+				graduationSubjects.get(i).getSubject().setName(subjectName.substring(0, start) + subjectName.substring(end + 1, subjectName.length()));
+			}
+
 			if(i != 0) {
 				if(!graduationSubjects.get(i).getYear().equals(graduationSubjects.get(idx).getYear())) {
 					graduationSubjectMap.put(graduationSubjects.get(idx).getYear(), subjectTemp);
@@ -109,8 +118,8 @@ public class UserGraduationController {
 	}
 
 	@RequestMapping(value="downdetail")
-	public void downDetail(HttpServletResponse response) throws Exception {
-		File destDetailFile = new File("src\\main\\webapp\\res\\file\\user\\통합_졸업요건.pdf");
+	public void downDetail(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		File destDetailFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\user\\통합_졸업요건.pdf");
 
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("통합_졸업요건.pdf".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
@@ -327,6 +336,14 @@ public class UserGraduationController {
 			}
 
 			for(GraduationSubject graduationSubject : graduationSubjects) {
+				if(graduationSubject.getSubject().getName().contains("(")) {
+					String subjectName = graduationSubject.getSubject().getName();
+					int start = graduationSubject.getSubject().getName().indexOf("(");
+					int end = graduationSubject.getSubject().getName().indexOf(")");
+
+					graduationSubject.getSubject().setName(subjectName.substring(0, start) + subjectName.substring(end + 1, subjectName.length()));
+				}
+
 				for(Score score : scores) {
 					if(!graduationSubject.getNote().equals("") && graduationSubject.getNote().length() != 0) {
 						if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
@@ -463,6 +480,14 @@ public class UserGraduationController {
 			}
 
 			for(GraduationSubject graduationSubject : graduationSubjects) {
+				if(graduationSubject.getSubject().getName().contains("(")) {
+					String subjectName = graduationSubject.getSubject().getName();
+					int start = graduationSubject.getSubject().getName().indexOf("(");
+					int end = graduationSubject.getSubject().getName().indexOf(")");
+
+					graduationSubject.getSubject().setName(subjectName.substring(0, start) + subjectName.substring(end + 1, subjectName.length()));
+				}
+
 				for(Score score : scores) {
 					if(!graduationSubject.getNote().equals("") && graduationSubject.getNote().length() != 0) {
 						if(score.getSubstitutionCode().equals("0") && graduationSubject.getSubject().getCode().equals(score.getSubject().getCode())) {
