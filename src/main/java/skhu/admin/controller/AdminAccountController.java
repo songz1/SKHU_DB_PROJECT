@@ -43,7 +43,7 @@ public class AdminAccountController {
 
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
-		
+
 		List<Department> departments = departmentMapper.findAll();
 		List<Admin> admins = adminMapper.findAllWithDepartment((currentPage - 1) * 15, 15, condition, searchType, "%" + searchText + "%");
 		ArrayList<Page> pages = page.paging(total, 15, currentPage, request.getQueryString());
@@ -121,19 +121,30 @@ public class AdminAccountController {
 
 			return "admin/menu/account/pwdchange";
 		}
-		return "redirect:pwdconfirm";
+
+		String message = "비밀번호가 일치하지 않습니다!";
+	    String location = "pwdconfirm";
+
+	    model.addAttribute("message", message);
+	    model.addAttribute("location", location);
+
+	    return "user/error/error";
 	}
 
 	@RequestMapping(value="pwdupdate", method=RequestMethod.POST)
 	public String pwdupdate(HttpSession session, Model model, Admin account, @RequestParam("passwordConfirm") String passwordConfirm) {
-		System.out.println(account.getPassword());
-		System.out.println(passwordConfirm);
-		if(account.getPassword().equals(passwordConfirm)) {
-			System.out.println("test");
+		if(passwordConfirm != null && !passwordConfirm.equals("") && account.getPassword().equals(passwordConfirm)) {
 			adminMapper.update(account);
+			return "redirect:../main";
 		}
 
-		return "redirect:../main";
+		String message = "일치하지 않습니다!";
+	    String location = "pwdconfirm";
+
+	    model.addAttribute("message", message);
+	    model.addAttribute("location", location);
+
+	    return "user/error/error";
 	}
 
 	@RequestMapping(value="addadmin", method=RequestMethod.GET)
@@ -153,9 +164,18 @@ public class AdminAccountController {
 		(admin.getLoginId().length() != 0 && !admin.getLoginId().equals("")) &&
 		(admin.getName().length() != 0 && !admin.getName().equals("")) &&
 		(admin.getPassword().length() != 0 && !admin.getPassword().equals("")) &&
-		admin.getPassword().equals(passwordConfirm))
+		admin.getPassword().equals(passwordConfirm)) {
 			adminMapper.insert(admin);
 
-		return "redirect:../main";
+			return "redirect:adminList";
+		}
+
+		String message = "생성에 실패하였습니다!";
+	    String location = "../main";
+
+	    model.addAttribute("message", message);
+	    model.addAttribute("location", location);
+
+	    return "user/error/error";
 	}
 }
