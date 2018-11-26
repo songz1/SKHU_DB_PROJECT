@@ -73,6 +73,7 @@
 			or (d.id = #{ minor } and g.id = #{ subGraduation })
 			or (d.name = #{ student.doubleMajor } and g.name = #{ subGraduation })
 		order by g.id
+		limit #{start}, #{end}
 	</select>
 	<select id="findByStudent" resultMap="graduationGradeResultMap">
 		select gg.*, g.id graduationId, g.name graduationName, g.division,

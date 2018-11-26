@@ -11,7 +11,10 @@ import skhu.dto.Student;
 public interface StudentMapper {
 	List<Student> findAll();
 	Student findByStudentNumber(String studentNumber);
-	List<Student> findAllWithDepartment(@Param("condition")Student condition, @Param("searchType")String searchType, @Param("searchText")String searchText);
+	List<Student> findAllWithDepartment(
+			@Param("start")int start, @Param("end")int end, 
+			@Param("condition")Student condition, @Param("searchType")String searchType, 
+			@Param("searchText")String searchText);
 	Student login(@Param("studentNumber")String studentNumber, @Param("password")String password);
 	Student findById(@Param("id")int id);
 	Student findByAccount(@Param("name")String name, @Param("studentNumber")String studentNumber);
@@ -25,7 +28,9 @@ public interface StudentMapper {
 		@Param("searchText") String searchText, @Param("majorCheck") boolean majorCheck,
 		@Param("minorCheck") boolean minorCheck
 	);
-	List<Student> findAllWithCounseling(@Param("condition")Student condition, @Param("searchType")String searchType, @Param("searchText")String searchText);
+	int count(@Param("condition") Student condition, @Param("searchType") String searchType, @Param("searchText") String searchText);
+	List<Student> findAllWithCounseling(@Param("start")int start, @Param("end")int end, 
+			@Param("condition")Student condition, @Param("searchType")String searchType, @Param("searchText")String searchText);
 	void update(Student student);
 	void insert(Student student);
 	void delete(@Param("id")int id);

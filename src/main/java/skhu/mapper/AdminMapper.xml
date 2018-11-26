@@ -57,6 +57,7 @@
 				and a.name like #{searchText}
 			</if>
 		</where>
+		limit #{start}, #{end}
 	</select>
 	<resultMap id="adminListResultMap" type="Admin">
 		<id property="id" column="id" />
@@ -70,5 +71,19 @@
 			<result property="name" column="departmentName" />
 		</association>
 	</resultMap>
-	
+	<select id="count" resultType="int">
+		select count(*) from admin a
+		left join department d on a.departmentId = d.id
+		<where>
+			<if test="condition.departmentId != 0 and condition.departmentId != null">
+				and d.id = #{condition.departmentId}
+			</if>
+			<if test='searchType == "0" and searchText != null and searchText != ""'>
+				and a.loginId like #{searchText}
+			</if>
+			<if test='searchType == "1" and searchText != null and searchText != ""'>
+				and a.name like #{searchText}
+			</if>
+		</where>
+	</select>
 </mapper>

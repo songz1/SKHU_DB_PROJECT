@@ -95,6 +95,15 @@
 							<i class="glyphicon glyphicon-trash glyphicon-default"></i> 삭제
 						</button>
 					</div>
+					<nav>
+					  <ul class="pager">
+					    <c:forEach var="page" items="${ pages }">
+							<li>
+								<a href="subjectlist?${ page.queryString }"> ${ page.label }</a>
+							</li>
+						</c:forEach>
+					  </ul>
+					</nav>
 				</form>
 			</div>
 		</div>

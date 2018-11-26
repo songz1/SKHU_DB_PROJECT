@@ -36,6 +36,7 @@
 		</where> 
 		group by s.id
 		order by s.studentNumber, d.id asc
+		limit #{start}, #{end}
 	</select>
 	<resultMap id="counselingResultMap" type="Student">
 		<id property="id" column="id" />
@@ -82,6 +83,7 @@
 				and s.semester = #{condition.semester}
 			</if>
 		</where>
+		limit #{start}, #{end}
 	</select>
 	<resultMap id="studentListResultMap" type="Student">
 		<id property="id" column="id" />
@@ -211,6 +213,29 @@
 			</collection>
 		</association>
 	</resultMap>
+	
+	<select id="count" resultType="int">
+		select count(*) from student s
+		left join department d on s.departmentId = d.id
+		<where>
+			<if test="condition.departmentId != 0 and condition.departmentId != null">
+				and d.id = #{condition.departmentId}
+			</if>
+			<if test='searchType == "0" and searchText != null and searchText != ""'>
+				and s.studentNumber like #{searchText}
+			</if>
+			<if test='searchType == "1" and searchText != null and searchText != ""'>
+				and s.name like #{searchText}
+			</if>
+			<if test='condition.year != null and condition.year != "0"'>
+				and s.year = #{condition.year}
+			</if>
+			<if test="condition.semester != 0 and condition.semester != null">
+				and s.semester = #{condition.semester}
+			</if>
+		</where>
+	</select>
+	
 	<select id="countByGraduation" resultType="int">
 		select count(*) from student s
 		left join department d on s.departmentId = d.id

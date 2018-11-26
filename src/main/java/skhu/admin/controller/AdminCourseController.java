@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ import skhu.mapper.SubjectMapper;
 import skhu.mapper.SubstitutionMapper;
 import skhu.util.ExcelReader;
 import skhu.util.ExcelReaderOption;
+import skhu.util.PageOption;
+import skhu.vo.Page;
 
 @Controller
 @RequestMapping("admin/menu/course")
@@ -47,7 +50,8 @@ public class AdminCourseController {
 	@RequestMapping(value="changerequestlist", method=RequestMethod.GET)
 	public String changerequestList(Model model, Student condition,
 			@RequestParam(value="searchText", required=false) String searchText,
-			@RequestParam(value="searchType", required=false) String searchType) {
+			@RequestParam(value="searchType", required=false) String searchType,
+			HttpServletRequest request, @RequestParam(value="pg", required=false) String pg) {
 
 		Rule rule = new Rule();
 		rule.setName("대체과목");
@@ -58,15 +62,24 @@ public class AdminCourseController {
 		if(searchType == null)
 			searchType = "0";
 
-		List<Department> departments = departmentMapper.findWithoutCommon();
-		List<Student> students = studentMapper.findAllWithDepartment(condition, searchType, "%" + searchText + "%");
+		Page page = new Page();
+		int total = studentMapper.count(condition, searchType, searchText);
+		int currentPage = 1;
 
+		if(pg != null)
+			currentPage = Integer.parseInt(pg);
+		
+		List<Department> departments = departmentMapper.findWithoutCommon();
+		List<Student> students = studentMapper.findAllWithDepartment((currentPage - 1) * 10, 10, condition, searchType, "%" + searchText + "%");
+		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
+		
 		model.addAttribute("rule", rule);
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
 		model.addAttribute("students", students);
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("searchType", searchType);
+		model.addAttribute("pages", pages);
 
 		return "admin/menu/course/changerequestList";
 	}
@@ -277,7 +290,8 @@ public class AdminCourseController {
 	@RequestMapping(value="majorrequestlist", method=RequestMethod.GET)
 	public String majorrequestList(Model model, Student condition,
 			@RequestParam(value="searchText", required=false) String searchText,
-			@RequestParam(value="searchType", required=false) String searchType) {
+			@RequestParam(value="searchType", required=false) String searchType,
+			HttpServletRequest request, @RequestParam(value="pg", required=false) String pg) {
 
 		Rule rule = new Rule();
 		rule.setName("전공인정");
@@ -288,15 +302,24 @@ public class AdminCourseController {
 		if(searchType == null)
 			searchType = "0";
 
-		List<Department> departments = departmentMapper.findWithoutCommon();
-		List<Student> students = studentMapper.findAllWithDepartment(condition, searchType, "%" + searchText + "%");
+		Page page = new Page();
+		int total = studentMapper.count(condition, searchType, searchText);
+		int currentPage = 1;
 
+		if(pg != null)
+			currentPage = Integer.parseInt(pg);
+		
+		List<Department> departments = departmentMapper.findWithoutCommon();
+		List<Student> students = studentMapper.findAllWithDepartment((currentPage - 1) * 10, 10, condition, searchType, "%" + searchText + "%");
+		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
+		
 		model.addAttribute("rule", rule);
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
 		model.addAttribute("students", students);
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("searchType", searchType);
+		model.addAttribute("pages", pages);
 
 		return "admin/menu/course/majorrequestList";
 	}
@@ -387,7 +410,8 @@ public class AdminCourseController {
 	@RequestMapping(value="gradelist", method=RequestMethod.GET)
 	public String gradeList(Model model, Student condition,
 			@RequestParam(value="searchText", required=false) String searchText,
-			@RequestParam(value="searchType", required=false) String searchType) {
+			@RequestParam(value="searchType", required=false) String searchType,
+			HttpServletRequest request, @RequestParam(value="pg", required=false) String pg) {
 
 		if(searchText == null)
 			searchText = "";
@@ -395,14 +419,23 @@ public class AdminCourseController {
 		if(searchType == null)
 			searchType = "0";
 
-		List<Department> departments = departmentMapper.findWithoutCommon();
-		List<Student> students = studentMapper.findAllWithDepartment(condition, searchType, "%" + searchText + "%");
+		Page page = new Page();
+		int total = studentMapper.count(condition, searchType, searchText);
+		int currentPage = 1;
 
+		if(pg != null)
+			currentPage = Integer.parseInt(pg);
+		
+		List<Department> departments = departmentMapper.findWithoutCommon();
+		List<Student> students = studentMapper.findAllWithDepartment((currentPage - 1) * 10, 10, condition, searchType, "%" + searchText + "%");
+		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
+		
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
 		model.addAttribute("students", students);
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("searchType", searchType);
+		model.addAttribute("pages", pages);
 
 		return "admin/menu/course/gradeList";
 	}

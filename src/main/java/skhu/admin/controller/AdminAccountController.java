@@ -1,7 +1,9 @@
 package skhu.admin.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import skhu.dto.Admin;
 import skhu.dto.Department;
 import skhu.mapper.AdminMapper;
 import skhu.mapper.DepartmentMapper;
+import skhu.vo.Page;
 
 @Controller
 @RequestMapping("admin/menu/account")
@@ -24,8 +27,9 @@ public class AdminAccountController {
 
 	@RequestMapping(value="adminList", method=RequestMethod.GET)
 	public String adminList(Model model, Admin condition,
-			@RequestParam(value="searchText", required=false) String searchText, @RequestParam(value="pg", required=false) String pg,
-			@RequestParam(value="searchType", required=false) String searchType) {
+			@RequestParam(value="searchText", required=false) String searchText,
+			@RequestParam(value="searchType", required=false) String searchType,
+			HttpServletRequest request, @RequestParam(value="pg", required=false) String pg) {
 
 		if(searchText == null)
 			searchText = "";
@@ -33,14 +37,23 @@ public class AdminAccountController {
 		if(searchType == null)
 			searchType = "0";
 
+		Page page = new Page();
+		int total = adminMapper.count(condition, searchType, searchText);
+		int currentPage = 1;
+
+		if(pg != null)
+			currentPage = Integer.parseInt(pg);
+		
 		List<Department> departments = departmentMapper.findAll();
-		List<Admin> admins = adminMapper.findAllWithDepartment(condition, searchType, "%" + searchText + "%");
+		List<Admin> admins = adminMapper.findAllWithDepartment((currentPage - 1) * 10, 10, condition, searchType, "%" + searchText + "%");
+		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
 
 		model.addAttribute("condition", condition);
 		model.addAttribute("departments", departments);
 		model.addAttribute("admins", admins);
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("searchType", searchType);
+		model.addAttribute("pages", pages);
 
 		return "admin/menu/account/adminList";
 	}

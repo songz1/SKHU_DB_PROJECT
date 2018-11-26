@@ -79,7 +79,15 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				
+				<nav>
+					  <ul class="pager">
+					    <c:forEach var="page" items="${ pages }">
+							<li>
+								<a href="adminList?${ page.queryString }"> ${ page.label }</a>
+							</li>
+						</c:forEach>
+					  </ul>
+				</nav>
 			</div>
 		</div>
 	</div>

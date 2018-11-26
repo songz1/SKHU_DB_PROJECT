@@ -304,7 +304,9 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="gradelist", method=RequestMethod.GET)
-	public String gradelist(Model model, HttpServletRequest request, GraduationGrade condition, @RequestParam(value="pg", required=false) String pg, @RequestParam(value="searchText", required=false) String searchText) {
+	public String gradelist(Model model, GraduationGrade condition, 
+							@RequestParam(value="searchText", required=false) String searchText,
+							HttpServletRequest request, @RequestParam(value="pg", required=false) String pg) {
 		if(searchText == null)
 			searchText = "";
 
@@ -315,7 +317,7 @@ public class AdminGraduationController {
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
 
-		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByOption(condition, "%" + searchText + "%");
+		List<GraduationGrade> graduationGrades = graduationGradeMapper.findByOption((currentPage - 1) * 10, 10, condition, "%" + searchText + "%");
 		List<Department> departments = departmentMapper.findAll();
 		List<Graduation> graduations = graduationMapper.findAll();
 		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
@@ -359,7 +361,9 @@ public class AdminGraduationController {
 	}
 
 	@RequestMapping(value="subjectlist", method=RequestMethod.GET)
-	public String subjectlist(Model model, HttpServletRequest request, GraduationSubject condition, @RequestParam(value="pg", required=false) String pg, @RequestParam(value="searchText", required=false) String searchText) {
+	public String subjectlist(Model model, GraduationSubject condition,
+							@RequestParam(value="searchText", required=false) String searchText,
+							HttpServletRequest request, @RequestParam(value="pg", required=false) String pg) {
 		if(searchText == null)
 			searchText = "";
 
@@ -370,7 +374,7 @@ public class AdminGraduationController {
 		if(pg != null)
 			currentPage = Integer.parseInt(pg);
 
-		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByOption(condition, "%" + searchText + "%");
+		List<GraduationSubject> graduationSubjects = graduationSubjectMapper.findByOption((currentPage - 1) * 10, 10, condition, "%" + searchText + "%");
 		List<Department> departments = departmentMapper.findAll();
 		List<Graduation> graduations = graduationMapper.findAll();
 		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
@@ -647,6 +651,7 @@ public class AdminGraduationController {
 		model.addAttribute("students", students);
 		model.addAttribute("departments", departments);
 		model.addAttribute("pages", pages);
+		
 		return "admin/menu/graduation/graduationList";
 	}
 
@@ -793,7 +798,7 @@ public class AdminGraduationController {
 	public String counseling(Model model, Student condition,
 			@RequestParam(value="searchText", required=false) String searchText,
 			@RequestParam(value="searchType", required=false) String searchType,
-			@RequestParam(value="pg", required=false) String pg) {
+			HttpServletRequest request, @RequestParam(value="pg", required=false) String pg) {
 
 		if(searchText == null)
 			searchText = "";
@@ -801,14 +806,23 @@ public class AdminGraduationController {
 		if(searchType == null)
 			searchType = "0";
 		
-		List<Student> students = studentMapper.findAllWithCounseling(condition, searchType, "%" + searchText + "%");
+		Page page = new Page();
+		int total = studentMapper.count(condition, searchType, "%" + searchText + "%");
+		int currentPage = 1;
+
+		if(pg != null)
+			currentPage = Integer.parseInt(pg);
+		
+		List<Student> students = studentMapper.findAllWithCounseling((currentPage - 1) * 10, 10, condition, searchType, "%" + searchText + "%");
 		List<Department> departments = departmentMapper.findWithoutCommon();
+		ArrayList<Page> pages = page.paging(total, 10, currentPage, request.getQueryString());
 
 		model.addAttribute("condition", condition);
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("students", students);
 		model.addAttribute("departments", departments);
+		model.addAttribute("pages", pages);
 
 		return "admin/menu/graduation/counseling";
 	}

@@ -85,6 +85,7 @@
 				and gs.graduationId = #{ condition.graduationId }
 			</if>
 		</where>
+		limit #{start}, #{end}
 	</select>
 	<select id="countByOption" resultType="int">
 		select count(*) from graduation_subject gs
