@@ -17,7 +17,7 @@
 	<select id="findByDivision" resultType="Subject">
 		select * from subject where division = #{ division } and departmentId = #{ departmentId } group by code;
 	</select>
-	<select id="findBySubTitle" resultMap="subjectDetailResultMap">
+	<select id="findBySubtitle" resultMap="subjectDetailResultMap">
 		select sj.*, sd.id detailId, sd.title title, sd.subtitle subtitle from subject sj
 		left join subject_detail sd on sj.detailId = sd.id
 		where sd.subtitle = #{ subtitle }

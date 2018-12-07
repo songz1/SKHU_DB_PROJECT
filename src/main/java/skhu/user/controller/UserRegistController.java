@@ -41,8 +41,19 @@ public class UserRegistController {
 		(student.getStudentNumber().length() != 0 && !student.getStudentNumber().equals("")) &&
 		(student.getName().length() != 0 && !student.getName().equals("")) &&
 		(student.getPassword().length() != 0 && !student.getPassword().equals("")) &&
-		student.getPassword().equals(passwordConfirm))
+		student.getPassword().equals(passwordConfirm)) {
+			student.setSemester((student.getYear()*2)+student.getSemester());
 			studentMapper.insert(student);
+		}
+		else {
+			String message = "입력을 확인해주세요.";
+		    String location = "regist";
+		
+		    model.addAttribute("message", message);
+		    model.addAttribute("location", location);
+		
+		    return "user/error/error";
+		}
 
 		return "redirect:confirm";
 	}

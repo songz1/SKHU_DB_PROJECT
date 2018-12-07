@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +26,8 @@
 		<div id="header" class="panel panel-default">
 			<div class="panel-body">
 				<h3 class="text-center">기본정보 변경</h3>
-				<form:form method="post" action="acntupdate" modelAttribute="account" class="form-horizontal mb-25 mt-25">
+				<form:form method="post" action="acntupdate"
+					modelAttribute="account" class="form-horizontal mb-25 mt-25">
 					<form:hidden path="id" />
 					<form:hidden path="studentNumber" />
 					<div class="form-group">
@@ -38,7 +39,8 @@
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">소속 학과</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<form:select path="departmentId" class="form-control" itemValue="id" itemLabel="name" items="${ departments }" />
+							<form:select path="departmentId" class="form-control"
+								itemValue="id" itemLabel="name" items="${ departments }" />
 						</div>
 					</div>
 					<div class="form-group mb-50">
@@ -70,10 +72,12 @@
 					<div class="form-group mb-50">
 						<label class="col-sm-2 control-label">졸업과정</label>
 						<div class="mb-25 col-md-4 col-md-offset-2">
-							<select name="mainGraduation" class="form-control" id="option-show">
+							<select name="mainGraduation" class="form-control"
+								id="option-show">
 								<c:forEach var="graduation" items="${ graduations }">
 									<c:if test="${ graduation.division eq 'a' }">
-										<option value="${ graduation.name }" <c:if test="${graduation.name eq mainSelect}">selected</c:if>>${ graduation.name }</option>
+										<option value="${ graduation.name }"
+											<c:if test="${graduation.name eq mainSelect}">selected</c:if>>${ graduation.name }</option>
 									</c:if>
 								</c:forEach>
 							</select>

@@ -40,7 +40,7 @@
 						<tr>
 							<td class="title col-md-1">졸업과정</td>
 							<td class="col-md-1"><select name="mainGraduation"
-								id="option-show">
+								id="option-show" class="form-control">
 									<c:forEach var="graduation" items="${ graduations }">
 										<c:if test="${ graduation.division eq 'a' }">
 											<option value="${ graduation.id }"
@@ -49,7 +49,7 @@
 									</c:forEach>
 							</select></td>
 							<td class="title col-md-1 td-minor">타학과부전공</td>
-							<td class="col-md-1 td-minor"><select name="minor">
+							<td class="col-md-1 td-minor"><select name="minor" class="form-control">
 									<option value="0">미선택</option>
 									<c:forEach var="department" items="${ departments }">
 										<c:if test="${ department.id != student.departmentId }">
@@ -59,7 +59,7 @@
 									</c:forEach>
 							</select></td>
 							<td class="title col-md-1 td-double">타학과복수전공1</td>
-							<td class="col-md-1 td-double"><select name="doubleMajor1">
+							<td class="col-md-1 td-double"><select name="doubleMajor1" class="form-control">
 									<option value="0">미선택</option>
 									<c:forEach var="department" items="${ departments }">
 										<c:if test="${ department.id != student.departmentId }">
@@ -69,7 +69,7 @@
 									</c:forEach>
 							</select></td>
 							<td class="title col-md-1 td-double">타학과복수전공2</td>
-							<td class="col-md-1 td-double"><select name="doubleMajor2">
+							<td class="col-md-1 td-double"><select name="doubleMajor2" class="form-control">
 									<option value="0">미선택</option>
 									<c:forEach var="department" items="${ departments }">
 										<c:if
@@ -84,7 +84,7 @@
 					<table class="table text-center">
 						<tr>
 							<td class="title col-md-1">상세졸업과정</td>
-							<td class="col-md-1"><select name="subGraduation">
+							<td class="col-md-1"><select name="subGraduation" class="form-control">
 									<option value="0">미선택</option>
 									<c:forEach var="graduation" items="${ graduations }">
 										<c:if test="${ graduation.division eq 'c' }">

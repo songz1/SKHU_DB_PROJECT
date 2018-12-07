@@ -35,6 +35,11 @@ public class UserAccountController {
 		List<Department> departments = departmentMapper.findWithoutCommon();
 		List<Graduation> graduations = graduationMapper.findWithoutCommon();
 
+		int value = 0;
+		if(account.getSemester()%2 == 0) value = 2;
+		else if(account.getSemester()%2 == 1) value = 1;
+		account.setSemester(value);
+		
 		System.out.println(account.getMinor());
 
 		String[] splitGraduations = account.getGraduation().split(" ", 2);

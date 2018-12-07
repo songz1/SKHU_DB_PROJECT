@@ -57,7 +57,16 @@ public class UserForgotController {
 							@RequestParam("passwordConfirm") String passwordConfirm) {
 		if(account.getPassword().equals(passwordConfirm))
 			studentMapper.update(account);
-
+		else {
+			String message = "패스워드 불일치";
+		    String location = "forgotpwd";
+		
+		    model.addAttribute("message", message);
+		    model.addAttribute("location", location);
+		
+		    return "user/error/error";
+		}
+		
 		String message = "비밀번호 변경 완료";
 	    String location = "../login/login";
 	
