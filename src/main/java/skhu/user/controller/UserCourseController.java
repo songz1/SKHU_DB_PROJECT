@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -40,36 +41,34 @@ public class UserCourseController {
 	@Autowired StudentMapper studentMapper;
 
 	@RequestMapping(value="changerequest", method=RequestMethod.GET)
-	public String changerequest(Model model, HttpSession session) {
-		Student student = ((Student)session.getAttribute("userInfo"));
-		Rule rule = ruleMapper.findByName("대체과목");
-		System.out.println(student.getId());
-		List<Score> scores = scoreMapper.findWithSubstitution(student.getId());
-		Map<Score, List<Subject>> changeMap = new HashMap<Score, List<Subject>>();
-		System.out.println(student.getId());
-		if(scores != null) {
-			for(Score score : scores) {
-				List<Subject> subjects = new ArrayList<Subject>();
-				if(score.getSubstitution().getSubstitutionCode().equals("전공선택")) {
-					subjects = subjectMapper.findByDivision("전공선택", student.getDepartmentId());
-				}
+	   public String changerequest(Model model, HttpSession session) {
+	      Student student = ((Student)session.getAttribute("userInfo"));
+	      Rule rule = ruleMapper.findByName("대체과목");
+	      List<Score> scores = scoreMapper.findWithSubstitution(student.getId());
+	      Map<Score, List<Subject>> changeMap = new HashMap<Score, List<Subject>>();
+	      if(scores != null) {
+	         for(Score score : scores) {
+	            List<Subject> subjects = new ArrayList<Subject>();
+	            if(score.getSubstitution().getSubstitutionCode().equals("전공선택")) {
+	               subjects = subjectMapper.findByDivision("전공선택", student.getDepartmentId());
+	            }
 
-				else if(score.getSubstitution().getSubstitutionCode().contains("전공")) {
-					subjects = subjectMapper.findBySubtitle(score.getSubstitutionCode());
-				}
+	            else if(score.getSubstitution().getSubstitutionCode().contains("전공")) {
+	               subjects = subjectMapper.findBySubtitle(score.getSubstitutionCode());
+	            }
 
-				else {
-					subjects.add(subjectMapper.findByCode(score.getSubstitutionCode()));
-				}
+	            else {
+	               subjects.add(subjectMapper.findByCode(score.getSubstitutionCode()));
+	            }
 
-				changeMap.put(score, subjects);
-			}
-		}
+	            changeMap.put(score, subjects);
+	         }
+	      }
 
-		model.addAttribute("changeMap", changeMap);
-		model.addAttribute("rule", rule);
-		return "user/menu/course/changerequest";
-	}
+	      model.addAttribute("changeMap", changeMap);
+	      model.addAttribute("rule", rule);
+	      return "user/menu/course/changerequest";
+	   }
 
 	@RequestMapping(value="changerequest", method=RequestMethod.POST)
 	public String changeRequest(Model model, @RequestParam("id") int id, @RequestParam("change") String code) {
@@ -140,8 +139,8 @@ public class UserCourseController {
 	}
 
 	@RequestMapping(value="downchangerequestlist")
-	public void downChangeRequestList(HttpServletResponse response) throws Exception {
-		File destCompleteFile = new File("src\\main\\webapp\\res\\file\\form\\양식_대체과목목록.xlsx");
+	public void downChangeRequestList(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		File destCompleteFile = new File(request.getSession().getServletContext().getRealPath("") + "\\res\\file\\form\\양식_대체과목목록.xlsx");
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +  new String("대체과목목록.xlsx".getBytes("UTF-8"), "ISO8859_1") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		response.setHeader("Content-Type", "application/octet-stream; charset=utf-8\r\n");
